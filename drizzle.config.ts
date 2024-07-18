@@ -1,12 +1,11 @@
+import './envConfig';
 import { defineConfig } from "drizzle-kit";
-
-console.log(process.env.NEXT_PUBLIC_TEST);
 
 export default defineConfig({
   dialect: "postgresql",
-  schema: "./src/schemas/*",
+  schema: "./src/database/schemas/*",
   out: "./drizzle",
   dbCredentials: {
-    url: process.env.NEXT_PUBLIC_TEST!,
+    url: process.env.POSTGRES_URL!,
   }
 });
