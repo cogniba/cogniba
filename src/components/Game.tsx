@@ -1,6 +1,6 @@
 "use client";
 
-import sleep from "@/helpers/sleep";
+import sleep from "@/utils/sleep";
 import Crosshair from "./Crosshair";
 import Square from "./Square";
 import { useEffect, useRef, useState } from "react";

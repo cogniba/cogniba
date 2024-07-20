@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import MainLayoutWrapper from "./(components)/MainLayoutWrapper";
+import { cn } from "@/lib/utils";
 
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
+const fontSans = Inter({
   subsets: ["latin"],
-  display: "swap",
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +25,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </head>
 
-      <body className={roboto.className}>
+      <body
+        className={cn(
+          "bg-background min-h-screen font-sans antialiased",
+          fontSans.variable,
+        )}
+      >
         <MainLayoutWrapper>{children}</MainLayoutWrapper>
       </body>
     </html>

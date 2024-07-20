@@ -1,9 +1,10 @@
 import NextAuth from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { db } from "@/database";
-import { accounts, users } from "@/database/schemas/users";
+import { db } from "@/database/db";
+import authConfig from "./auth.config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: DrizzleAdapter(db, { usersTable: users, accountsTable: accounts }),
-  providers: [],
+  adapter: DrizzleAdapter(db),
+  session: { strategy: "jwt" },
+  ...authConfig,
 });

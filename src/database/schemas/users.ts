@@ -10,22 +10,22 @@ import {
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
-export const typeEnum = pgEnum("type", ["parent", "child"]);
+export const roleEnum = pgEnum("role", ["child", "parent", "admin"]);
 
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  email: text("email").notNull(),
-  emailVerified: timestamp("emailVerified", { mode: "date" }),
-  image: text("image"),
+  email: text("email"),
+  username: text("username").notNull(),
+  password: text("password").notNull(),
   name: text("name").notNull(),
-  type: typeEnum("type").notNull(),
+  role: roleEnum("role").notNull(),
 });
 
-// export const userRelations = relations(users, ({ many }) => ({
-//   children: many(users),
-// }));
+export const userRelations = relations(users, ({ many }) => ({
+  children: many(users),
+}));
 
 export const accounts = pgTable(
   "account",

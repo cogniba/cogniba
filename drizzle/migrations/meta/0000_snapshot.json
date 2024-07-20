@@ -1,6 +1,6 @@
 {
-  "id": "8d113d25-ca0e-4fd7-ae81-700c95b195c6",
-  "prevId": "818e3b8e-2824-4cbe-b3b1-668f9c4ff2c9",
+  "id": "0090b74d-f66c-4a07-8aa4-e0f23b9d0557",
+  "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -246,6 +246,18 @@
           "name": "email",
           "type": "text",
           "primaryKey": false,
+          "notNull": false
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
           "notNull": true
         },
         "name": {
@@ -254,9 +266,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "type": {
-          "name": "type",
-          "type": "type",
+        "role": {
+          "name": "role",
+          "type": "role",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
@@ -305,12 +317,13 @@
     }
   },
   "enums": {
-    "public.type": {
-      "name": "type",
+    "public.role": {
+      "name": "role",
       "schema": "public",
       "values": [
+        "child",
         "parent",
-        "child"
+        "admin"
       ]
     }
   },

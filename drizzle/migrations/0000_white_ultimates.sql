@@ -1,4 +1,9 @@
-ALTER TYPE "type" ADD VALUE 'child';--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."role" AS ENUM('child', 'parent', 'admin');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "account" (
 	"userId" text NOT NULL,
 	"type" text NOT NULL,
@@ -33,6 +38,15 @@ CREATE TABLE IF NOT EXISTS "session" (
 	"expires" timestamp NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "user" (
+	"id" text PRIMARY KEY NOT NULL,
+	"email" text,
+	"username" text NOT NULL,
+	"password" text NOT NULL,
+	"name" text NOT NULL,
+	"role" "role" NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "verificationToken" (
 	"identifier" text NOT NULL,
 	"token" text NOT NULL,
@@ -40,12 +54,6 @@ CREATE TABLE IF NOT EXISTS "verificationToken" (
 	CONSTRAINT "verificationToken_identifier_token_pk" PRIMARY KEY("identifier","token")
 );
 --> statement-breakpoint
-ALTER TABLE "users" RENAME TO "user";--> statement-breakpoint
-ALTER TABLE "user" RENAME COLUMN "full_name" TO "name";--> statement-breakpoint
-ALTER TABLE "user" ALTER COLUMN "id" SET DATA TYPE text;--> statement-breakpoint
-ALTER TABLE "user" ALTER COLUMN "name" SET NOT NULL;--> statement-breakpoint
-ALTER TABLE "user" ALTER COLUMN "email" SET NOT NULL;--> statement-breakpoint
-ALTER TABLE "user" ALTER COLUMN "type" SET NOT NULL;--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "account" ADD CONSTRAINT "account_userId_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
@@ -63,5 +71,3 @@ DO $$ BEGIN
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
---> statement-breakpoint
-ALTER TABLE "user" DROP COLUMN IF EXISTS "children";
