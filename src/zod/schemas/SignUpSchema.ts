@@ -4,7 +4,7 @@ export const SignUpSchema = z
   .object({
     role: z.enum(["child", "parent", "admin"]),
 
-    email: z.string().optional(),
+    email: z.string().max(64, { message: "Email is too long" }),
 
     fullName: z
       .string()

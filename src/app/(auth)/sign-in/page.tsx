@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import handleSignIn from "@/server-actions/handleSignIn";
+import handleSignIn from "@/server-actions/auth/handleSignIn";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -47,8 +47,10 @@ export default function LoginForm() {
 
     startTransition(() => {
       handleSignIn(data).then((result) => {
-        setError(result.error ?? null);
-        setSuccess(result.success ?? null);
+        if (result) {
+          setError(result.error ?? null);
+          setSuccess(result.success ?? null);
+        }
       });
     });
   }
@@ -84,6 +86,7 @@ export default function LoginForm() {
                         name="username"
                         type="text"
                         placeholder="marcoshernanz123"
+                        autoComplete="username"
                         required
                       />
                     </FormControl>
@@ -114,7 +117,7 @@ export default function LoginForm() {
                         id="password"
                         name="password"
                         type="password"
-                        placeholder="••••••••"
+                        // placeholder="••••••••"
                         required
                       />
                     </FormControl>

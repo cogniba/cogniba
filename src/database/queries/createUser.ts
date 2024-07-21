@@ -1,33 +1,35 @@
 import saltAndHashPassword from "@/utils/saltAndHashPassword";
-import getUser from "./getUser";
+import getUserByUsername from "./getUserByUsername";
 import { db } from "../db";
 import { users } from "../schemas/users";
 
 export default async function createUser(
   role: "child" | "parent" | "admin",
-  email: string | undefined,
+  email: string,
   fullName: string,
   username: string,
   password: string,
 ) {
-  try {
-    const existingUser = await getUser(username);
-    if (existingUser) {
-      throw new Error("Username already exists");
-    }
+  const existingUser = await getUserByUsername(username);
+  if (existingUser) {
+    return null;
+  }
 
-    const hashedPassword = await saltAndHashPassword(password);
+  const hashedPassword = await saltAndHashPassword(password);
+  let modifiedEmail = email;
+  if (role !== "parent" || !email) {
+    modifiedEmail = "";
+  }
 
-    const user = await db.insert(users).values({
+  return await db
+    .insert(users)
+    .values({
+      email: modifiedEmail,
       role,
-      email: role === "parent" ? email : null,
       name: fullName,
       username,
       password: hashedPassword,
-    });
-
-    return user;
-  } catch (error) {
-    return null;
-  }
+    })
+    .returning()
+    .then((res) => res[0] ?? null);
 }

@@ -25,7 +25,7 @@ import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormAlert from "@/components/FormAlert";
 import { useState, useTransition } from "react";
-import handleSignUp from "@/server-actions/handleSignUp";
+import handleSignUp from "@/server-actions/auth/handleSignUp";
 import {
   Select,
   SelectContent,
@@ -191,7 +191,7 @@ export default function LoginForm() {
                         id="password"
                         name="password"
                         type="password"
-                        placeholder="••••••••"
+                        // placeholder="••••••••"
                         autoComplete="off"
                         required
                       />

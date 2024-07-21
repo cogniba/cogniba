@@ -58,19 +58,9 @@ export default function Game() {
 
   useEffect(() => {
     gameSequence.current = generateGameSequence(1);
-    console.log(gameSequence.current);
-
-    // gameSequence.current.forEach(async (position) => {
-    //   console.log(position);
-    //   setSelectedSquare(position);
-    //   await sleep(700);
-    //   setSelectedSquare(null);
-    //   await sleep(2300);
-    // });
 
     async function playGame() {
       for (const position of gameSequence.current) {
-        console.log(position);
         setSelectedSquare(position);
         await sleep(700);
         setSelectedSquare(null);
@@ -85,7 +75,7 @@ export default function Game() {
     <div className="flex h-full w-full items-center justify-center p-10 [container-type:size]">
       <div className="grid h-[100cqmin] w-[100cqmin] grid-cols-3 grid-rows-3 gap-2 bg-black">
         {Array.from({ length: 9 }, (_, i) =>
-          i == 4 ? (
+          i === 4 ? (
             <Crosshair key={i} />
           ) : (
             <Square key={i} selected={i - Number(i > 4) === selectedSquare} />
