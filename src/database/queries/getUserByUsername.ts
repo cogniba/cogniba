@@ -1,5 +1,5 @@
 import { db } from "@/database/db";
-import { users } from "../schemas/users";
+import { users } from "../schemas/auth";
 import { eq } from "drizzle-orm";
 import takeUniqueOrThrow from "@/utils/takeUniqueOrThrow";
 

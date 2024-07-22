@@ -5,6 +5,7 @@ import {
   primaryKey,
   integer,
   pgSchema,
+  AnyPgColumn,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
@@ -16,6 +17,7 @@ export const users = authSchema.table("users", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
+
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   name: text("name"),
@@ -24,11 +26,14 @@ export const users = authSchema.table("users", {
   username: text("username").unique(),
   password: text("password"),
   role: roleEnum("role"),
-});
 
-// export const userRelations = relations(users, ({ many }) => ({
-//   children: many(users),
-// }));
+  children: text("children")
+    .notNull()
+    .references((): AnyPgColumn => users.id, { onDelete: "cascade" })
+    .array(),
+
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
+});
 
 export const accounts = authSchema.table(
   "accounts",

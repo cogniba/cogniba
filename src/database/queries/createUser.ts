@@ -1,7 +1,7 @@
 import saltAndHashPassword from "@/utils/saltAndHashPassword";
 import getUserByUsername from "./getUserByUsername";
 import { db } from "../db";
-import { users } from "../schemas/users";
+import { users } from "../schemas/auth";
 
 export default async function createUser(
   role: "child" | "parent" | "admin",

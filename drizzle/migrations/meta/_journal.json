@@ -8,6 +8,13 @@
       "when": 1721575322866,
       "tag": "0000_crazy_shinko_yamashiro",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1721634556500,
+      "tag": "0001_colorful_wallop",
+      "breakpoints": true
     }
   ]
 }
