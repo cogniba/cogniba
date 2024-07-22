@@ -1,5 +1,5 @@
 import type { Adapter } from "@auth/core/adapters";
-import * as schema from "@/database/schemas/users";
+import * as schema from "@/database/schemas/auth";
 import { and, eq } from "drizzle-orm";
 import { PgDatabase } from "drizzle-orm/pg-core";
 

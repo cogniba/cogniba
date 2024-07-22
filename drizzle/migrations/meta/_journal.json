@@ -15,6 +15,13 @@
       "when": 1721634556500,
       "tag": "0001_colorful_wallop",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1721639296506,
+      "tag": "0002_opposite_klaw",
+      "breakpoints": true
     }
   ]
 }

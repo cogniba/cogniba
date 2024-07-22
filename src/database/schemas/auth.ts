@@ -27,10 +27,9 @@ export const users = authSchema.table("users", {
   password: text("password"),
   role: roleEnum("role"),
 
-  children: text("children")
-    .notNull()
-    .references((): AnyPgColumn => users.id, { onDelete: "cascade" })
-    .array(),
+  parent: text("parent").references((): AnyPgColumn => users.id, {
+    onDelete: "cascade",
+  }),
 
   createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
 });
