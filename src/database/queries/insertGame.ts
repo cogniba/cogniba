@@ -8,6 +8,7 @@ export default async function insertGame(
   correctHits: number,
   incorrectHits: number,
   missedHits: number,
+  timeSpent: number,
 ) {
   const userId = await getUserId();
 
@@ -18,5 +19,6 @@ export default async function insertGame(
     correctHits,
     incorrectHits,
     missedHits,
+    timeSpent,
   });
 }

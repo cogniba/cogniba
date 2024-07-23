@@ -5,6 +5,7 @@ import SpaceBar from "@/components/SpaceBar";
 import StartScreen from "../(components)/StartScreen";
 import { useEffect, useRef, useState } from "react";
 import {
+  calculateNewLevel,
   generateGameSequence,
   getCorrectHitSequence,
   insertGameIntoDatabase,
@@ -50,10 +51,20 @@ export default function PlayPage() {
     }
 
     setIsPlaying(false);
+
+    const currentLevel = level as number;
+
+    const newLevel = calculateNewLevel(
+      correctHitSequence.current,
+      playerHitSequence.current,
+      currentLevel,
+    );
+    setLevel(newLevel);
+
     await insertGameIntoDatabase(
       correctHitSequence.current,
       playerHitSequence.current,
-      level as number,
+      currentLevel,
     );
   };
 

@@ -2,8 +2,11 @@ import insertGame from "@/database/queries/insertGame";
 import {
   gameBaseSequenceLength,
   gameDecreaseLevelThreshold,
+  gameDelayBeforeStart,
+  gameHiddenSquareDuration,
   gameIncreaseLevelThreshold,
   gameNumTargets,
+  gameVisibleSquareDuration,
 } from "@/settings/constants";
 
 function getTargetsCount(sequence: number[], level: number) {
@@ -88,7 +91,7 @@ export function getHitStatistics(
   return { correctHits, incorrectHits, missedHits };
 }
 
-export async function insertGameIntoDatabase(
+export function calculateNewLevel(
   correctHitSequence: boolean[],
   playerHitSequence: boolean[],
   level: number,
@@ -107,5 +110,36 @@ export async function insertGameIntoDatabase(
     newLevel = level + 1;
   }
 
-  await insertGame(level, newLevel, correctHits, incorrectHits, missedHits);
+  return newLevel;
+}
+
+export async function insertGameIntoDatabase(
+  correctHitSequence: boolean[],
+  playerHitSequence: boolean[],
+  level: number,
+) {
+  const { correctHits, incorrectHits, missedHits } = getHitStatistics(
+    correctHitSequence,
+    playerHitSequence,
+  );
+
+  const newLevel = calculateNewLevel(
+    correctHitSequence,
+    playerHitSequence,
+    level,
+  );
+
+  const timeSpent =
+    (gameBaseSequenceLength + level) *
+      (gameVisibleSquareDuration + gameHiddenSquareDuration) +
+    gameDelayBeforeStart;
+
+  await insertGame(
+    level,
+    newLevel,
+    correctHits,
+    incorrectHits,
+    missedHits,
+    timeSpent,
+  );
 }

@@ -16,5 +16,7 @@ export const games = pgTable("games", {
   incorrectHits: integer("incorrectHits").notNull(),
   missedHits: integer("missedHits").notNull(),
 
+  timeSpent: integer("timeSpent").notNull(),
+
   createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
 });
