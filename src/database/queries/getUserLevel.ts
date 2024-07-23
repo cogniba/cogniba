@@ -14,7 +14,7 @@ export default async function getUserLevel() {
     .where(eq(games.userId, userId))
     .orderBy(desc(games.createdAt))
     .limit(1)
-    .then((res) => res[0].newLevel ?? 1);
+    .then((res) => res[0]?.newLevel ?? 1);
 
   return level;
 }

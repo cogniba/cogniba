@@ -17,6 +17,7 @@ import {
   gameVisibleSquareDuration,
 } from "@/settings/constants";
 import getUserLevel from "@/database/queries/getUserLevel";
+import LevelDisplay from "../(components)/LevelDisplay";
 
 export default function PlayPage() {
   const [level, setLevel] = useState<number | null>(null);
@@ -99,6 +100,9 @@ export default function PlayPage() {
     <div className="flex h-full items-center justify-center bg-red-500">
       <StartScreen visible={!isPlaying} onStart={startPlaying} />
       <div className="flex h-full w-[50rem] flex-col items-center bg-blue-500">
+        <div className="h-20">
+          <LevelDisplay level={level} />
+        </div>
         <div className="h-full w-full bg-pink-500">
           <Game selectedSquare={selectedSquare} />
         </div>
