@@ -1,3 +1,5 @@
+"use server";
+
 import saltAndHashPassword from "@/utils/saltAndHashPassword";
 import getUserByUsername from "./getUserByUsername";
 import { db } from "../db";

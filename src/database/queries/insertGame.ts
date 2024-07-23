@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "../db";
 import { games } from "../schemas/games";
 import getUserId from "./getUserId";

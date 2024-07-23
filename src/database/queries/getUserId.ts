@@ -1,3 +1,5 @@
+"use server";
+
 import { auth } from "@/auth/auth";
 
 export default async function getUserId() {
