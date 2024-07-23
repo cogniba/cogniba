@@ -13,7 +13,7 @@ export default function SpaceBar({ hasPressedSpaceBar }: SpaceBarProps) {
     if (!hasPressedSpaceBar.current) {
       hasPressedSpaceBar.current = true;
       setIsSpaceBarPressed(true);
-      await sleep(300);
+      await sleep(400);
       setIsSpaceBarPressed(false);
     }
   }, [hasPressedSpaceBar]);
@@ -27,13 +27,15 @@ export default function SpaceBar({ hasPressedSpaceBar }: SpaceBarProps) {
   }, [handleSpaceBarPress]);
 
   return (
-    <div className="flex h-full w-full items-center justify-center bg-green-500 px-2 py-8">
+    <div className="flex h-full w-full items-center justify-center">
       <button
         className={cn(
-          "h-full w-full bg-white",
-          isSpaceBarPressed && "bg-green-300",
+          "h-full w-full -translate-y-1 rounded-md border border-orange-400/50 bg-orange-300 shadow-2xl outline-none transition duration-300",
+          isSpaceBarPressed &&
+            "translate-y-0 border-orange-500/50 bg-orange-400 shadow-sm",
         )}
-        onClick={handleSpaceBarPress}
+        tabIndex={-1}
+        onPointerDown={handleSpaceBarPress}
       ></button>
     </div>
   );

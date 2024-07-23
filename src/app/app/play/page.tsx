@@ -8,7 +8,6 @@ import {
   calculateNewLevel,
   generateGameSequence,
   getCorrectHitSequence,
-  getHitStatistics,
   insertGameIntoDatabase,
 } from "@/utils/gameLogic";
 import sleep from "@/utils/sleep";
@@ -63,12 +62,6 @@ export default function PlayPage() {
     );
     setLevel(newLevel);
 
-    console.log(correctHitSequence.current);
-    console.log(playerHitSequence.current);
-    console.log(
-      getHitStatistics(correctHitSequence.current, playerHitSequence.current),
-    );
-
     await insertGameIntoDatabase(
       correctHitSequence.current,
       playerHitSequence.current,
@@ -102,16 +95,16 @@ export default function PlayPage() {
   }, []);
 
   return (
-    <div className="flex h-full items-center justify-center bg-red-500">
+    <div className="flex h-full items-center justify-center">
       <StartScreen visible={!isPlaying} onStart={startPlaying} />
-      <div className="flex h-full w-[50rem] flex-col items-center bg-blue-500">
-        <div className="h-20">
+      <div className="flex h-full w-full max-w-3xl flex-col items-center">
+        <div className="mb-[2.5cqmin] mt-[1.5cqmin] flex-shrink-0">
           <LevelDisplay level={level} />
         </div>
-        <div className="h-full w-full bg-pink-500">
+        <div className="h-full w-full">
           <Game selectedSquare={selectedSquare} />
         </div>
-        <div className="h-44 w-full flex-shrink-0">
+        <div className="mb-[2.5cqmin] mt-[3cqmin] h-[11cqmin] w-[90cqmin] flex-shrink-0">
           <SpaceBar hasPressedSpaceBar={hasPressedSpaceBar} />
         </div>
       </div>
