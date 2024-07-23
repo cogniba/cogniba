@@ -8,6 +8,7 @@ import {
   calculateNewLevel,
   generateGameSequence,
   getCorrectHitSequence,
+  getHitStatistics,
   insertGameIntoDatabase,
 } from "@/utils/gameLogic";
 import sleep from "@/utils/sleep";
@@ -62,6 +63,12 @@ export default function PlayPage() {
     );
     setLevel(newLevel);
 
+    console.log(correctHitSequence.current);
+    console.log(playerHitSequence.current);
+    console.log(
+      getHitStatistics(correctHitSequence.current, playerHitSequence.current),
+    );
+
     await insertGameIntoDatabase(
       correctHitSequence.current,
       playerHitSequence.current,
@@ -73,6 +80,14 @@ export default function PlayPage() {
     if (!level) return;
 
     setIsPlaying(true);
+
+    gameSequence.current = generateGameSequence(level);
+    correctHitSequence.current = getCorrectHitSequence(
+      gameSequence.current,
+      level,
+    );
+    playerHitSequence.current = [];
+
     await sleep(gameDelayBeforeStart);
     playGame();
   };
@@ -85,16 +100,6 @@ export default function PlayPage() {
 
     getLevel();
   }, []);
-
-  useEffect(() => {
-    if (!level) return;
-
-    gameSequence.current = generateGameSequence(level);
-    correctHitSequence.current = getCorrectHitSequence(
-      gameSequence.current,
-      level,
-    );
-  }, [level]);
 
   return (
     <div className="flex h-full items-center justify-center bg-red-500">
