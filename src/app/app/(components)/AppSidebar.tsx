@@ -3,23 +3,38 @@
 import { PlayIcon, SettingsIcon } from "lucide-react";
 import AppSidebarItem from "./AppSidebarItem";
 import SignOutButton from "./SignOutButton";
+import { useState } from "react";
 
 export default function AppSidebar() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
-    <aside className="pointer-events-auto absolute z-50 h-full w-16 border-r border-slate-200 bg-white text-white shadow-xl shadow-black/5">
-      <div className="flex h-full w-full flex-col items-center justify-between">
-        <div className="flex w-full flex-col items-center justify-center gap-y-1 p-2">
-          <AppSidebarItem Icon={PlayIcon} href="/app/play" />
-          <AppSidebarItem Icon={SettingsIcon} />
-          <AppSidebarItem Icon={SettingsIcon} />
-          <AppSidebarItem Icon={SettingsIcon} />
-          <AppSidebarItem Icon={SettingsIcon} />
-        </div>
-        <div className="flex w-full flex-col items-center justify-center gap-y-1 p-2">
-          <AppSidebarItem Icon={SettingsIcon} href="/app/settings" />
-          <SignOutButton />
-        </div>
+    <nav
+      className="transition-width hide-scrollbar group pointer-events-auto absolute z-50 flex h-full w-16 flex-col items-center justify-between overflow-y-auto border-r border-slate-200 bg-white py-2 text-white shadow-xl shadow-black/5 duration-200 data-[state=expanded]:w-56 data-[state=expanded]:shadow-black/10"
+      data-state={isExpanded ? "expanded" : "collapsed"}
+      onMouseEnter={() => setIsExpanded(true)}
+      onMouseLeave={() => setIsExpanded(false)}
+    >
+      <div className="flex w-full flex-col items-center justify-center gap-y-1 p-2">
+        <AppSidebarItem
+          href="/app/play"
+          text="Play"
+          Icon={PlayIcon}
+          isExpanded={isExpanded}
+        />
+        <AppSidebarItem Icon={SettingsIcon} />
+        <AppSidebarItem Icon={SettingsIcon} />
+        <AppSidebarItem Icon={SettingsIcon} />
+        <AppSidebarItem Icon={SettingsIcon} />
       </div>
-    </aside>
+      <div className="flex w-full flex-col items-center justify-center gap-y-1 p-2">
+        <AppSidebarItem
+          href="/app/settings"
+          text="Settings"
+          Icon={SettingsIcon}
+        />
+        <SignOutButton />
+      </div>
+    </nav>
   );
 }

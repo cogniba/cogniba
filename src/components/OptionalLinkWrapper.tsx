@@ -12,7 +12,7 @@ export default function OptionalLinkWrapper({
   return (
     <>
       {href ? (
-        <Link className="h-full w-full" href={href}>
+        <Link className="w-full" href={href}>
           {children}
         </Link>
       ) : (

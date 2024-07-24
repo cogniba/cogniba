@@ -18,10 +18,17 @@ const config = {
         "2xl": "1400px",
       },
     },
+
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+
+      transitionProperty: {
+        width: "width",
+        position: "top, right, bottom, left",
+      },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -32,6 +39,7 @@ const config = {
           to: { height: "0" },
         },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
