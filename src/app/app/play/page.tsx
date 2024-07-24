@@ -21,7 +21,7 @@ import LevelDisplay from "../(components)/LevelDisplay";
 
 export default function PlayPage() {
   const [level, setLevel] = useState<number | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
 
   const gameSequence = useRef<number[]>([]);

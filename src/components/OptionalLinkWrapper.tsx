@@ -9,5 +9,15 @@ export default function OptionalLinkWrapper({
   children,
   href,
 }: OptionalLinkWrapperProps) {
-  return <>{href ? <Link href={href}>{children}</Link> : <>{children}</>}</>;
+  return (
+    <>
+      {href ? (
+        <Link className="h-full w-full" href={href}>
+          {children}
+        </Link>
+      ) : (
+        <>{children}</>
+      )}
+    </>
+  );
 }

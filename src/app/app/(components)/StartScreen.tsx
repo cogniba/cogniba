@@ -14,6 +14,7 @@ interface StartScreenProps {
 export default function StartScreen({ visible, onStart }: StartScreenProps) {
   return (
     <Dialog defaultOpen open={visible}>
+      {/* <DialogPortal container={playContainer.current}> */}
       <DialogContent closeButton={false}>
         <DialogTitle>Play the game</DialogTitle>
         <DialogDescription>
@@ -23,6 +24,7 @@ export default function StartScreen({ visible, onStart }: StartScreenProps) {
           Play
         </Button>
       </DialogContent>
+      {/* </DialogPortal> */}
     </Dialog>
   );
 }

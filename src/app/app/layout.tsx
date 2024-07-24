@@ -11,7 +11,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       {/* <AppHeader /> */}
       <div className="relative flex h-full w-full">
         <AppSidebar />
-        <main className="h-full w-full bg-slate-50">{children}</main>
+        <main className="h-full w-full bg-teal-50">{children}</main>
       </div>
     </div>
   );

@@ -1,5 +1,3 @@
-"use client";
-
 import handleSignOut from "@/server-actions/auth/handleSignOut";
 import AppSidebarItem from "./AppSidebarItem";
 import { LogOutIcon } from "lucide-react";

@@ -1,5 +1,6 @@
 import OptionalLinkWrapper from "@/components/OptionalLinkWrapper";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 interface AppSidebarItemProps {
   text?: string;
@@ -14,17 +15,22 @@ export default function AppSidebarItem({
   onClick,
   href,
 }: AppSidebarItemProps) {
+  const pathname = usePathname();
+
   return (
-    <div className="h-20 bg-yellow-500 p-1.5">
-      <OptionalLinkWrapper href={href}>
-        <button
-          className="flex h-full items-start justify-center rounded-lg bg-blue-500 p-5"
-          onClick={onClick}
-        >
-          <Icon className="h-full w-full" />
-          <div>{text}</div>
-        </button>
-      </OptionalLinkWrapper>
-    </div>
+    <OptionalLinkWrapper href={href}>
+      <button
+        className={cn(
+          "flex aspect-square h-full w-full items-center justify-center rounded-lg text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950",
+          pathname === href && "bg-slate-200",
+        )}
+        onClick={onClick}
+      >
+        <Icon
+          className={cn("h-5 w-5", pathname === href && "text-slate-950")}
+        />
+        <div>{text}</div>
+      </button>
+    </OptionalLinkWrapper>
   );
 }
