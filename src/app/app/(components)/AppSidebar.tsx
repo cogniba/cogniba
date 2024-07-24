@@ -1,6 +1,6 @@
 "use client";
 
-import { PlayIcon, SettingsIcon } from "lucide-react";
+import { AreaChartIcon, PlayIcon, SettingsIcon } from "lucide-react";
 import AppSidebarItem from "./AppSidebarItem";
 import SignOutButton from "./SignOutButton";
 import { useState } from "react";
@@ -22,7 +22,12 @@ export default function AppSidebar() {
           Icon={PlayIcon}
           isExpanded={isExpanded}
         />
-        <AppSidebarItem Icon={SettingsIcon} />
+        <AppSidebarItem
+          href="/app/analytics"
+          text="Analytics"
+          Icon={AreaChartIcon}
+          isExpanded={isExpanded}
+        />
         <AppSidebarItem Icon={SettingsIcon} />
         <AppSidebarItem Icon={SettingsIcon} />
         <AppSidebarItem Icon={SettingsIcon} />
@@ -32,6 +37,7 @@ export default function AppSidebar() {
           href="/app/settings"
           text="Settings"
           Icon={SettingsIcon}
+          isExpanded={isExpanded}
         />
         <SignOutButton />
       </div>
