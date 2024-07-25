@@ -1,3 +1,4 @@
+// TODO
 export const gameBaseSequenceLength = 10;
 export const gameNumTargets = 6;
 export const gameVisibleSquareDuration = 1000;

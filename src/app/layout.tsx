@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import MainLayoutWrapper from "./(components)/MainLayoutWrapper";
 import { cn } from "@/lib/utils";
@@ -7,6 +7,11 @@ import { cn } from "@/lib/utils";
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+const fontSerif = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
 });
 
 export const metadata: Metadata = {
@@ -29,6 +34,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           "bg-background min-h-screen font-sans antialiased",
           fontSans.variable,
+          fontSerif.variable,
         )}
       >
         <MainLayoutWrapper>{children}</MainLayoutWrapper>
