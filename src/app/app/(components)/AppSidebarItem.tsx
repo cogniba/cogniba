@@ -4,10 +4,10 @@ import { usePathname } from "next/navigation";
 
 interface AppSidebarItemProps {
   href?: string;
-  text?: string;
+  text: string;
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   onClick?: () => void;
-  isExpanded?: boolean;
+  isExpanded: boolean;
 }
 
 export default function AppSidebarItem({
@@ -24,7 +24,7 @@ export default function AppSidebarItem({
       <div className="w-full">
         <button
           className={cn(
-            "group/item: relative flex h-12 w-full items-center justify-center rounded-md text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950 hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start",
+            "group/item relative flex h-12 w-full items-center justify-center rounded-md text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950 hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start",
             pathname === href &&
               "bg-slate-200 text-slate-950 shadow-sm hover:bg-slate-200",
           )}
@@ -35,7 +35,7 @@ export default function AppSidebarItem({
             <Icon className="h-5 w-5" />
           </div>
           <div
-            className="absolute left-9 text-left text-base font-medium opacity-0 transition-[opacity,left] group-data-[state=expanded]:left-11 group-data-[state=expanded]:opacity-100"
+            className="absolute left-9 min-w-32 text-left text-base font-medium opacity-0 transition-[opacity,left] group-data-[state=expanded]:left-11 group-data-[state=expanded]:opacity-100"
             aria-hidden={isExpanded || undefined}
           >
             {text}

@@ -2,7 +2,7 @@
 
 import { db } from "../db";
 import { games } from "../schemas/games";
-import getUserId from "./getUserId";
+import getUser from "./getUser";
 
 export default async function insertGame(
   level: number,
@@ -12,7 +12,11 @@ export default async function insertGame(
   missedHits: number,
   timeSpent: number,
 ) {
-  const userId = await getUserId();
+  const { id: userId } = await getUser();
+
+  if (!userId) {
+    throw new Error("User not found");
+  }
 
   await db.insert(games).values({
     userId,

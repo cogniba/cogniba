@@ -2,13 +2,13 @@
 
 import { auth } from "@/auth/auth";
 
-export default async function getUserId() {
+export default async function getUser() {
   const session = await auth();
 
-  const userId = session?.user.id;
-  if (!userId) {
+  const user = session?.user;
+  if (!user) {
     throw new Error("User not found");
   }
 
-  return userId;
+  return user;
 }

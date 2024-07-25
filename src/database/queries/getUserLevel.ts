@@ -3,10 +3,14 @@
 import { desc, eq } from "drizzle-orm";
 import { db } from "../db";
 import { games } from "../schemas/games";
-import getUserId from "./getUserId";
+import getUser from "./getUser";
 
 export default async function getUserLevel() {
-  const userId = await getUserId();
+  const { id: userId } = await getUser();
+
+  if (!userId) {
+    throw new Error("User not found");
+  }
 
   const level = await db
     .select()
