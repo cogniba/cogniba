@@ -8,6 +8,7 @@ import {
   calculateNewLevel,
   generateGameSequence,
   getCorrectHitSequence,
+  getHitStatistics,
   insertGameIntoDatabase,
 } from "@/utils/gameLogic";
 import sleep from "@/utils/sleep";
@@ -24,6 +25,9 @@ export default function PlayPage() {
   const [level, setLevel] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
+  const [correctHits, setCorrectHits] = useState<number | null>(null);
+  const [incorrectHits, setIncorrectHits] = useState<number | null>(null);
+  const [missedHits, setMissedHits] = useState<number | null>(null);
 
   const { setIsVisible } = useSidebar();
 
@@ -32,10 +36,33 @@ export default function PlayPage() {
   const playerHitSequence = useRef<boolean[]>([]);
   const hasPressedSpaceBar = useRef(true);
 
-  let step = 0;
+  const updateGameData = async () => {
+    const currentLevel = level as number;
+
+    const { correctHits, incorrectHits, missedHits } = getHitStatistics(
+      correctHitSequence.current,
+      playerHitSequence.current,
+    );
+    setCorrectHits(correctHits);
+    setIncorrectHits(incorrectHits);
+    setMissedHits(missedHits);
+
+    const newLevel = calculateNewLevel(
+      correctHitSequence.current,
+      playerHitSequence.current,
+      currentLevel,
+    );
+    setLevel(newLevel);
+
+    await insertGameIntoDatabase(
+      correctHitSequence.current,
+      playerHitSequence.current,
+      currentLevel,
+    );
+  };
 
   const playGame = async () => {
-    step = 0;
+    let step = 0;
 
     hasPressedSpaceBar.current = false;
     for (const position of gameSequence.current) {
@@ -57,20 +84,7 @@ export default function PlayPage() {
     setIsPlaying(false);
     setIsVisible(true);
 
-    const currentLevel = level as number;
-
-    const newLevel = calculateNewLevel(
-      correctHitSequence.current,
-      playerHitSequence.current,
-      currentLevel,
-    );
-    setLevel(newLevel);
-
-    await insertGameIntoDatabase(
-      correctHitSequence.current,
-      playerHitSequence.current,
-      currentLevel,
-    );
+    await updateGameData();
   };
 
   const startPlaying = async () => {
@@ -101,7 +115,16 @@ export default function PlayPage() {
 
   return (
     <div className="flex h-full items-center justify-center">
-      <StartScreen visible={!isPlaying} onStart={startPlaying} />
+      <StartScreen
+        visible={!isPlaying}
+        onStart={startPlaying}
+        correctHits={5}
+        incorrectHits={1}
+        missedHits={2}
+        // correctHits={correctHits}
+        // incorrectHits={incorrectHits}
+        // missedHits={missedHits}
+      />
       <div className="flex h-full w-full max-w-3xl flex-col items-center">
         <div className="mb-[2.5cqmin] mt-[1.5cqmin] flex-shrink-0">
           <LevelDisplay level={level} />
