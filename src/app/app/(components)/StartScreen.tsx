@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const baseBox = "";
 const boxVariants = cva("flex items-center gap-2 rounded-md py-2 pl-4", {
   variants: {
     size: { small: "pr-10 ", big: "" },
@@ -38,6 +37,7 @@ interface StartScreenProps {
   correctHits: number | null;
   incorrectHits: number | null;
   missedHits: number | null;
+  newLevel: number | null;
 }
 
 export default function StartScreen({
@@ -46,6 +46,7 @@ export default function StartScreen({
   correctHits,
   incorrectHits,
   missedHits,
+  newLevel,
 }: StartScreenProps) {
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
@@ -57,6 +58,13 @@ export default function StartScreen({
     accuracy = Math.floor(
       (correctHits / (correctHits + incorrectHits + missedHits)) * 100,
     );
+  }
+
+  let previousLevel = newLevel ?? 0;
+  if (hasStatistics) {
+    previousLevel -= Number(accuracy >= gameIncreaseLevelThreshold * 100);
+    previousLevel += Number(accuracy <= gameDecreaseLevelThreshold * 100);
+    previousLevel = Math.max(1, previousLevel);
   }
 
   useEffect(() => {
@@ -200,7 +208,7 @@ export default function StartScreen({
                       }),
                     )}
                   >
-                    Level 1
+                    Level {previousLevel}
                   </div>
                   <MoveRightIcon className="h-6 w-6 flex-shrink-0 text-slate-900" />
                   <div
@@ -212,7 +220,7 @@ export default function StartScreen({
                       }),
                     )}
                   >
-                    Level 1
+                    Level {newLevel ?? 0}
                   </div>
                 </div>
               </div>
