@@ -18,11 +18,14 @@ import {
 } from "@/settings/constants";
 import getUserLevel from "@/database/queries/getUserLevel";
 import LevelDisplay from "../(components)/LevelDisplay";
+import { useSidebar } from "@/context/SidebarContext";
 
 export default function PlayPage() {
   const [level, setLevel] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
+
+  const { setIsVisible } = useSidebar();
 
   const gameSequence = useRef<number[]>([]);
   const correctHitSequence = useRef<boolean[]>([]);
@@ -52,6 +55,7 @@ export default function PlayPage() {
     }
 
     setIsPlaying(false);
+    setIsVisible(true);
 
     const currentLevel = level as number;
 
@@ -73,6 +77,7 @@ export default function PlayPage() {
     if (!level) return;
 
     setIsPlaying(true);
+    setIsVisible(false);
 
     gameSequence.current = generateGameSequence(level);
     correctHitSequence.current = getCorrectHitSequence(

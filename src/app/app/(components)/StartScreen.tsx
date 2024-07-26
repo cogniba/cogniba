@@ -36,7 +36,7 @@ export default function StartScreen({ visible, onStart }: StartScreenProps) {
           </div>
         </blockquote>
         <Button
-          className="mt-14 justify-center py-5 text-4xl font-semibold"
+          className="mt-14 justify-center py-5 text-4xl font-bold uppercase tracking-wide focus-visible:ring-0"
           size="custom"
           type="submit"
           onClick={onStart}

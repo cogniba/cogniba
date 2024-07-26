@@ -1,4 +1,5 @@
 import OptionalLinkWrapper from "@/components/OptionalLinkWrapper";
+import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
@@ -7,7 +8,6 @@ interface AppSidebarItemProps {
   text: string;
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   onClick?: () => void;
-  isExpanded: boolean;
 }
 
 export default function AppSidebarItem({
@@ -15,9 +15,9 @@ export default function AppSidebarItem({
   Icon,
   onClick,
   href,
-  isExpanded,
 }: AppSidebarItemProps) {
   const pathname = usePathname();
+  const { isExpanded, isUserDropdownOpen } = useSidebar();
 
   return (
     <OptionalLinkWrapper href={href}>
@@ -28,7 +28,6 @@ export default function AppSidebarItem({
             pathname === href &&
               "bg-slate-200 text-slate-950 shadow-sm hover:bg-slate-200",
           )}
-          aria-current={isExpanded}
           onClick={onClick}
         >
           <div className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center">
@@ -36,7 +35,7 @@ export default function AppSidebarItem({
           </div>
           <div
             className="absolute left-9 min-w-32 text-left text-base font-medium opacity-0 transition-[opacity,left] group-data-[state=expanded]:left-11 group-data-[state=expanded]:opacity-100"
-            aria-hidden={isExpanded || undefined}
+            aria-hidden={isExpanded || isUserDropdownOpen || undefined}
           >
             {text}
           </div>

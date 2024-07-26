@@ -10,18 +10,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import handleSignOut from "@/server-actions/auth/handleSignOut";
+import { useSidebar } from "@/context/SidebarContext";
 
-interface UserButtonProps {
-  isExpanded: boolean;
-  isUserDropdownOpen: boolean;
-  setIsUserDropdownOpen: (open: boolean) => void;
-}
-
-export default function UserButton({
-  isExpanded,
-  isUserDropdownOpen,
-  setIsUserDropdownOpen,
-}: UserButtonProps) {
+export default function UserButton() {
+  const { isExpanded, isUserDropdownOpen, setIsUserDropdownOpen } =
+    useSidebar();
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
 
@@ -52,7 +45,6 @@ export default function UserButton({
               "group/item relative flex h-12 w-full items-center justify-center rounded-md text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950 hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start",
               isUserDropdownOpen && "bg-slate-100",
             )}
-            aria-current={isExpanded}
           >
             <div className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center">
               <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50">
@@ -61,7 +53,7 @@ export default function UserButton({
             </div>
             <div
               className="absolute left-9 w-40 space-y-0.5 text-left text-base font-medium opacity-0 transition-[opacity,left] group-data-[state=expanded]:left-11 group-data-[state=expanded]:opacity-100"
-              aria-hidden={isExpanded || undefined}
+              aria-hidden={isExpanded || isUserDropdownOpen || undefined}
             >
               <div className="truncate font-semibold">{name}</div>
               <div className="truncate text-xs font-normal text-slate-600 group-hover/item:text-slate-700">
