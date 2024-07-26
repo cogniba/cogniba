@@ -118,12 +118,9 @@ export default function PlayPage() {
       <StartScreen
         visible={!isPlaying}
         onStart={startPlaying}
-        correctHits={5}
-        incorrectHits={1}
-        missedHits={2}
-        // correctHits={correctHits}
-        // incorrectHits={incorrectHits}
-        // missedHits={missedHits}
+        correctHits={correctHits}
+        incorrectHits={incorrectHits}
+        missedHits={missedHits}
       />
       <div className="flex h-full w-full max-w-3xl flex-col items-center">
         <div className="mb-[2.5cqmin] mt-[1.5cqmin] flex-shrink-0">
