@@ -18,5 +18,5 @@ export const games = pgTable("games", {
 
   timeSpent: integer("timeSpent").notNull(),
 
-  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });
