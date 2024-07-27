@@ -1,5 +1,5 @@
 import { and, desc, eq, gte, lte } from "drizzle-orm";
-import { db } from "../db";
+import { db } from "@/database/db";
 import { games } from "../schemas/games";
 import getUser from "./getUser";
 
