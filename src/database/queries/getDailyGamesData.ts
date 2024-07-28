@@ -5,7 +5,6 @@ import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
 import getUser from "./getUser";
 import { date } from "./functions";
-import { users } from "../schemas/auth";
 
 export type DailyGamesData = {
   gamesPlayed: number;
@@ -13,7 +12,7 @@ export type DailyGamesData = {
   correctHits: number;
   incorrectHits: number;
   missedHits: number;
-  timeSpent: number;
+  timePlayed: number;
   date: string;
 }[];
 
@@ -31,7 +30,7 @@ export default async function getDailyGamesData(): Promise<DailyGamesData> {
       correctHits: avg(games.correctHits).mapWith(Number),
       incorrectHits: avg(games.incorrectHits).mapWith(Number),
       missedHits: avg(games.missedHits).mapWith(Number),
-      timeSpent: sum(games.timeSpent).mapWith(Number),
+      timePlayed: sum(games.timePlayed).mapWith(Number),
       date: date(games.createdAt),
     })
     .from(games)

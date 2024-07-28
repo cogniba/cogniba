@@ -129,7 +129,7 @@ export async function insertGameIntoDatabase(
     level,
   );
 
-  const timeSpent =
+  const timePlayed =
     (gameBaseSequenceLength + level) *
       (gameVisibleSquareDuration + gameHiddenSquareDuration) +
     gameDelayBeforeStart;
@@ -140,6 +140,6 @@ export async function insertGameIntoDatabase(
     correctHits,
     incorrectHits,
     missedHits,
-    timeSpent,
+    timePlayed,
   );
 }

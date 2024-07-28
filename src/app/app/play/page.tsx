@@ -114,18 +114,14 @@ export default function PlayPage() {
   }, []);
 
   return (
-    <div className="flex h-full items-center justify-center">
+    <div className="flex h-screen items-center justify-center">
       <StartScreen
         visible={!isPlaying}
         onStart={startPlaying}
-        // correctHits={correctHits}
-        // incorrectHits={incorrectHits}
-        // missedHits={missedHits}
-        // newLevel={level}
-        correctHits={5}
-        incorrectHits={1}
-        missedHits={1}
-        newLevel={3}
+        correctHits={correctHits}
+        incorrectHits={incorrectHits}
+        missedHits={missedHits}
+        newLevel={level}
       />
       <div className="flex h-full w-full max-w-3xl flex-col items-center">
         <div className="mb-[2.5cqmin] mt-[1.5cqmin] flex-shrink-0">

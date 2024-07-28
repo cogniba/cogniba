@@ -9,11 +9,11 @@ interface AppLayoutProps {
 export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <SidebarProvider>
-      <div className="flex h-screen flex-col">
+      <div className="flex flex-col">
         {/* <AppHeader /> */}
         <div className="relative flex h-full w-full">
           <AppSidebar />
-          <main className="h-full w-full bg-teal-50">{children}</main>
+          <main className="min-h-screen w-full bg-teal-50">{children}</main>
         </div>
       </div>
     </SidebarProvider>

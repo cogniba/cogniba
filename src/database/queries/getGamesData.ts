@@ -16,7 +16,7 @@ export default async function getGamesData(fromDate: Date, toDate: Date) {
       correctHits: games.correctHits,
       incorrectHits: games.incorrectHits,
       missedHits: games.missedHits,
-      timeSpent: games.timeSpent,
+      timePlayed: games.timePlayed,
       date: games.createdAt,
     })
     .from(games)
