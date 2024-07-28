@@ -43,6 +43,13 @@
       "when": 1722157486778,
       "tag": "0005_harsh_maelstrom",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1722190042724,
+      "tag": "0006_round_sinister_six",
+      "breakpoints": true
     }
   ]
 }

@@ -1,7 +1,7 @@
 import { and, desc, eq, gte, lte } from "drizzle-orm";
 import { db } from "@/database/db";
-import { games } from "../schemas/games";
-import getUser from "./getUser";
+import { games } from "@/database/schemas/games";
+import getUser from "@/database/queries/users/getUser";
 
 export default async function getGamesData(fromDate: Date, toDate: Date) {
   const { id: userId } = await getUser();

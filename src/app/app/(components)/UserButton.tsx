@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CircleUserIcon, LogOutIcon } from "lucide-react";
-import getUser from "@/database/queries/getUser";
+import getUser from "@/database/queries/users/getUser";
 import {
   DropdownMenu,
   DropdownMenuContent,

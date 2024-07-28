@@ -1,4 +1,4 @@
-import insertGame from "@/database/queries/insertGame";
+import insertGame from "@/database/queries/games/insertGame";
 import {
   gameBaseSequenceLength,
   gameDecreaseLevelThreshold,

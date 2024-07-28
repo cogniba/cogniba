@@ -3,8 +3,8 @@
 import { avg, count, eq, sum } from "drizzle-orm";
 import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
-import getUser from "./getUser";
-import { date } from "./functions";
+import getUser from "@/database/queries/users/getUser";
+import { date } from "@/database/queries/functions";
 
 export type DailyGamesData = {
   gamesPlayed: number;

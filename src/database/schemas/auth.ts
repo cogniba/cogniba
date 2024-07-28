@@ -1,3 +1,4 @@
+import { InferSelectModel } from "drizzle-orm";
 import {
   boolean,
   timestamp,
@@ -27,7 +28,7 @@ export const users = authSchema.table("users", {
   password: text("password"),
   role: roleEnum("role"),
 
-  parent: text("parent").references((): AnyPgColumn => users.id, {
+  parentId: text("parentId").references((): AnyPgColumn => users.id, {
     onDelete: "cascade",
   }),
 
@@ -100,3 +101,5 @@ export const authenticators = authSchema.table(
     }),
   }),
 );
+
+export type Users = InferSelectModel<typeof users>;

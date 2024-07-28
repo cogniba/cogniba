@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/database/db";
-import { users } from "../schemas/auth";
+import { users } from "@/database/schemas/auth";
 import { eq } from "drizzle-orm";
 
 export default async function getUserByUsername(username: string) {

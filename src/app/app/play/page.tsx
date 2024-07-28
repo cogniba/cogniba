@@ -17,7 +17,7 @@ import {
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
-import getUserLevel from "@/database/queries/getUserLevel";
+import getUserLevel from "@/database/queries/games/getUserLevel";
 import LevelDisplay from "../(components)/LevelDisplay";
 import { useSidebar } from "@/context/SidebarContext";
 

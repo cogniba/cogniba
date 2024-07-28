@@ -1,9 +1,9 @@
 "use server";
 
 import saltAndHashPassword from "@/utils/saltAndHashPassword";
-import getUserByUsername from "./getUserByUsername";
-import { db } from "../db";
-import { users } from "../schemas/auth";
+import getUserByUsername from "@/database/queries/users/getUserByUsername";
+import { db } from "@/database/db";
+import { users } from "@/database/schemas/auth";
 
 export default async function createUser(
   role: "child" | "parent" | "admin",

@@ -1,9 +1,9 @@
 "use server";
 
 import { desc, eq } from "drizzle-orm";
-import { db } from "../db";
-import { games } from "../schemas/games";
-import getUser from "./getUser";
+import { db } from "@/database/db";
+import { games } from "@/database/schemas/games";
+import getUser from "@/database/queries/users/getUser";
 
 export default async function getUserLevel() {
   const { id: userId } = await getUser();

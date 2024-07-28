@@ -1,11 +1,11 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 import bcrypt from "bcryptjs";
-import getUserByUsername from "@/database/queries/getUserByUsername";
+import getUserByUsername from "@/database/queries/users/getUserByUsername";
 import Credentials from "next-auth/providers/credentials";
 import { db } from "@/database/db";
 
 import { SignInSchema } from "@/zod/schemas/SignInSchema";
-import { PostgresDrizzleAdapter } from "../../drizzle/adapter/drizzleAdapter";
+import { PostgresDrizzleAdapter } from "@/../drizzle/adapter/drizzleAdapter";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PostgresDrizzleAdapter(db),
