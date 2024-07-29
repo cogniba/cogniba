@@ -4,7 +4,16 @@ export const SignUpSchema = z
   .object({
     role: z.enum(["child", "parent", "admin"]),
 
-    email: z.string().max(64, { message: "Email is too long" }),
+    email: z
+      .string()
+      .email()
+      .max(64, { message: "Email is too long" })
+      .optional(),
+
+    parentUsername: z
+      .string()
+      .max(64, { message: "Parent username is too long" })
+      .optional(),
 
     fullName: z
       .string()
@@ -30,6 +39,13 @@ export const SignUpSchema = z
           code: z.ZodIssueCode.custom,
           message: "Invalid email address",
           path: ["email"],
+        });
+      }
+    } else if (data.role === "child") {
+      if (!data.parentUsername) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Parent username is required",
         });
       }
     }

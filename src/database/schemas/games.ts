@@ -22,4 +22,4 @@ export const games = pgTable("games", {
   createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });
 
-export type Games = InferSelectModel<typeof games>;
+export type GameType = InferSelectModel<typeof games>;

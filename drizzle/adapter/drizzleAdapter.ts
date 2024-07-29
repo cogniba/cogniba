@@ -1,3 +1,5 @@
+// TODO
+
 import type { Adapter } from "@auth/core/adapters";
 import * as schema from "@/database/schemas/auth";
 import { and, eq } from "drizzle-orm";

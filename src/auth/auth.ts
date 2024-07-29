@@ -18,15 +18,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           if (!validatedCredentials.success) {
             throw new Error("Invalid credentials");
           }
+
           const { username, password } = validatedCredentials.data;
           const user = await getUserByUsername(username);
-          if (!user || !user.password) {
+          if (!user) {
             throw new Error("Invalid credentials");
           }
+
           const passwordsMatch = await bcrypt.compare(password, user.password);
           if (!passwordsMatch) {
             throw new Error("Invalid credentials");
           }
+
           return user;
         } catch (error) {
           return null;

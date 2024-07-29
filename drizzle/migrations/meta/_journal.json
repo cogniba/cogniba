@@ -50,6 +50,27 @@
       "when": 1722190042724,
       "tag": "0006_round_sinister_six",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1722241036945,
+      "tag": "0007_rare_fantastic_four",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1722241180751,
+      "tag": "0008_bright_leopardon",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1722277083646,
+      "tag": "0009_tiny_valkyrie",
+      "breakpoints": true
     }
   ]
 }

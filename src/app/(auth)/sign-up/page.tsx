@@ -44,6 +44,7 @@ export default function LoginForm() {
     defaultValues: {
       role: undefined,
       email: "",
+      parentUsername: "",
       fullName: "",
       username: "",
       password: "",
@@ -122,6 +123,33 @@ export default function LoginForm() {
                           name="email"
                           type="email"
                           placeholder="marcoshernanz@example.com"
+                          autoComplete="off"
+                          required
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("role") === "child" && (
+                <FormField
+                  control={form.control}
+                  name="parentUsername"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="parentUsername">
+                        Parent Username
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          id="parentUsername"
+                          name="parentUsername"
+                          type="text"
+                          placeholder="alfredohernanz123"
                           autoComplete="off"
                           required
                         />

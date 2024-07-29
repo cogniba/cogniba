@@ -1,13 +1,10 @@
 import NextAuth, { DefaultSession, DefaultUser } from "next-auth";
+import { Users, UserType } from "@/database/schemas/auth";
 
 declare module "next-auth" {
-  export interface User extends DefaultUser {
-    username: string | null;
-    password: string | null;
-    role: "child" | "parent" | "admin" | null;
-  }
+  export interface User extends UserType {}
 
   export interface Session {
-    user: User;
+    user: UserType;
   }
 }

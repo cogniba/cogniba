@@ -22,10 +22,6 @@ export default function UserButton() {
     const handleName = async () => {
       const { name, username } = await getUser();
 
-      if (!name || !username) {
-        throw new Error("User not found");
-      }
-
       setName(name);
       setUserName(username);
     };

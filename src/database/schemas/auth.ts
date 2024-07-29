@@ -17,22 +17,22 @@ export const roleEnum = authSchema.enum("role", ["child", "parent", "admin"]);
 export const users = authSchema.table("users", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .$defaultFn(() => crypto.randomUUID())
+    .notNull(),
 
-  email: text("email").notNull(),
+  email: text("email").unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
-  name: text("name"),
-  image: text("image"),
 
-  username: text("username").unique(),
-  password: text("password"),
-  role: roleEnum("role"),
+  name: text("name").notNull(),
+  username: text("username").unique().notNull(),
+  password: text("password").notNull(),
+  role: roleEnum("role").notNull(),
 
   parentId: text("parentId").references((): AnyPgColumn => users.id, {
     onDelete: "cascade",
   }),
 
-  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });
 
 export const accounts = authSchema.table(
@@ -102,4 +102,4 @@ export const authenticators = authSchema.table(
   }),
 );
 
-export type Users = InferSelectModel<typeof users>;
+export type UserType = InferSelectModel<typeof users>;

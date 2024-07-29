@@ -5,12 +5,8 @@ import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
 import getUser from "@/database/queries/users/getUser";
 
-export default async function getUserLevel() {
+export default async function getUserLevel(): Promise<number> {
   const { id: userId } = await getUser();
-
-  if (!userId) {
-    throw new Error("User not found");
-  }
 
   const level = await db
     .select()
@@ -18,7 +14,7 @@ export default async function getUserLevel() {
     .where(eq(games.userId, userId))
     .orderBy(desc(games.createdAt))
     .limit(1)
-    .then((res) => res[0]?.newLevel ?? 1);
+    .then((res) => (res.length === 1 ? res[0].newLevel : 1));
 
   return level;
 }

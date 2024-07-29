@@ -19,10 +19,6 @@ export type DailyGamesData = {
 export default async function getDailyGamesData(): Promise<DailyGamesData> {
   const { id: userId } = await getUser();
 
-  if (!userId) {
-    throw new Error("User not found");
-  }
-
   const gamesData = await db
     .select({
       gamesPlayed: count(games.level),
