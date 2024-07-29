@@ -1,4 +1,4 @@
-import NextAuth, { type DefaultSession } from "next-auth";
+import NextAuth from "next-auth";
 import bcrypt from "bcryptjs";
 import getUserByUsername from "@/database/queries/users/getUserByUsername";
 import Credentials from "next-auth/providers/credentials";

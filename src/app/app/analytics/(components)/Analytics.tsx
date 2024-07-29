@@ -10,7 +10,7 @@ import GamesPlayedChart from "./(charts)/GamesPlayedChart";
 import StatsChart from "./(charts)/StatsChart";
 import TimePlayedChart from "./(charts)/TimePlayedChart";
 import cleanChartData from "@/lib/cleanChartData";
-import { Users } from "@/database/schemas/auth";
+import { UserType } from "@/database/schemas/auth";
 
 type chartMetrics =
   | "level"
@@ -21,7 +21,7 @@ type chartMetrics =
 
 interface AnalyticsProps {
   bulkData: DailyGamesData;
-  userChildren: Users[];
+  userChildren: UserType[];
 }
 
 export default function Analytics({ bulkData, userChildren }: AnalyticsProps) {

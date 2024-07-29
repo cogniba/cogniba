@@ -4,7 +4,13 @@ import { Users, UserType } from "@/database/schemas/auth";
 declare module "next-auth" {
   export interface User extends UserType {}
 
+  export interface AdapterUser extends User {}
+
   export interface Session {
-    user: UserType;
+    user: User;
   }
+}
+
+declare module "@auth/core/adapters" {
+  export interface AdapterUser extends UserType {}
 }

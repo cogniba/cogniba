@@ -1,9 +1,20 @@
 // TODO
 
-import type { Adapter } from "@auth/core/adapters";
+import { UserType } from "@/database/schemas/auth";
+import type { Adapter, AdapterUser } from "@auth/core/adapters";
 import * as schema from "@/database/schemas/auth";
 import { and, eq } from "drizzle-orm";
 import { PgDatabase } from "drizzle-orm/pg-core";
+
+type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
+
+type ExpandRecursively<T> = T extends object
+  ? T extends infer O
+    ? { [K in keyof O]: ExpandRecursively<O[K]> }
+    : never
+  : T;
+
+type ExpandedAdapterUser = Expand<AdapterUser>;
 
 export function PostgresDrizzleAdapter(
   client: InstanceType<typeof PgDatabase>,
@@ -11,12 +22,12 @@ export function PostgresDrizzleAdapter(
   const { users, accounts, sessions, verificationTokens } = schema;
 
   return {
-    async createUser(data) {
+    async createUser(data): Promise<AdapterUser> {
       return await client
         .insert(users)
         .values(data)
         .returning()
-        .then((res) => res[0] ?? null);
+        .then((res) => res[0]);
     },
 
     async getUser(data) {
@@ -24,7 +35,7 @@ export function PostgresDrizzleAdapter(
         .select()
         .from(users)
         .where(eq(users.id, data))
-        .then((res) => res[0] ?? null);
+        .then((res) => (res.length === 1 ? res[0] : null));
     },
 
     async getUserByAccount(account) {
@@ -70,7 +81,7 @@ export function PostgresDrizzleAdapter(
         .delete(users)
         .where(eq(users.id, id))
         .returning()
-        .then((res) => res[0] ?? null);
+        .then((res) => (res.length === 1 ? res[0] : null));
     },
 
     async unlinkAccount(account) {
@@ -83,7 +94,7 @@ export function PostgresDrizzleAdapter(
           ),
         )
         .returning()
-        .then((res) => res[0] ?? null);
+        .then((res) => (res.length === 1 ? res[0] : null));
 
       return { provider, type, providerAccountId, userId };
     },
@@ -105,7 +116,7 @@ export function PostgresDrizzleAdapter(
         .from(sessions)
         .where(eq(sessions.sessionToken, data))
         .innerJoin(users, eq(users.id, sessions.userId))
-        .then((res) => res[0] ?? null);
+        .then((res) => (res.length === 1 ? res[0] : null));
     },
 
     async updateSession(data) {
@@ -122,7 +133,7 @@ export function PostgresDrizzleAdapter(
         .delete(sessions)
         .where(eq(sessions.sessionToken, sessionToken))
         .returning()
-        .then((res) => res[0] ?? null);
+        .then((res) => (res.length === 1 ? res[0] : null));
 
       return session;
     },
@@ -132,7 +143,7 @@ export function PostgresDrizzleAdapter(
         .select()
         .from(users)
         .where(eq(users.email, data))
-        .then((res) => res[0] ?? null);
+        .then((res) => (res.length === 1 ? res[0] : null));
     },
 
     async createVerificationToken(token) {
@@ -154,7 +165,7 @@ export function PostgresDrizzleAdapter(
             ),
           )
           .returning()
-          .then((res) => res[0] ?? null);
+          .then((res) => (res.length === 1 ? res[0] : null));
       } catch (err) {
         throw new Error("No verification token found.");
       }
