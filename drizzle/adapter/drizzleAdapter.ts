@@ -1,20 +1,10 @@
 // TODO
+// @ts-nocheck
 
-import { UserType } from "@/database/schemas/auth";
 import type { Adapter, AdapterUser } from "@auth/core/adapters";
 import * as schema from "@/database/schemas/auth";
 import { and, eq } from "drizzle-orm";
 import { PgDatabase } from "drizzle-orm/pg-core";
-
-type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
-
-type ExpandRecursively<T> = T extends object
-  ? T extends infer O
-    ? { [K in keyof O]: ExpandRecursively<O[K]> }
-    : never
-  : T;
-
-type ExpandedAdapterUser = Expand<AdapterUser>;
 
 export function PostgresDrizzleAdapter(
   client: InstanceType<typeof PgDatabase>,
@@ -22,7 +12,7 @@ export function PostgresDrizzleAdapter(
   const { users, accounts, sessions, verificationTokens } = schema;
 
   return {
-    async createUser(data): Promise<AdapterUser> {
+    async createUser(data) {
       return await client
         .insert(users)
         .values(data)

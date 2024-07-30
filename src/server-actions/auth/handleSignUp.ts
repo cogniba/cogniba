@@ -19,8 +19,8 @@ export default async function handleSignUp(
 
     const user = await createUser({
       role,
-      email: email ?? null,
-      parentUsername: parentUsername ?? null,
+      email: role === "parent" ? (email ?? null) : null,
+      parentUsername: role === "child" ? (parentUsername ?? null) : null,
       fullName,
       username,
       password,

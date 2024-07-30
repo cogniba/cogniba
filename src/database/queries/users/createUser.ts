@@ -36,10 +36,18 @@ export default async function createUser({
   }
 
   let parentId = null;
-  if (parentUsername) {
+  if (role === "child") {
+    if (!parentUsername) {
+      throw new Error("Parent username is required");
+    }
+
     const parent = await getUserByUsername(parentUsername);
     if (!parent) {
       throw new Error("Parent not found");
+    }
+
+    if (parent.role !== "parent") {
+      throw new Error("Parent is not a parent");
     }
 
     parentId = parent.id;
