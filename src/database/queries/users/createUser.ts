@@ -1,6 +1,6 @@
 "use server";
 
-import saltAndHashPassword from "@/utils/saltAndHashPassword";
+import saltAndHashPassword from "@/lib/saltAndHashPassword";
 import getUserByUsername from "@/database/queries/users/getUserByUsername";
 import { db } from "@/database/db";
 import { users, UserType } from "@/database/schemas/auth";

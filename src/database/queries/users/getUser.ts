@@ -11,5 +11,5 @@ export default async function getUser(): Promise<UserType> {
     throw new Error("No user");
   }
 
-  return user;
+  return user as UserType;
 }

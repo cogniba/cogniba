@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import sleep from "@/utils/sleep";
+import { cn } from "@/lib/cn";
+import sleep from "@/lib/sleep";
 import { useCallback, useEffect, useState } from "react";
 
 interface SpaceBarProps {

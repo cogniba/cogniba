@@ -8,9 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
 import handleSignOut from "@/server-actions/auth/handleSignOut";
 import { useSidebar } from "@/context/SidebarContext";
+import { cn } from "@/lib/cn";
 
 export default function UserButton() {
   const { isExpanded, isUserDropdownOpen, setIsUserDropdownOpen } =

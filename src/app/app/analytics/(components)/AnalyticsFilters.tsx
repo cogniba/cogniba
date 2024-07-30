@@ -4,11 +4,11 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { Users } from "@/database/schemas/auth";
+import { UserType } from "@/database/schemas/auth";
 import getFirstName from "@/lib/getFirstName";
 
 interface AnalyticsFiltersProps {
-  userChildren: Users[];
+  userChildren: UserType[];
 }
 
 export default function AnalyticsFilters({

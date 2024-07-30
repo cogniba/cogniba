@@ -4,14 +4,7 @@ import Game from "@/components/Game";
 import SpaceBar from "@/components/SpaceBar";
 import StartScreen from "../(components)/StartScreen";
 import { useEffect, useRef, useState } from "react";
-import {
-  calculateNewLevel,
-  generateGameSequence,
-  getCorrectHitSequence,
-  getHitStatistics,
-  insertGameIntoDatabase,
-} from "@/utils/gameLogic";
-import sleep from "@/utils/sleep";
+import sleep from "@/lib/sleep";
 import {
   gameDelayBeforeStart,
   gameHiddenSquareDuration,
@@ -20,6 +13,11 @@ import {
 import getUserLevel from "@/database/queries/games/getUserLevel";
 import LevelDisplay from "../(components)/LevelDisplay";
 import { useSidebar } from "@/context/SidebarContext";
+import getHitStatistics from "@/lib/game-logic/getHitStatistics";
+import calculateNewLevel from "@/lib/game-logic/calculateNewLevel";
+import insertGameIntoDatabase from "@/lib/game-logic/insertGameIntoDatabase";
+import generateGameSequence from "@/lib/game-logic/generateGameSequence";
+import getCorrectHitSequence from "@/lib/game-logic/getCorrectHitSequence";
 
 export default function PlayPage() {
   const [level, setLevel] = useState<number | null>(null);

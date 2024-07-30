@@ -5,7 +5,7 @@ export default function cleanChartData(
   data: DailyGamesData,
   startDate: Date,
   endDate: Date,
-) {
+): DailyGamesData {
   const filteredData = data.filter((item) => {
     const date = new Date(item.date);
     return date >= startDate && date <= endDate;

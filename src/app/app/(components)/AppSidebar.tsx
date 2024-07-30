@@ -4,7 +4,7 @@ import { AreaChartIcon, PlayIcon, SettingsIcon } from "lucide-react";
 import AppSidebarItem from "./AppSidebarItem";
 import UserButton from "./UserButton";
 import { useSidebar } from "@/context/SidebarContext";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 export default function AppSidebar() {
   const { isVisible, isExpanded, setIsExpanded, isUserDropdownOpen } =
