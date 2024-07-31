@@ -8,6 +8,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { DailyGamesData } from "@/database/queries/games/getDailyGamesData";
+import { FileSearchIcon } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 interface AnalyticsChartProps {
@@ -27,13 +28,13 @@ export default function AnalyticsChart({
 }: AnalyticsChartProps) {
   return (
     <>
-      <CardHeader className="flex flex-col justify-center">
+      <CardHeader className="mb-1 flex flex-col justify-center px-0 pt-0">
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       {data ? (
         <ChartContainer
-          className="aspect-auto h-96 w-full"
+          className="aspect-auto h-full w-full"
           config={chartConfig}
         >
           <AreaChart data={data}>
@@ -106,7 +107,16 @@ export default function AnalyticsChart({
           </AreaChart>
         </ChartContainer>
       ) : (
-        <div> No data </div>
+        <div className="flex h-full w-full flex-col items-center justify-center gap-4 pb-24 text-slate-400">
+          <FileSearchIcon
+            className="h-12 w-12 text-slate-800"
+            strokeWidth={1.5}
+            opacity={0.5}
+          />
+          <div className="text-2xl text-slate-800/50">
+            No data for this period
+          </div>
+        </div>
       )}
     </>
   );

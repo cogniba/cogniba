@@ -38,7 +38,7 @@ export default function Analytics({ bulkData, userChildren }: AnalyticsProps) {
   const [selectedChild, setSelectedChild] = useState<UserType | null>(null);
 
   const cleanData =
-    date && date.from && date.to
+    date && date.from && date.to && data.length > 0
       ? cleanChartData(data, date.from, date.to)
       : null;
 
@@ -55,7 +55,7 @@ export default function Analytics({ bulkData, userChildren }: AnalyticsProps) {
 
   return (
     <Card className="flex h-full w-full flex-col">
-      <CardHeader>
+      <CardHeader className="border-b p-8">
         <AnalyticsFilters
           userChildren={userChildren}
           date={date}
@@ -65,7 +65,7 @@ export default function Analytics({ bulkData, userChildren }: AnalyticsProps) {
           setSelectedChild={setSelectedChild}
         />
       </CardHeader>
-      <CardContent className="h-full">
+      <CardContent className="flex h-full flex-col p-8">
         {chartMetric === "level" && <LevelChart data={cleanData} />}
         {chartMetric === "accuracy" && <AccuracyChart data={cleanData} />}
         {chartMetric === "stats" && <StatsChart data={cleanData} />}
