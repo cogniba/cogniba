@@ -10,7 +10,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface AccuracyChartProps {
-  data: DailyGamesData;
+  data: DailyGamesData | null;
 }
 
 export default function AccuracyChart({ data }: AccuracyChartProps) {

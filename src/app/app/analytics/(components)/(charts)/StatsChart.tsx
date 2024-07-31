@@ -18,7 +18,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface StatsChartProps {
-  data: DailyGamesData;
+  data: DailyGamesData | null;
 }
 
 export default function StatsChart({ data }: StatsChartProps) {

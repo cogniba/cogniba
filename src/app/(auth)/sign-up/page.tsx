@@ -55,8 +55,6 @@ export default function LoginForm() {
     setError(null);
     setSuccess(null);
 
-    console.log("AAA");
-
     startTransition(() => {
       handleSignUp(data).then((result) => {
         setError(result.error ?? null);

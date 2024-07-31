@@ -10,7 +10,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface LevelChartProps {
-  data: DailyGamesData;
+  data: DailyGamesData | null;
 }
 
 export default function LevelChart({ data }: LevelChartProps) {

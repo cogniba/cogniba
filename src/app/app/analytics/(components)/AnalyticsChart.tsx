@@ -11,7 +11,7 @@ import { DailyGamesData } from "@/database/queries/games/getDailyGamesData";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 interface AnalyticsChartProps {
-  data: DailyGamesData;
+  data: DailyGamesData | null;
   chartConfig: ChartConfig;
   title: string;
   description: string;
@@ -31,69 +31,83 @@ export default function AnalyticsChart({
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <ChartContainer className="aspect-auto h-96 w-full" config={chartConfig}>
-        <AreaChart data={data}>
-          <defs>
-            {names.map((name, index) => (
-              <linearGradient id={name} x1="0" y1="0" x2="0" y2="1" key={index}>
-                <stop
-                  offset="5%"
-                  stopColor={`var(--color-${name})`}
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor={`var(--color-${name})`}
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-            ))}
-          </defs>
-          <CartesianGrid vertical={false} opacity={0.3} />
-          <XAxis
-            dataKey="date"
-            tickLine={false}
-            axisLine={false}
-            tickMargin={8}
-            minTickGap={16}
-            interval="preserveStartEnd"
-            padding={{ left: 16, right: 16 }}
-            tickFormatter={(value) => {
-              const date = new Date(value);
-              return date.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              });
-            }}
-          />
-          <ChartTooltip
-            cursor={false}
-            content={
-              <ChartTooltipContent
-                labelFormatter={(value) => {
-                  const date = new Date(value);
-                  return date.toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  });
-                }}
-                indicator="dot"
-              />
-            }
-          />
-          {names.map((name, index) => (
-            <Area
-              dataKey={name}
-              type="monotone"
-              fill={`url(#${name})`}
-              stroke={`var(--color-${name})`}
-              key={index}
+      {data ? (
+        <ChartContainer
+          className="aspect-auto h-96 w-full"
+          config={chartConfig}
+        >
+          <AreaChart data={data}>
+            <defs>
+              {names.map((name, index) => (
+                <linearGradient
+                  id={name}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                  key={index}
+                >
+                  <stop
+                    offset="5%"
+                    stopColor={`var(--color-${name})`}
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor={`var(--color-${name})`}
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+              ))}
+            </defs>
+            <CartesianGrid vertical={false} opacity={0.3} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              minTickGap={16}
+              interval="preserveStartEnd"
+              padding={{ left: 16, right: 16 }}
+              tickFormatter={(value) => {
+                const date = new Date(value);
+                return date.toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                });
+              }}
             />
-          ))}
-          <ChartLegend content={<ChartLegendContent />} />
-        </AreaChart>
-      </ChartContainer>
+            <ChartTooltip
+              cursor={false}
+              content={
+                <ChartTooltipContent
+                  labelFormatter={(value) => {
+                    const date = new Date(value);
+                    return date.toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    });
+                  }}
+                  indicator="dot"
+                />
+              }
+            />
+            {names.map((name, index) => (
+              <Area
+                dataKey={name}
+                type="monotone"
+                fill={`url(#${name})`}
+                stroke={`var(--color-${name})`}
+                key={index}
+              />
+            ))}
+            <ChartLegend content={<ChartLegendContent />} />
+          </AreaChart>
+        </ChartContainer>
+      ) : (
+        <div> No data </div>
+      )}
     </>
   );
 }

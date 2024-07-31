@@ -5,6 +5,7 @@ import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
 import getUser from "@/database/queries/users/getUser";
 import { date } from "@/database/queries/functions";
+import { UserType } from "@/database/schemas/auth";
 
 export type DailyGamesData = {
   gamesPlayed: number;
@@ -16,8 +17,17 @@ export type DailyGamesData = {
   date: string;
 }[];
 
-export default async function getDailyGamesData(): Promise<DailyGamesData> {
-  const { id: userId } = await getUser();
+export default async function getDailyGamesData(
+  user?: UserType,
+): Promise<DailyGamesData> {
+  let userId: string;
+
+  if (user) {
+    userId = user.id;
+  } else {
+    const user = await getUser();
+    userId = user.id;
+  }
 
   const gamesData = await db
     .select({

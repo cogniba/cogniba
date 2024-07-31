@@ -10,7 +10,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface GamesPlayedChartProps {
-  data: DailyGamesData;
+  data: DailyGamesData | null;
 }
 
 export default function GamesPlayedChart({ data }: GamesPlayedChartProps) {
