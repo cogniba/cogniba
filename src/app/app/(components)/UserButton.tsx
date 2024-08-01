@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { CircleUserIcon, LogOutIcon } from "lucide-react";
 import getUser from "@/database/queries/users/getUser";
 import {
@@ -17,6 +17,13 @@ export default function UserButton() {
     useSidebar();
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
+  const [isPending, startTransition] = useTransition();
+
+  const onSignOut = () => {
+    startTransition(() => {
+      handleSignOut();
+    });
+  };
 
   useEffect(() => {
     const handleName = async () => {
@@ -64,7 +71,8 @@ export default function UserButton() {
         <DropdownMenuGroup>
           <DropdownMenuItem
             className="font-medium text-slate-700 transition duration-200 hover:text-slate-950"
-            onClick={() => handleSignOut()}
+            disabled={isPending}
+            onClick={onSignOut}
           >
             <LogOutIcon className="mr-2 h-4 w-4" />
             <div>Sign Out</div>

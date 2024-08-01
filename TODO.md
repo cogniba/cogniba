@@ -1,2 +1,2 @@
 app.cogniaprendo.com
-Analytics % and min
+Disabled state when signing out

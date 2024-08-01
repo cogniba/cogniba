@@ -51,7 +51,7 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof SignUpSchema>) {
+  const onSubmit = (data: z.infer<typeof SignUpSchema>) => {
     setError(null);
     setSuccess(null);
 
@@ -61,7 +61,7 @@ export default function LoginForm() {
         setSuccess(result.success ?? null);
       });
     });
-  }
+  };
 
   return (
     <Form {...form}>
