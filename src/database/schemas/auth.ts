@@ -9,6 +9,7 @@ import {
   AnyPgColumn,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
+import { settings } from "./settings";
 
 export const authSchema = pgSchema("auth");
 
@@ -29,6 +30,9 @@ export const users = authSchema.table("users", {
   role: roleEnum("role").notNull(),
 
   parentId: text("parentId").references((): AnyPgColumn => users.id, {
+    onDelete: "cascade",
+  }),
+  settingsId: text("settingsId").references((): AnyPgColumn => settings.id, {
     onDelete: "cascade",
   }),
 
