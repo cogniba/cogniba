@@ -77,6 +77,7 @@ export default async function createUser({
       name: fullName,
       username,
       password: hashedPassword,
+      settingsId,
     })
     .returning()
     .then((res) => (res.length === 1 ? res[0] : null));

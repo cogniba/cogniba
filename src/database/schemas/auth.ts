@@ -32,9 +32,11 @@ export const users = authSchema.table("users", {
   parentId: text("parentId").references((): AnyPgColumn => users.id, {
     onDelete: "cascade",
   }),
-  settingsId: text("settingsId").references((): AnyPgColumn => settings.id, {
-    onDelete: "cascade",
-  }),
+  settingsId: text("settingsId")
+    .references((): AnyPgColumn => settings.id, {
+      onDelete: "cascade",
+    })
+    .notNull(),
 
   createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });

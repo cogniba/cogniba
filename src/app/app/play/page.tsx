@@ -112,7 +112,7 @@ export default function PlayPage() {
   }, []);
 
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="-ml-16 flex h-screen items-center justify-center">
       <StartScreen
         visible={!isPlaying}
         onStart={startPlaying}

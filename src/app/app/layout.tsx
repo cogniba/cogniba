@@ -13,7 +13,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
         {/* <AppHeader /> */}
         <div className="relative flex h-full w-full">
           <AppSidebar />
-          <main className="min-h-screen w-full bg-teal-50">{children}</main>
+          <main className="min-h-screen w-full bg-teal-50 pl-16">
+            {children}
+          </main>
         </div>
       </div>
     </SidebarProvider>

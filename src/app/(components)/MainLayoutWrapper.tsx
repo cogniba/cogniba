@@ -1,3 +1,5 @@
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 interface MainLayoutWrapperProps {
   readonly children: React.ReactNode;
 }
@@ -5,5 +7,14 @@ interface MainLayoutWrapperProps {
 export default function MainLayoutWrapper({
   children,
 }: MainLayoutWrapperProps) {
-  return <div>{children}</div>;
+  return (
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      // disableTransitionOnChange
+    >
+      {children}
+    </ThemeProvider>
+  );
 }

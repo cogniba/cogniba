@@ -7,7 +7,7 @@ export default async function AnalyticsPage() {
   const children = await getUserChildren();
 
   return (
-    <div className="flex h-screen items-center justify-center pl-16">
+    <div className="flex h-screen items-center justify-center">
       <div className="flex h-full w-full max-w-7xl flex-col items-center gap-5 py-20">
         <Analytics bulkData={data} userChildren={children} />
       </div>
