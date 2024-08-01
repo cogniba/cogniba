@@ -24,9 +24,7 @@ interface AnalyticsFiltersProps {
   userChildren: UserType[];
   date: DateRange | undefined;
   setDate: (date: DateRange | undefined) => void;
-  setChartMetric: (
-    metric: "level" | "accuracy" | "stats" | "gamesPlayed" | "timePlayed",
-  ) => void;
+  setChartMetric: (metric: chartMetrics) => void;
   selectedChild: UserType | null;
   setSelectedChild: (child: UserType) => void;
 }
@@ -62,7 +60,9 @@ export default function AnalyticsFilters({
             </SelectContent>
           </Select>
         )}
-        <Select onValueChange={(value: chartMetrics) => setChartMetric(value)}>
+        <Select
+          onValueChange={(value) => setChartMetric(value as chartMetrics)}
+        >
           <SelectTrigger className="w-64">
             <SelectValue placeholder="Select a metric" />
           </SelectTrigger>

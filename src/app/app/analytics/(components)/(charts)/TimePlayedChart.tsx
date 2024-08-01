@@ -21,6 +21,7 @@ export default function TimePlayedChart({ data }: TimePlayedChartProps) {
       title="Time played"
       description="Showing the time played per day"
       names={["timePlayed"]}
+      postfix=" min"
     />
   );
 }

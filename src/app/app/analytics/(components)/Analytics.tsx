@@ -15,13 +15,15 @@ import cleanChartData from "@/lib/cleanChartData";
 import { UserType } from "@/database/schemas/auth";
 import { subDays } from "date-fns";
 import { DateRange } from "react-day-picker";
+import ChartNoData from "@/components/ChartNoData";
 
 export type chartMetrics =
   | "level"
   | "accuracy"
   | "stats"
   | "gamesPlayed"
-  | "timePlayed";
+  | "timePlayed"
+  | null;
 
 interface AnalyticsProps {
   bulkData: DailyGamesData;
@@ -33,10 +35,11 @@ export default function Analytics({ bulkData, userChildren }: AnalyticsProps) {
     from: subDays(new Date(), 7),
     to: new Date(),
   });
-  const [chartMetric, setChartMetric] = useState<chartMetrics>("level");
+  const [chartMetric, setChartMetric] = useState<chartMetrics>(null);
   const [data, setData] = useState(bulkData);
   const [selectedChild, setSelectedChild] = useState<UserType | null>(null);
 
+  const isParent = userChildren.length > 0;
   const cleanData =
     date && date.from && date.to && data.length > 0
       ? cleanChartData(data, date.from, date.to)
@@ -66,11 +69,22 @@ export default function Analytics({ bulkData, userChildren }: AnalyticsProps) {
         />
       </CardHeader>
       <CardContent className="flex h-full flex-col p-8">
-        {chartMetric === "level" && <LevelChart data={cleanData} />}
-        {chartMetric === "accuracy" && <AccuracyChart data={cleanData} />}
-        {chartMetric === "stats" && <StatsChart data={cleanData} />}
-        {chartMetric === "gamesPlayed" && <GamesPlayedChart data={cleanData} />}
-        {chartMetric === "timePlayed" && <TimePlayedChart data={cleanData} />}
+        {isParent && selectedChild === null ? (
+          <ChartNoData text="No child selected" />
+        ) : (
+          <>
+            {chartMetric === null && <ChartNoData text="No metric selected" />}
+            {chartMetric === "level" && <LevelChart data={cleanData} />}
+            {chartMetric === "accuracy" && <AccuracyChart data={cleanData} />}
+            {chartMetric === "stats" && <StatsChart data={cleanData} />}
+            {chartMetric === "gamesPlayed" && (
+              <GamesPlayedChart data={cleanData} />
+            )}
+            {chartMetric === "timePlayed" && (
+              <TimePlayedChart data={cleanData} />
+            )}
+          </>
+        )}
       </CardContent>
     </Card>
   );

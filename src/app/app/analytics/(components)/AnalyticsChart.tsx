@@ -1,3 +1,4 @@
+import ChartNoData from "@/components/ChartNoData";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
@@ -8,7 +9,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { DailyGamesData } from "@/database/queries/games/getDailyGamesData";
-import { FileSearchIcon } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 interface AnalyticsChartProps {
@@ -17,6 +17,7 @@ interface AnalyticsChartProps {
   title: string;
   description: string;
   names: string[];
+  postfix?: string;
 }
 
 export default function AnalyticsChart({
@@ -25,6 +26,7 @@ export default function AnalyticsChart({
   title,
   description,
   names,
+  postfix,
 }: AnalyticsChartProps) {
   return (
     <>
@@ -91,6 +93,7 @@ export default function AnalyticsChart({
                     });
                   }}
                   indicator="dot"
+                  postfix={postfix}
                 />
               }
             />
@@ -107,16 +110,7 @@ export default function AnalyticsChart({
           </AreaChart>
         </ChartContainer>
       ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-4 pb-24 text-slate-400">
-          <FileSearchIcon
-            className="h-12 w-12 text-slate-800"
-            strokeWidth={1.5}
-            opacity={0.5}
-          />
-          <div className="text-2xl text-slate-800/50">
-            No data for this period
-          </div>
-        </div>
+        <ChartNoData text="No data for this period" />
       )}
     </>
   );

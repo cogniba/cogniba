@@ -21,6 +21,7 @@ export default function AccuracyChart({ data }: AccuracyChartProps) {
       title="Average accuracy"
       description="Showing the average accuracy per day"
       names={["accuracy"]}
+      postfix="%"
     />
   );
 }

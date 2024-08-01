@@ -1,17 +1,12 @@
 import { DailyGamesData } from "@/database/queries/games/getDailyGamesData";
-import { format } from "date-fns";
+import { format, isEqual, startOfDay } from "date-fns";
 
 export default function cleanChartData(
   data: DailyGamesData,
   startDate: Date,
   endDate: Date,
 ): DailyGamesData {
-  const filteredData = data.filter((item) => {
-    const date = new Date(item.date);
-    return date >= startDate && date <= endDate;
-  });
-
-  const formattedData = filteredData.map((item) => ({
+  const formattedData = data.map((item) => ({
     ...item,
     level: Math.round(item.level * 10) / 10,
     correctHits: Math.round(item.correctHits * 10) / 10,
@@ -25,26 +20,56 @@ export default function cleanChartData(
     timePlayed: Math.round(item.timePlayed / 1000 / 60),
   }));
 
+  const filledData = [];
+
   for (
     let date = new Date(startDate);
-    date <= endDate;
+    date < new Date(data[0].date);
     date.setDate(date.getDate() + 1)
   ) {
-    if (
-      !formattedData.find((item) => item.date === format(date, "yyyy-MM-dd"))
-    ) {
-      formattedData.push({
-        level: 0,
-        correctHits: 0,
-        incorrectHits: 0,
-        missedHits: 0,
-        accuracy: 0,
+    filledData.push({
+      level: 0,
+      correctHits: 0,
+      incorrectHits: 0,
+      missedHits: 0,
+      accuracy: 0,
+      timePlayed: 0,
+      gamesPlayed: 0,
+      date: format(date, "yyyy-MM-dd"),
+    });
+  }
+
+  let i = 0;
+  for (
+    let date = new Date(data[0].date);
+    startOfDay(date) <= startOfDay(endDate);
+    date.setDate(date.getDate() + 1)
+  ) {
+    if (isEqual(startOfDay(new Date(data[i].date)), startOfDay(date))) {
+      filledData.push(formattedData[i]);
+      if (i + 1 < data.length) {
+        i++;
+      }
+    } else {
+      filledData.push({
+        ...formattedData[i],
+        date: format(date, "yyyy-MM-dd"),
         timePlayed: 0,
         gamesPlayed: 0,
-        date: format(date, "yyyy-MM-dd"),
       });
     }
   }
 
-  return formattedData.sort((a, b) => a.date.localeCompare(b.date));
+  const filteredData = filledData.filter((item) => {
+    const date = new Date(item.date);
+    return (
+      startOfDay(date) >= startOfDay(startDate) &&
+      startOfDay(date) <= startOfDay(endDate)
+    );
+  });
+
+  console.log(filledData);
+  console.log(formattedData);
+
+  return filteredData;
 }
