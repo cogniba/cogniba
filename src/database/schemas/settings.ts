@@ -1,3 +1,4 @@
+import { InferSelectModel } from "drizzle-orm";
 import { boolean, pgTable, text } from "drizzle-orm/pg-core";
 
 export const settings = pgTable("settings", {
@@ -7,3 +8,5 @@ export const settings = pgTable("settings", {
   showFeedback: boolean("showFeedback").notNull(),
   canChildrenChangeSettings: boolean("canChildrenChangeSettings"),
 });
+
+export type SettingsType = InferSelectModel<typeof settings>;

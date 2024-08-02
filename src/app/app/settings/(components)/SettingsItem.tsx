@@ -1,0 +1,48 @@
+"use client";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+interface SettingsItemProps {
+  title: string;
+  description: string;
+  options: { value: string; label: string }[];
+  defaultOption: string;
+  onValueChange: (value: string) => void;
+}
+
+export default function SettingsItem({
+  title,
+  description,
+  options,
+  defaultOption,
+  onValueChange,
+}: SettingsItemProps) {
+  const updateSettings = (value: string) => {};
+
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-0.5">
+        <span className="text-xl font-semibold text-slate-950">{title}</span>
+        <span className="text-sm text-slate-500">{description}</span>
+      </div>
+      <Select defaultValue={defaultOption} onValueChange={onValueChange}>
+        <SelectTrigger className="w-80">
+          <SelectValue></SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((option, index) => (
+            <SelectItem key={index} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}
