@@ -23,13 +23,15 @@ export default function SettingsItem({
   defaultOption,
   onValueChange,
 }: SettingsItemProps) {
-  const updateSettings = (value: string) => {};
-
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-col gap-0.5">
-        <span className="text-xl font-semibold text-slate-950">{title}</span>
-        <span className="text-sm text-slate-500">{description}</span>
+        <span className="text-xl font-semibold text-slate-950 dark:text-slate-50">
+          {title}
+        </span>
+        <span className="text-sm text-slate-500 dark:text-slate-400">
+          {description}
+        </span>
       </div>
       <Select defaultValue={defaultOption} onValueChange={onValueChange}>
         <SelectTrigger className="w-80">

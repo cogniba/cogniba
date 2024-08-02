@@ -68,8 +68,5 @@ export default function cleanChartData(
     );
   });
 
-  console.log(filledData);
-  console.log(formattedData);
-
   return filteredData;
 }

@@ -45,13 +45,13 @@ export default function UserButton() {
         <div className="w-full">
           <button
             className={cn(
-              "group/item relative flex h-12 w-full items-center justify-center rounded-md text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950 hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start",
-              isUserDropdownOpen && "bg-slate-100",
+              "group/item relative flex h-12 w-full items-center justify-center rounded-md text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950 hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-50",
+              isUserDropdownOpen && "bg-slate-100 dark:bg-slate-900",
             )}
           >
             <div className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50">
-                <CircleUserIcon className="h-6 w-6 text-slate-800 transition duration-200" />
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 dark:bg-slate-950">
+                <CircleUserIcon className="h-6 w-6 text-slate-800 transition duration-200 dark:text-slate-200" />
               </div>
             </div>
             <div
@@ -59,7 +59,7 @@ export default function UserButton() {
               aria-hidden={isExpanded || isUserDropdownOpen || undefined}
             >
               <div className="truncate font-semibold">{name}</div>
-              <div className="truncate text-xs font-normal text-slate-600 group-hover/item:text-slate-700">
+              <div className="truncate text-xs font-normal text-slate-600 transition duration-200 group-hover/item:text-slate-700 dark:text-slate-400 dark:group-hover/item:text-slate-300">
                 @{userName}
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function UserButton() {
       <DropdownMenuContent className="w-64" align="start">
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className="font-medium text-slate-700 transition duration-200 hover:text-slate-950"
+            className="font-medium text-slate-700 transition duration-200 hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-50"
             disabled={isPending}
             onClick={onSignOut}
           >

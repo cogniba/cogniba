@@ -57,8 +57,8 @@ export default function Analytics({ bulkData, userChildren }: AnalyticsProps) {
   }, [selectedChild]);
 
   return (
-    <Card className="flex h-full w-full flex-col">
-      <CardHeader className="border-b p-8">
+    <Card className="flex h-full w-full flex-col bg-white dark:bg-slate-900/30">
+      <CardHeader className="border-b border-slate-200 p-8 dark:border-slate-800">
         <AnalyticsFilters
           userChildren={userChildren}
           date={date}

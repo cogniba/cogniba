@@ -30,7 +30,7 @@ export default function AnalyticsChart({
 }: AnalyticsChartProps) {
   return (
     <>
-      <CardHeader className="mb-1 flex flex-col justify-center px-0 pt-0">
+      <CardHeader className="mb-4 flex flex-col justify-center px-0 pt-0">
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
@@ -71,7 +71,7 @@ export default function AnalyticsChart({
               tickMargin={8}
               minTickGap={16}
               interval="preserveStartEnd"
-              padding={{ left: 16, right: 16 }}
+              // padding={{ left: 16, right: 16 }}
               tickFormatter={(value) => {
                 const date = new Date(value);
                 return date.toLocaleDateString("en-US", {

@@ -13,7 +13,7 @@ export default function AppSidebar() {
   return (
     <nav
       className={cn(
-        "hide-scrollbar group pointer-events-auto fixed z-50 flex h-full w-16 flex-col items-center justify-between overflow-y-auto border-r border-slate-200 bg-white py-2 text-white shadow-xl shadow-black/5 transition-all duration-200 data-[state=expanded]:w-60 data-[state=expanded]:shadow-black/10",
+        "hide-scrollbar group pointer-events-auto fixed z-50 flex h-full w-16 flex-col items-center justify-between overflow-y-auto border-r border-slate-200 bg-white py-2 shadow-xl shadow-black/5 transition-all duration-200 data-[state=expanded]:w-60 data-[state=expanded]:shadow-black/10 dark:border-slate-800 dark:bg-slate-950 dark:shadow-black/30 dark:data-[state=expanded]:shadow-black/60",
         !isVisible && "-translate-x-full transition duration-300",
       )}
       data-state={isExpanded || isUserDropdownOpen ? "expanded" : "collapsed"}

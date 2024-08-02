@@ -14,7 +14,6 @@ export default async function updateUserSettings({
   showFeedback,
   canChildrenChangeSettings,
 }: getUserSettingsProps): Promise<SettingsType> {
-  console.log("AAA");
   const { settingsId } = await getUser();
 
   const userSettings = await db

@@ -30,9 +30,9 @@ export default function SpaceBar({ hasPressedSpaceBar }: SpaceBarProps) {
     <div className="flex h-full w-full items-center justify-center">
       <button
         className={cn(
-          "h-full w-full -translate-y-1 rounded-md border border-orange-400/50 bg-orange-300 shadow-2xl outline-none transition duration-300",
+          "h-full w-full -translate-y-1 rounded-md border border-orange-400/50 bg-orange-300 shadow-2xl outline-none transition duration-300 dark:border-orange-800 dark:bg-orange-900",
           isSpaceBarPressed &&
-            "translate-y-0 border-orange-500/50 bg-orange-400 shadow-sm",
+            "translate-y-0 border-orange-500/50 bg-orange-400 shadow-sm dark:border-orange-700 dark:bg-orange-800",
         )}
         tabIndex={-1}
         onPointerDown={handleSpaceBarPress}
