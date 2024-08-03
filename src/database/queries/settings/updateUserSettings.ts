@@ -16,6 +16,8 @@ export default async function updateUserSettings({
 }: getUserSettingsProps): Promise<SettingsType> {
   const { settingsId } = await getUser();
 
+  // TODO: Refresh router
+
   const userSettings = await db
     .update(settings)
     .set({
@@ -28,6 +30,7 @@ export default async function updateUserSettings({
   if (!userSettings) {
     throw new Error("Error updating user settings");
   }
+  console.log("2", userSettings);
 
   return userSettings;
 }

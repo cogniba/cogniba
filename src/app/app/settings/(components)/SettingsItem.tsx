@@ -12,7 +12,7 @@ interface SettingsItemProps {
   title: string;
   description: string;
   options: { value: string; label: string }[];
-  defaultOption: string;
+  value: string;
   onValueChange: (value: string) => void;
 }
 
@@ -20,7 +20,7 @@ export default function SettingsItem({
   title,
   description,
   options,
-  defaultOption,
+  value,
   onValueChange,
 }: SettingsItemProps) {
   return (
@@ -33,7 +33,7 @@ export default function SettingsItem({
           {description}
         </span>
       </div>
-      <Select defaultValue={defaultOption} onValueChange={onValueChange}>
+      <Select value={value} onValueChange={onValueChange}>
         <SelectTrigger className="w-80">
           <SelectValue></SelectValue>
         </SelectTrigger>

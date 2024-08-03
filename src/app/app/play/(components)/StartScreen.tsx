@@ -40,8 +40,8 @@ interface StartScreenProps {
   correctHits: number | null;
   incorrectHits: number | null;
   missedHits: number | null;
-  previousLevel: number | null;
-  newLevel: number | null;
+  previousLevel: number;
+  newLevel: number;
 }
 
 export default function StartScreen({
@@ -77,6 +77,7 @@ export default function StartScreen({
       <DialogContent
         className="max-w-lg bg-slate-50 dark:bg-slate-950"
         closeButton={false}
+        backdrop={true}
         aria-describedby="Start screen. Press 'Play' to start playing"
       >
         {!hasStatistics ? (
@@ -84,7 +85,7 @@ export default function StartScreen({
             <DialogTitle className="mb-6 text-3xl text-slate-900 dark:text-slate-100">
               Welcome back!
             </DialogTitle>
-            <blockquote className="font-serif text-lg font-normal italic text-slate-600 dark:text-slate-400">
+            <blockquote className="font-serif text-lg font-normal italic text-slate-600 dark:text-slate-300">
               <div className="mb-1">&ldquo;{quote}&rdquo;</div>
               <div className="text-right text-xl text-slate-700 dark:text-slate-400">
                 &mdash; {author}
@@ -130,7 +131,7 @@ export default function StartScreen({
               <div className="h-[calc(100%+1rem)] border-l border-slate-200 dark:border-slate-800"></div>
 
               <div className="flex h-full w-full flex-col gap-1 text-lg">
-                {accuracy >= gameIncreaseLevelThreshold * 100 ? (
+                {newLevel > previousLevel && (
                   <>
                     <div
                       className={cn(
@@ -155,7 +156,8 @@ export default function StartScreen({
                       <div className="font-medium">Level Increased</div>
                     </div>
                   </>
-                ) : accuracy <= gameDecreaseLevelThreshold * 100 ? (
+                )}
+                {newLevel === previousLevel && (
                   <>
                     <div
                       className={cn(boxVariants({ size: "big", color: "red" }))}
@@ -173,7 +175,8 @@ export default function StartScreen({
                       <div className="font-medium">Level Decreased</div>
                     </div>
                   </>
-                ) : (
+                )}
+                {newLevel < previousLevel && (
                   <>
                     <div
                       className={cn(

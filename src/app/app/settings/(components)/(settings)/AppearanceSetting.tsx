@@ -15,7 +15,7 @@ export default function AppearanceSetting() {
         { value: "dark", label: "Dark" },
         { value: "system", label: "System default" },
       ]}
-      defaultOption={theme || "system"}
+      value={theme || "system"}
       onValueChange={(value) => setTheme(value)}
     />
   );

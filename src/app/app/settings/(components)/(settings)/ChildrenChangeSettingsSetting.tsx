@@ -1,26 +1,25 @@
 "use client";
 
-import getUserSettings from "@/database/queries/settings/getUserSettings";
 import SettingsItem from "../SettingsItem";
 import updateUserSettings from "@/database/queries/settings/updateUserSettings";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function ChildrenChangeSettingsSetting() {
+interface ChildrenChangeSettingsSettingProps {
+  startingCanChildrenChangeSettings: boolean | null;
+}
+
+export default function ChildrenChangeSettingsSetting({
+  startingCanChildrenChangeSettings,
+}: ChildrenChangeSettingsSettingProps) {
   const [canChildrenChangeSettings, setCanChildrenChangeSettings] = useState<
     boolean | null
-  >(null);
-
-  useEffect(() => {
-    const fetchSettings = async () => {
-      const { canChildrenChangeSettings } = await getUserSettings();
-      setCanChildrenChangeSettings(canChildrenChangeSettings);
-    };
-
-    fetchSettings();
-  }, []);
+  >(startingCanChildrenChangeSettings);
 
   const updateSettings = async (value: string) => {
-    updateUserSettings({ canChildrenChangeSettings: value === "enabled" });
+    setCanChildrenChangeSettings(value === "enabled");
+    await updateUserSettings({
+      canChildrenChangeSettings: value === "enabled",
+    });
   };
 
   return (
@@ -31,7 +30,7 @@ export default function ChildrenChangeSettingsSetting() {
         { value: "enabled", label: "Enabled" },
         { value: "disabled", label: "Disabled" },
       ]}
-      defaultOption={canChildrenChangeSettings ? "enabled" : "disabled"}
+      value={canChildrenChangeSettings ? "enabled" : "disabled"}
       onValueChange={(value) => updateSettings(value)}
     />
   );

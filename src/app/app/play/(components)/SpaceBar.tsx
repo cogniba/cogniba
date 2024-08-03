@@ -4,19 +4,24 @@ import { useCallback, useEffect, useState } from "react";
 
 interface SpaceBarProps {
   hasPressedSpaceBar: React.MutableRefObject<boolean>;
+  handleShowFeedback: () => void;
 }
 
-export default function SpaceBar({ hasPressedSpaceBar }: SpaceBarProps) {
+export default function SpaceBar({
+  hasPressedSpaceBar,
+  handleShowFeedback,
+}: SpaceBarProps) {
   const [isSpaceBarPressed, setIsSpaceBarPressed] = useState(false);
 
   const handleSpaceBarPress = useCallback(async () => {
     if (!hasPressedSpaceBar.current) {
       hasPressedSpaceBar.current = true;
       setIsSpaceBarPressed(true);
+      handleShowFeedback();
       await sleep(400);
       setIsSpaceBarPressed(false);
     }
-  }, [hasPressedSpaceBar]);
+  }, [hasPressedSpaceBar, handleShowFeedback]);
 
   useEffect(() => {
     addEventListener("keydown", (e) => {

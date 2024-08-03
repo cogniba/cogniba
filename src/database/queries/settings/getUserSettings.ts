@@ -17,5 +17,7 @@ export default async function getUserSettings(): Promise<SettingsType> {
     throw new Error("User settings not found");
   }
 
+  console.log("1", userSettings);
+
   return userSettings;
 }
