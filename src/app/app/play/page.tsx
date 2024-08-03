@@ -21,6 +21,7 @@ import getCorrectHitSequence from "@/lib/game-logic/getCorrectHitSequence";
 
 export default function PlayPage() {
   const [level, setLevel] = useState<number | null>(null);
+  const [previousLevel, setPreviousLevel] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
   const [correctHits, setCorrectHits] = useState<number | null>(null);
@@ -50,6 +51,7 @@ export default function PlayPage() {
       playerHitSequence.current,
       currentLevel,
     );
+    setPreviousLevel(currentLevel);
     setLevel(newLevel);
 
     await insertGameIntoDatabase(
@@ -119,6 +121,7 @@ export default function PlayPage() {
         correctHits={correctHits}
         incorrectHits={incorrectHits}
         missedHits={missedHits}
+        previousLevel={previousLevel}
         newLevel={level}
       />
       <div className="flex h-full w-full max-w-3xl flex-col items-center">

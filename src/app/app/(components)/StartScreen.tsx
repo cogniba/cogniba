@@ -40,6 +40,7 @@ interface StartScreenProps {
   correctHits: number | null;
   incorrectHits: number | null;
   missedHits: number | null;
+  previousLevel: number | null;
   newLevel: number | null;
 }
 
@@ -49,6 +50,7 @@ export default function StartScreen({
   correctHits,
   incorrectHits,
   missedHits,
+  previousLevel,
   newLevel,
 }: StartScreenProps) {
   const [quote, setQuote] = useState("");
@@ -61,13 +63,6 @@ export default function StartScreen({
     accuracy = Math.floor(
       (correctHits / (correctHits + incorrectHits + missedHits)) * 100,
     );
-  }
-
-  let previousLevel = newLevel ?? 0;
-  if (hasStatistics) {
-    previousLevel -= Number(accuracy >= gameIncreaseLevelThreshold * 100);
-    previousLevel += Number(accuracy <= gameDecreaseLevelThreshold * 100);
-    previousLevel = Math.max(1, previousLevel);
   }
 
   useEffect(() => {
