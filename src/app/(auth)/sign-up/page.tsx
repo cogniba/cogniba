@@ -66,11 +66,11 @@ export default function LoginForm() {
   return (
     <Form {...form}>
       <form
-        className="flex h-screen items-center justify-center"
+        className="flex h-screen items-center justify-center bg-slate-50 dark:bg-slate-950"
         onSubmit={form.handleSubmit(onSubmit)}
         autoComplete="off"
       >
-        <Card className="w-full max-w-sm space-y-1">
+        <Card className="w-full max-w-sm space-y-1 bg-white dark:bg-slate-900/30">
           <CardHeader>
             <CardTitle className="text-2xl">Sign Up</CardTitle>
             <CardDescription>
