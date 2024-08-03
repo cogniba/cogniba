@@ -18,15 +18,18 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const boxVariants = cva("flex items-center gap-2 rounded-md py-2 pl-4", {
+const boxVariants = cva("flex items-center gap-2 rounded-md py-2 pl-4 border", {
   variants: {
     size: { small: "pr-10 ", big: "" },
     color: {
-      green: "bg-green-200 text-green-950",
-      red: "bg-red-200 text-red-950",
-      yellow: "bg-yellow-200 text-yellow-950",
-      blue: "bg-sky-200 text-sky-950",
-      orange: "bg-orange-200 text-orange-950",
+      green:
+        "bg-green-200 text-green-950 border-green-300/50 dark:bg-green-950 dark:text-green-50 dark:border-green-900",
+      red: "bg-red-200 text-red-950 border-red-300/50 dark:bg-red-950 dark:text-red-50 dark:border-red-900",
+      yellow:
+        "bg-yellow-200 text-yellow-950 border-yellow-300/50 dark:bg-yellow-950 dark:text-yellow-50 dark:border-yellow-900",
+      blue: "bg-sky-200 text-sky-950 border-sky-300/50 dark:bg-sky-950 dark:text-sky-50 dark:border-sky-900",
+      orange:
+        "bg-orange-200 text-orange-950 border-orange-300/50 dark:bg-orange-950 dark:text-orange-50 dark:border-orange-900",
     },
   },
 });
@@ -77,28 +80,28 @@ export default function StartScreen({
   return (
     <Dialog defaultOpen open={visible}>
       <DialogContent
-        className="max-w-lg bg-slate-50"
+        className="max-w-lg bg-slate-50 dark:bg-slate-950"
         closeButton={false}
         aria-describedby="Start screen. Press 'Play' to start playing"
       >
         {!hasStatistics ? (
           <>
-            <DialogTitle className="mb-6 text-3xl text-slate-900">
+            <DialogTitle className="mb-6 text-3xl text-slate-900 dark:text-slate-100">
               Welcome back!
             </DialogTitle>
-            <blockquote className="font-serif text-lg font-normal italic text-slate-600">
+            <blockquote className="font-serif text-lg font-normal italic text-slate-600 dark:text-slate-400">
               <div className="mb-1">&ldquo;{quote}&rdquo;</div>
-              <div className="text-right text-xl text-slate-700">
+              <div className="text-right text-xl text-slate-700 dark:text-slate-400">
                 &mdash; {author}
               </div>
             </blockquote>
           </>
         ) : (
           <>
-            <DialogTitle className="mb-6 text-3xl text-slate-900">
+            <DialogTitle className="mb-6 text-3xl text-slate-900 dark:text-slate-100">
               Well played!
             </DialogTitle>
-            <div className="divide flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-300/50 bg-white p-2">
+            <div className="divide flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-300/50 bg-white p-2 dark:border-slate-800 dark:bg-slate-900/30">
               <div className="flex flex-col gap-1 text-lg">
                 <div
                   className={cn(boxVariants({ size: "small", color: "green" }))}
@@ -129,7 +132,7 @@ export default function StartScreen({
                 </div>
               </div>
 
-              <div className="h-[calc(100%+1rem)] border-l border-slate-200"></div>
+              <div className="h-[calc(100%+1rem)] border-l border-slate-200 dark:border-slate-800"></div>
 
               <div className="flex h-full w-full flex-col gap-1 text-lg">
                 {accuracy >= gameIncreaseLevelThreshold * 100 ? (
@@ -210,7 +213,7 @@ export default function StartScreen({
                   >
                     Level {previousLevel}
                   </div>
-                  <MoveRightIcon className="h-6 w-6 flex-shrink-0 text-slate-900" />
+                  <MoveRightIcon className="h-6 w-6 flex-shrink-0 text-slate-900 dark:text-slate-100" />
                   <div
                     className={cn(
                       boxVariants({
@@ -228,10 +231,11 @@ export default function StartScreen({
           </>
         )}
         <Button
-          className="mt-14 justify-center border border-orange-400/50 bg-orange-300 py-5 text-4xl font-bold uppercase tracking-wide text-slate-950 transition duration-200 hover:border-orange-500/50 hover:bg-orange-400 hover:shadow-lg focus-visible:ring-opacity-0 active:shadow-sm"
+          className="mt-14 justify-center border border-orange-400/50 bg-orange-300 py-5 text-4xl font-bold uppercase tracking-wide text-slate-950 transition duration-200 hover:border-orange-500/50 hover:bg-orange-400 hover:shadow-lg focus-visible:outline-none focus-visible:ring-opacity-0 active:shadow-sm dark:border-orange-200/50 dark:bg-orange-300 dark:text-slate-950 dark:hover:border-orange-300/50 dark:hover:bg-orange-400"
           size="custom"
           type="submit"
           onClick={onStart}
+          tabIndex={-1}
         >
           Play
         </Button>
