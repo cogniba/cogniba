@@ -6,10 +6,12 @@ import { useState } from "react";
 
 interface ShowFeedbackSettingsProps {
   startingShowFeedback: boolean;
+  disabled?: boolean;
 }
 
 export default function ShowFeedbackSettings({
   startingShowFeedback,
+  disabled,
 }: ShowFeedbackSettingsProps) {
   const [showFeedback, setShowFeedback] =
     useState<boolean>(startingShowFeedback);
@@ -29,6 +31,7 @@ export default function ShowFeedbackSettings({
       ]}
       value={showFeedback ? "enabled" : "disabled"}
       onValueChange={(value) => updateSettings(value)}
+      disabled={disabled}
     />
   );
 }

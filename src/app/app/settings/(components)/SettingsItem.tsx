@@ -14,6 +14,7 @@ interface SettingsItemProps {
   options: { value: string; label: string }[];
   value: string;
   onValueChange: (value: string) => void;
+  disabled?: boolean;
 }
 
 export default function SettingsItem({
@@ -22,6 +23,7 @@ export default function SettingsItem({
   options,
   value,
   onValueChange,
+  disabled = false,
 }: SettingsItemProps) {
   return (
     <div className="flex items-center justify-between">
@@ -33,7 +35,7 @@ export default function SettingsItem({
           {description}
         </span>
       </div>
-      <Select value={value} onValueChange={onValueChange}>
+      <Select value={value} onValueChange={onValueChange} disabled={disabled}>
         <SelectTrigger className="w-80">
           <SelectValue></SelectValue>
         </SelectTrigger>
