@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { DailyGamesData } from "@/database/queries/games/getDailyGamesData";
+import { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
 import AnalyticsFilters from "./AnalyticsFilters";
 import { useState } from "react";
 import LevelChart from "./(charts)/LevelChart";
@@ -14,7 +14,6 @@ import { UserType } from "@/database/schemas/auth";
 import { subDays } from "date-fns";
 import { DateRange } from "react-day-picker";
 import ChartNoData from "@/components/ChartNoData";
-import useSWR from "swr";
 
 export type chartMetrics =
   | "level"
@@ -25,23 +24,30 @@ export type chartMetrics =
   | null;
 
 interface AnalyticsProps {
-  data: DailyGamesData;
+  userData: DailyGamesData | null;
+  childrenData: DailyGamesData[] | null;
   userChildren: UserType[];
 }
 
-export default function Analytics({ data, userChildren }: AnalyticsProps) {
+export default function Analytics({
+  userData,
+  childrenData,
+  userChildren,
+}: AnalyticsProps) {
   const [date, setDate] = useState<DateRange | undefined>({
     from: subDays(new Date(), 7),
     to: new Date(),
   });
   const [chartMetric, setChartMetric] = useState<chartMetrics>(null);
   const [selectedChild, setSelectedChild] = useState<UserType | null>(null);
-  const { data: childData } = useSWR<{ data: DailyGamesData } | null>(
-    `/api/app/analytics/get-daily-games-data?child-id=${selectedChild?.id ?? ""}`,
+
+  const selectedChildIndex = userChildren.findIndex(
+    (child) => child.id === selectedChild?.id,
   );
 
   const isParent = userChildren.length > 0;
-  const validData = isParent ? childData?.data : data;
+  const validData = isParent ? childrenData?.[selectedChildIndex] : userData;
+
   const cleanData =
     date && date.from && date.to && validData && validData.length > 0
       ? cleanChartData(validData, date.from, date.to)

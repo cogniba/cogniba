@@ -1,6 +1,6 @@
 import AnalyticsChart from "../AnalyticsChart";
 import { ChartConfig } from "@/components/ui/chart";
-import { DailyGamesData } from "@/database/queries/games/getDailyGamesData";
+import { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
 
 const chartConfig = {
   level: {

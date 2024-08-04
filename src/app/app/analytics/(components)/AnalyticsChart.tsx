@@ -8,7 +8,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { DailyGamesData } from "@/database/queries/games/getDailyGamesData";
+import { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 interface AnalyticsChartProps {

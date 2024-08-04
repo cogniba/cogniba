@@ -5,6 +5,7 @@ import getUser from "@/database/queries/users/getUser";
 import { date } from "@/database/queries/functions";
 
 export type DailyGamesData = {
+  userId: string;
   gamesPlayed: number;
   level: number;
   correctHits: number;
@@ -14,17 +15,12 @@ export type DailyGamesData = {
   date: string;
 }[];
 
-export default async function getDailyGamesData(
-  id?: string,
-): Promise<DailyGamesData> {
-  let userId = id;
-  if (!userId) {
-    const user = await getUser();
-    userId = user.id;
-  }
+export default async function getUserDailyGamesData(): Promise<DailyGamesData> {
+  const { id: userId } = await getUser();
 
   const gamesData = await db
     .select({
+      userId: games.userId,
       gamesPlayed: count(games.level),
       level: avg(games.level).mapWith(Number),
       correctHits: avg(games.correctHits).mapWith(Number),
@@ -35,7 +31,7 @@ export default async function getDailyGamesData(
     })
     .from(games)
     .where(eq(games.userId, userId))
-    .groupBy(date(games.createdAt))
+    .groupBy(date(games.createdAt), games.userId)
     .orderBy(date(games.createdAt));
 
   return gamesData;
