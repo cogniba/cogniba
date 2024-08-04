@@ -1,6 +1,5 @@
-import { useEffect, useState, useTransition } from "react";
+import { useTransition } from "react";
 import { CircleUserIcon, LogOutIcon } from "lucide-react";
-import getUser from "@/database/queries/users/getUser";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,11 +11,14 @@ import handleSignOut from "@/server-actions/auth/handleSignOut";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/cn";
 
-export default function UserButton() {
+interface UserButtonProps {
+  readonly name: string;
+  readonly username: string;
+}
+
+export default function UserButton({ name, username }: UserButtonProps) {
   const { isExpanded, isUserDropdownOpen, setIsUserDropdownOpen } =
     useSidebar();
-  const [name, setName] = useState("");
-  const [userName, setUserName] = useState("");
   const [isPending, startTransition] = useTransition();
 
   const onSignOut = () => {
@@ -24,17 +26,6 @@ export default function UserButton() {
       handleSignOut();
     });
   };
-
-  useEffect(() => {
-    const handleName = async () => {
-      const { name, username } = await getUser();
-
-      setName(name);
-      setUserName(username);
-    };
-
-    handleName();
-  }, []);
 
   return (
     <DropdownMenu
@@ -60,7 +51,7 @@ export default function UserButton() {
             >
               <div className="truncate font-semibold">{name}</div>
               <div className="truncate text-xs font-normal text-slate-600 transition duration-200 group-hover/item:text-slate-700 dark:text-slate-400 dark:group-hover/item:text-slate-300">
-                @{userName}
+                @{username}
               </div>
             </div>
           </button>

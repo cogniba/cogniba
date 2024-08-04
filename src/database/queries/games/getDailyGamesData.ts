@@ -1,11 +1,8 @@
-"use server";
-
 import { avg, count, eq, sum } from "drizzle-orm";
 import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
 import getUser from "@/database/queries/users/getUser";
 import { date } from "@/database/queries/functions";
-import { UserType } from "@/database/schemas/auth";
 
 export type DailyGamesData = {
   gamesPlayed: number;
@@ -18,13 +15,10 @@ export type DailyGamesData = {
 }[];
 
 export default async function getDailyGamesData(
-  user?: UserType,
+  id?: string,
 ): Promise<DailyGamesData> {
-  let userId: string;
-
-  if (user) {
-    userId = user.id;
-  } else {
+  let userId = id;
+  if (!userId) {
     const user = await getUser();
     userId = user.id;
   }

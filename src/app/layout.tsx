@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import MainLayoutWrapper from "./(components)/MainLayoutWrapper";
+import RootLayoutWrapper from "./(components)/RootLayoutWrapper";
 import { cn } from "@/lib/cn";
 import { Inter, Playfair_Display } from "next/font/google";
 
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontSerif.variable,
         )}
       >
-        <MainLayoutWrapper>{children}</MainLayoutWrapper>
+        <RootLayoutWrapper>{children}</RootLayoutWrapper>
       </body>
     </html>
   );

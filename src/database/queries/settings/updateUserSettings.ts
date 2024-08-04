@@ -4,6 +4,7 @@ import { settings, SettingsType } from "@/database/schemas/settings";
 import getUser from "../users/getUser";
 import { db } from "@/database/db";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 interface getUserSettingsProps {
   showFeedback?: boolean;
@@ -15,8 +16,6 @@ export default async function updateUserSettings({
   canChildrenChangeSettings,
 }: getUserSettingsProps): Promise<SettingsType> {
   const { settingsId } = await getUser();
-
-  // TODO: Refresh router
 
   const userSettings = await db
     .update(settings)
@@ -30,7 +29,8 @@ export default async function updateUserSettings({
   if (!userSettings) {
     throw new Error("Error updating user settings");
   }
-  console.log("2", userSettings);
+
+  revalidatePath("/app");
 
   return userSettings;
 }

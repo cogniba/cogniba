@@ -2,10 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import quotes from "@/content/quotes.json";
 import { cn } from "@/lib/cn";
-import {
-  gameDecreaseLevelThreshold,
-  gameIncreaseLevelThreshold,
-} from "@/settings/constants";
 import { cva } from "class-variance-authority";
 import {
   CheckIcon,

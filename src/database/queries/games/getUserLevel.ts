@@ -1,5 +1,3 @@
-"use server";
-
 import { desc, eq } from "drizzle-orm";
 import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";

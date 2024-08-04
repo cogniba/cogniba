@@ -1,5 +1,3 @@
-"use server";
-
 import { auth } from "@/auth/auth";
 import { UserType } from "@/database/schemas/auth";
 

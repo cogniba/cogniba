@@ -60,7 +60,6 @@ export default function LoginForm() {
       <form
         className="flex h-screen items-center justify-center bg-slate-50 dark:bg-slate-950"
         onSubmit={form.handleSubmit(onSubmit)}
-        // action={handleSubmitSignIn}
       >
         <Card className="w-full max-w-sm space-y-1 bg-white dark:bg-slate-900/30">
           <CardHeader>

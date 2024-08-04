@@ -1,5 +1,3 @@
-"use server";
-
 import { db } from "@/database/db";
 import getUser from "./getUser";
 import { users, UserType } from "@/database/schemas/auth";
@@ -15,7 +13,8 @@ export default async function getUserChildren(): Promise<UserType[]> {
   const children = await db
     .select()
     .from(users)
-    .where(eq(users.parentId, userId));
+    .where(eq(users.parentId, userId))
+    .orderBy(users.createdAt);
 
   return children;
 }

@@ -1,11 +1,9 @@
 "use client";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import getDailyGamesData, {
-  DailyGamesData,
-} from "@/database/queries/games/getDailyGamesData";
+import { DailyGamesData } from "@/database/queries/games/getDailyGamesData";
 import AnalyticsFilters from "./AnalyticsFilters";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LevelChart from "./(charts)/LevelChart";
 import AccuracyChart from "./(charts)/AccuracyChart";
 import GamesPlayedChart from "./(charts)/GamesPlayedChart";
@@ -16,6 +14,7 @@ import { UserType } from "@/database/schemas/auth";
 import { subDays } from "date-fns";
 import { DateRange } from "react-day-picker";
 import ChartNoData from "@/components/ChartNoData";
+import useSWR from "swr";
 
 export type chartMetrics =
   | "level"
@@ -26,35 +25,27 @@ export type chartMetrics =
   | null;
 
 interface AnalyticsProps {
-  bulkData: DailyGamesData;
+  data: DailyGamesData;
   userChildren: UserType[];
 }
 
-export default function Analytics({ bulkData, userChildren }: AnalyticsProps) {
+export default function Analytics({ data, userChildren }: AnalyticsProps) {
   const [date, setDate] = useState<DateRange | undefined>({
     from: subDays(new Date(), 7),
     to: new Date(),
   });
   const [chartMetric, setChartMetric] = useState<chartMetrics>(null);
-  const [data, setData] = useState(bulkData);
   const [selectedChild, setSelectedChild] = useState<UserType | null>(null);
+  const { data: childData } = useSWR<{ data: DailyGamesData } | null>(
+    `/api/app/analytics/get-daily-games-data?child-id=${selectedChild?.id ?? ""}`,
+  );
 
   const isParent = userChildren.length > 0;
+  const validData = isParent ? childData?.data : data;
   const cleanData =
-    date && date.from && date.to && data.length > 0
-      ? cleanChartData(data, date.from, date.to)
+    date && date.from && date.to && validData && validData.length > 0
+      ? cleanChartData(validData, date.from, date.to)
       : null;
-
-  useEffect(() => {
-    const getData = async () => {
-      if (selectedChild) {
-        const childData = await getDailyGamesData(selectedChild);
-        setData(childData);
-      }
-    };
-
-    getData();
-  }, [selectedChild]);
 
   return (
     <Card className="flex h-full w-full flex-col bg-white dark:bg-slate-900/30">

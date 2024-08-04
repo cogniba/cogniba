@@ -9,7 +9,7 @@ export default async function AnalyticsPage() {
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="flex h-full w-full max-w-7xl flex-col items-center gap-5 py-20">
-        <Analytics bulkData={data} userChildren={children} />
+        <Analytics data={data} userChildren={children} />
       </div>
     </div>
   );

@@ -1,5 +1,3 @@
-"use server";
-
 import { settings, SettingsType } from "@/database/schemas/settings";
 import getUser from "../users/getUser";
 import { db } from "@/database/db";
@@ -16,8 +14,6 @@ export default async function getUserSettings(): Promise<SettingsType> {
   if (!userSettings) {
     throw new Error("User settings not found");
   }
-
-  console.log("1", userSettings);
 
   return userSettings;
 }

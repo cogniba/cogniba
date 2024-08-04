@@ -6,7 +6,12 @@ import UserButton from "./UserButton";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/cn";
 
-export default function AppSidebar() {
+interface AppSidebarProps {
+  name: string;
+  username: string;
+}
+
+export default function AppSidebar({ name, username }: AppSidebarProps) {
   const { isVisible, isExpanded, setIsExpanded, isUserDropdownOpen } =
     useSidebar();
 
@@ -34,7 +39,7 @@ export default function AppSidebar() {
           text="Settings"
           Icon={SettingsIcon}
         />
-        <UserButton />
+        <UserButton name={name} username={username} />
       </div>
     </nav>
   );
