@@ -71,168 +71,178 @@ export default function StartScreen({
   return (
     <Dialog defaultOpen open={visible}>
       <DialogContent
-        className="z-40 max-w-lg bg-slate-50 dark:bg-slate-950"
+        className="z-40 flex h-full w-full max-w-full justify-center bg-slate-50 p-0 dark:bg-slate-950 sm:h-fit sm:max-w-lg sm:p-6"
         closeButton={false}
         backdrop={true}
         aria-describedby="Start screen. Press 'Play' to start playing"
       >
-        {!hasStatistics ? (
-          <>
-            <DialogTitle className="mb-6 text-3xl text-slate-900 dark:text-slate-100">
-              Welcome back!
-            </DialogTitle>
-            <blockquote className="font-serif text-lg font-normal italic text-slate-600 dark:text-slate-300">
-              <div className="mb-1">&ldquo;{quote}&rdquo;</div>
-              <div className="text-right text-xl text-slate-700 dark:text-slate-400">
-                &mdash; {author}
-              </div>
-            </blockquote>
-          </>
-        ) : (
-          <>
-            <DialogTitle className="mb-6 text-3xl text-slate-900 dark:text-slate-100">
-              Well played!
-            </DialogTitle>
-            <div className="divide flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-300/50 bg-white p-2 dark:border-slate-800 dark:bg-slate-900/30">
-              <div className="flex flex-col gap-1 text-lg">
-                <div
-                  className={cn(boxVariants({ size: "small", color: "green" }))}
-                >
-                  <CheckIcon className="h-6 w-6" />
-                  <div>
-                    <span className="font-semibold">{correctHits}</span> correct
-                  </div>
+        <div className="xs:px-7 flex w-full max-w-lg flex-col justify-center px-6 sm:px-0">
+          {!hasStatistics ? (
+            <>
+              <DialogTitle className="mb-6 text-3xl text-slate-900 dark:text-slate-100">
+                Welcome back!
+              </DialogTitle>
+              <blockquote className="font-serif text-lg font-normal italic text-slate-600 dark:text-slate-300">
+                <div className="mb-1">&ldquo;{quote}&rdquo;</div>
+                <div className="text-right text-xl text-slate-700 dark:text-slate-400">
+                  &mdash; {author}
                 </div>
-                <div
-                  className={cn(boxVariants({ size: "small", color: "red" }))}
-                >
-                  <XIcon className="h-6 w-6" />
-                  <div>
-                    <span className="font-semibold">{incorrectHits}</span>{" "}
-                    incorrect
-                  </div>
-                </div>
-                <div
-                  className={cn(
-                    boxVariants({ size: "small", color: "yellow" }),
-                  )}
-                >
-                  <TriangleAlert className="h-6 w-6" />
-                  <div>
-                    <span className="font-semibold">{missedHits}</span> missed
-                  </div>
-                </div>
-              </div>
-
-              <div className="h-[calc(100%+1rem)] border-l border-slate-200 dark:border-slate-800"></div>
-
-              <div className="flex h-full w-full flex-col gap-1 text-lg">
-                {newLevel > previousLevel && (
-                  <>
-                    <div
-                      className={cn(
-                        boxVariants({ size: "big", color: "green" }),
-                      )}
-                    >
-                      <CrosshairIcon className="h-6 w-6" />
-                      <div>
-                        <span className="font-semibold">{accuracy}%</span>{" "}
-                        accuracy
-                      </div>
+              </blockquote>
+            </>
+          ) : (
+            <>
+              <DialogTitle className="mb-6 text-3xl text-slate-900 dark:text-slate-100">
+                Well played!
+              </DialogTitle>
+              <div className="xs:flex-row flex flex-col items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-300/50 bg-white p-2 dark:border-slate-800 dark:bg-slate-900/30">
+                <div className="xs:w-fit flex w-full flex-col gap-1 text-lg">
+                  <div
+                    className={cn(
+                      boxVariants({ size: "small", color: "green" }),
+                    )}
+                  >
+                    <CheckIcon className="h-6 w-6" />
+                    <div>
+                      <span className="font-semibold">{correctHits}</span>{" "}
+                      correct
                     </div>
+                  </div>
+                  <div
+                    className={cn(boxVariants({ size: "small", color: "red" }))}
+                  >
+                    <XIcon className="h-6 w-6" />
+                    <div>
+                      <span className="font-semibold">{incorrectHits}</span>{" "}
+                      incorrect
+                    </div>
+                  </div>
+                  <div
+                    className={cn(
+                      boxVariants({ size: "small", color: "yellow" }),
+                    )}
+                  >
+                    <TriangleAlert className="h-6 w-6" />
+                    <div>
+                      <span className="font-semibold">{missedHits}</span> missed
+                    </div>
+                  </div>
+                </div>
+
+                <div className="xs:block hidden h-[calc(100%+1rem)] border-l border-slate-200 dark:border-slate-800"></div>
+                <div className="xs:hidden block w-[calc(100%+1rem)] border-t border-slate-200 dark:border-slate-800"></div>
+
+                <div className="flex h-full w-full flex-col gap-1 text-lg">
+                  {newLevel > previousLevel && (
+                    <>
+                      <div
+                        className={cn(
+                          boxVariants({ size: "big", color: "green" }),
+                        )}
+                      >
+                        <CrosshairIcon className="h-6 w-6" />
+                        <div>
+                          <span className="font-semibold">{accuracy}%</span>{" "}
+                          accuracy
+                        </div>
+                      </div>
+                      <div
+                        className={cn(
+                          boxVariants({
+                            size: "big",
+                            color: "green",
+                          }),
+                        )}
+                      >
+                        <MoveUpRightIcon className="h-6 w-6" />
+                        <div className="font-medium">Level Increased</div>
+                      </div>
+                    </>
+                  )}
+                  {newLevel === previousLevel && (
+                    <>
+                      <div
+                        className={cn(
+                          boxVariants({ size: "big", color: "red" }),
+                        )}
+                      >
+                        <CrosshairIcon className="h-6 w-6" />
+                        <div>
+                          <span className="font-semibold">{accuracy}%</span>{" "}
+                          accuracy
+                        </div>
+                      </div>
+                      <div
+                        className={cn(
+                          boxVariants({ size: "big", color: "red" }),
+                        )}
+                      >
+                        <MoveDownRightIcon className="h-6 w-6" />
+                        <div className="font-medium">Level Decreased</div>
+                      </div>
+                    </>
+                  )}
+                  {newLevel < previousLevel && (
+                    <>
+                      <div
+                        className={cn(
+                          boxVariants({ size: "big", color: "blue" }),
+                        )}
+                      >
+                        <CrosshairIcon className="h-6 w-6" />
+                        <div>
+                          <span className="font-semibold">{accuracy}%</span>{" "}
+                          accuracy
+                        </div>
+                      </div>
+                      <div
+                        className={cn(
+                          boxVariants({ size: "big", color: "blue" }),
+                        )}
+                      >
+                        <MoveRightIcon className="h-6 w-6" />
+                        <div className="font-medium">Level Maintained</div>
+                      </div>
+                    </>
+                  )}
+                  <div className="xs:flex hidden items-center justify-between gap-3 text-center font-medium">
                     <div
                       className={cn(
                         boxVariants({
                           size: "big",
-                          color: "green",
+                          color: "orange",
+                          className: "w-full justify-center px-0",
                         }),
                       )}
                     >
-                      <MoveUpRightIcon className="h-6 w-6" />
-                      <div className="font-medium">Level Increased</div>
+                      Level {previousLevel}
                     </div>
-                  </>
-                )}
-                {newLevel === previousLevel && (
-                  <>
-                    <div
-                      className={cn(boxVariants({ size: "big", color: "red" }))}
-                    >
-                      <CrosshairIcon className="h-6 w-6" />
-                      <div>
-                        <span className="font-semibold">{accuracy}%</span>{" "}
-                        accuracy
-                      </div>
-                    </div>
-                    <div
-                      className={cn(boxVariants({ size: "big", color: "red" }))}
-                    >
-                      <MoveDownRightIcon className="h-6 w-6" />
-                      <div className="font-medium">Level Decreased</div>
-                    </div>
-                  </>
-                )}
-                {newLevel < previousLevel && (
-                  <>
+                    <MoveRightIcon className="h-6 w-6 flex-shrink-0 text-slate-900 dark:text-slate-100" />
                     <div
                       className={cn(
-                        boxVariants({ size: "big", color: "blue" }),
+                        boxVariants({
+                          size: "big",
+                          color: "orange",
+                          className: "w-full justify-center px-0",
+                        }),
                       )}
                     >
-                      <CrosshairIcon className="h-6 w-6" />
-                      <div>
-                        <span className="font-semibold">{accuracy}%</span>{" "}
-                        accuracy
-                      </div>
+                      Level {newLevel ?? 0}
                     </div>
-                    <div
-                      className={cn(
-                        boxVariants({ size: "big", color: "blue" }),
-                      )}
-                    >
-                      <MoveRightIcon className="h-6 w-6" />
-                      <div className="font-medium">Level Maintained</div>
-                    </div>
-                  </>
-                )}
-                <div className="flex items-center justify-between gap-3 text-center font-medium">
-                  <div
-                    className={cn(
-                      boxVariants({
-                        size: "big",
-                        color: "orange",
-                        className: "w-full justify-center px-0",
-                      }),
-                    )}
-                  >
-                    Level {previousLevel}
-                  </div>
-                  <MoveRightIcon className="h-6 w-6 flex-shrink-0 text-slate-900 dark:text-slate-100" />
-                  <div
-                    className={cn(
-                      boxVariants({
-                        size: "big",
-                        color: "orange",
-                        className: "w-full justify-center px-0",
-                      }),
-                    )}
-                  >
-                    Level {newLevel ?? 0}
                   </div>
                 </div>
               </div>
-            </div>
-          </>
-        )}
-        <Button
-          className="mt-14 justify-center border border-orange-400/50 bg-orange-300 py-5 text-4xl font-bold uppercase tracking-wide text-slate-950 transition duration-200 hover:border-orange-500/50 hover:bg-orange-400 hover:shadow-lg focus-visible:outline-none focus-visible:ring-opacity-0 active:shadow-sm dark:border-orange-200/50 dark:bg-orange-300 dark:text-slate-950 dark:hover:border-orange-300/50 dark:hover:bg-orange-400"
-          size="custom"
-          type="submit"
-          onClick={onStart}
-          tabIndex={-1}
-        >
-          Play
-        </Button>
+            </>
+          )}
+          <Button
+            className="mt-14 w-full justify-center border border-orange-400/50 bg-orange-300 py-5 text-4xl font-bold uppercase tracking-wide text-slate-950 transition duration-200 hover:border-orange-500/50 hover:bg-orange-400 hover:shadow-lg focus-visible:outline-none focus-visible:ring-opacity-0 active:shadow-sm dark:border-orange-200/50 dark:bg-orange-300 dark:text-slate-950 dark:hover:border-orange-300/50 dark:hover:bg-orange-400"
+            size="custom"
+            type="submit"
+            onClick={onStart}
+            tabIndex={-1}
+          >
+            Play
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   );

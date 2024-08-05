@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 const config = {
   darkMode: ["class"],
@@ -11,14 +12,10 @@ const config = {
   ],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
+    screens: {
+      xs: "480px",
+      ...defaultTheme.screens,
     },
-
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
@@ -26,7 +23,6 @@ const config = {
 
       screens: {
         "can-hover": { raw: "(hover: hover)" },
-        xs: "480px",
       },
 
       transitionProperty: {
