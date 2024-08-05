@@ -34,7 +34,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function LoginForm() {
+export default function SignUpPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -66,90 +66,115 @@ export default function LoginForm() {
   return (
     <Form {...form}>
       <form
-        className="flex h-screen items-center justify-center bg-slate-50 dark:bg-slate-950"
+        className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950"
         onSubmit={form.handleSubmit(onSubmit)}
         autoComplete="off"
       >
-        <Card className="w-full max-w-sm space-y-1 bg-white dark:bg-slate-900/30">
-          <CardHeader>
-            <CardTitle className="text-2xl">Sign Up</CardTitle>
-            <CardDescription>
-              Enter your information to create a new account
-            </CardDescription>
-          </CardHeader>
+        <Card className="flex min-h-screen w-full items-center justify-center space-y-1 bg-white dark:bg-slate-900/30 sm:my-8 sm:min-h-fit sm:max-w-sm">
+          <div className="max-w-sm">
+            <CardHeader>
+              <CardTitle className="text-2xl">Sign Up</CardTitle>
+              <CardDescription>
+                Enter your information to create a new account
+              </CardDescription>
+            </CardHeader>
 
-          <CardContent>
-            <div className="flex flex-col gap-5">
-              <FormField
-                control={form.control}
-                name="role"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel htmlFor="role">Role</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      value={field.value}
-                      disabled={isPending}
-                      required
-                    >
-                      <FormControl>
-                        <SelectTrigger id="role" name="role">
-                          <SelectValue placeholder="Select a role" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="child">Child</SelectItem>
-                        <SelectItem value="parent">Parent</SelectItem>
-                        <SelectItem value="admin">Admin</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {form.watch("role") === "parent" && (
+            <CardContent>
+              <div className="flex flex-col gap-5">
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="role"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel htmlFor="email">Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          id="email"
-                          name="email"
-                          type="email"
-                          placeholder="marcoshernanz@example.com"
-                          autoComplete="off"
-                          required
-                        />
-                      </FormControl>
+                      <FormLabel htmlFor="role">Role</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                        disabled={isPending}
+                        required
+                      >
+                        <FormControl>
+                          <SelectTrigger id="role" name="role">
+                            <SelectValue placeholder="Select a role" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="child">Child</SelectItem>
+                          <SelectItem value="parent">Parent</SelectItem>
+                          <SelectItem value="admin">Admin</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-              )}
 
-              {form.watch("role") === "child" && (
+                {form.watch("role") === "parent" && (
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            disabled={isPending}
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="marcoshernanz@example.com"
+                            autoComplete="off"
+                            required
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+
+                {form.watch("role") === "child" && (
+                  <FormField
+                    control={form.control}
+                    name="parentUsername"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel htmlFor="parentUsername">
+                          Parent Username
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            disabled={isPending}
+                            id="parentUsername"
+                            name="parentUsername"
+                            type="text"
+                            placeholder="alfredohernanz123"
+                            autoComplete="off"
+                            required
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+
                 <FormField
                   control={form.control}
-                  name="parentUsername"
+                  name="fullName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel htmlFor="parentUsername">
-                        Parent Username
-                      </FormLabel>
+                      <FormLabel htmlFor="fullName">Full Name</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           disabled={isPending}
-                          id="parentUsername"
-                          name="parentUsername"
+                          id="fullName"
+                          name="fullName"
                           type="text"
-                          placeholder="alfredohernanz123"
+                          placeholder="Marcos Hernanz"
                           autoComplete="off"
                           required
                         />
@@ -158,87 +183,64 @@ export default function LoginForm() {
                     </FormItem>
                   )}
                 />
-              )}
 
-              <FormField
-                control={form.control}
-                name="fullName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel htmlFor="fullName">Full Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        id="fullName"
-                        name="fullName"
-                        type="text"
-                        placeholder="Marcos Hernanz"
-                        autoComplete="off"
-                        required
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="username">Username</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          id="username"
+                          name="username"
+                          type="text"
+                          placeholder="marcoshernanz123"
+                          autoComplete="off"
+                          required
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel htmlFor="username">Username</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        id="username"
-                        name="username"
-                        type="text"
-                        placeholder="marcoshernanz123"
-                        autoComplete="off"
-                        required
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="Password">Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          id="password"
+                          name="password"
+                          type="password"
+                          // placeholder="••••••••"
+                          autoComplete="off"
+                          required
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </CardContent>
 
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel htmlFor="Password">Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        id="password"
-                        name="password"
-                        type="password"
-                        // placeholder="••••••••"
-                        autoComplete="off"
-                        required
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </CardContent>
+            <CardFooter className="flex flex-col gap-6">
+              <Button type="submit" className="w-full" disabled={isPending}>
+                Sign Up
+              </Button>
 
-          <CardFooter className="flex flex-col gap-6">
-            <Button type="submit" className="w-full" disabled={isPending}>
-              Sign Up
-            </Button>
-
-            {error && <FormAlert variant="destructive" message={error} />}
-            {success && <FormAlert variant="success" message={success} />}
-          </CardFooter>
+              {error && <FormAlert variant="destructive" message={error} />}
+              {success && <FormAlert variant="success" message={success} />}
+            </CardFooter>
+          </div>
         </Card>
       </form>
     </Form>

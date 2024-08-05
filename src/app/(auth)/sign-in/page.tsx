@@ -28,7 +28,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormAlert from "@/components/FormAlert";
 import { useState, useTransition } from "react";
 
-export default function LoginForm() {
+export default function SignInPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -58,83 +58,85 @@ export default function LoginForm() {
   return (
     <Form {...form}>
       <form
-        className="flex h-screen items-center justify-center bg-slate-50 dark:bg-slate-950"
+        className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <Card className="w-full max-w-sm space-y-1 bg-white dark:bg-slate-900/30">
-          <CardHeader>
-            <CardTitle className="text-2xl">Sign In</CardTitle>
-            <CardDescription>
-              Enter your credentials to sign in to your account
-            </CardDescription>
-          </CardHeader>
+        <Card className="flex min-h-screen w-full items-center justify-center space-y-1 bg-white dark:bg-slate-900/30 sm:my-8 sm:min-h-fit sm:max-w-sm">
+          <div className="max-w-sm">
+            <CardHeader>
+              <CardTitle className="text-2xl">Sign In</CardTitle>
+              <CardDescription>
+                Enter your credentials to sign in to your account
+              </CardDescription>
+            </CardHeader>
 
-          <CardContent>
-            <div className="flex flex-col gap-5">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel htmlFor="username">Username</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        id="username"
-                        name="username"
-                        type="text"
-                        placeholder="marcoshernanz123"
-                        autoComplete="username"
-                        required
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <CardContent>
+              <div className="flex flex-col gap-5">
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="username">Username</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          id="username"
+                          name="username"
+                          type="text"
+                          placeholder="marcoshernanz123"
+                          autoComplete="username"
+                          required
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex items-center">
-                      <FormLabel htmlFor="Password">Password</FormLabel>
-                      <Link
-                        href="#"
-                        className="ml-auto inline-block text-sm underline"
-                        tabIndex={-1}
-                      >
-                        Forgot your password?
-                      </Link>
-                    </div>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        id="password"
-                        name="password"
-                        type="password"
-                        // placeholder="••••••••"
-                        required
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </CardContent>
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="flex items-center">
+                        <FormLabel htmlFor="Password">Password</FormLabel>
+                        <Link
+                          href="#"
+                          className="ml-auto inline-block text-sm underline"
+                          tabIndex={-1}
+                        >
+                          Forgot your password?
+                        </Link>
+                      </div>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          id="password"
+                          name="password"
+                          type="password"
+                          // placeholder="••••••••"
+                          required
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </CardContent>
 
-          <CardFooter className="flex flex-col gap-6">
-            <Button type="submit" className="w-full" disabled={isPending}>
-              Sign In
-            </Button>
+            <CardFooter className="flex flex-col gap-6">
+              <Button type="submit" className="w-full" disabled={isPending}>
+                Sign In
+              </Button>
 
-            {error && <FormAlert variant="destructive" message={error} />}
-            {success && <FormAlert variant="success" message={success} />}
-          </CardFooter>
+              {error && <FormAlert variant="destructive" message={error} />}
+              {success && <FormAlert variant="success" message={success} />}
+            </CardFooter>
+          </div>
         </Card>
       </form>
     </Form>
