@@ -71,7 +71,7 @@ export default function StartScreen({
   return (
     <Dialog defaultOpen open={visible}>
       <DialogContent
-        className="max-w-lg bg-slate-50 dark:bg-slate-950"
+        className="z-40 max-w-lg bg-slate-50 dark:bg-slate-950"
         closeButton={false}
         backdrop={true}
         aria-describedby="Start screen. Press 'Play' to start playing"

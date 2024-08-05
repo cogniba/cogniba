@@ -24,6 +24,11 @@ const config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
 
+      screens: {
+        "can-hover": { raw: "(hover: hover)" },
+        xs: "480px",
+      },
+
       transitionProperty: {
         width: "width",
         position: "top, right, bottom, left",
