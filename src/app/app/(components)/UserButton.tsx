@@ -58,7 +58,11 @@ export default function UserButton({ name, username }: UserButtonProps) {
         </div>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-64" align="start">
+      <DropdownMenuContent
+        className="w-[var(--radix-popper-anchor-width)] xs:w-64"
+        align="start"
+        asChild
+      >
         <DropdownMenuGroup>
           <DropdownMenuItem
             className="font-medium text-slate-700 transition duration-200 hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-50"
