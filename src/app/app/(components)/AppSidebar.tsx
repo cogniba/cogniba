@@ -44,7 +44,7 @@ export default function AppSidebar({ name, username }: AppSidebarProps) {
       ></div>
       <button
         className={cn(
-          "pointer-events-auto fixed z-50 p-1.5 lg:can-hover:hidden",
+          "pointer-events-auto fixed z-50 p-1.5 text-slate-950 drop-shadow-lg dark:text-slate-50 lg:can-hover:hidden",
           !isVisible && "-translate-x-full [transition:transform_300ms]",
         )}
         onClick={() => setIsExpanded((expanded) => !expanded)}

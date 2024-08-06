@@ -12,7 +12,7 @@ export default async function SettingsPage() {
   const { role } = await getUser();
 
   return (
-    <div className="my-10 flex flex-col items-center gap-6">
+    <div className="mx-6 my-10 flex flex-col items-center gap-6">
       <SettingsCard>
         <AppearanceSetting />
       </SettingsCard>
