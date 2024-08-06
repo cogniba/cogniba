@@ -60,6 +60,7 @@ export default function Analytics({
           userChildren={userChildren}
           date={date}
           setDate={setDate}
+          chartMetric={chartMetric}
           setChartMetric={setChartMetric}
           selectedChild={selectedChild}
           setSelectedChild={setSelectedChild}

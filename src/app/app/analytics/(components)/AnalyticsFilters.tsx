@@ -24,6 +24,7 @@ interface AnalyticsFiltersProps {
   userChildren: UserType[];
   date: DateRange | undefined;
   setDate: (date: DateRange | undefined) => void;
+  chartMetric: chartMetrics;
   setChartMetric: (metric: chartMetrics) => void;
   selectedChild: UserType | null;
   setSelectedChild: (child: UserType) => void;
@@ -33,17 +34,22 @@ export default function AnalyticsFilters({
   userChildren,
   date,
   setDate,
+  chartMetric,
   setChartMetric,
   selectedChild,
   setSelectedChild,
 }: AnalyticsFiltersProps) {
   const isParent = userChildren.length > 0;
+  const selectedChildIndex = selectedChild
+    ? String(userChildren.findIndex((child) => child.id === selectedChild.id))
+    : undefined;
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center justify-start gap-3">
         {isParent && (
           <Select
+            value={selectedChildIndex}
             onValueChange={(value) =>
               setSelectedChild(userChildren[Number(value)])
             }
@@ -61,6 +67,7 @@ export default function AnalyticsFilters({
           </Select>
         )}
         <Select
+          value={chartMetric ?? undefined}
           onValueChange={(value) => setChartMetric(value as chartMetrics)}
         >
           <SelectTrigger className="w-64">
