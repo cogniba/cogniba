@@ -76,7 +76,7 @@ export default function StartScreen({
         backdrop={true}
         aria-describedby="Start screen. Press 'Play' to start playing"
       >
-        <div className="xs:px-7 flex w-full max-w-lg flex-col justify-center px-6 sm:px-0">
+        <div className="flex w-full max-w-lg flex-col justify-center px-6 xs:px-7 sm:px-0">
           {!hasStatistics ? (
             <>
               <DialogTitle className="mb-6 text-3xl text-slate-900 dark:text-slate-100">
@@ -94,8 +94,8 @@ export default function StartScreen({
               <DialogTitle className="mb-6 text-3xl text-slate-900 dark:text-slate-100">
                 Well played!
               </DialogTitle>
-              <div className="xs:flex-row flex flex-col items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-300/50 bg-white p-2 dark:border-slate-800 dark:bg-slate-900/30">
-                <div className="xs:w-fit flex w-full flex-col gap-1 text-lg">
+              <div className="flex flex-col items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-300/50 bg-white p-2 dark:border-slate-800 dark:bg-slate-900/30 xs:flex-row">
+                <div className="flex w-full flex-col gap-1 text-lg xs:w-fit">
                   <div
                     className={cn(
                       boxVariants({ size: "small", color: "green" }),
@@ -128,83 +128,61 @@ export default function StartScreen({
                   </div>
                 </div>
 
-                <div className="xs:block hidden h-[calc(100%+1rem)] border-l border-slate-200 dark:border-slate-800"></div>
-                <div className="xs:hidden block w-[calc(100%+1rem)] border-t border-slate-200 dark:border-slate-800"></div>
+                <div className="hidden h-[calc(100%+1rem)] border-l border-slate-200 dark:border-slate-800 xs:block"></div>
+                <div className="block w-[calc(100%+1rem)] border-t border-slate-200 dark:border-slate-800 xs:hidden"></div>
 
                 <div className="flex h-full w-full flex-col gap-1 text-lg">
+                  <div
+                    className={cn(
+                      boxVariants({
+                        size: "big",
+                        color:
+                          newLevel > previousLevel
+                            ? "green"
+                            : newLevel === previousLevel
+                              ? "blue"
+                              : "red",
+                      }),
+                    )}
+                  >
+                    <CrosshairIcon className="h-6 w-6" />
+                    <div>
+                      <span className="font-semibold">{accuracy}%</span>{" "}
+                      accuracy
+                    </div>
+                  </div>
                   {newLevel > previousLevel && (
-                    <>
-                      <div
-                        className={cn(
-                          boxVariants({ size: "big", color: "green" }),
-                        )}
-                      >
-                        <CrosshairIcon className="h-6 w-6" />
-                        <div>
-                          <span className="font-semibold">{accuracy}%</span>{" "}
-                          accuracy
-                        </div>
-                      </div>
-                      <div
-                        className={cn(
-                          boxVariants({
-                            size: "big",
-                            color: "green",
-                          }),
-                        )}
-                      >
-                        <MoveUpRightIcon className="h-6 w-6" />
-                        <div className="font-medium">Level Increased</div>
-                      </div>
-                    </>
+                    <div
+                      className={cn(
+                        boxVariants({
+                          size: "big",
+                          color: "green",
+                        }),
+                      )}
+                    >
+                      <MoveUpRightIcon className="h-6 w-6" />
+                      <div className="font-medium">Level Increased</div>
+                    </div>
                   )}
                   {newLevel === previousLevel && (
-                    <>
-                      <div
-                        className={cn(
-                          boxVariants({ size: "big", color: "red" }),
-                        )}
-                      >
-                        <CrosshairIcon className="h-6 w-6" />
-                        <div>
-                          <span className="font-semibold">{accuracy}%</span>{" "}
-                          accuracy
-                        </div>
-                      </div>
-                      <div
-                        className={cn(
-                          boxVariants({ size: "big", color: "red" }),
-                        )}
-                      >
-                        <MoveDownRightIcon className="h-6 w-6" />
-                        <div className="font-medium">Level Decreased</div>
-                      </div>
-                    </>
+                    <div
+                      className={cn(
+                        boxVariants({ size: "big", color: "blue" }),
+                      )}
+                    >
+                      <MoveRightIcon className="h-6 w-6" />
+                      <div className="font-medium">Level Maintained</div>
+                    </div>
                   )}
                   {newLevel < previousLevel && (
-                    <>
-                      <div
-                        className={cn(
-                          boxVariants({ size: "big", color: "blue" }),
-                        )}
-                      >
-                        <CrosshairIcon className="h-6 w-6" />
-                        <div>
-                          <span className="font-semibold">{accuracy}%</span>{" "}
-                          accuracy
-                        </div>
-                      </div>
-                      <div
-                        className={cn(
-                          boxVariants({ size: "big", color: "blue" }),
-                        )}
-                      >
-                        <MoveRightIcon className="h-6 w-6" />
-                        <div className="font-medium">Level Maintained</div>
-                      </div>
-                    </>
+                    <div
+                      className={cn(boxVariants({ size: "big", color: "red" }))}
+                    >
+                      <MoveDownRightIcon className="h-6 w-6" />
+                      <div className="font-medium">Level Decreased</div>
+                    </div>
                   )}
-                  <div className="xs:flex hidden items-center justify-between gap-3 text-center font-medium">
+                  <div className="hidden items-center justify-between gap-3 text-center font-medium xs:flex">
                     <div
                       className={cn(
                         boxVariants({

@@ -36,20 +36,27 @@ export default function AppSidebar({ name, username }: AppSidebarProps) {
       data-state={isExpanded || isUserDropdownOpen ? "expanded" : "collapsed"}
     >
       <div
-        className="lg:can-hover:hidden pointer-events-auto invisible fixed inset-0 z-40 bg-black/30 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-data-[state=expanded]:visible group-data-[state=expanded]:opacity-100"
+        className={cn(
+          "pointer-events-auto invisible fixed inset-0 z-40 bg-black/30 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-data-[state=expanded]:visible group-data-[state=expanded]:opacity-100 lg:can-hover:hidden",
+          !isVisible && "-translate-x-full [transition:transform_300ms]",
+        )}
         onClick={() => setIsExpanded(false)}
       ></div>
       <button
-        className="lg:can-hover:hidden pointer-events-auto fixed z-50 m-1.5"
+        className={cn(
+          "pointer-events-auto fixed z-50 p-1.5 lg:can-hover:hidden",
+          !isVisible && "-translate-x-full [transition:transform_300ms]",
+        )}
         onClick={() => setIsExpanded((expanded) => !expanded)}
       >
         <MenuIcon className="visible fixed h-10 w-10 opacity-100 transition-all group-data-[state=expanded]:invisible group-data-[state=expanded]:rotate-90 group-data-[state=expanded]:opacity-0" />
-        <XIcon className="fixed h-10 w-10 opacity-100 transition-all group-data-[state=collapsed]:invisible group-data-[state=collapsed]:-rotate-90 group-data-[state=collapsed]:opacity-0" />
+        <XIcon className="h-10 w-10 opacity-100 transition-all group-data-[state=collapsed]:invisible group-data-[state=collapsed]:-rotate-90 group-data-[state=collapsed]:opacity-0" />
       </button>
       <nav
         className={cn(
-          "hide-scrollbar xs:group-data-[state=expanded]:w-60 lg:can-hover:translate-x-0 lg:can-hover:pt-2 group pointer-events-auto fixed z-40 flex h-full w-16 -translate-x-full flex-col items-center justify-between overflow-y-auto border-r border-slate-200 bg-white py-2 pt-12 shadow-xl shadow-black/5 transition-all duration-200 group-data-[state=expanded]:w-full group-data-[state=expanded]:translate-x-0 group-data-[state=expanded]:shadow-black/10 dark:border-slate-800 dark:bg-slate-950 dark:shadow-black/30 dark:group-data-[state=expanded]:shadow-black/60",
-          !isVisible && "-translate-x-full transition-[translate_300ms]",
+          "hide-scrollbar group pointer-events-auto fixed z-40 flex h-full w-16 -translate-x-full flex-col items-center justify-between overflow-y-auto border-r border-slate-200 bg-white py-2 pt-12 shadow-xl shadow-black/5 transition-all duration-200 group-data-[state=expanded]:w-full group-data-[state=expanded]:translate-x-0 group-data-[state=expanded]:shadow-black/10 dark:border-slate-800 dark:bg-slate-950 dark:shadow-black/30 dark:group-data-[state=expanded]:shadow-black/60 xs:group-data-[state=expanded]:w-60 lg:can-hover:translate-x-0 lg:can-hover:pt-2",
+          !isVisible &&
+            "-translate-x-full [transition:transform_300ms] group-data-[state=expanded]:-translate-x-full lg:can-hover:-translate-x-full",
         )}
         onMouseEnter={() => isHoverable && setIsExpanded(true)}
         onMouseLeave={() => isHoverable && setIsExpanded(false)}
