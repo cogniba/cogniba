@@ -12,11 +12,7 @@ export default function cleanChartData(
     correctHits: Math.round(item.correctHits * 10) / 10,
     incorrectHits: Math.round(item.incorrectHits * 10) / 10,
     missedHits: Math.round(item.missedHits * 10) / 10,
-    accuracy: Math.round(
-      (item.correctHits /
-        (item.correctHits + item.incorrectHits + item.missedHits)) *
-        100,
-    ),
+    accuracy: Math.round(item.accuracy * 100),
     timePlayed: Math.round(item.timePlayed / 1000 / 60),
   }));
 
@@ -28,6 +24,7 @@ export default function cleanChartData(
     date.setDate(date.getDate() + 1)
   ) {
     filledData.push({
+      userId: data[0].userId,
       level: 0,
       correctHits: 0,
       incorrectHits: 0,

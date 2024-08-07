@@ -3,6 +3,7 @@ import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
 import getSessionUser from "@/database/queries/users/getSessionUser";
 import { date } from "@/database/queries/functions";
+import calculateAccuracy from "@/lib/calculateAccuracy";
 
 export type DailyGamesData = {
   userId: string;
@@ -11,6 +12,7 @@ export type DailyGamesData = {
   correctHits: number;
   incorrectHits: number;
   missedHits: number;
+  accuracy: number;
   timePlayed: number;
   date: string;
 }[];
@@ -34,5 +36,14 @@ export default async function getUserDailyGamesData(): Promise<DailyGamesData> {
     .groupBy(date(games.createdAt), games.userId)
     .orderBy(date(games.createdAt));
 
-  return gamesData;
+  const fullGamesData = gamesData.map((data) => ({
+    accuracy: calculateAccuracy({
+      correctHits: data.correctHits,
+      incorrectHits: data.incorrectHits,
+      missedHits: data.missedHits,
+    }),
+    ...data,
+  }));
+
+  return fullGamesData;
 }

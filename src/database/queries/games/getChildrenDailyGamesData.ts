@@ -4,6 +4,7 @@ import { games } from "@/database/schemas/games";
 import { date } from "@/database/queries/functions";
 import { UserType } from "@/database/schemas/auth";
 import { DailyGamesData } from "./getUserDailyGamesData";
+import calculateAccuracy from "@/lib/calculateAccuracy";
 
 export default async function getChildrenDailyGamesData(
   children: UserType[],
@@ -26,8 +27,17 @@ export default async function getChildrenDailyGamesData(
     .groupBy(date(games.createdAt), games.userId)
     .orderBy(date(games.createdAt));
 
+  const fullGamesData = gamesData.map((data) => ({
+    accuracy: calculateAccuracy({
+      correctHits: data.correctHits,
+      incorrectHits: data.incorrectHits,
+      missedHits: data.missedHits,
+    }),
+    ...data,
+  }));
+
   const childrenGamesData = children.map((child) =>
-    gamesData.filter((game) => game.userId === child.id),
+    fullGamesData.filter((game) => game.userId === child.id),
   );
 
   return childrenGamesData;

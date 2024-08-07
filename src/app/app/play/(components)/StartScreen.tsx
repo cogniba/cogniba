@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import quotes from "@/content/quotes.json";
+import calculateAccuracy from "@/lib/calculateAccuracy";
 import { cn } from "@/lib/cn";
 import { cva } from "class-variance-authority";
 import {
@@ -56,8 +57,8 @@ export default function StartScreen({
     correctHits !== null && incorrectHits !== null && missedHits !== null;
   let accuracy = 0;
   if (hasStatistics) {
-    accuracy = Math.floor(
-      (correctHits / (correctHits + incorrectHits + missedHits)) * 100,
+    accuracy = Math.round(
+      calculateAccuracy({ correctHits, incorrectHits, missedHits }) * 100,
     );
   }
 
