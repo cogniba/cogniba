@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -8,21 +9,41 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface SettingsItemProps {
-  title: string;
-  description: string;
-  options: { value: string; label: string }[];
-  value: string;
-  onValueChange: (value: string) => void;
-  disabled?: boolean;
-}
+type SettingsItemProps =
+  | {
+      title: string;
+      description: string;
+      type: "select";
+      options: { value: string; label: string }[];
+      value: string;
+      onValueChange: (value: string) => void;
+      disabled?: boolean;
+
+      buttonText?: never;
+      onClick?: never;
+    }
+  | {
+      title: string;
+      description: string;
+      type: "button";
+      buttonText: string;
+      onClick: () => void;
+      disabled?: boolean;
+
+      options?: never;
+      value?: never;
+      onValueChange?: never;
+    };
 
 export default function SettingsItem({
   title,
   description,
+  type,
   options,
   value,
   onValueChange,
+  buttonText,
+  onClick,
   disabled = false,
 }: SettingsItemProps) {
   return (
@@ -35,18 +56,36 @@ export default function SettingsItem({
           {description}
         </span>
       </div>
-      <Select value={value} onValueChange={onValueChange} disabled={disabled}>
-        <SelectTrigger className="w-full flex-shrink-0 md:w-60 lg:w-80">
-          <SelectValue></SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((option, index) => (
-            <SelectItem key={index} value={option.value}>
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <div className="w-full flex-shrink-0 md:w-60 lg:w-80">
+        {type === "select" && (
+          <Select
+            value={value}
+            onValueChange={onValueChange}
+            disabled={disabled}
+          >
+            <SelectTrigger>
+              <SelectValue></SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((option, index) => (
+                <SelectItem key={index} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+        {type === "button" && (
+          <Button
+            onClick={onClick}
+            disabled={disabled}
+            variant="outline"
+            className="w-full"
+          >
+            {buttonText}
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import { and, desc, eq, gte, lte } from "drizzle-orm";
 import { db } from "@/database/db";
 import { games, GameType } from "@/database/schemas/games";
-import getUser from "@/database/queries/users/getUser";
+import getSessionUser from "@/database/queries/users/getSessionUser";
 
 export default async function getGamesData(
   startDate: Date,
   endDate: Date,
 ): Promise<GameType[]> {
-  const { id: userId } = await getUser();
+  const { id: userId } = await getSessionUser();
 
   const gamesData = await db
     .select()

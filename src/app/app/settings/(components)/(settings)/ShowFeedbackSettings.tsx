@@ -25,6 +25,7 @@ export default function ShowFeedbackSettings({
     <SettingsItem
       title="Show feedback"
       description="The player will receive feedback while playing. Recommended when starting out"
+      type="select"
       options={[
         { value: "enabled", label: "Enabled" },
         { value: "disabled", label: "Disabled" },

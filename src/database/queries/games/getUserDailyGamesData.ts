@@ -1,7 +1,7 @@
 import { avg, count, eq, sum } from "drizzle-orm";
 import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
-import getUser from "@/database/queries/users/getUser";
+import getSessionUser from "@/database/queries/users/getSessionUser";
 import { date } from "@/database/queries/functions";
 
 export type DailyGamesData = {
@@ -16,7 +16,7 @@ export type DailyGamesData = {
 }[];
 
 export default async function getUserDailyGamesData(): Promise<DailyGamesData> {
-  const { id: userId } = await getUser();
+  const { id: userId } = await getSessionUser();
 
   const gamesData = await db
     .select({

@@ -4,12 +4,13 @@ import ChildrenChangeSettingsSetting from "./(components)/(settings)/ChildrenCha
 import ShowFeedbackSettings from "./(components)/(settings)/ShowFeedbackSettings";
 import getUserCanChangeSettings from "@/database/queries/settings/getUserCanChangeSettings";
 import SettingsCard from "./(components)/SettingsCard";
-import getUser from "@/database/queries/users/getUser";
+import getSessionUser from "@/database/queries/users/getSessionUser";
+import ChangePasswordSettings from "./(components)/(settings)/ChangePasswordSettings";
 
 export default async function SettingsPage() {
   const settings = await getUserSettings();
   const canChangeSettings = await getUserCanChangeSettings();
-  const { role } = await getUser();
+  const { role } = await getSessionUser();
 
   return (
     <div className="mx-6 my-10 flex flex-col items-center gap-6">
@@ -42,6 +43,9 @@ export default async function SettingsPage() {
             disabled={role === "child" && !canChangeSettings}
           />
         </div>
+      </SettingsCard>
+      <SettingsCard>
+        <ChangePasswordSettings />
       </SettingsCard>
     </div>
   );

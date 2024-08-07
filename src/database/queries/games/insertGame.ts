@@ -2,7 +2,7 @@
 
 import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
-import getUser from "@/database/queries/users/getUser";
+import getSessionUser from "@/database/queries/users/getSessionUser";
 
 interface insertGameProps {
   level: number;
@@ -21,7 +21,7 @@ export default async function insertGame({
   missedHits,
   timePlayed,
 }: insertGameProps): Promise<void> {
-  const { id: userId } = await getUser();
+  const { id: userId } = await getSessionUser();
 
   await db.insert(games).values({
     userId,

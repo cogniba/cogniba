@@ -1,7 +1,7 @@
 import { settings, SettingsType } from "@/database/schemas/settings";
-import getUser from "../users/getUser";
 import { db } from "@/database/db";
 import { eq } from "drizzle-orm";
+import getUser from "../users/getUser";
 
 export default async function getUserSettings(): Promise<SettingsType> {
   const { settingsId } = await getUser();

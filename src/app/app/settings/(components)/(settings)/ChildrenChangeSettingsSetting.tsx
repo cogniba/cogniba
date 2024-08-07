@@ -26,6 +26,7 @@ export default function ChildrenChangeSettingsSetting({
     <SettingsItem
       title="Allow children to change settings"
       description="Your children will be able to change their own settings"
+      type="select"
       options={[
         { value: "enabled", label: "Enabled" },
         { value: "disabled", label: "Disabled" },

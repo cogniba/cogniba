@@ -6,9 +6,10 @@ import { SignInSchema } from "@/zod/schemas/SignInSchema";
 import { AuthError } from "next-auth";
 import { isRedirectError } from "next/dist/client/components/redirect";
 
-export default async function handleSignIn(data: z.infer<typeof SignInSchema>) {
+export default async function handleSignIn(
+  data: z.infer<typeof SignInSchema>,
+): Promise<{ success?: string; error?: string }> {
   const validatedData = SignInSchema.safeParse(data);
-
   if (!validatedData.success) {
     return { error: "Invalid credentials" };
   }

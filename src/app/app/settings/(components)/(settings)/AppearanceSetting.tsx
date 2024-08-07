@@ -10,6 +10,7 @@ export default function AppearanceSetting() {
     <SettingsItem
       title="Appearance"
       description="Choose how you want the application to look"
+      type="select"
       options={[
         { value: "light", label: "Light" },
         { value: "dark", label: "Dark" },

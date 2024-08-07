@@ -1,14 +1,14 @@
 import { SidebarProvider } from "@/context/SidebarContext";
 import AppHeader from "./(components)/AppHeader";
 import AppSidebar from "./(components)/AppSidebar";
-import getUser from "@/database/queries/users/getUser";
+import getSessionUser from "@/database/queries/users/getSessionUser";
 
 interface AppLayoutProps {
   readonly children: React.ReactNode;
 }
 
 export default async function AppLayout({ children }: AppLayoutProps) {
-  const { username, name } = await getUser();
+  const { username, name } = await getSessionUser();
 
   return (
     <SidebarProvider>
