@@ -45,8 +45,8 @@ export default function AnalyticsFilters({
     : undefined;
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center justify-start gap-3">
+    <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+      <div className="flex w-full flex-col items-center justify-start gap-3 sm:w-fit lg:flex-row">
         {isParent && (
           <Select
             value={selectedChildIndex}
@@ -54,7 +54,7 @@ export default function AnalyticsFilters({
               setSelectedChild(userChildren[Number(value)])
             }
           >
-            <SelectTrigger className="w-64">
+            <SelectTrigger className="w-full sm:w-52 md:w-64">
               <SelectValue placeholder="Select a child" />
             </SelectTrigger>
             <SelectContent>
@@ -70,7 +70,7 @@ export default function AnalyticsFilters({
           value={chartMetric ?? undefined}
           onValueChange={(value) => setChartMetric(value as chartMetrics)}
         >
-          <SelectTrigger className="w-64">
+          <SelectTrigger className="w-full sm:w-52 md:w-64">
             <SelectValue placeholder="Select a metric" />
           </SelectTrigger>
           <SelectContent>
@@ -86,7 +86,7 @@ export default function AnalyticsFilters({
         <PopoverTrigger asChild>
           <Button
             className={cn(
-              "flex w-64 items-center justify-start gap-2 font-normal",
+              "flex w-full items-center justify-start gap-2 font-normal sm:w-64",
               !date && "text-slate-800",
             )}
             variant="outline"
