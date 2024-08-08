@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Game from "./Game";
 import { useSidebar } from "@/context/SidebarContext";
 import sleep from "@/lib/sleep";
@@ -28,6 +28,7 @@ export default function GameLogic({
   const [previousLevel, setPreviousLevel] = useState<number>(startingLevel);
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
+  const [isSpaceBarPressed, setIsSpaceBarPressed] = useState(false);
   const [correctHits, setCorrectHits] = useState<number | null>(null);
   const [incorrectHits, setIncorrectHits] = useState<number | null>(null);
   const [missedHits, setMissedHits] = useState<number | null>(null);
@@ -137,6 +138,24 @@ export default function GameLogic({
     playGame();
   }, [level, playGame, setIsVisible]);
 
+  const handleSpaceBarPress = useCallback(async () => {
+    if (!hasPressedSpaceBar.current) {
+      hasPressedSpaceBar.current = true;
+      setIsSpaceBarPressed(true);
+      handleShowFeedback();
+      await sleep(400);
+      setIsSpaceBarPressed(false);
+    }
+  }, [handleShowFeedback]);
+
+  useEffect(() => {
+    addEventListener("keydown", (e) => {
+      if (e.code === "Space") {
+        handleSpaceBarPress();
+      }
+    });
+  }, [handleSpaceBarPress]);
+
   return (
     <Game
       feedback={feedback}
@@ -148,8 +167,8 @@ export default function GameLogic({
       previousLevel={previousLevel}
       level={level}
       selectedSquare={selectedSquare}
-      hasPressedSpaceBarRef={hasPressedSpaceBar}
-      handleShowFeedback={handleShowFeedback}
+      isSpaceBarPressed={isSpaceBarPressed}
+      handlePressSpaceBar={handleSpaceBarPress}
     />
   );
 }

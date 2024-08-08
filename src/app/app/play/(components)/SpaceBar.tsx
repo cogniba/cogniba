@@ -1,36 +1,14 @@
 import { cn } from "@/lib/cn";
-import sleep from "@/lib/sleep";
-import { useCallback, useEffect, useState } from "react";
 
 interface SpaceBarProps {
-  hasPressedSpaceBarRef: React.MutableRefObject<boolean>;
-  handleShowFeedback: () => void;
+  isSpaceBarPressed: boolean;
+  handleSpaceBarPress: () => void;
 }
 
 export default function SpaceBar({
-  hasPressedSpaceBarRef,
-  handleShowFeedback,
+  isSpaceBarPressed,
+  handleSpaceBarPress,
 }: SpaceBarProps) {
-  const [isSpaceBarPressed, setIsSpaceBarPressed] = useState(false);
-
-  const handleSpaceBarPress = useCallback(async () => {
-    if (!hasPressedSpaceBarRef.current) {
-      hasPressedSpaceBarRef.current = true;
-      setIsSpaceBarPressed(true);
-      handleShowFeedback();
-      await sleep(400);
-      setIsSpaceBarPressed(false);
-    }
-  }, [hasPressedSpaceBarRef, handleShowFeedback]);
-
-  useEffect(() => {
-    addEventListener("keydown", (e) => {
-      if (e.code === "Space") {
-        handleSpaceBarPress();
-      }
-    });
-  }, [handleSpaceBarPress]);
-
   return (
     <div className="flex h-full w-full items-center justify-center">
       <button

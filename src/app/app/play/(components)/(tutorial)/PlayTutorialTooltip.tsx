@@ -23,11 +23,11 @@ export default function PlayTutorialTooltip({
         {step.content}
       </CardContent>
       <CardFooter className="flex justify-end gap-4">
-        {index > 0 && (
+        {/* {index > 0 && (
           <Button variant="secondary" {...backProps}>
             Back
           </Button>
-        )}
+        )} */}
         <Button {...primaryProps}>Next</Button>
       </CardFooter>
     </Card>

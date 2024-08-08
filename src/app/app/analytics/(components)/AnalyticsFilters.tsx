@@ -19,15 +19,16 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/cn";
+import { Dispatch, SetStateAction } from "react";
 
 interface AnalyticsFiltersProps {
   userChildren: UserType[];
   date: DateRange | undefined;
-  setDate: (date: DateRange | undefined) => void;
+  setDate: Dispatch<SetStateAction<DateRange | undefined>>;
   chartMetric: chartMetrics;
-  setChartMetric: (metric: chartMetrics) => void;
+  setChartMetric: Dispatch<SetStateAction<chartMetrics>>;
   selectedChild: UserType | null;
-  setSelectedChild: (child: UserType) => void;
+  setSelectedChild: Dispatch<SetStateAction<UserType | null>>;
 }
 
 export default function AnalyticsFilters({

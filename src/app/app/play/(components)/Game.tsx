@@ -16,8 +16,8 @@ interface GameProps {
   previousLevel: number;
   level: number;
   selectedSquare: number | null;
-  hasPressedSpaceBarRef: React.MutableRefObject<boolean>;
-  handleShowFeedback: () => void;
+  isSpaceBarPressed: boolean;
+  handlePressSpaceBar: () => void;
 }
 
 export default function Game({
@@ -30,8 +30,8 @@ export default function Game({
   previousLevel,
   level,
   selectedSquare,
-  hasPressedSpaceBarRef,
-  handleShowFeedback,
+  isSpaceBarPressed,
+  handlePressSpaceBar,
 }: GameProps) {
   return (
     <>
@@ -61,8 +61,8 @@ export default function Game({
           </div>
           <div className="mb-[2.5cqh] mt-[3cqh] h-[11cqh] w-[100cqmin] max-w-5xl flex-shrink-0 2xl:w-[max(100cqmin,90vh)]">
             <SpaceBar
-              hasPressedSpaceBarRef={hasPressedSpaceBarRef}
-              handleShowFeedback={handleShowFeedback}
+              isSpaceBarPressed={isSpaceBarPressed}
+              handleSpaceBarPress={handlePressSpaceBar}
             />
           </div>
         </div>
