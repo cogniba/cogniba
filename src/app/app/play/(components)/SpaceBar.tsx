@@ -3,25 +3,25 @@ import sleep from "@/lib/sleep";
 import { useCallback, useEffect, useState } from "react";
 
 interface SpaceBarProps {
-  hasPressedSpaceBar: React.MutableRefObject<boolean>;
+  hasPressedSpaceBarRef: React.MutableRefObject<boolean>;
   handleShowFeedback: () => void;
 }
 
 export default function SpaceBar({
-  hasPressedSpaceBar,
+  hasPressedSpaceBarRef,
   handleShowFeedback,
 }: SpaceBarProps) {
   const [isSpaceBarPressed, setIsSpaceBarPressed] = useState(false);
 
   const handleSpaceBarPress = useCallback(async () => {
-    if (!hasPressedSpaceBar.current) {
-      hasPressedSpaceBar.current = true;
+    if (!hasPressedSpaceBarRef.current) {
+      hasPressedSpaceBarRef.current = true;
       setIsSpaceBarPressed(true);
       handleShowFeedback();
       await sleep(400);
       setIsSpaceBarPressed(false);
     }
-  }, [hasPressedSpaceBar, handleShowFeedback]);
+  }, [hasPressedSpaceBarRef, handleShowFeedback]);
 
   useEffect(() => {
     addEventListener("keydown", (e) => {
@@ -39,6 +39,7 @@ export default function SpaceBar({
           isSpaceBarPressed &&
             "translate-y-0 border-orange-500/50 bg-orange-400 shadow-sm dark:border-orange-600 dark:bg-orange-700",
         )}
+        id="button"
         tabIndex={-1}
         onPointerDown={handleSpaceBarPress}
       ></button>

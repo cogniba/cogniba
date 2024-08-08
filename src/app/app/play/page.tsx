@@ -1,10 +1,16 @@
-import Game from "@/app/app/play/(components)/Game";
 import getUserLevel from "@/database/queries/games/getUserLevel";
 import getUserSettings from "@/database/queries/settings/getUserSettings";
+import PlayTutorial from "./(components)/(tutorial)/PlayTutorial";
+import GameLogic from "./(components)/GameLogic";
 
 export default async function PlayPage() {
   const level = await getUserLevel();
   const { showFeedback } = await getUserSettings();
 
-  return <Game startingLevel={level} showFeedbackEnabled={showFeedback} />;
+  return (
+    <>
+      {/* <PlayTutorial /> */}
+      <GameLogic startingLevel={level} showFeedbackEnabled={showFeedback} />
+    </>
+  );
 }
