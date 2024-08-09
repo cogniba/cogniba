@@ -177,8 +177,6 @@ export default function PlayTutorialSteps({
 
   const steps = useMemo(() => getSteps(boardSize), [boardSize]);
 
-  console.log(steps);
-
   const handleJoyrideCallback = (data: CallBackProps) => {
     const { type, action } = data;
 

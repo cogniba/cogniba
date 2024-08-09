@@ -23,8 +23,6 @@ export default function PlayTutorial() {
 
   const stepRef = useRef(3);
 
-  const playGame = useCallback(async (level: number) => {}, []);
-
   useEffect(() => {
     stepRef.current = step;
   }, [step]);
@@ -67,7 +65,7 @@ export default function PlayTutorial() {
       level1ExplanationStepAnimation();
     } else if (stepRef.current === level1PlayStep) {
       setIsRunning(false);
-      playGame(1);
+      // playGame();
     }
   }, [isRunning, step]);
 
