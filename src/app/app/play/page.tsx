@@ -6,7 +6,7 @@ import GameLogic from "./(components)/GameLogic";
 export default async function PlayPage() {
   const level = await getUserLevel();
   const { showFeedback } = await getUserSettings();
-  const tutorialPart = null;
+  const tutorialPart = 0;
 
   return (
     <>

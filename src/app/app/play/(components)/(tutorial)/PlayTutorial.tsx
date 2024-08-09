@@ -8,20 +8,42 @@ import {
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
+import useGameLogic from "@/hooks/useGameLogic";
 
 const boardStep = 3;
 const buttonStep = 4;
 const level1ExplanationStep = 5;
-const level1PlayStep = 6;
+const level1PlayStep = 7;
 
 export default function PlayTutorial() {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
 
-  const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
-  const [isSpaceBarPressed, setIsSpaceBarPressed] = useState(false);
+  const [tutorialSelectedSquare, setTutorialSelectedSquare] = useState<
+    number | null
+  >(null);
+  const [tutorialSpaceBarPressed, setTutorialSpaceBarPressed] = useState(false);
 
-  const stepRef = useRef(3);
+  const stepRef = useRef(0);
+
+  const {
+    feedback,
+    isPlaying,
+    startPlaying,
+    correctHits,
+    incorrectHits,
+    missedHits,
+    previousLevel,
+    level,
+    selectedSquare,
+    isSpaceBarPressed,
+    handleSpaceBarPress,
+  } = useGameLogic({
+    startingLevel: 1,
+    showFeedbackEnabled: true,
+    isTutorial: true,
+    setShowTutorialHint: setIsRunning,
+  });
 
   useEffect(() => {
     stepRef.current = step;
@@ -32,29 +54,36 @@ export default function PlayTutorial() {
 
     const boardStepAnimation = async () => {
       while (stepRef.current === boardStep) {
-        setSelectedSquare(Math.floor(Math.random() * 8));
+        setTutorialSelectedSquare(Math.floor(Math.random() * 8));
         await sleep(gameVisibleSquareDuration);
-        setSelectedSquare(null);
+        setTutorialSelectedSquare(null);
         await sleep(gameHiddenSquareDuration);
       }
     };
 
     const buttonStepAnimation = async () => {
       while (stepRef.current === buttonStep) {
-        setIsSpaceBarPressed(true);
+        setTutorialSpaceBarPressed(true);
         await sleep(400);
-        setIsSpaceBarPressed(false);
+        setTutorialSpaceBarPressed(false);
         await sleep(2000);
       }
     };
 
-    const level1ExplanationStepAnimation = async () => {
+    const level1ExplanationAnimation = async () => {
       while (stepRef.current === level1ExplanationStep) {
-        setSelectedSquare(6);
+        setTutorialSelectedSquare(6);
         await sleep(gameVisibleSquareDuration);
-        setSelectedSquare(null);
+        setTutorialSelectedSquare(null);
         await sleep(gameHiddenSquareDuration);
       }
+    };
+
+    const startTutorialGame = async () => {
+      setIsRunning(false);
+      await startPlaying();
+      setStep((step) => step + 1);
+      setIsRunning(true);
     };
 
     if (stepRef.current === boardStep) {
@@ -62,33 +91,29 @@ export default function PlayTutorial() {
     } else if (stepRef.current === buttonStep) {
       buttonStepAnimation();
     } else if (stepRef.current === level1ExplanationStep) {
-      level1ExplanationStepAnimation();
+      level1ExplanationAnimation();
     } else if (stepRef.current === level1PlayStep) {
-      setIsRunning(false);
-      // playGame();
+      if (!isPlaying) {
+        startTutorialGame();
+      }
     }
-  }, [isRunning, step]);
+  }, [isRunning, step, startPlaying, isPlaying]);
 
   return (
     <>
-      <PlayTutorialSteps
-        step={step}
-        setStep={setStep}
-        isRunning={isRunning}
-        setIsRunning={setIsRunning}
-      />
+      <PlayTutorialSteps step={step} setStep={setStep} isRunning={isRunning} />
       <Game
-        feedback={null}
+        feedback={feedback}
         isStartScreenVisible={false}
-        startPlaying={() => {}}
-        correctHits={null}
-        incorrectHits={null}
-        missedHits={null}
-        previousLevel={1}
-        level={1}
-        selectedSquare={selectedSquare}
-        isSpaceBarPressed={isSpaceBarPressed}
-        handlePressSpaceBar={() => {}}
+        startPlaying={startPlaying}
+        correctHits={correctHits}
+        incorrectHits={incorrectHits}
+        missedHits={missedHits}
+        previousLevel={previousLevel}
+        level={level}
+        selectedSquare={selectedSquare || tutorialSelectedSquare}
+        isSpaceBarPressed={isSpaceBarPressed || tutorialSpaceBarPressed}
+        handlePressSpaceBar={handleSpaceBarPress}
       />
     </>
   );

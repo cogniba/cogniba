@@ -157,20 +157,56 @@ const getSteps = (boardSize: number) => [
     },
     ...defaultStepProps,
   } satisfies Step,
+  {
+    title: <>Press the button</>,
+    content: (
+      <>
+        The square appeared{" "}
+        <strong className="font-semibold text-slate-50">
+          two consecutive times
+        </strong>{" "}
+        on the{" "}
+        <strong className="font-semibold text-slate-50">same spot</strong> -{" "}
+        <strong className="font-semibold text-slate-50">
+          Press the button
+        </strong>
+        .{" "}
+      </>
+    ),
+    target: "#button",
+    placement: "top" as const,
+    spotlightClicks: true,
+    data: {
+      hideButton: true,
+    },
+    ...defaultStepProps,
+  } satisfies Step,
+  {
+    title: <>Congratulations!</>,
+    content: (
+      <>
+        You beat{" "}
+        <strong className="font-semibold text-orange-400">level 1</strong>, you
+        will now advance to{" "}
+        <strong className="font-semibold text-orange-400">level 2</strong>!
+      </>
+    ),
+    target: "body",
+    placement: "center" as const,
+    ...defaultStepProps,
+  } satisfies Step,
 ];
 
 interface PlayTutorialStepsProps {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
   isRunning: boolean;
-  setIsRunning: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function PlayTutorialSteps({
   step,
   setStep,
   isRunning,
-  setIsRunning,
 }: PlayTutorialStepsProps) {
   const [loaded, setLoaded] = useState(false);
   const [boardSize, setBoardSize] = useState(0);

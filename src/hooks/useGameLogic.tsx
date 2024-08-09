@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useSidebar } from "@/context/SidebarContext";
 import sleep from "@/lib/sleep";
 import getHitStatistics from "@/lib/game-logic/getHitStatistics";
@@ -11,15 +18,20 @@ import {
 } from "@/settings/constants";
 import generateGameSequence from "@/lib/game-logic/generateGameSequence";
 import getCorrectHitSequence from "@/lib/game-logic/getCorrectHitSequence";
+import waitFor from "@/lib/waitFor";
 
 interface useGameLogicProps {
   startingLevel: number;
   showFeedbackEnabled: boolean;
+  isTutorial?: boolean;
+  setShowTutorialHint?: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function useGameLogic({
   startingLevel,
   showFeedbackEnabled,
+  isTutorial = false,
+  setShowTutorialHint = () => {},
 }: useGameLogicProps) {
   const [level, setLevel] = useState<number>(startingLevel);
   const [previousLevel, setPreviousLevel] = useState<number>(startingLevel);
@@ -39,6 +51,7 @@ export default function useGameLogic({
   const correctHitSequence = useRef<boolean[]>([]);
   const playerHitSequence = useRef<boolean[]>([]);
   const hasPressedSpaceBar = useRef(true);
+  const shouldPressButton = useRef(false);
 
   const showFeedback = useCallback(
     async (feedback: "correct" | "incorrect" | "missed") => {
@@ -93,8 +106,21 @@ export default function useGameLogic({
 
     hasPressedSpaceBar.current = false;
     for (const position of gameSequence.current) {
+      shouldPressButton.current = correctHitSequence.current[step];
+
       setSelectedSquare(position);
       await sleep(gameVisibleSquareDuration);
+
+      if (
+        isTutorial &&
+        correctHitSequence.current[step] &&
+        !hasPressedSpaceBar.current
+      ) {
+        setShowTutorialHint(true);
+        await waitFor(() => hasPressedSpaceBar.current);
+        setShowTutorialHint(false);
+      }
+
       setSelectedSquare(null);
       await sleep(gameHiddenSquareDuration);
 
@@ -109,6 +135,7 @@ export default function useGameLogic({
       }
 
       hasPressedSpaceBar.current = false;
+      shouldPressButton.current = false;
       step++;
     }
 
@@ -116,7 +143,13 @@ export default function useGameLogic({
     setIsVisible(true);
 
     await updateGameData();
-  }, [setIsVisible, showFeedback, updateGameData]);
+  }, [
+    setIsVisible,
+    showFeedback,
+    updateGameData,
+    isTutorial,
+    setShowTutorialHint,
+  ]);
 
   const startPlaying = useCallback(async () => {
     if (!level) return;
@@ -132,18 +165,20 @@ export default function useGameLogic({
     playerHitSequence.current = [];
 
     await sleep(gameDelayBeforeStart);
-    playGame();
+    await playGame();
   }, [level, playGame, setIsVisible]);
 
   const handleSpaceBarPress = useCallback(async () => {
     if (!hasPressedSpaceBar.current) {
+      if (isTutorial && !shouldPressButton.current) return;
+
       hasPressedSpaceBar.current = true;
       setIsSpaceBarPressed(true);
       handleShowFeedback();
       await sleep(400);
       setIsSpaceBarPressed(false);
     }
-  }, [handleShowFeedback]);
+  }, [handleShowFeedback, isTutorial]);
 
   useEffect(() => {
     addEventListener("keydown", (e) => {

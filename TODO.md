@@ -6,3 +6,9 @@ Streak system
 Goal system
 Full screen when playing
 Fix tooltip on button in tutorial
+Refactor SpaceBar to Button
+Orange button in tutorial
+Responsive tutorial
+Fix jiggle when transforming button
+Bug on tutorial level 1
+Refactor <strong>
