@@ -1,13 +1,20 @@
-import Joyride, { ACTIONS, CallBackProps, EVENTS } from "react-joyride";
+import Joyride, { ACTIONS, CallBackProps, EVENTS, Step } from "react-joyride";
 import PlayTutorialTooltip from "./PlayTutorialTooltip";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 const defaultStepProps = {
   isFixed: true,
   disableBeacon: true,
 };
 
-const steps = [
+const getSteps = (boardSize: number) => [
   {
     title: (
       <>
@@ -26,7 +33,7 @@ const steps = [
     target: "body",
     placement: "center" as const,
     ...defaultStepProps,
-  },
+  } satisfies Step,
   {
     title: <>3 important things</>,
     content: (
@@ -44,7 +51,7 @@ const steps = [
     target: "body",
     placement: "center" as const,
     ...defaultStepProps,
-  },
+  } satisfies Step,
   {
     title: <>The level</>,
     content: (
@@ -62,7 +69,7 @@ const steps = [
     target: "#level-display",
     placement: "bottom" as const,
     ...defaultStepProps,
-  },
+  } satisfies Step,
   {
     title: <>The board</>,
     content: (
@@ -77,9 +84,10 @@ const steps = [
       </>
     ),
     target: "#board",
-    placement: "right" as const,
+    placement: "bottom" as const,
+    offset: -boardSize / 2,
     ...defaultStepProps,
-  },
+  } satisfies Step,
   {
     title: <>The button</>,
     content: (
@@ -99,7 +107,56 @@ const steps = [
     target: "#button",
     placement: "top" as const,
     ...defaultStepProps,
-  },
+  } satisfies Step,
+  {
+    title: <>How to play</>,
+    content: (
+      <>
+        You are on{" "}
+        <strong className="font-semibold text-orange-400">level 1</strong>, so
+        you have to{" "}
+        <strong className="font-semibold text-slate-50">
+          press the button
+        </strong>{" "}
+        when the square appears{" "}
+        <strong className="font-semibold text-slate-50">
+          in the same spot as
+        </strong>{" "}
+        <strong className="font-semibold text-orange-400">1 step before</strong>
+        . In other words,{" "}
+        <strong className="font-semibold text-slate-50">
+          press the button
+        </strong>{" "}
+        when the square appears{" "}
+        <strong className="font-semibold text-slate-50">
+          two consecutive times
+        </strong>{" "}
+        on the same spot.
+      </>
+    ),
+    target: "#board",
+    placement: "bottom" as const,
+    offset: -boardSize / 2,
+    ...defaultStepProps,
+  } satisfies Step,
+  {
+    title: <>Let&apos;s test your skills!</>,
+    content: (
+      <>
+        Let&apos;s{" "}
+        <strong className="font-semibold text-slate-50">play a game</strong> to
+        see if you understood the instructions. We will{" "}
+        <strong className="font-semibold text-slate-50">help you</strong> along
+        the way.
+      </>
+    ),
+    target: "body",
+    placement: "center" as const,
+    data: {
+      buttonText: "Play",
+    },
+    ...defaultStepProps,
+  } satisfies Step,
 ];
 
 interface PlayTutorialStepsProps {
@@ -116,6 +173,11 @@ export default function PlayTutorialSteps({
   setIsRunning,
 }: PlayTutorialStepsProps) {
   const [loaded, setLoaded] = useState(false);
+  const [boardSize, setBoardSize] = useState(0);
+
+  const steps = useMemo(() => getSteps(boardSize), [boardSize]);
+
+  console.log(steps);
 
   const handleJoyrideCallback = (data: CallBackProps) => {
     const { type, action } = data;
@@ -126,6 +188,7 @@ export default function PlayTutorialSteps({
   };
 
   useEffect(() => {
+    setBoardSize(document.getElementById("board")?.clientWidth || 0);
     setLoaded(true);
   }, []);
 
@@ -141,7 +204,7 @@ export default function PlayTutorialSteps({
       disableCloseOnEsc={true}
       disableOverlayClose={true}
       disableScrolling={true}
-      disableScrollParentFix={true}
+      // disableScrollParentFix={true}
       styles={{
         options: {
           arrowColor: "var(--slate-800)",

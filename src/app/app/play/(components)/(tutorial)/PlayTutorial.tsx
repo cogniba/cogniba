@@ -11,13 +11,19 @@ import {
 
 const boardStep = 3;
 const buttonStep = 4;
+const level1ExplanationStep = 5;
+const level1PlayStep = 6;
 
 export default function PlayTutorial() {
-  const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(3);
   const [isRunning, setIsRunning] = useState(true);
 
-  const stepRef = useRef(0);
+  const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
+  const [isSpaceBarPressed, setIsSpaceBarPressed] = useState(false);
+
+  const stepRef = useRef(3);
+
+  const playGame = useCallback(async (level: number) => {}, []);
 
   useEffect(() => {
     stepRef.current = step;
@@ -26,7 +32,7 @@ export default function PlayTutorial() {
   useEffect(() => {
     if (!isRunning) return;
 
-    const blinkSquares = async () => {
+    const boardStepAnimation = async () => {
       while (stepRef.current === boardStep) {
         setSelectedSquare(Math.floor(Math.random() * 8));
         await sleep(gameVisibleSquareDuration);
@@ -35,8 +41,33 @@ export default function PlayTutorial() {
       }
     };
 
+    const buttonStepAnimation = async () => {
+      while (stepRef.current === buttonStep) {
+        setIsSpaceBarPressed(true);
+        await sleep(400);
+        setIsSpaceBarPressed(false);
+        await sleep(2000);
+      }
+    };
+
+    const level1ExplanationStepAnimation = async () => {
+      while (stepRef.current === level1ExplanationStep) {
+        setSelectedSquare(6);
+        await sleep(gameVisibleSquareDuration);
+        setSelectedSquare(null);
+        await sleep(gameHiddenSquareDuration);
+      }
+    };
+
     if (stepRef.current === boardStep) {
-      blinkSquares();
+      boardStepAnimation();
+    } else if (stepRef.current === buttonStep) {
+      buttonStepAnimation();
+    } else if (stepRef.current === level1ExplanationStep) {
+      level1ExplanationStepAnimation();
+    } else if (stepRef.current === level1PlayStep) {
+      setIsRunning(false);
+      playGame(1);
     }
   }, [isRunning, step]);
 
@@ -58,7 +89,7 @@ export default function PlayTutorial() {
         previousLevel={1}
         level={1}
         selectedSquare={selectedSquare}
-        isSpaceBarPressed={true}
+        isSpaceBarPressed={isSpaceBarPressed}
         handlePressSpaceBar={() => {}}
       />
     </>

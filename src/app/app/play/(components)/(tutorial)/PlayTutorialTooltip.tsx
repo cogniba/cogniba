@@ -28,7 +28,8 @@ export default function PlayTutorialTooltip({
             Back
           </Button>
         )} */}
-        <Button {...primaryProps}>Next</Button>
+        {/* <Button {...primaryProps} >Next</Button> */}
+        <Button {...primaryProps}>{step.data?.buttonText || "Next"}</Button>
       </CardFooter>
     </Card>
   );

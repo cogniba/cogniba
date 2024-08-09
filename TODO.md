@@ -5,3 +5,4 @@ Track how much time has been spent with the tab open
 Streak system
 Goal system
 Full screen when playing
+Fix tooltip on button in tutorial
