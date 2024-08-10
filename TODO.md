@@ -12,3 +12,4 @@ Responsive tutorial
 Fix jiggle when transforming button
 Bug on tutorial level 1
 Refactor <strong>
+Squares blinking in level 2 explanation in tutorial
