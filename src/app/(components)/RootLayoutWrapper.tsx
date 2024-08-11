@@ -1,6 +1,7 @@
 "use client";
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
 
 interface RootLayoutWrapperProps {
@@ -16,14 +17,16 @@ export default function RootLayoutWrapper({
         fetcher: (url: string) => fetch(url).then((res) => res.json()),
       }}
     >
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        {children}
-      </ThemeProvider>
+      <SessionProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </SessionProvider>
     </SWRConfig>
   );
 }

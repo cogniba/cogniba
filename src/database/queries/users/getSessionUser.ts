@@ -7,6 +7,8 @@ type SessionUserType = {
   id: string;
   role: "child" | "parent" | "admin";
   username: string;
+
+  hasFinishedTutorial: boolean;
 };
 
 export default async function getSessionUser(): Promise<SessionUserType> {

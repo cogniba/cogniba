@@ -38,11 +38,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
+    jwt({ token, user, trigger, session }) {
+      if (trigger === "update") {
+        if (typeof session.hasFinishedTutorial === "boolean") {
+          token.hasFinishedTutorial = session.hasFinishedTutorial;
+        }
+      }
+
       if (user) {
         token.id = user.id;
         token.role = user.role;
         token.username = user.username;
+        token.hasFinishedTutorial = user.hasFinishedTutorial;
       }
       return token;
     },
@@ -50,6 +57,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       session.user.id = token.id as string;
       session.user.role = token.role as "child" | "parent" | "admin";
       session.user.username = token.username as string;
+      session.user.hasFinishedTutorial = token.hasFinishedTutorial as boolean;
       return session;
     },
   },

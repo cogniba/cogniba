@@ -1,13 +1,6 @@
 import Joyride, { ACTIONS, CallBackProps, EVENTS, Step } from "react-joyride";
 import PlayTutorialTooltip from "./PlayTutorialTooltip";
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 
 const defaultStepProps = {
   isFixed: true,
@@ -265,6 +258,9 @@ const getSteps = (boardSize: number) => [
     ),
     target: "body",
     placement: "center" as const,
+    data: {
+      buttonText: "Finish",
+    },
     ...defaultStepProps,
   } satisfies Step,
 ];

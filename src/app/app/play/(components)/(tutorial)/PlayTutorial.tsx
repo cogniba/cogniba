@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Game from "../Game";
 import PlayTutorialSteps from "./PlayTutorialSteps";
 import sleep from "@/lib/sleep";
@@ -9,14 +9,24 @@ import {
   gameVisibleSquareDuration,
 } from "@/settings/constants";
 import useGameLogic from "@/hooks/useGameLogic";
+import finishTutorial from "@/server-actions/finishTutorial";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const boardStep = 3;
 const buttonStep = 4;
 const level1ExplanationStep = 5;
 const level1PlayStep = 7;
+const level1BeatStep = 8;
+const level2ExplanationStep = 9;
+const lastStep = 11;
 
-export default function PlayTutorial() {
-  const [step, setStep] = useState(0);
+interface PlayTutorialProps {
+  startingLevel: number;
+}
+
+export default function PlayTutorial({ startingLevel }: PlayTutorialProps) {
+  const [step, setStep] = useState(startingLevel === 1 ? 0 : level1BeatStep);
   const [isRunning, setIsRunning] = useState(true);
 
   const [tutorialSelectedSquare, setTutorialSelectedSquare] = useState<
@@ -24,7 +34,9 @@ export default function PlayTutorial() {
   >(null);
   const [tutorialSpaceBarPressed, setTutorialSpaceBarPressed] = useState(false);
 
-  const stepRef = useRef(0);
+  const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
+
+  const { update: updateSession, data } = useSession();
 
   const {
     feedback,
@@ -39,7 +51,7 @@ export default function PlayTutorial() {
     isSpaceBarPressed,
     handleSpaceBarPress,
   } = useGameLogic({
-    startingLevel: 1,
+    startingLevel,
     showFeedbackEnabled: true,
     isTutorial: true,
     setShowTutorialHint: setIsRunning,
@@ -86,6 +98,23 @@ export default function PlayTutorial() {
       setIsRunning(true);
     };
 
+    const level2ExplanationAnimation = async () => {
+      let square = 5;
+
+      while (stepRef.current === level2ExplanationStep) {
+        setTutorialSelectedSquare(square);
+        await sleep(gameVisibleSquareDuration);
+        setTutorialSelectedSquare(null);
+        await sleep(gameHiddenSquareDuration);
+        square = square === 5 ? 6 : 5;
+      }
+    };
+
+    const handleLastStep = async () => {
+      await updateSession({ hasFinishedTutorial: true });
+      await finishTutorial();
+    };
+
     if (stepRef.current === boardStep) {
       boardStepAnimation();
     } else if (stepRef.current === buttonStep) {
@@ -96,8 +125,13 @@ export default function PlayTutorial() {
       if (!isPlaying) {
         startTutorialGame();
       }
+    } else if (stepRef.current === level2ExplanationStep) {
+      level2ExplanationAnimation();
+    } else if (stepRef.current === lastStep) {
+      stepRef.current++;
+      handleLastStep();
     }
-  }, [isRunning, step, startPlaying, isPlaying]);
+  }, [isRunning, step, startPlaying, isPlaying, updateSession, data]);
 
   return (
     <>

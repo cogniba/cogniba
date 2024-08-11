@@ -28,6 +28,7 @@ export const users = authSchema.table("users", {
   username: text("username").unique().notNull(),
   password: text("password").notNull(),
   role: roleEnum("role").notNull(),
+  hasFinishedTutorial: boolean("hasFinishedTutorial").notNull().default(false),
 
   parentId: text("parentId").references((): AnyPgColumn => users.id, {
     onDelete: "cascade",
