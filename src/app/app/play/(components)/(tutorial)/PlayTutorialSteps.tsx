@@ -1,6 +1,7 @@
 import Joyride, { ACTIONS, CallBackProps, EVENTS, Step } from "react-joyride";
 import PlayTutorialTooltip from "./PlayTutorialTooltip";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+import { Strong } from "@/components/Strong";
 
 const defaultStepProps = {
   isFixed: true,
@@ -11,16 +12,13 @@ const getSteps = (boardSize: number) => [
   {
     title: (
       <>
-        Welcome to <span className="text-orange-500">cogniaprendo</span>!
+        Welcome to <Strong variant="orange">cogniaprendo</Strong>!
       </>
     ),
     content: (
       <>
         In this quick tutorial you will learn{" "}
-        <strong className="font-semibold text-slate-50">
-          how to play the game
-        </strong>
-        .
+        <Strong>how to play the game</Strong>.
       </>
     ),
     target: "body",
@@ -32,14 +30,9 @@ const getSteps = (boardSize: number) => [
     title: <>3 important things</>,
     content: (
       <>
-        There&apos;s{" "}
-        <strong className="font-semibold text-slate-50">
-          3 important things
-        </strong>{" "}
-        you need to consider when playing the game:{" "}
-        <strong className="font-semibold text-slate-50">the level</strong>,{" "}
-        <strong className="font-semibold text-slate-50">the board</strong>, and{" "}
-        <strong className="font-semibold text-slate-50">the button</strong>.
+        There&apos;s <Strong>3 important things</Strong> you need to consider
+        when playing the game: <Strong>the level</Strong>,{" "}
+        <Strong>the board</Strong>, and <Strong>the button</Strong>.
       </>
     ),
     target: "body",
@@ -50,13 +43,8 @@ const getSteps = (boardSize: number) => [
     title: <>The level</>,
     content: (
       <>
-        This display shows{" "}
-        <strong className="font-semibold text-slate-50">
-          what level you&apos;re on
-        </strong>
-        . The <strong className="font-semibold text-slate-50">higher</strong>{" "}
-        the level, the{" "}
-        <strong className="font-semibold text-slate-50">harder</strong> the game
+        This display shows <Strong>what level you&apos;re on</Strong>. The{" "}
+        <Strong>higher</Strong> the level, the <Strong>harder</Strong> the game
         gets.
       </>
     ),
@@ -68,13 +56,9 @@ const getSteps = (boardSize: number) => [
     title: <>The board</>,
     content: (
       <>
-        <strong className="font-semibold text-slate-50">The board</strong> is
-        where you have to{" "}
-        <strong className="font-semibold text-slate-50">focus</strong> when
-        playing. Squares{" "}
-        <strong className="font-semibold text-slate-50">appear</strong> every
-        few seconds on{" "}
-        <strong className="font-semibold text-slate-50">the board</strong>.
+        <Strong>The board</Strong> is where you have to <Strong>focus</Strong>{" "}
+        when playing. Squares <Strong>appear</Strong> every few seconds on{" "}
+        <Strong>the board</Strong>.
       </>
     ),
     target: "#board",
@@ -86,16 +70,9 @@ const getSteps = (boardSize: number) => [
     title: <>The button</>,
     content: (
       <>
-        You will have to{" "}
-        <strong className="font-semibold text-slate-50">
-          press the button
-        </strong>{" "}
-        when playing the game. You can either{" "}
-        <strong className="font-semibold text-slate-50">click it</strong> or{" "}
-        <strong className="font-semibold text-slate-50">
-          press the space bar
-        </strong>
-        .
+        You will have to <Strong>press the button</Strong> when playing the
+        game. You can either <Strong>click it</Strong> or{" "}
+        <Strong>press the space bar</Strong>.
       </>
     ),
     target: "#button",
@@ -106,27 +83,12 @@ const getSteps = (boardSize: number) => [
     title: <>How to play</>,
     content: (
       <>
-        You are on{" "}
-        <strong className="font-semibold text-orange-400">level 1</strong>, so
-        you have to{" "}
-        <strong className="font-semibold text-slate-50">
-          press the button
-        </strong>{" "}
-        when the square appears{" "}
-        <strong className="font-semibold text-slate-50">
-          in the same spot as
-        </strong>{" "}
-        <strong className="font-semibold text-orange-400">1 step</strong>{" "}
-        <strong className="font-semibold text-slate-50">before</strong>. In
-        other words,{" "}
-        <strong className="font-semibold text-slate-50">
-          press the button
-        </strong>{" "}
-        when the square appears{" "}
-        <strong className="font-semibold text-slate-50">
-          two consecutive times
-        </strong>{" "}
-        on the same spot.
+        You are on <Strong variant="orange">level 1</Strong>, so you have to{" "}
+        <Strong>press the button</Strong> when the square appears{" "}
+        <Strong>in the same spot as</Strong>{" "}
+        <Strong variant="orange">1 step</Strong> <Strong>before</Strong>. In
+        other words, <Strong>press the button</Strong> when the square appears{" "}
+        <Strong>two consecutive times</Strong> on the same spot.
       </>
     ),
     target: "#board",
@@ -138,11 +100,8 @@ const getSteps = (boardSize: number) => [
     title: <>Let&apos;s test your skills!</>,
     content: (
       <>
-        Let&apos;s{" "}
-        <strong className="font-semibold text-slate-50">play a game</strong> to
-        see if you understood the instructions. We will{" "}
-        <strong className="font-semibold text-slate-50">help you</strong> along
-        the way.
+        Let&apos;s <Strong>play a game</Strong> to see if you understood the
+        instructions. We will <Strong>help you</Strong> along the way.
       </>
     ),
     target: "body",
@@ -154,16 +113,8 @@ const getSteps = (boardSize: number) => [
     title: <>Press the button</>,
     content: (
       <>
-        The square appeared{" "}
-        <strong className="font-semibold text-slate-50">
-          two consecutive times
-        </strong>{" "}
-        on the{" "}
-        <strong className="font-semibold text-slate-50">same spot</strong> -{" "}
-        <strong className="font-semibold text-slate-50">
-          Press the button
-        </strong>
-        .{" "}
+        The square appeared <Strong>two consecutive times</Strong> on the{" "}
+        <Strong>same spot</Strong> - <Strong>Press the button</Strong>.{" "}
       </>
     ),
     target: "#button",
@@ -176,11 +127,8 @@ const getSteps = (boardSize: number) => [
     title: <>Congratulations!</>,
     content: (
       <>
-        You beat{" "}
-        <strong className="font-semibold text-orange-400">level 1</strong>, you
-        will now{" "}
-        <strong className="font-semibold text-slate-50">advance</strong> to{" "}
-        <strong className="font-semibold text-orange-400">level 2</strong>!
+        You beat <Strong variant="orange">level 1</Strong>, you will now{" "}
+        <Strong>advance</Strong> to <Strong variant="orange">level 2</Strong>!
       </>
     ),
     target: "body",
@@ -192,18 +140,10 @@ const getSteps = (boardSize: number) => [
     title: <>How to play level 2</>,
     content: (
       <>
-        You are now on{" "}
-        <strong className="font-semibold text-orange-400">level 2</strong>, so
-        you will have to{" "}
-        <strong className="font-semibold text-slate-50">
-          press the button
-        </strong>{" "}
-        when the square appears{" "}
-        <strong className="font-semibold text-slate-50">
-          in the same spot as
-        </strong>{" "}
-        <strong className="font-semibold text-orange-400">2 steps</strong>{" "}
-        <strong className="font-semibold text-slate-50">before</strong>.
+        You are now on <Strong variant="orange">level 2</Strong>, so you will
+        have to <Strong>press the button</Strong> when the square appears{" "}
+        <Strong>in the same spot as</Strong>{" "}
+        <Strong variant="orange">2 steps</Strong> <Strong>before</Strong>.
       </>
     ),
     target: "#board",
@@ -215,40 +155,27 @@ const getSteps = (boardSize: number) => [
     title: <>All you!</>,
     content: (
       <>
-        We will{" "}
-        <strong className="font-semibold text-slate-50">
-          no longer help you
-        </strong>
-        , but you will receive{" "}
-        <strong className="font-semibold text-slate-50">feedback</strong> while
-        playing. <br />
+        We will <Strong>no longer help you</Strong>, but you will receive{" "}
+        <Strong>feedback</Strong> while playing. <br />
         <br />
         <ul className="space-y-2.5">
           <li>
-            If the screen turns{" "}
-            <strong className="font-semibold text-green-400">green</strong>, it
-            means you{" "}
-            <strong className="font-semibold text-green-400">
-              pressed the button correctly
-            </strong>
-            .
+            If the screen turns <Strong variant="green">green</Strong>, it means
+            you <Strong variant="green">pressed the button correctly</Strong>.
           </li>
           <li>
-            If the screen turns{" "}
-            <strong className="font-semibold text-red-400">red</strong>, it
-            means you{" "}
-            <strong className="font-semibold text-red-400">
+            If the screen turns <Strong variant="red">red</Strong>, it means you{" "}
+            <Strong variant="red">
               you pressed the button, but you shouldn&apos;t have
-            </strong>
+            </Strong>
             .
           </li>
           <li>
-            And if the screen turns{" "}
-            <strong className="font-semibold text-yellow-400">yellow</strong>,
-            it means you{" "}
-            <strong className="font-semibold text-yellow-400">
+            And if the screen turns <Strong variant="yellow">yellow</Strong>, it
+            means you{" "}
+            <Strong variant="yellow">
               should have pressed the button, but you didn&apos;t
-            </strong>
+            </Strong>
             .
           </li>
         </ul>

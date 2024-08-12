@@ -2,7 +2,7 @@ import { cn } from "@/lib/cn";
 import { cva, VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-const emphasizeVariants = cva("font-semibold", {
+const strongVariants = cva("font-semibold", {
   variants: {
     variant: {
       default: "dark:text-slate-50 text-slate-950",
@@ -19,23 +19,23 @@ const emphasizeVariants = cva("font-semibold", {
   },
 });
 
-export interface EmphasizeProps
+export interface StrongProps
   extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof emphasizeVariants> {
+    VariantProps<typeof strongVariants> {
   asChild?: boolean;
 }
 
-const Emphasize = React.forwardRef<HTMLElement, EmphasizeProps>(
+const Strong = React.forwardRef<HTMLElement, StrongProps>(
   ({ className, variant, ...props }, ref) => {
     return (
-      <em
-        className={cn(emphasizeVariants({ variant, className }))}
+      <strong
+        className={cn(strongVariants({ variant, className }))}
         ref={ref}
         {...props}
-      ></em>
+      ></strong>
     );
   },
 );
-Emphasize.displayName = "Emphasize";
+Strong.displayName = "Strong";
 
-export { Emphasize };
+export { Strong };
