@@ -25,6 +25,7 @@ const getSteps = (boardSize: number) => [
     ),
     target: "body",
     placement: "center" as const,
+    data: { hideBackButton: true },
     ...defaultStepProps,
   } satisfies Step,
   {
@@ -146,9 +147,7 @@ const getSteps = (boardSize: number) => [
     ),
     target: "body",
     placement: "center" as const,
-    data: {
-      buttonText: "Play",
-    },
+    data: { primaryButtonText: "Play" },
     ...defaultStepProps,
   } satisfies Step,
   {
@@ -170,9 +169,7 @@ const getSteps = (boardSize: number) => [
     target: "#button",
     placement: "top" as const,
     spotlightClicks: true,
-    data: {
-      hideButton: true,
-    },
+    data: { hidePrimaryButton: true, hideBackButton: true },
     ...defaultStepProps,
   } satisfies Step,
   {
@@ -188,6 +185,7 @@ const getSteps = (boardSize: number) => [
     ),
     target: "body",
     placement: "center" as const,
+    data: { hideBackButton: true },
     ...defaultStepProps,
   } satisfies Step,
   {
@@ -258,9 +256,7 @@ const getSteps = (boardSize: number) => [
     ),
     target: "body",
     placement: "center" as const,
-    data: {
-      buttonText: "Finish",
-    },
+    data: { primaryButtonText: "Finish" },
     ...defaultStepProps,
   } satisfies Step,
 ];

@@ -12,7 +12,6 @@ export default function PlayTutorialTooltip({
   step,
   primaryProps,
   backProps,
-  index,
 }: TooltipRenderProps) {
   return (
     <Card>
@@ -23,14 +22,15 @@ export default function PlayTutorialTooltip({
         {step.content}
       </CardContent>
       <CardFooter className="flex justify-end gap-4">
-        {/* {index > 0 && (
+        {!step.data?.hideBackButton && (
           <Button variant="secondary" {...backProps}>
             Back
           </Button>
-        )} */}
-        {/* <Button {...primaryProps} >Next</Button> */}
-        {!step.data?.hideButton && (
-          <Button {...primaryProps}>{step.data?.buttonText || "Next"}</Button>
+        )}
+        {!step.data?.hidePrimaryButton && (
+          <Button variant="orange" {...primaryProps}>
+            {step.data?.primaryButtonText || "Next"}
+          </Button>
         )}
       </CardFooter>
     </Card>
