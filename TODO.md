@@ -10,4 +10,3 @@ Full screen when playing
 Responsive tutorial
 Show tutorial when reaching a new level
 Confeti when increasing level
-Fix jiggle when transforming button
