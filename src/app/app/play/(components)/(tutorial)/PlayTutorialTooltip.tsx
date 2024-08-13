@@ -44,7 +44,7 @@ export default function PlayTutorialTooltip({
       <CardHeader>
         <CardTitle>{step.title}</CardTitle>
       </CardHeader>
-      <CardContent className="max-w-md dark:text-slate-300">
+      <CardContent className="max-w-md text-slate-700 dark:text-slate-300">
         {step.content}
       </CardContent>
       <CardFooter className="flex items-center justify-between">
