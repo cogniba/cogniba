@@ -11,7 +11,6 @@ import {
 import useGameLogic from "@/hooks/useGameLogic";
 import finishTutorial from "@/server-actions/finishTutorial";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const boardStep = 3;
 const buttonStep = 4;
@@ -23,9 +22,13 @@ const lastStep = 11;
 
 interface PlayTutorialProps {
   startingLevel: number;
+  showSkipButton: boolean;
 }
 
-export default function PlayTutorial({ startingLevel }: PlayTutorialProps) {
+export default function PlayTutorial({
+  startingLevel,
+  showSkipButton,
+}: PlayTutorialProps) {
   const [step, setStep] = useState(startingLevel === 1 ? 0 : level1BeatStep);
   const [isRunning, setIsRunning] = useState(true);
 
@@ -36,7 +39,7 @@ export default function PlayTutorial({ startingLevel }: PlayTutorialProps) {
 
   const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
 
-  const { update: updateSession, data } = useSession();
+  const { update: updateSession } = useSession();
 
   const {
     feedback,
@@ -131,11 +134,16 @@ export default function PlayTutorial({ startingLevel }: PlayTutorialProps) {
       stepRef.current++;
       handleLastStep();
     }
-  }, [isRunning, step, startPlaying, isPlaying, updateSession, data]);
+  }, [isRunning, step, startPlaying, isPlaying, updateSession]);
 
   return (
     <>
-      <PlayTutorialSteps step={step} setStep={setStep} isRunning={isRunning} />
+      <PlayTutorialSteps
+        step={step}
+        setStep={setStep}
+        isRunning={isRunning}
+        showSkipButton={showSkipButton}
+      />
       <Game
         feedback={feedback}
         isStartScreenVisible={false}

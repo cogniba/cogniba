@@ -7,14 +7,15 @@ import getSessionUser from "@/database/queries/users/getSessionUser";
 export default async function PlayPage() {
   // const level = await getUserLevel();
   const { showFeedback } = await getUserSettings();
-  // const { hasFinishedTutorial } = await getSessionUser();
+  // const { hasFinishedTutorial, role } = await getSessionUser();
   const level = 1;
   const hasFinishedTutorial = false;
+  const role = "parent";
 
   return (
     <>
       {!hasFinishedTutorial ? (
-        <PlayTutorial startingLevel={level} />
+        <PlayTutorial startingLevel={level} showSkipButton={role !== "child"} />
       ) : (
         <GameLogic startingLevel={level} showFeedbackEnabled={showFeedback} />
       )}

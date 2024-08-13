@@ -11,5 +11,6 @@ Fix jiggle when transforming button
 Bug on tutorial level 1
 Light mode
 Fix tooltip on button in tutorial. Tooltip should be the same as the text
+RoleType
+Organize imports and import type
 Skip button for parents and admins
-Refactor SpaceBar name to Button
