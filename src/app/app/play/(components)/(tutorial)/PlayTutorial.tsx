@@ -32,7 +32,7 @@ export default function PlayTutorial({ startingLevel }: PlayTutorialProps) {
   const [tutorialSelectedSquare, setTutorialSelectedSquare] = useState<
     number | null
   >(null);
-  const [tutorialSpaceBarPressed, setTutorialSpaceBarPressed] = useState(false);
+  const [isTutorialButtonPressed, setIsTutorialButtonPressed] = useState(false);
 
   const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
 
@@ -48,8 +48,8 @@ export default function PlayTutorial({ startingLevel }: PlayTutorialProps) {
     previousLevel,
     level,
     selectedSquare,
-    isSpaceBarPressed,
-    handleSpaceBarPress,
+    isButtonPressed,
+    handleButtonPress,
   } = useGameLogic({
     startingLevel,
     showFeedbackEnabled: true,
@@ -75,9 +75,9 @@ export default function PlayTutorial({ startingLevel }: PlayTutorialProps) {
 
     const buttonStepAnimation = async () => {
       while (stepRef.current === buttonStep) {
-        setTutorialSpaceBarPressed(true);
+        setIsTutorialButtonPressed(true);
         await sleep(400);
-        setTutorialSpaceBarPressed(false);
+        setIsTutorialButtonPressed(false);
         await sleep(2000);
       }
     };
@@ -146,8 +146,8 @@ export default function PlayTutorial({ startingLevel }: PlayTutorialProps) {
         previousLevel={previousLevel}
         level={level}
         selectedSquare={selectedSquare || tutorialSelectedSquare}
-        isSpaceBarPressed={isSpaceBarPressed || tutorialSpaceBarPressed}
-        handlePressSpaceBar={handleSpaceBarPress}
+        isButtonPressed={isButtonPressed || isTutorialButtonPressed}
+        handleButtonPress={handleButtonPress}
       />
     </>
   );

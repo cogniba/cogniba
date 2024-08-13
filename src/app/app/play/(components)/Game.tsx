@@ -1,7 +1,7 @@
 "use client";
 
 import LevelDisplay from "./LevelDisplay";
-import SpaceBar from "./SpaceBar";
+import GameButton from "./GameButton";
 import Board from "./Board";
 import { cn } from "@/lib/cn";
 import StartScreen from "./StartScreen";
@@ -16,8 +16,8 @@ interface GameProps {
   previousLevel: number;
   level: number;
   selectedSquare: number | null;
-  isSpaceBarPressed: boolean;
-  handlePressSpaceBar: () => void;
+  isButtonPressed: boolean;
+  handleButtonPress: () => void;
 }
 
 export default function Game({
@@ -30,8 +30,8 @@ export default function Game({
   previousLevel,
   level,
   selectedSquare,
-  isSpaceBarPressed,
-  handlePressSpaceBar,
+  isButtonPressed,
+  handleButtonPress,
 }: GameProps) {
   return (
     <>
@@ -60,9 +60,9 @@ export default function Game({
             <Board selectedSquare={selectedSquare} />
           </div>
           <div className="mb-[2.5cqh] mt-[3cqh] h-[11cqh] w-[100cqmin] max-w-5xl flex-shrink-0 2xl:w-[max(100cqmin,90vh)]">
-            <SpaceBar
-              isSpaceBarPressed={isSpaceBarPressed}
-              handleSpaceBarPress={handlePressSpaceBar}
+            <GameButton
+              isButtonPressed={isButtonPressed}
+              handleButtonPress={handleButtonPress}
             />
           </div>
         </div>

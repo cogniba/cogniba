@@ -13,4 +13,3 @@ Light mode
 Fix tooltip on button in tutorial. Tooltip should be the same as the text
 Skip button for parents and admins
 Refactor SpaceBar name to Button
-Refactor <strong> to <Emphasize>

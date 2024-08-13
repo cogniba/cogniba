@@ -22,8 +22,8 @@ export default function GameLogic({
     previousLevel,
     level,
     selectedSquare,
-    isSpaceBarPressed,
-    handleSpaceBarPress,
+    isButtonPressed,
+    handleButtonPress,
   } = useGameLogic({ startingLevel, showFeedbackEnabled });
 
   return (
@@ -37,8 +37,8 @@ export default function GameLogic({
       previousLevel={previousLevel}
       level={level}
       selectedSquare={selectedSquare}
-      isSpaceBarPressed={isSpaceBarPressed}
-      handlePressSpaceBar={handleSpaceBarPress}
+      isButtonPressed={isButtonPressed}
+      handleButtonPress={handleButtonPress}
     />
   );
 }
