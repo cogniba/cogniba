@@ -1,8 +1,11 @@
 import "./globals.css";
-import type { Metadata } from "next";
+
 import RootLayoutWrapper from "./(components)/RootLayoutWrapper";
+
 import { cn } from "@/lib/cn";
 import { Inter, Playfair_Display } from "next/font/google";
+
+import type { Metadata } from "next";
 
 const fontSans = Inter({
   subsets: ["latin"],

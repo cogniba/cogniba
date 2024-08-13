@@ -1,6 +1,13 @@
-import Joyride, { ACTIONS, CallBackProps, EVENTS, Step } from "react-joyride";
 import PlayTutorialTooltip from "./PlayTutorialTooltip";
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+
+import Joyride, { ACTIONS, CallBackProps, EVENTS, Step } from "react-joyride";
+import {
+  type Dispatch,
+  type SetStateAction,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Strong } from "@/components/Strong";
 
 const getSteps = (boardSize: number, showSkipButton: boolean) => {

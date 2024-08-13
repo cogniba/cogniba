@@ -1,5 +1,5 @@
 import { db } from "@/database/db";
-import { users, UserType } from "@/database/schemas/auth";
+import { users, type UserType } from "@/database/schemas/auth";
 import { eq } from "drizzle-orm";
 
 export default async function getUserByUsername(

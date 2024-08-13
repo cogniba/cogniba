@@ -1,5 +1,8 @@
 "use client";
 
+import AppSidebarItem from "./AppSidebarItem";
+import UserButton from "./UserButton";
+
 import {
   AreaChartIcon,
   MenuIcon,
@@ -7,8 +10,6 @@ import {
   SettingsIcon,
   XIcon,
 } from "lucide-react";
-import AppSidebarItem from "./AppSidebarItem";
-import UserButton from "./UserButton";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/cn";
 import { useEffect, useState } from "react";

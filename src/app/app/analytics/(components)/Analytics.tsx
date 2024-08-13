@@ -1,14 +1,16 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
 import AnalyticsFilters from "./AnalyticsFilters";
-import { useState } from "react";
 import cleanChartData from "@/lib/cleanChartData";
-import { UserType } from "@/database/schemas/auth";
-import { subDays } from "date-fns";
-import { DateRange } from "react-day-picker";
 import AnalyticsMetrics from "./AnalyticsMetricCharts";
+
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useState } from "react";
+import { subDays } from "date-fns";
+
+import type { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
+import type { UserType } from "@/database/schemas/auth";
+import type { DateRange } from "react-day-picker";
 
 export type chartMetrics =
   | "level"

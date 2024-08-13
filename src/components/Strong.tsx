@@ -1,6 +1,7 @@
+import * as React from "react";
+
 import { cn } from "@/lib/cn";
 import { cva, VariantProps } from "class-variance-authority";
-import * as React from "react";
 
 const strongVariants = cva("font-semibold", {
   variants: {

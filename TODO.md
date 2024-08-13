@@ -11,4 +11,3 @@ Fix jiggle when transforming button
 Bug on tutorial level 1
 Light mode
 Fix tooltip on button in tutorial. Tooltip should be the same as the text
-Organize imports and import type

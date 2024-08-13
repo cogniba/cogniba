@@ -1,7 +1,8 @@
-import { SidebarProvider } from "@/context/SidebarContext";
 import AppHeader from "./(components)/AppHeader";
 import AppSidebar from "./(components)/AppSidebar";
 import getSessionUser from "@/database/queries/users/getSessionUser";
+
+import { SidebarProvider } from "@/context/SidebarContext";
 
 interface AppLayoutProps {
   readonly children: React.ReactNode;

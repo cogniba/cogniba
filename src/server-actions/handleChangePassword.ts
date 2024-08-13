@@ -1,11 +1,13 @@
 "use server";
 
-import { ChangePasswordSchema } from "@/zod/schemas/ChangePasswordSchema";
 import * as z from "zod";
+
 import bcrypt from "bcryptjs";
 import updateUserPassword from "@/database/queries/users/updateUserPassword";
-import { isRedirectError } from "next/dist/client/components/redirect";
 import getUser from "@/database/queries/users/getUser";
+
+import { ChangePasswordSchema } from "@/zod/schemas/ChangePasswordSchema";
+import { isRedirectError } from "next/dist/client/components/redirect";
 
 export default async function handleChangePassword(
   data: z.infer<typeof ChangePasswordSchema>,

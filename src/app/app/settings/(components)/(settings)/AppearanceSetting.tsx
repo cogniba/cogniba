@@ -1,7 +1,8 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import SettingsItem from "../SettingsItem";
+
+import { useTheme } from "next-themes";
 
 export default function AppearanceSetting() {
   const { setTheme, theme } = useTheme();

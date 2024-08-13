@@ -1,5 +1,6 @@
-import { gameBaseSequenceLength, gameNumTargets } from "@/settings/constants";
 import getTargetsCount from "./getTargetsCount";
+
+import { gameBaseSequenceLength, gameNumTargets } from "@/settings/constants";
 
 export default function generateGameSequence(level: number): number[] {
   const gameSequence = [];

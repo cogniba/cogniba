@@ -1,3 +1,5 @@
+import finishTutorial from "@/server-actions/finishTutorial";
+
 import { Strong } from "@/components/Strong";
 import {
   AlertDialog,
@@ -19,10 +21,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import finishTutorial from "@/server-actions/finishTutorial";
 import { useSession } from "next-auth/react";
 import { useCallback } from "react";
-import { TooltipRenderProps } from "react-joyride";
+
+import type { TooltipRenderProps } from "react-joyride";
 
 export default function PlayTutorialTooltip({
   step,

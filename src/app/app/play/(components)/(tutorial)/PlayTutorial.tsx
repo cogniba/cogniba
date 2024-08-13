@@ -1,15 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Game from "../Game";
 import PlayTutorialSteps from "./PlayTutorialSteps";
 import sleep from "@/lib/sleep";
+import useGameLogic from "@/hooks/useGameLogic";
+import finishTutorial from "@/server-actions/finishTutorial";
+
+import { useEffect, useRef, useState } from "react";
 import {
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
-import useGameLogic from "@/hooks/useGameLogic";
-import finishTutorial from "@/server-actions/finishTutorial";
 import { useSession } from "next-auth/react";
 
 const boardStep = 3;

@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import quotes from "@/content/quotes.json";
 import calculateAccuracy from "@/lib/calculateAccuracy";
+
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/cn";
 import { cva } from "class-variance-authority";
 import {

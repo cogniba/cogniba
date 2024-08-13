@@ -1,3 +1,5 @@
+import getFirstName from "@/lib/getFirstName";
+
 import {
   Select,
   SelectContent,
@@ -5,8 +7,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { UserType } from "@/database/schemas/auth";
-import getFirstName from "@/lib/getFirstName";
 import { chartMetrics } from "./Analytics";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -17,9 +17,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
-import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/cn";
-import { Dispatch, SetStateAction } from "react";
+
+import type { UserType } from "@/database/schemas/auth";
+import type { DateRange } from "react-day-picker";
+import type { Dispatch, SetStateAction } from "react";
 
 interface AnalyticsFiltersProps {
   userChildren: UserType[];

@@ -1,9 +1,10 @@
+import getHitStatistics from "./getHitStatistics";
+import calculateAccuracy from "../calculateAccuracy";
+
 import {
   gameDecreaseLevelThreshold,
   gameIncreaseLevelThreshold,
 } from "@/settings/constants";
-import getHitStatistics from "./getHitStatistics";
-import calculateAccuracy from "../calculateAccuracy";
 
 export default function calculateNewLevel(
   correctHitSequence: boolean[],

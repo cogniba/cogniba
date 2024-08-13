@@ -1,7 +1,8 @@
+import getSessionUser from "@/database/queries/users/getSessionUser";
+
 import { and, desc, eq, gte, lte } from "drizzle-orm";
 import { db } from "@/database/db";
-import { games, GameType } from "@/database/schemas/games";
-import getSessionUser from "@/database/queries/users/getSessionUser";
+import { games, type GameType } from "@/database/schemas/games";
 
 export default async function getGamesData(
   startDate: Date,

@@ -1,4 +1,4 @@
-import { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
+import type { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
 import { format, isEqual, startOfDay } from "date-fns";
 
 export default function cleanChartData(

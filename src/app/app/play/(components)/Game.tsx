@@ -3,8 +3,9 @@
 import LevelDisplay from "./LevelDisplay";
 import GameButton from "./GameButton";
 import Board from "./Board";
-import { cn } from "@/lib/cn";
 import StartScreen from "./StartScreen";
+
+import { cn } from "@/lib/cn";
 
 interface GameProps {
   feedback: "correct" | "incorrect" | "missed" | null;

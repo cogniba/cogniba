@@ -1,6 +1,6 @@
 import { db } from "@/database/db";
-import { users, UserType } from "@/database/schemas/auth";
-import { settings, SettingsType } from "@/database/schemas/settings";
+import { users } from "@/database/schemas/auth";
+import { settings, type SettingsType } from "@/database/schemas/settings";
 import { eq } from "drizzle-orm";
 
 export default async function getSettingsByUserId(

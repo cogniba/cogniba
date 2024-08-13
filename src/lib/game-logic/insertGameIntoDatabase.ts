@@ -1,12 +1,13 @@
+import calculateNewLevel from "./calculateNewLevel";
+import getHitStatistics from "./getHitStatistics";
+import insertGame from "@/database/queries/games/insertGame";
+
 import {
   gameBaseSequenceLength,
   gameDelayBeforeStart,
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
-import calculateNewLevel from "./calculateNewLevel";
-import getHitStatistics from "./getHitStatistics";
-import insertGame from "@/database/queries/games/insertGame";
 
 export default async function insertGameIntoDatabase(
   correctHitSequence: boolean[],

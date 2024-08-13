@@ -1,10 +1,11 @@
 "use server";
 
-import { settings, SettingsType } from "@/database/schemas/settings";
+import getUser from "../users/getUser";
+
+import { settings, type SettingsType } from "@/database/schemas/settings";
 import { db } from "@/database/db";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import getUser from "../users/getUser";
 
 interface getUserSettingsProps {
   showFeedback?: boolean;

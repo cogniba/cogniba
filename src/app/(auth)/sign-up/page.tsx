@@ -2,6 +2,9 @@
 
 import * as z from "zod";
 
+import FormAlert from "@/components/FormAlert";
+import handleSignUp from "@/server-actions/auth/handleSignUp";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,9 +26,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FormAlert from "@/components/FormAlert";
 import { useState, useTransition } from "react";
-import handleSignUp from "@/server-actions/auth/handleSignUp";
 import {
   Select,
   SelectContent,

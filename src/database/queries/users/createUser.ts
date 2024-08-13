@@ -2,9 +2,10 @@
 
 import saltAndHashPassword from "@/lib/saltAndHashPassword";
 import getUserByUsername from "@/database/queries/users/getUserByUsername";
-import { db } from "@/database/db";
-import { RoleType, users, UserType } from "@/database/schemas/auth";
 import getUserByEmail from "./getUserByEmail";
+
+import { db } from "@/database/db";
+import { type RoleType, users, type UserType } from "@/database/schemas/auth";
 import { settings } from "@/database/schemas/settings";
 
 interface createUserProps {

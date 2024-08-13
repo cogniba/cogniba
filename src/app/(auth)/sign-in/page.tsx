@@ -1,8 +1,10 @@
 "use client";
 
+import * as z from "zod";
+
 import Link from "next/link";
 import handleSignIn from "@/server-actions/auth/handleSignIn";
-import * as z from "zod";
+import FormAlert from "@/components/FormAlert";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -25,7 +27,6 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { SignInSchema } from "@/zod/schemas/SignInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FormAlert from "@/components/FormAlert";
 import { useState, useTransition } from "react";
 
 export default function SignInPage() {

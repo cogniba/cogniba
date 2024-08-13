@@ -1,9 +1,11 @@
 import ChartNoData from "@/components/ChartNoData";
-import { UserType } from "@/database/schemas/auth";
-import { chartMetrics } from "./Analytics";
-import { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
 import AnalyticsChart from "./AnalyticsChart";
-import { ChartConfig } from "@/components/ui/chart";
+
+import { chartMetrics } from "./Analytics";
+
+import type { UserType } from "@/database/schemas/auth";
+import type { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
+import type { ChartConfig } from "@/components/ui/chart";
 
 const charts = {
   level: {

@@ -1,10 +1,11 @@
+import calculateAccuracy from "@/lib/calculateAccuracy";
+
 import { avg, count, inArray, sum } from "drizzle-orm";
 import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
 import { date } from "@/database/queries/functions";
-import { UserType } from "@/database/schemas/auth";
-import { DailyGamesData } from "./getUserDailyGamesData";
-import calculateAccuracy from "@/lib/calculateAccuracy";
+import type { UserType } from "@/database/schemas/auth";
+import type { DailyGamesData } from "./getUserDailyGamesData";
 
 export default async function getChildrenDailyGamesData(
   children: UserType[],

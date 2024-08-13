@@ -1,5 +1,5 @@
 import { auth } from "@/auth/auth";
-import { RoleType } from "@/database/schemas/auth";
+import { type RoleType } from "@/database/schemas/auth";
 
 type SessionUserType = {
   name: string;

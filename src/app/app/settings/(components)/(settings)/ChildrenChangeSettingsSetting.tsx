@@ -2,6 +2,7 @@
 
 import SettingsItem from "../SettingsItem";
 import updateUserSettings from "@/database/queries/settings/updateUserSettings";
+
 import { useState } from "react";
 
 interface ChildrenChangeSettingsSettingProps {

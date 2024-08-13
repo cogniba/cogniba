@@ -1,10 +1,11 @@
 // TODO
 // @ts-nocheck
-
-import type { Adapter, AdapterUser } from "@auth/core/adapters";
 import * as schema from "@/database/schemas/auth";
+
 import { and, eq } from "drizzle-orm";
 import { PgDatabase } from "drizzle-orm/pg-core";
+
+import type { Adapter, AdapterUser } from "@auth/core/adapters";
 
 export function PostgresDrizzleAdapter(
   client: InstanceType<typeof PgDatabase>,

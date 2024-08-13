@@ -1,7 +1,8 @@
+import getSessionUser from "@/database/queries/users/getSessionUser";
+
 import { desc, eq } from "drizzle-orm";
 import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
-import getSessionUser from "@/database/queries/users/getSessionUser";
 
 export default async function getUserLevel(): Promise<number> {
   const { id: userId } = await getSessionUser();

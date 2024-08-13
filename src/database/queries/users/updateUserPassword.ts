@@ -1,9 +1,10 @@
 "use server";
 
-import { db } from "@/database/db";
 import getSessionUser from "./getSessionUser";
-import { users } from "@/database/schemas/auth";
 import saltAndHashPassword from "@/lib/saltAndHashPassword";
+
+import { db } from "@/database/db";
+import { users } from "@/database/schemas/auth";
 import { eq } from "drizzle-orm";
 
 export default async function updateUserPassword(

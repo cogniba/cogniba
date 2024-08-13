@@ -1,15 +1,18 @@
 "use client";
 
 import * as z from "zod";
+
+import SettingsItem from "../SettingsItem";
+import FormAlert from "@/components/FormAlert";
+import handleChangePassword from "@/server-actions/handleChangePassword";
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import SettingsItem from "../SettingsItem";
 import { useState, useTransition } from "react";
 import {
   Form,
@@ -24,8 +27,6 @@ import { ChangePasswordSchema } from "@/zod/schemas/ChangePasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import FormAlert from "@/components/FormAlert";
-import handleChangePassword from "@/server-actions/handleChangePassword";
 
 export default function ChangePasswordSettings() {
   const [open, setOpen] = useState(false);

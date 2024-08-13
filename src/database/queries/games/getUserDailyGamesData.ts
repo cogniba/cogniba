@@ -1,9 +1,10 @@
+import getSessionUser from "@/database/queries/users/getSessionUser";
+import calculateAccuracy from "@/lib/calculateAccuracy";
+
 import { avg, count, eq, sum } from "drizzle-orm";
 import { db } from "@/database/db";
 import { games } from "@/database/schemas/games";
-import getSessionUser from "@/database/queries/users/getSessionUser";
 import { date } from "@/database/queries/functions";
-import calculateAccuracy from "@/lib/calculateAccuracy";
 
 export type DailyGamesData = {
   userId: string;

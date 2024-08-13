@@ -1,3 +1,5 @@
+import handleSignOut from "@/server-actions/auth/handleSignOut";
+
 import { useTransition } from "react";
 import { CircleUserIcon, LogOutIcon } from "lucide-react";
 import {
@@ -7,7 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import handleSignOut from "@/server-actions/auth/handleSignOut";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/cn";
 

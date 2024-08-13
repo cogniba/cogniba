@@ -1,24 +1,25 @@
+import sleep from "@/lib/sleep";
+import generateGameSequence from "@/lib/game-logic/generateGameSequence";
+import getCorrectHitSequence from "@/lib/game-logic/getCorrectHitSequence";
+import waitFor from "@/lib/waitFor";
+import getHitStatistics from "@/lib/game-logic/getHitStatistics";
+import calculateNewLevel from "@/lib/game-logic/calculateNewLevel";
+import insertGameIntoDatabase from "@/lib/game-logic/insertGameIntoDatabase";
+
 import {
-  Dispatch,
-  SetStateAction,
+  type Dispatch,
+  type SetStateAction,
   useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
 import { useSidebar } from "@/context/SidebarContext";
-import sleep from "@/lib/sleep";
-import getHitStatistics from "@/lib/game-logic/getHitStatistics";
-import calculateNewLevel from "@/lib/game-logic/calculateNewLevel";
-import insertGameIntoDatabase from "@/lib/game-logic/insertGameIntoDatabase";
 import {
   gameDelayBeforeStart,
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
-import generateGameSequence from "@/lib/game-logic/generateGameSequence";
-import getCorrectHitSequence from "@/lib/game-logic/getCorrectHitSequence";
-import waitFor from "@/lib/waitFor";
 
 interface useGameLogicProps {
   startingLevel: number;

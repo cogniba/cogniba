@@ -1,8 +1,10 @@
 "use server";
 
 import * as z from "zod";
-import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
+
 import createUser from "@/database/queries/users/createUser";
+
+import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
 
 export default async function handleSignUp(
   data: z.infer<typeof SignUpSchema>,
