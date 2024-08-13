@@ -31,6 +31,7 @@ export default function PlayTutorialTooltip({
   index,
   primaryProps,
   backProps,
+  tooltipProps,
 }: TooltipRenderProps) {
   const { update: updateSession } = useSession();
 
@@ -40,11 +41,11 @@ export default function PlayTutorialTooltip({
   }, [updateSession]);
 
   return (
-    <Card>
+    <Card {...tooltipProps} className="w-screen max-w-md lg:max-w-lg">
       <CardHeader>
         <CardTitle>{step.title}</CardTitle>
       </CardHeader>
-      <CardContent className="max-w-md text-slate-700 dark:text-slate-300">
+      <CardContent className="text-slate-700 dark:text-slate-300">
         {step.content}
       </CardContent>
       <CardFooter className="flex items-center justify-between">

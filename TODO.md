@@ -7,6 +7,6 @@ Goal system
 Revalidate tag
 Security breach in server actions. Validate input in all server actions
 Full screen when playing
-Responsive tutorial
-Show tutorial when reaching a new level
 Confeti when increasing level
+Show tutorial when reaching a new level
+Responsive tutorial
