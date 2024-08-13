@@ -8,8 +8,6 @@ Revalidate tag
 Security breach in server actions. Validate input in all server actions
 Full screen when playing
 Responsive tutorial
-Fix jiggle when transforming button
-Bug on tutorial level 1
-Light mode
 Show tutorial when reaching a new level
 Confeti when increasing level
+Fix jiggle when transforming button

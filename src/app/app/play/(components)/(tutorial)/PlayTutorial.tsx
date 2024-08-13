@@ -39,6 +39,7 @@ export default function PlayTutorial({
   const [isTutorialButtonPressed, setIsTutorialButtonPressed] = useState(false);
 
   const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
+  const isPlayingAnimation = useRef(false);
 
   const { update: updateSession } = useSession();
 
@@ -75,6 +76,7 @@ export default function PlayTutorial({
         setTutorialSelectedSquare(null);
         await sleep(gameHiddenSquareDuration);
       }
+      isPlayingAnimation.current = false;
     };
 
     const buttonStepAnimation = async () => {
@@ -84,6 +86,7 @@ export default function PlayTutorial({
         setIsTutorialButtonPressed(false);
         await sleep(2000);
       }
+      isPlayingAnimation.current = false;
     };
 
     const level1ExplanationAnimation = async () => {
@@ -93,6 +96,7 @@ export default function PlayTutorial({
         setTutorialSelectedSquare(null);
         await sleep(gameHiddenSquareDuration);
       }
+      isPlayingAnimation.current = false;
     };
 
     const startTutorialGame = async () => {
@@ -112,6 +116,7 @@ export default function PlayTutorial({
         await sleep(gameHiddenSquareDuration);
         square = square === 5 ? 6 : 5;
       }
+      isPlayingAnimation.current = false;
     };
 
     const handleLastStep = async () => {
@@ -120,17 +125,29 @@ export default function PlayTutorial({
     };
 
     if (stepRef.current === boardStep) {
-      boardStepAnimation();
+      if (!isPlayingAnimation.current) {
+        isPlayingAnimation.current = true;
+        boardStepAnimation();
+      }
     } else if (stepRef.current === buttonStep) {
-      buttonStepAnimation();
+      if (!isPlayingAnimation.current) {
+        isPlayingAnimation.current = true;
+        buttonStepAnimation();
+      }
     } else if (stepRef.current === level1ExplanationStep) {
-      level1ExplanationAnimation();
+      if (!isPlayingAnimation.current) {
+        isPlayingAnimation.current = true;
+        level1ExplanationAnimation();
+      }
     } else if (stepRef.current === level1PlayStep) {
       if (!isPlaying) {
         startTutorialGame();
       }
     } else if (stepRef.current === level2ExplanationStep) {
-      level2ExplanationAnimation();
+      if (!isPlayingAnimation.current) {
+        isPlayingAnimation.current = true;
+        level2ExplanationAnimation();
+      }
     } else if (stepRef.current === lastStep) {
       stepRef.current++;
       handleLastStep();
@@ -154,7 +171,11 @@ export default function PlayTutorial({
         missedHits={missedHits}
         previousLevel={previousLevel}
         level={level}
-        selectedSquare={selectedSquare || tutorialSelectedSquare}
+        selectedSquare={
+          tutorialSelectedSquare !== null
+            ? tutorialSelectedSquare
+            : selectedSquare
+        }
         isButtonPressed={isButtonPressed || isTutorialButtonPressed}
         handleButtonPress={handleButtonPress}
       />
