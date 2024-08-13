@@ -3,12 +3,12 @@
 import saltAndHashPassword from "@/lib/saltAndHashPassword";
 import getUserByUsername from "@/database/queries/users/getUserByUsername";
 import { db } from "@/database/db";
-import { users, UserType } from "@/database/schemas/auth";
+import { RoleType, users, UserType } from "@/database/schemas/auth";
 import getUserByEmail from "./getUserByEmail";
 import { settings } from "@/database/schemas/settings";
 
 interface createUserProps {
-  role: "child" | "parent" | "admin";
+  role: RoleType;
   email: string | null;
   parentUsername: string | null;
   fullName: string;

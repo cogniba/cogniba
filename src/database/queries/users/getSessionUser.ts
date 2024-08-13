@@ -1,11 +1,12 @@
 import { auth } from "@/auth/auth";
+import { RoleType } from "@/database/schemas/auth";
 
 type SessionUserType = {
   name: string;
   email: string;
 
   id: string;
-  role: "child" | "parent" | "admin";
+  role: RoleType;
   username: string;
 
   hasFinishedTutorial: boolean;

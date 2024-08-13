@@ -6,6 +6,7 @@ import { db } from "@/database/db";
 
 import { SignInSchema } from "@/zod/schemas/SignInSchema";
 import { PostgresDrizzleAdapter } from "@/../drizzle/adapter/drizzleAdapter";
+import { RoleType } from "@/database/schemas/auth";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PostgresDrizzleAdapter(db),
@@ -55,7 +56,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     session({ session, token }) {
       session.user.id = token.id as string;
-      session.user.role = token.role as "child" | "parent" | "admin";
+      session.user.role = token.role as RoleType;
       session.user.username = token.username as string;
       session.user.hasFinishedTutorial = token.hasFinishedTutorial as boolean;
       return session;

@@ -109,4 +109,5 @@ export const authenticators = authSchema.table(
   }),
 );
 
+export type RoleType = "child" | "parent" | "admin";
 export type UserType = InferSelectModel<typeof users>;
