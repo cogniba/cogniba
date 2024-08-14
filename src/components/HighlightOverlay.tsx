@@ -1,50 +1,36 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { Portal } from "./ui/Portal";
+import useElementDimensions from "@/hooks/useElementDimensions";
 
 interface HighlightOverlayProps {
-  elementId: string;
+  targetElement: string;
   padding?: number;
 }
 
 export default function HighlightOverlay({
-  elementId,
+  targetElement,
   padding = 8,
 }: HighlightOverlayProps) {
-  const elementRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    elementRef.current = null;
-
-    const element = document.getElementById(elementId);
-    if (element) {
-      elementRef.current = element;
-    }
-  }, [elementId]);
-
-  console.log(elementRef.current);
-
-  if (!elementRef.current) {
+  const elementDimensions = useElementDimensions(targetElement);
+  if (!elementDimensions) {
     return null;
   }
 
-  const { height, width, top, left } =
-    elementRef.current.getBoundingClientRect();
+  const { height, width, top, left } = elementDimensions;
 
   return (
-    <Portal asChild>
-      <div className="fixed left-0 top-0 z-50 h-screen w-screen mix-blend-hard-light dark:bg-black/50">
+    <div className="fixed left-0 top-0 z-50 h-screen w-screen mix-blend-hard-light dark:bg-black/50">
+      {targetElement !== "body" && (
         <div
-          className="absolute h-96 w-96 rounded-lg bg-[#808080]"
+          className="absolute rounded-lg bg-[#808080]"
           style={{
-            height: height + padding * 2,
-            width: width + padding * 2,
-            top: top - padding,
-            left: left - padding,
+            height,
+            width,
+            top,
+            left,
           }}
         ></div>
-      </div>
-    </Portal>
+      )}
+    </div>
   );
 }

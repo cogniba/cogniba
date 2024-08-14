@@ -39,6 +39,7 @@ interface DialogContentProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
   closeButton?: boolean;
   backdrop?: boolean;
+  hideOverlay?: boolean;
 }
 
 const DialogContent = React.forwardRef<
@@ -46,11 +47,18 @@ const DialogContent = React.forwardRef<
   DialogContentProps
 >(
   (
-    { closeButton = true, backdrop = false, className, children, ...props },
+    {
+      closeButton = true,
+      backdrop = false,
+      hideOverlay = false,
+      className,
+      children,
+      ...props
+    },
     ref,
   ) => (
     <DialogPortal>
-      <DialogOverlay backdrop={backdrop} />
+      {!hideOverlay && <DialogOverlay backdrop={backdrop} />}
       <DialogPrimitive.Content
         ref={ref}
         className={cn(

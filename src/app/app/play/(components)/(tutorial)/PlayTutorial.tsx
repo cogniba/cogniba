@@ -3,7 +3,6 @@
 import Game from "../Game";
 import PlayTutorialSteps from "./PlayTutorialSteps";
 import sleep from "@/lib/sleep";
-import useGameLogic from "@/hooks/useGameLogic";
 import finishTutorial from "@/server-actions/finishTutorial";
 
 import { useEffect, useRef, useState } from "react";
@@ -12,6 +11,7 @@ import {
   gameVisibleSquareDuration,
 } from "@/settings/constants";
 import { useSession } from "next-auth/react";
+import useGameLogic from "@/hooks/useGameLogic";
 
 const boardStep = 3;
 const buttonStep = 4;
