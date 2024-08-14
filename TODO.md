@@ -5,6 +5,8 @@ Track how much time has been spent with the tab open
 Streak system
 Goal system
 Revalidate tag
+Spanish
+cognia.com
 Security breach in server actions. Validate input in all server actions
 Full screen when playing
 Confeti when increasing level

@@ -254,7 +254,7 @@ export default function PlayTutorialSteps({
       disableScrollParentFix={true}
       styles={{
         options: {
-          arrowColor: "var(--slate-800)",
+          arrowColor: "var(--tutorial-arrow)",
           zIndex: 50,
         },
       }}
