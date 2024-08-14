@@ -29,7 +29,8 @@ export default function GameLogic({
   return (
     <Game
       feedback={feedback}
-      isStartScreenVisible={!isPlaying}
+      // isStartScreenVisible={!isPlaying}
+      isStartScreenVisible={false}
       startPlaying={startPlaying}
       correctHits={correctHits}
       incorrectHits={incorrectHits}

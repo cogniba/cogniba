@@ -10,7 +10,10 @@ export default function GameButton({
   handleButtonPress,
 }: GameButtonProps) {
   return (
-    <div className="flex h-full w-full items-center justify-center" id="button">
+    <div
+      className="flex h-full w-full items-center justify-center"
+      id="game-button"
+    >
       <button
         className={cn(
           "h-full w-full -translate-y-1 rounded-md border border-orange-400/50 bg-orange-300 shadow-2xl outline-none transition duration-300 will-change-transform dark:border-orange-700 dark:bg-orange-800",

@@ -1,6 +1,6 @@
 import finishTutorial from "@/server-actions/finishTutorial";
 
-import { Strong } from "@/components/Strong";
+import { Strong } from "@/components/ui/Strong";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -41,81 +41,74 @@ export default function PlayTutorialTooltip({
   }, [updateSession]);
 
   return (
-    // <Card {...tooltipProps} className="w-screen max-w-md lg:max-w-lg">
-    //   <CardHeader>
-    //     <CardTitle>{step.title}</CardTitle>
-    //   </CardHeader>
-    //   <CardContent className="text-slate-700 dark:text-slate-300">
-    //     {step.content}
-    //   </CardContent>
-    //   <CardFooter className="flex items-center justify-between">
-    //     {!step.data?.hideSkipButton && index === 0 ? (
-    //       <AlertDialog>
-    //         <AlertDialogTrigger asChild>
-    //           <Button variant="outline">Skip</Button>
-    //         </AlertDialogTrigger>
-    //         <AlertDialogOverlay className="z-[1000]" />
-    //         <AlertDialogContent className="z-[1000]">
-    //           <AlertDialogHeader>
-    //             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-    //             <AlertDialogDescription className="dark:text-slate-300">
-    //               If you <Strong>skip</Strong> the tutorial you{" "}
-    //               <Strong>won&apos;t be able to see it again</Strong>. Only{" "}
-    //               <Strong>skip</Strong> if you{" "}
-    //               <Strong>already know how to play</Strong>.
-    //             </AlertDialogDescription>
-    //           </AlertDialogHeader>
-    //           <AlertDialogFooter>
-    //             <AlertDialogCancel
-    //               className={buttonVariants({ variant: "secondary" })}
-    //             >
-    //               Cancel
-    //             </AlertDialogCancel>
-    //             <AlertDialogAction
-    //               className={buttonVariants({ variant: "orange" })}
-    //               onClick={handleSkip}
-    //             >
-    //               Skip
-    //             </AlertDialogAction>
-    //           </AlertDialogFooter>
-    //         </AlertDialogContent>
-    //       </AlertDialog>
-    //     ) : (
-    //       <span></span>
-    //     )}
-    //     <div className="flex items-center justify-end gap-4">
-    //       {!step.data?.hideBackButton && (
-    //         <Button
-    //           {...backProps}
-    //           variant="secondary"
-    //           aria-label="Back"
-    //           data-action="Back"
-    //           title="Back"
-    //         >
-    //           Back
-    //         </Button>
-    //       )}
-    //       {!step.data?.hidePrimaryButton && (
-    //         <Button
-    //           {...primaryProps}
-    //           variant="orange"
-    //           aria-label={step.data?.primaryButtonText || "Next"}
-    //           data-action={step.data?.primaryButtonText || "Next"}
-    //           title={step.data?.primaryButtonText || "Next"}
-    //         >
-    //           {step.data?.primaryButtonText || "Next"}
-    //         </Button>
-    //       )}
-    //     </div>
-    //   </CardFooter>
-    // </Card>
-    <div className="w-screen max-w-3xl">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum fugit
-      reprehenderit ad voluptatum officia et, quae explicabo consectetur modi
-      facere totam porro cum. Maxime nulla voluptate facilis iste? Nisi esse
-      quibusdam voluptatem. Ad, reprehenderit ea nisi, fugit ex facilis
-      temporibus dignissimos rerum quae vel dolorem, et officiis illum animi
-      incidunt.
-    </div>
+    <Card {...tooltipProps} className="">
+      {/* <Card {...tooltipProps} className="w-[calc(100vw-1rem)] max-w-lg"> */}
+      <CardHeader>
+        <CardTitle>{step.title}</CardTitle>
+      </CardHeader>
+      <CardContent className="text-slate-700 dark:text-slate-300">
+        {step.content}
+      </CardContent>
+      <CardFooter className="flex items-center justify-between">
+        {!step.data?.hideSkipButton && index === 0 ? (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="outline">Skip</Button>
+            </AlertDialogTrigger>
+            <AlertDialogOverlay className="z-[1000]" />
+            <AlertDialogContent className="z-[1000]">
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription className="dark:text-slate-300">
+                  If you <Strong>skip</Strong> the tutorial you{" "}
+                  <Strong>won&apos;t be able to see it again</Strong>. Only{" "}
+                  <Strong>skip</Strong> if you{" "}
+                  <Strong>already know how to play</Strong>.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel
+                  className={buttonVariants({ variant: "secondary" })}
+                >
+                  Cancel
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  className={buttonVariants({ variant: "orange" })}
+                  onClick={handleSkip}
+                >
+                  Skip
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        ) : (
+          <span></span>
+        )}
+        <div className="flex items-center justify-end gap-4">
+          {!step.data?.hideBackButton && (
+            <Button
+              {...backProps}
+              variant="secondary"
+              aria-label="Back"
+              data-action="Back"
+              title="Back"
+            >
+              Back
+            </Button>
+          )}
+          {!step.data?.hidePrimaryButton && (
+            <Button
+              {...primaryProps}
+              variant="orange"
+              aria-label={step.data?.primaryButtonText || "Next"}
+              data-action={step.data?.primaryButtonText || "Next"}
+              title={step.data?.primaryButtonText || "Next"}
+            >
+              {step.data?.primaryButtonText || "Next"}
+            </Button>
+          )}
+        </div>
+      </CardFooter>
+    </Card>
   );
 }

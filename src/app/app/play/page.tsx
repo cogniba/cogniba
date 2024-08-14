@@ -3,14 +3,16 @@ import getUserSettings from "@/database/queries/settings/getUserSettings";
 import PlayTutorial from "./(components)/(tutorial)/PlayTutorial";
 import GameLogic from "./(components)/GameLogic";
 import getSessionUser from "@/database/queries/users/getSessionUser";
+import HighlightOverlay from "@/components/HighlightOverlay";
 
 export default async function PlayPage() {
-  // const level = await getUserLevel();
+  const level = await getUserLevel();
   const { showFeedback } = await getUserSettings();
-  // const { hasFinishedTutorial, role } = await getSessionUser();
-  const level = 1;
-  const hasFinishedTutorial = false;
-  const role = "parent";
+  const { hasFinishedTutorial, role } = await getSessionUser();
+
+  // const level = 1;
+  // const hasFinishedTutorial = false;
+  // const role = "parent";
 
   return (
     <>
@@ -19,6 +21,7 @@ export default async function PlayPage() {
       ) : (
         <GameLogic startingLevel={level} showFeedbackEnabled={showFeedback} />
       )}
+      <HighlightOverlay elementId="game-board" />
     </>
   );
 }

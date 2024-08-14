@@ -8,7 +8,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Strong } from "@/components/Strong";
+import { Strong } from "@/components/ui/Strong";
 
 const getSteps = (boardSize: number, showSkipButton: boolean) => {
   const defaultStepProps = {
@@ -60,7 +60,7 @@ const getSteps = (boardSize: number, showSkipButton: boolean) => {
         </>
       ),
       target: "#level-display",
-      placement: "bottom" as const,
+      placement: "top" as const,
     } satisfies Step,
     {
       ...defaultStepProps,
