@@ -42,15 +42,27 @@ export default function HighlightDialog({
 
   const { height, width, top, left } = elementDimensions;
 
+  const styles = {
+    top: { top: top - arrowHeight },
+    "center-top": { top: top + height / 2 - arrowHeight },
+    bottom: { top: top + height + arrowHeight },
+    "center-bottom": { top: top + height / 2 + arrowHeight },
+    center: {},
+  };
+
   return (
     <Dialog open={isOpen}>
       <HighlightOverlay targetElement={targetElement} />
       <DialogContent
         className={cn(
-          "z-50",
-          placement === "top" && "top-auto -translate-y-full",
+          "top-auto z-50",
+          (placement === "top" || placement === "center-top") &&
+            "-translate-y-full",
+          (placement === "bottom" || placement === "center-bottom") &&
+            "translate-y-0",
+          placement === "center" && "top-1/2",
         )}
-        style={placement === "top" ? { top: top - arrowHeight } : {}}
+        style={styles[placement]}
         closeButton={false}
         hideOverlay
       >
@@ -63,8 +75,10 @@ export default function HighlightDialog({
                 : "top"
             }
             className={cn(
-              "absolute left-1/2 top-0 -translate-x-1/2",
-              placement === "top" && "top-full",
+              "absolute left-1/2 top-0 -z-10 -translate-x-1/2",
+              (placement === "top" || placement === "center-top") && "top-full",
+              (placement === "bottom" || placement === "center-bottom") &&
+                "-translate-y-full",
             )}
           />
         )}

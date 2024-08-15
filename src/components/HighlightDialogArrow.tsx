@@ -16,14 +16,13 @@ const HighlightDialogArrow = forwardRef<
       <div
         className={cn(
           "h-0 w-0 border-[1rem] border-transparent",
-          type === "top" &&
-            "border-t-0 border-b-slate-50 dark:border-b-slate-800",
+          type === "top" && "border-t-0 border-b-white dark:border-b-slate-800",
           type === "bottom" &&
-            "border-b-0 border-t-slate-50 dark:border-t-slate-800",
+            "border-b-0 border-t-white dark:border-t-slate-800",
           type === "left" &&
-            "border-l-0 border-r-slate-50 dark:border-r-slate-800",
+            "border-l-0 border-r-white dark:border-r-slate-800",
           type === "right" &&
-            "border-r-0 border-l-slate-50 dark:border-l-slate-800",
+            "border-r-0 border-l-white dark:border-l-slate-800",
         )}
       ></div>
     </div>

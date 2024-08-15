@@ -21,7 +21,7 @@ export default async function PlayPage() {
       ) : (
         <GameLogic startingLevel={level} showFeedbackEnabled={showFeedback} />
       )}
-      <HighlightDialog targetElement="#game-board" placement="top">
+      <HighlightDialog targetElement="#game-board" placement="center">
         <>Hola hola</>
       </HighlightDialog>
     </>
