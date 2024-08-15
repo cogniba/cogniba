@@ -19,7 +19,7 @@ export default function HighlightOverlay({
   const { height, width, top, left } = elementDimensions;
 
   return (
-    <div className="fixed left-0 top-0 z-50 h-screen w-screen mix-blend-hard-light dark:bg-black/50">
+    <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black/50 mix-blend-hard-light">
       {targetElement !== "body" && (
         <div
           className="absolute rounded-lg bg-[#808080]"
