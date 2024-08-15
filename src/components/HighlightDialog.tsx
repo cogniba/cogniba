@@ -7,7 +7,7 @@ import useElementDimensions from "@/hooks/useElementDimensions";
 import { cn } from "@/lib/cn";
 import HighlightDialogArrow from "./HighlightDialogArrow";
 
-type PlacementType =
+export type PlacementType =
   | "top"
   | "bottom"
   | "center-top"
@@ -53,36 +53,37 @@ export default function HighlightDialog({
   return (
     <Dialog open={isOpen}>
       <HighlightOverlay targetElement={targetElement} />
-      <DialogContent
-        className={cn(
-          "top-auto z-50",
-          (placement === "top" || placement === "center-top") &&
-            "-translate-y-full",
-          (placement === "bottom" || placement === "center-bottom") &&
-            "translate-y-0",
-          placement === "center" && "top-1/2",
-        )}
-        style={styles[placement]}
-        closeButton={false}
-        hideOverlay
-      >
-        {placement !== "center" && (
-          <HighlightDialogArrow
-            ref={arrowRef}
-            type={
-              placement === "top" || placement === "center-top"
-                ? "bottom"
-                : "top"
-            }
-            className={cn(
-              "absolute left-1/2 top-0 -z-10 -translate-x-1/2",
-              (placement === "top" || placement === "center-top") && "top-full",
-              (placement === "bottom" || placement === "center-bottom") &&
-                "-translate-y-full",
-            )}
-          />
-        )}
-        {children}
+      <DialogContent asChild hideOverlay>
+        <div
+          className={cn(
+            "fixed left-1/2 top-auto z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
+            (placement === "top" || placement === "center-top") &&
+              "-translate-y-full",
+            (placement === "bottom" || placement === "center-bottom") &&
+              "translate-y-0",
+            placement === "center" && "top-1/2",
+          )}
+          style={styles[placement]}
+        >
+          {placement !== "center" && (
+            <HighlightDialogArrow
+              ref={arrowRef}
+              type={
+                placement === "top" || placement === "center-top"
+                  ? "bottom"
+                  : "top"
+              }
+              className={cn(
+                "absolute left-1/2 top-0 -z-10 -translate-x-1/2 drop-shadow-xl",
+                (placement === "top" || placement === "center-top") &&
+                  "top-full",
+                (placement === "bottom" || placement === "center-bottom") &&
+                  "-translate-y-full",
+              )}
+            />
+          )}
+          {children}
+        </div>
       </DialogContent>
     </Dialog>
   );

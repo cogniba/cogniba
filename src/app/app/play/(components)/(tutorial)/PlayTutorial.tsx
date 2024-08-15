@@ -31,7 +31,7 @@ export default function PlayTutorial({
   showSkipButton,
 }: PlayTutorialProps) {
   const [step, setStep] = useState(startingLevel === 1 ? 0 : level1BeatStep);
-  const [isRunning, setIsRunning] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
   const [tutorialSelectedSquare, setTutorialSelectedSquare] = useState<
     number | null
   >(null);
@@ -58,7 +58,7 @@ export default function PlayTutorial({
     startingLevel,
     showFeedbackEnabled: true,
     isTutorial: true,
-    setShowTutorialHint: setIsRunning,
+    setShowTutorialHint: setIsVisible,
   });
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function PlayTutorial({
   }, [step]);
 
   useEffect(() => {
-    if (!isRunning) return;
+    if (!isVisible) return;
 
     const boardStepAnimation = async () => {
       while (stepRef.current === boardStep) {
@@ -100,10 +100,10 @@ export default function PlayTutorial({
     };
 
     const startTutorialGame = async () => {
-      setIsRunning(false);
+      setIsVisible(false);
       await startPlaying();
       setStep((step) => step + 1);
-      setIsRunning(true);
+      setIsVisible(true);
     };
 
     const level2ExplanationAnimation = async () => {
@@ -153,7 +153,7 @@ export default function PlayTutorial({
       handleLastStep();
     }
   }, [
-    isRunning,
+    isVisible,
     step,
     startPlaying,
     isPlaying,
@@ -166,7 +166,7 @@ export default function PlayTutorial({
       <PlayTutorialSteps
         step={step}
         setStep={setStep}
-        isRunning={isRunning}
+        isVisible={isVisible}
         showSkipButton={showSkipButton}
       />
       <Game

@@ -1,5 +1,3 @@
-import finishTutorial from "@/server-actions/finishTutorial";
-
 import { Strong } from "@/components/ui/Strong";
 import {
   AlertDialog,
@@ -21,36 +19,42 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useSession } from "next-auth/react";
-import { useCallback } from "react";
 
-import type { TooltipRenderProps } from "react-joyride";
+interface PlayTutorialTooltipProps {
+  title: React.ReactNode;
+  content: React.ReactNode;
+  showSkipButton?: boolean;
+  hideBackButton?: boolean;
+  hidePrimaryButton?: boolean;
+  primaryButtonText?: string;
+
+  handlePrimaryButtonClick: () => void;
+  handleBackButtonClick: () => void;
+  handleSkipButtonClick: () => void;
+}
 
 export default function PlayTutorialTooltip({
-  step,
-  index,
-  primaryProps,
-  backProps,
-  tooltipProps,
-}: TooltipRenderProps) {
-  const { update: updateSession } = useSession();
+  title,
+  content,
+  showSkipButton = false,
+  hideBackButton = false,
+  hidePrimaryButton = false,
+  primaryButtonText = "Next",
 
-  const handleSkip = useCallback(async () => {
-    await updateSession({ hasFinishedTutorial: true });
-    await finishTutorial();
-  }, [updateSession]);
-
+  handlePrimaryButtonClick,
+  handleBackButtonClick,
+  handleSkipButtonClick,
+}: PlayTutorialTooltipProps) {
   return (
-    <Card {...tooltipProps} className="">
-      {/* <Card {...tooltipProps} className="w-[calc(100vw-1rem)] max-w-lg"> */}
+    <Card>
       <CardHeader>
-        <CardTitle>{step.title}</CardTitle>
+        <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent className="text-slate-700 dark:text-slate-300">
-        {step.content}
+        {content}
       </CardContent>
       <CardFooter className="flex items-center justify-between">
-        {!step.data?.hideSkipButton && index === 0 ? (
+        {showSkipButton ? (
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="outline">Skip</Button>
@@ -74,7 +78,7 @@ export default function PlayTutorialTooltip({
                 </AlertDialogCancel>
                 <AlertDialogAction
                   className={buttonVariants({ variant: "orange" })}
-                  onClick={handleSkip}
+                  onClick={handleSkipButtonClick}
                 >
                   Skip
                 </AlertDialogAction>
@@ -85,26 +89,14 @@ export default function PlayTutorialTooltip({
           <span></span>
         )}
         <div className="flex items-center justify-end gap-4">
-          {!step.data?.hideBackButton && (
-            <Button
-              {...backProps}
-              variant="secondary"
-              aria-label="Back"
-              data-action="Back"
-              title="Back"
-            >
+          {!hideBackButton && (
+            <Button variant="secondary" onClick={handleBackButtonClick}>
               Back
             </Button>
           )}
-          {!step.data?.hidePrimaryButton && (
-            <Button
-              {...primaryProps}
-              variant="orange"
-              aria-label={step.data?.primaryButtonText || "Next"}
-              data-action={step.data?.primaryButtonText || "Next"}
-              title={step.data?.primaryButtonText || "Next"}
-            >
-              {step.data?.primaryButtonText || "Next"}
+          {!hidePrimaryButton && (
+            <Button variant="orange" onClick={handlePrimaryButtonClick}>
+              {primaryButtonText}
             </Button>
           )}
         </div>
