@@ -205,9 +205,13 @@ export default function PlayTutorialSteps({
     await finishTutorial();
   }, [updateSession]);
 
+  if (step >= steps.length) {
+    return null;
+  }
+
   return (
     <HighlightDialog
-      // isOpen={isVisible}
+      isOpen={isVisible}
       placement={steps[step].placement}
       targetElement={steps[step].target}
     >

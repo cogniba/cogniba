@@ -11,7 +11,7 @@ const strongVariants = cva("font-semibold", {
       teal: "dark:text-teal-400 text-teal-600",
       red: "dark:text-red-400 text-red-600",
       green: "dark:text-green-400 text-green-600",
-      yellow: "dark:text-yellow-400 text-yellow-600",
+      yellow: "dark:text-yellow-500 text-yellow-600",
     },
   },
 

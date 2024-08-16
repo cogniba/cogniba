@@ -20,6 +20,7 @@ export default function HighlightOverlay({
 
   const elementDimensions = useElementDimensions(
     targetElement === "body" ? previousTargetElementRef.current : targetElement,
+    padding,
   );
   const { height, width, top, left } = elementDimensions ?? {
     height: 0,
