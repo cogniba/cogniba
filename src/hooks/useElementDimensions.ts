@@ -8,11 +8,8 @@ export default function useElementDimensions(
 
   useEffect(() => {
     setElement(null);
-
     const element = document.querySelector(targetElement);
-    if (element) {
-      setElement(element);
-    }
+    setElement(element);
   }, [targetElement]);
 
   if (!element) {

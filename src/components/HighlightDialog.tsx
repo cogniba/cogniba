@@ -35,12 +35,12 @@ export default function HighlightDialog({
   }, []);
 
   const elementDimensions = useElementDimensions(targetElement);
-
-  if (!elementDimensions) {
-    return null;
-  }
-
-  const { height, width, top, left } = elementDimensions;
+  const { height, width, top, left } = elementDimensions ?? {
+    height: 0,
+    width: 0,
+    top: 0,
+    left: 0,
+  };
 
   const styles = {
     top: { top: top - arrowHeight },
@@ -56,7 +56,7 @@ export default function HighlightDialog({
       <DialogContent asChild hideOverlay>
         <div
           className={cn(
-            "fixed left-1/2 top-auto z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
+            "fixed left-1/2 top-auto z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 transition-all duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
             (placement === "top" || placement === "center-top") &&
               "-translate-y-full",
             (placement === "bottom" || placement === "center-bottom") &&

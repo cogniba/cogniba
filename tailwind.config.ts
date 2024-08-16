@@ -30,6 +30,8 @@ const config = {
       transitionProperty: {
         width: "width",
         position: "top, right, bottom, left",
+        size: "width, height",
+        "bounding-box": "top, right, bottom, left, width, height",
       },
 
       keyframes: {
