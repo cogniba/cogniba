@@ -13,5 +13,4 @@ Confeti when increasing level
 Show tutorial when reaching a new level
 Responsive tutorial
 Remove refs in dependency arrays of useEffect
-Uninstall react-joyride
 Click on button tutorial
