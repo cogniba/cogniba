@@ -17,7 +17,8 @@ export default async function PlayPage() {
   return (
     <>
       {!hasFinishedTutorial ? (
-        <PlayTutorial startingLevel={level} showSkipButton={role !== "child"} />
+        // <PlayTutorial startingLevel={level} showSkipButton={role !== "child"} />
+        <PlayTutorial startingLevel={level} showSkipButton={true} />
       ) : (
         <GameLogic startingLevel={level} showFeedbackEnabled={showFeedback} />
       )}

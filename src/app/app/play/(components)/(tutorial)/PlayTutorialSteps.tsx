@@ -207,6 +207,7 @@ export default function PlayTutorialSteps({
 
   return (
     <HighlightDialog
+      // isOpen={isVisible}
       placement={steps[step].placement}
       targetElement={steps[step].target}
     >

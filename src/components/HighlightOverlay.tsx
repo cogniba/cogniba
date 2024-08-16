@@ -2,15 +2,17 @@
 
 import useElementDimensions from "@/hooks/useElementDimensions";
 import { cn } from "@/lib/cn";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 interface HighlightOverlayProps {
   targetElement: string;
+  isVisible: boolean;
   padding?: number;
 }
 
 export default function HighlightOverlay({
   targetElement,
+  isVisible,
   padding = 8,
 }: HighlightOverlayProps) {
   const currentTargetElementRef = useRef(targetElement);
@@ -31,10 +33,13 @@ export default function HighlightOverlay({
     currentTargetElementRef.current = targetElement;
   }
 
-  console.log(targetElement + "\n" + previousTargetElementRef.current);
-
   return (
-    <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black/50 mix-blend-hard-light">
+    <div
+      className={cn(
+        "visible fixed left-0 top-0 z-50 h-screen w-screen bg-black/50 mix-blend-hard-light transition-opacity duration-1000",
+        !isVisible && "invisible opacity-0",
+      )}
+    >
       <div
         className={cn(
           "absolute rounded-lg bg-[#808080] opacity-100",
