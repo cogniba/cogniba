@@ -37,13 +37,13 @@ export default function HighlightOverlay({
   return (
     <div
       className={cn(
-        "visible fixed left-0 top-0 z-50 h-screen w-screen bg-black/50 mix-blend-hard-light transition-opacity duration-1000",
+        "pointer-events-auto visible fixed left-0 top-0 z-50 h-screen w-screen bg-black/50 mix-blend-hard-light transition-opacity duration-1000",
         !isVisible && "invisible opacity-0",
       )}
     >
       <div
         className={cn(
-          "absolute rounded-lg bg-[#808080] opacity-100",
+          "pointer-events-none absolute rounded-lg bg-[#808080] opacity-100",
           targetElement === "body" ||
             previousTargetElementRef.current === "body"
             ? "transition-opacity duration-500"

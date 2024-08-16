@@ -14,3 +14,4 @@ Show tutorial when reaching a new level
 Responsive tutorial
 Remove refs in dependency arrays of useEffect
 Click on button tutorial
+Hover sidebar on tutorial
