@@ -7,6 +7,7 @@ import finishTutorial from "@/server-actions/finishTutorial";
 
 import { useEffect, useRef, useState } from "react";
 import {
+  gameDelayBeforeStart,
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
@@ -37,6 +38,7 @@ export default function PlayTutorial({
   >(null);
   const [isTutorialButtonPressed, setIsTutorialButtonPressed] = useState(false);
   const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
+  const [isLoadingGame, setIsLoadingGame] = useState(false);
 
   const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
 
@@ -106,6 +108,12 @@ export default function PlayTutorial({
       setIsVisible(true);
     };
 
+    const handleStartGameDelay = async () => {
+      setIsLoadingGame(true);
+      await sleep(gameDelayBeforeStart);
+      setIsLoadingGame(false);
+    };
+
     const level2ExplanationAnimation = async () => {
       let square = 5;
 
@@ -141,6 +149,7 @@ export default function PlayTutorial({
       }
     } else if (stepRef.current === level1PlayStep) {
       if (!isPlaying) {
+        handleStartGameDelay();
         startTutorialGame();
       }
     } else if (stepRef.current === level2ExplanationStep) {
@@ -164,7 +173,7 @@ export default function PlayTutorial({
   return (
     <>
       <PlayTutorialSteps
-        step={step}
+        step={step - Number(isLoadingGame)}
         setStep={setStep}
         isVisible={isVisible}
         showSkipButton={showSkipButton}
