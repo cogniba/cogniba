@@ -36,14 +36,12 @@ export default function HighlightOverlay({
 
   return (
     <div
-      className={cn(
-        "pointer-events-auto visible fixed left-0 top-0 z-50 h-screen w-screen bg-black/50 mix-blend-hard-light transition-opacity duration-1000",
-        !isVisible && "invisible opacity-0",
-      )}
+      data-state={isVisible ? "open" : "closed"}
+      className="pointer-events-auto fixed inset-0 z-50 bg-black/50 mix-blend-hard-light data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
     >
       <div
         className={cn(
-          "pointer-events-none absolute rounded-lg bg-[#808080] opacity-100",
+          "absolute rounded-lg bg-[#808080] opacity-100",
           targetElement === "body" ||
             previousTargetElementRef.current === "body"
             ? "transition-opacity duration-500"

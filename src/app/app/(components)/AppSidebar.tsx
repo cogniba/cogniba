@@ -38,14 +38,14 @@ export default function AppSidebar({ name, username }: AppSidebarProps) {
     >
       <div
         className={cn(
-          "pointer-events-auto invisible fixed inset-0 z-40 bg-black/30 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-data-[state=expanded]:visible group-data-[state=expanded]:opacity-100 lg:can-hover:hidden",
+          "invisible fixed inset-0 z-40 bg-black/30 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-data-[state=expanded]:visible group-data-[state=expanded]:opacity-100 lg:can-hover:hidden",
           !isVisible && "-translate-x-full [transition:transform_300ms]",
         )}
         onClick={() => setIsExpanded(false)}
       ></div>
       <button
         className={cn(
-          "pointer-events-auto fixed z-50 p-1.5 text-slate-950 drop-shadow-lg dark:text-slate-50 lg:can-hover:hidden",
+          "fixed z-50 p-1.5 text-slate-950 drop-shadow-lg dark:text-slate-50 lg:can-hover:hidden",
           !isVisible && "-translate-x-full [transition:transform_300ms]",
         )}
         onClick={() => setIsExpanded((expanded) => !expanded)}
@@ -55,7 +55,7 @@ export default function AppSidebar({ name, username }: AppSidebarProps) {
       </button>
       <nav
         className={cn(
-          "hide-scrollbar group pointer-events-auto fixed z-40 flex h-full w-16 -translate-x-full flex-col items-center justify-between overflow-y-auto border-r border-slate-200 bg-white py-2 pt-12 shadow-xl shadow-black/5 transition-all duration-200 group-data-[state=expanded]:w-full group-data-[state=expanded]:translate-x-0 group-data-[state=expanded]:shadow-black/10 dark:border-slate-800 dark:bg-slate-950 dark:shadow-black/30 dark:group-data-[state=expanded]:shadow-black/60 xs:group-data-[state=expanded]:w-60 lg:can-hover:translate-x-0 lg:can-hover:pt-2",
+          "hide-scrollbar group fixed z-40 flex h-full w-16 -translate-x-full flex-col items-center justify-between overflow-y-auto border-r border-slate-200 bg-white py-2 pt-12 shadow-xl shadow-black/5 transition-all duration-200 group-data-[state=expanded]:w-full group-data-[state=expanded]:translate-x-0 group-data-[state=expanded]:shadow-black/10 dark:border-slate-800 dark:bg-slate-950 dark:shadow-black/30 dark:group-data-[state=expanded]:shadow-black/60 xs:group-data-[state=expanded]:w-60 lg:can-hover:translate-x-0 lg:can-hover:pt-2",
           !isVisible &&
             "-translate-x-full [transition:transform_300ms] group-data-[state=expanded]:-translate-x-full lg:can-hover:-translate-x-full",
         )}
