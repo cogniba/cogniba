@@ -17,6 +17,7 @@ export type PlacementType =
 interface HighlightDialogProps {
   targetElement?: string;
   placement: PlacementType;
+  elementClickable?: boolean;
   isOpen: boolean;
   children: React.ReactNode;
 }
@@ -24,6 +25,7 @@ interface HighlightDialogProps {
 export default function HighlightDialog({
   targetElement = "body",
   placement,
+  elementClickable = true,
   isOpen,
   children,
 }: HighlightDialogProps) {
@@ -53,7 +55,11 @@ export default function HighlightDialog({
 
   return (
     <Dialog open={isOpen} defaultOpen>
-      <HighlightOverlay targetElement={targetElement} isVisible={isOpen} />
+      <HighlightOverlay
+        targetElement={targetElement}
+        isVisible={isOpen}
+        elementClickable={true}
+      />
       <DialogContent
         hideOverlay
         closeButton={false}

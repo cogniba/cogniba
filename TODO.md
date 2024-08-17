@@ -10,10 +10,9 @@ cognia.com
 Security breach in server actions. Validate input in all server actions
 Full screen when playing
 Confeti when increasing level
+Vim motions
+Make an editor to write in vim
+Rename Play to Game
 Show tutorial when reaching a new level
 Responsive tutorial
 Remove refs in dependency arrays of useEffect
-Click on button tutorial
-Hover sidebar on tutorial
-Vim motions
-Make an editor to write in vim

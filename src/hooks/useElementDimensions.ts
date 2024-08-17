@@ -3,14 +3,20 @@ import { useEffect, useState } from "react";
 export default function useElementDimensions(
   targetElement: string,
   padding = 8,
-): { height: number; width: number; top: number; left: number } | null {
+): {
+  height: number;
+  width: number;
+  top: number;
+  left: number;
+  element: Element;
+} | null {
   const [element, setElement] = useState<Element | null>(null);
 
   useEffect(() => {
     setElement(null);
-    const element = document.querySelector(targetElement);
-    setElement(element);
-  }, [targetElement]);
+    const newElement = document.querySelector(targetElement);
+    setElement(newElement);
+  }, [targetElement, element]);
 
   if (!element) {
     return null;
@@ -23,5 +29,6 @@ export default function useElementDimensions(
     width: width + padding * 2,
     top: top - padding,
     left: left - padding,
+    element,
   };
 }

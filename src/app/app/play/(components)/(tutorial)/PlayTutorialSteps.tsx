@@ -15,6 +15,7 @@ type StepType = {
   hideBackButton?: boolean;
   hidePrimaryButton?: boolean;
   primaryButtonText?: string;
+  elementClickable?: boolean;
 };
 
 const steps = [
@@ -119,8 +120,7 @@ const steps = [
     ),
     target: "#game-button",
     placement: "top",
-    // TODO
-    // spotlightClicks: true,
+    elementClickable: true,
     hidePrimaryButton: true,
     hideBackButton: true,
   },
@@ -213,6 +213,7 @@ export default function PlayTutorialSteps({
     <HighlightDialog
       isOpen={isVisible}
       placement={steps[step].placement}
+      elementClickable={steps[step].elementClickable}
       targetElement={steps[step].target}
     >
       <PlayTutorialTooltip
