@@ -128,6 +128,7 @@ export default function PlayTutorial({
     };
 
     const handleLastStep = async () => {
+      setIsVisible(false);
       await updateSession({ hasFinishedTutorial: true });
       await finishTutorial();
     };
@@ -158,7 +159,6 @@ export default function PlayTutorial({
         level2ExplanationAnimation();
       }
     } else if (stepRef.current === lastStep) {
-      stepRef.current++;
       handleLastStep();
     }
   }, [
@@ -173,7 +173,7 @@ export default function PlayTutorial({
   return (
     <>
       <PlayTutorialSteps
-        step={step - Number(isLoadingGame)}
+        step={step - Number(isLoadingGame) - Number(step === lastStep)}
         setStep={setStep}
         isVisible={isVisible}
         showSkipButton={showSkipButton}
