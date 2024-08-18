@@ -10,7 +10,7 @@ export default auth((request) => {
       return Response.redirect(newUrl);
     }
   } else if (isAuthenticated) {
-    if (pathname.startsWith("/sign-in")) {
+    if (pathname === "/" || pathname.startsWith("/sign-in")) {
       const newUrl = new URL("/app", request.nextUrl.origin);
       return Response.redirect(newUrl);
     } else if (

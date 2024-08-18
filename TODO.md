@@ -16,4 +16,4 @@ Make an editor to write in vim
 Rename Play to Game
 Show tutorial when reaching a new level
 Responsive tutorial
-Dialog disappearing with animation when finishing tutorial
+Remove refs from useEffect
