@@ -1,7 +1,7 @@
 "use client";
 
 import Game from "../Game";
-import PlayTutorialSteps from "./PlayTutorialSteps";
+import GameTutorialSteps from "./GameTutorialSteps";
 import sleep from "@/lib/sleep";
 import finishTutorial from "@/server-actions/finishTutorial";
 
@@ -22,15 +22,15 @@ const level1BeatStep = 8;
 const level2ExplanationStep = 9;
 const lastStep = 11;
 
-interface PlayTutorialProps {
+interface GameTutorialProps {
   startingLevel: number;
   showSkipButton: boolean;
 }
 
-export default function PlayTutorial({
+export default function GameTutorial({
   startingLevel,
   showSkipButton,
-}: PlayTutorialProps) {
+}: GameTutorialProps) {
   const [step, setStep] = useState(startingLevel === 1 ? 0 : level1BeatStep);
   const [isVisible, setIsVisible] = useState(true);
   const [tutorialSelectedSquare, setTutorialSelectedSquare] = useState<
@@ -172,7 +172,7 @@ export default function PlayTutorial({
 
   return (
     <>
-      <PlayTutorialSteps
+      <GameTutorialSteps
         step={step - Number(isLoadingGame) - Number(step === lastStep)}
         setStep={setStep}
         isVisible={isVisible}

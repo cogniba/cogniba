@@ -3,7 +3,7 @@ import { Strong } from "@/components/ui/Strong";
 import HighlightDialog, {
   type PlacementType,
 } from "@/components/HighlightDialog";
-import PlayTutorialTooltip from "./PlayTutorialTooltip";
+import GameTutorialTooltip from "./GameTutorialTooltip";
 import { useSession } from "next-auth/react";
 import finishTutorial from "@/server-actions/finishTutorial";
 
@@ -187,19 +187,19 @@ const steps = [
   },
 ] satisfies StepType[];
 
-interface PlayTutorialStepsProps {
+interface GameTutorialStepsProps {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
   isVisible: boolean;
   showSkipButton: boolean;
 }
 
-export default function PlayTutorialSteps({
+export default function GameTutorialSteps({
   step,
   setStep,
   isVisible,
   showSkipButton,
-}: PlayTutorialStepsProps) {
+}: GameTutorialStepsProps) {
   const { update: updateSession } = useSession();
 
   const handleSkip = useCallback(async () => {
@@ -218,7 +218,7 @@ export default function PlayTutorialSteps({
       elementClickable={steps[step].elementClickable}
       targetElement={steps[step].target}
     >
-      <PlayTutorialTooltip
+      <GameTutorialTooltip
         title={steps[step].title}
         content={steps[step].content}
         showSkipButton={showSkipButton && step === 0}

@@ -1,5 +1,5 @@
-import Crosshair from "./Crosshair";
-import Square from "./Square";
+import GameCrosshair from "./GameCrosshair";
+import GameSquare from "./GameSquare";
 
 interface BoardProps {
   selectedSquare: number | null;
@@ -14,9 +14,12 @@ export default function Board({ selectedSquare }: BoardProps) {
       >
         {Array.from({ length: 9 }, (_, i) =>
           i === 4 ? (
-            <Crosshair key={i} />
+            <GameCrosshair key={i} />
           ) : (
-            <Square key={i} selected={i - Number(i > 4) === selectedSquare} />
+            <GameSquare
+              key={i}
+              selected={i - Number(i > 4) === selectedSquare}
+            />
           ),
         )}
       </div>

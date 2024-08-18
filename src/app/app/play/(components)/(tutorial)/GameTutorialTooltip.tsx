@@ -18,7 +18,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-interface PlayTutorialTooltipProps {
+interface GameTutorialTooltipProps {
   title: React.ReactNode;
   content: React.ReactNode;
   showSkipButton?: boolean;
@@ -31,7 +31,7 @@ interface PlayTutorialTooltipProps {
   handleSkipButtonClick: () => void;
 }
 
-export default function PlayTutorialTooltip({
+export default function GameTutorialTooltip({
   title,
   content,
   showSkipButton = false,
@@ -42,7 +42,7 @@ export default function PlayTutorialTooltip({
   handlePrimaryButtonClick,
   handleBackButtonClick,
   handleSkipButtonClick,
-}: PlayTutorialTooltipProps) {
+}: GameTutorialTooltipProps) {
   return (
     <>
       <DialogHeader className="pb-1">

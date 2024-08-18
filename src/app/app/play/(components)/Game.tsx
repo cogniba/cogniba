@@ -1,9 +1,9 @@
 "use client";
 
-import LevelDisplay from "./LevelDisplay";
+import GameLevelDisplay from "./GameLevelDisplay";
 import GameButton from "./GameButton";
-import Board from "./Board";
-import StartScreen from "./StartScreen";
+import Board from "./GameBoard";
+import StartScreen from "./GameStartScreen";
 
 import { cn } from "@/lib/cn";
 
@@ -55,7 +55,7 @@ export default function Game({
         />
         <div className="flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] [container-type:size] md:px-2">
           <div className="my-first-step my-[1.5cqh] flex-shrink-0 sm:mb-[2.5cqh] sm:mt-[1.5cqh]">
-            <LevelDisplay level={level} />
+            <GameLevelDisplay level={level} />
           </div>
           <div className="h-[100cqmin] w-[100cqmin]">
             <Board selectedSquare={selectedSquare} />

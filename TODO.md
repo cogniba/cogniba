@@ -13,7 +13,6 @@ Full screen when playing
 Confeti when increasing level
 Vim motions
 Make an editor to write in vim
-Rename Play to Game
 Show tutorial when reaching a new level
 Responsive tutorial
 Remove refs from useEffect
