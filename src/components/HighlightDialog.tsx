@@ -25,7 +25,7 @@ interface HighlightDialogProps {
 export default function HighlightDialog({
   targetElement = "body",
   placement,
-  elementClickable = true,
+  elementClickable = false,
   isOpen,
   children,
 }: HighlightDialogProps) {
@@ -58,7 +58,7 @@ export default function HighlightDialog({
       <HighlightOverlay
         targetElement={targetElement}
         isVisible={isOpen}
-        elementClickable={true}
+        elementClickable={elementClickable}
       />
       <DialogContent
         hideOverlay

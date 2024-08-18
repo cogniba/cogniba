@@ -47,7 +47,6 @@ export default function HighlightOverlay({
     const newElement = document.querySelector(targetElement);
 
     if (newElement instanceof HTMLElement && targetElement !== "body") {
-      console.log(newElement);
       newElement.style.pointerEvents = "auto";
     }
   }, [targetElement, element, elementClickable]);

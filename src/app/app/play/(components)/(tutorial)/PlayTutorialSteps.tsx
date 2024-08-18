@@ -58,6 +58,7 @@ const steps = [
     ),
     target: "#game-level-display",
     placement: "bottom",
+    elementClickable: false,
   },
   {
     title: <>The board</>,
@@ -82,6 +83,7 @@ const steps = [
     ),
     target: "#game-button",
     placement: "top",
+    elementClickable: true,
   },
   {
     title: <>How to play</>,
