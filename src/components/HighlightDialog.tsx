@@ -82,7 +82,7 @@ export default function HighlightDialog({
                 : "top"
             }
             className={cn(
-              "absolute left-1/2 top-0 -z-10 -translate-x-1/2 drop-shadow-xl",
+              "absolute left-1/2 top-0 -z-10 -translate-x-1/2",
               (placement === "top" || placement === "center-top") && "top-full",
               (placement === "bottom" || placement === "center-bottom") &&
                 "-translate-y-full",

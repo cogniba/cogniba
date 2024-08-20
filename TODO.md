@@ -13,8 +13,6 @@ Security breach in server actions. Validate input in all server actions. Remove 
 Full screen when playing
 Confeti when increasing level
 Show tutorial when reaching a new level
-Responsive tutorial
-
 
 
 
