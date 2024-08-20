@@ -1,5 +1,3 @@
-"use server";
-
 import getSessionUser from "@/database/queries/users/getSessionUser";
 
 import { db } from "@/database/db";

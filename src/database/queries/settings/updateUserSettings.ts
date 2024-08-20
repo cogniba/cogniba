@@ -1,5 +1,3 @@
-"use server";
-
 import getUser from "../users/getUser";
 
 import { settings, type SettingsType } from "@/database/schemas/settings";
@@ -7,7 +5,7 @@ import { db } from "@/database/db";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-interface getUserSettingsProps {
+interface updateUserSettingsProps {
   showFeedback?: boolean;
   canChildrenChangeSettings?: boolean;
 }
@@ -15,7 +13,7 @@ interface getUserSettingsProps {
 export default async function updateUserSettings({
   showFeedback,
   canChildrenChangeSettings,
-}: getUserSettingsProps): Promise<SettingsType> {
+}: updateUserSettingsProps): Promise<SettingsType> {
   const { settingsId } = await getUser();
 
   const userSettings = await db

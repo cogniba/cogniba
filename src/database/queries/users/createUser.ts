@@ -1,5 +1,3 @@
-"use server";
-
 import saltAndHashPassword from "@/lib/saltAndHashPassword";
 import getUserByUsername from "@/database/queries/users/getUserByUsername";
 import getUserByEmail from "./getUserByEmail";

@@ -4,7 +4,7 @@ import getCorrectHitSequence from "@/lib/game-logic/getCorrectHitSequence";
 import waitFor from "@/lib/waitFor";
 import getHitStatistics from "@/lib/game-logic/getHitStatistics";
 import calculateNewLevel from "@/lib/game-logic/calculateNewLevel";
-import insertGameIntoDatabase from "@/lib/game-logic/insertGameIntoDatabase";
+import insertGameIntoDatabase from "@/server-actions/game/insertGameIntoDatabase";
 
 import {
   type Dispatch,

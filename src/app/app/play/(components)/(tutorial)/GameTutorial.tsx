@@ -3,7 +3,7 @@
 import Game from "../Game";
 import GameTutorialSteps from "./GameTutorialSteps";
 import sleep from "@/lib/sleep";
-import finishTutorial from "@/server-actions/finishTutorial";
+import finishTutorial from "@/server-actions/game/finishTutorial";
 
 import { useEffect, useRef, useState } from "react";
 import {

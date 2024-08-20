@@ -1,7 +1,7 @@
 "use client";
 
+import updateSettings from "@/server-actions/settings/updateSettings";
 import SettingsItem from "../SettingsItem";
-import updateUserSettings from "@/database/queries/settings/updateUserSettings";
 
 import { useState } from "react";
 
@@ -16,9 +16,9 @@ export default function ChildrenChangeSettingsSetting({
     boolean | null
   >(startingCanChildrenChangeSettings);
 
-  const updateSettings = async (value: string) => {
+  const updateCanChildrenChangeSettings = async (value: string) => {
     setCanChildrenChangeSettings(value === "enabled");
-    await updateUserSettings({
+    await updateSettings({
       canChildrenChangeSettings: value === "enabled",
     });
   };
@@ -33,7 +33,7 @@ export default function ChildrenChangeSettingsSetting({
         { value: "disabled", label: "Disabled" },
       ]}
       value={canChildrenChangeSettings ? "enabled" : "disabled"}
-      onValueChange={(value) => updateSettings(value)}
+      onValueChange={(value) => updateCanChildrenChangeSettings(value)}
     />
   );
 }

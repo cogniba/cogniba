@@ -5,11 +5,17 @@ import * as z from "zod";
 import createUser from "@/database/queries/users/createUser";
 
 import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
+import getSessionUser from "@/database/queries/users/getSessionUser";
 
 export default async function handleSignUp(
   data: z.infer<typeof SignUpSchema>,
 ): Promise<{ success?: string; error?: string }> {
   try {
+    const { role: userRole } = await getSessionUser();
+    if (userRole !== "admin") {
+      return { error: "You do not have permission to perform this action" };
+    }
+
     const validatedData = SignUpSchema.safeParse(data);
 
     if (!validatedData.success) {

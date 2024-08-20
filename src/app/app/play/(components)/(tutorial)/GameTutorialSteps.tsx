@@ -5,7 +5,7 @@ import HighlightDialog, {
 } from "@/components/HighlightDialog";
 import GameTutorialTooltip from "./GameTutorialTooltip";
 import { useSession } from "next-auth/react";
-import finishTutorial from "@/server-actions/finishTutorial";
+import finishTutorial from "@/server-actions/game/finishTutorial";
 
 type StepType = {
   title: React.ReactNode;

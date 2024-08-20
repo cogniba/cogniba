@@ -1,5 +1,7 @@
-import calculateNewLevel from "./calculateNewLevel";
-import getHitStatistics from "./getHitStatistics";
+"use server";
+
+import calculateNewLevel from "../../lib/game-logic/calculateNewLevel";
+import getHitStatistics from "../../lib/game-logic/getHitStatistics";
 import insertGame from "@/database/queries/games/insertGame";
 
 import {

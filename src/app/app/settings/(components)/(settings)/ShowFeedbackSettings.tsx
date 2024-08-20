@@ -1,7 +1,7 @@
 "use client";
 
+import updateSettings from "@/server-actions/settings/updateSettings";
 import SettingsItem from "../SettingsItem";
-import updateUserSettings from "@/database/queries/settings/updateUserSettings";
 
 import { useState } from "react";
 
@@ -17,9 +17,9 @@ export default function ShowFeedbackSettings({
   const [showFeedback, setShowFeedback] =
     useState<boolean>(startingShowFeedback);
 
-  const updateSettings = async (value: string) => {
+  const updateShowFeedback = async (value: string) => {
     setShowFeedback(value === "enabled");
-    await updateUserSettings({ showFeedback: value === "enabled" });
+    await updateSettings({ showFeedback: value === "enabled" });
   };
 
   return (
@@ -32,7 +32,7 @@ export default function ShowFeedbackSettings({
         { value: "disabled", label: "Disabled" },
       ]}
       value={showFeedback ? "enabled" : "disabled"}
-      onValueChange={(value) => updateSettings(value)}
+      onValueChange={(value) => updateShowFeedback(value)}
       disabled={disabled}
     />
   );

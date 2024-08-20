@@ -1,5 +1,3 @@
-"use server";
-
 import getSessionUser from "./getSessionUser";
 import saltAndHashPassword from "@/lib/saltAndHashPassword";
 

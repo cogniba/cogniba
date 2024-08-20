@@ -2,12 +2,7 @@ import quotes from "@/content/quotes.json";
 import calculateAccuracy from "@/lib/calculateAccuracy";
 
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogOverlay,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/cn";
 import { cva } from "class-variance-authority";
 import {
@@ -77,10 +72,6 @@ export default function StartScreen({
 
   return (
     <>
-      {/* <div
-        data-state={"closed"}
-        className="fixed left-1/2 top-1/2 z-[60] h-96 w-96 bg-red-600 data-[state=closed]:invisible data-[state=closed]:duration-1000 data-[state=open]:duration-1000 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
-      ></div> */}
       <div
         data-state={visible ? "open" : "closed"}
         className="pointer-events-auto fixed inset-0 z-40 bg-black/80 backdrop-blur-sm data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"

@@ -9,7 +9,6 @@ Revalidate tag
 Spanish
 cognia.com
 Make an editor to write in vim
-Security breach in server actions. Validate input in all server actions. Remove 'use server' from database queries
 Full screen when playing
 Confeti when increasing level
 Show tutorial when reaching a new level

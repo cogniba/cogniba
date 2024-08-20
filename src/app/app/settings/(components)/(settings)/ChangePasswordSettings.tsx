@@ -4,7 +4,7 @@ import * as z from "zod";
 
 import SettingsItem from "../SettingsItem";
 import FormAlert from "@/components/FormAlert";
-import handleChangePassword from "@/server-actions/handleChangePassword";
+import handleChangePassword from "@/server-actions/settings/handleChangePassword";
 
 import {
   Dialog,
