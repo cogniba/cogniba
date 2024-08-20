@@ -89,7 +89,6 @@ export default function GameTutorial({
       }
       setIsPlayingAnimation(false);
     };
-
     const level1ExplanationAnimation = async () => {
       while (stepRef.current === level1ExplanationStep) {
         setTutorialSelectedSquare(6);

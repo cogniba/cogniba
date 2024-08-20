@@ -51,7 +51,7 @@ export default function GameTutorialTooltip({
       <div className="text-md pb-2.5 text-slate-700 dark:text-slate-300">
         {content}
       </div>
-      <DialogFooter className="flex items-center justify-between sm:justify-between">
+      <DialogFooter className="flex flex-row items-center justify-between sm:justify-between">
         {showSkipButton ? (
           <AlertDialog>
             <AlertDialogTrigger asChild>
