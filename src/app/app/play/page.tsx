@@ -6,13 +6,13 @@ import getSessionUser from "@/database/queries/users/getSessionUser";
 import HighlightDialog from "@/components/HighlightDialog";
 
 export default async function GamePage() {
-  // const level = await getUserLevel();
+  const level = await getUserLevel();
   const { showFeedback } = await getUserSettings();
-  // const { hasFinishedTutorial, role } = await getSessionUser();
+  const { hasFinishedTutorial, role } = await getSessionUser();
 
-  const level = 1;
-  const hasFinishedTutorial = false;
-  const role = "parent";
+  // const level = 1;
+  // const hasFinishedTutorial = false;
+  // const role = "parent";
 
   return (
     <>
