@@ -20,6 +20,7 @@ import {
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
+import getMaxLevel from "@/server-actions/game/getMaxLevel";
 
 interface useGameLogicProps {
   startingLevel: number;
@@ -45,6 +46,7 @@ export default function useGameLogic({
   const [feedback, setFeedback] = useState<
     "correct" | "incorrect" | "missed" | null
   >(null);
+  const [hasReachedNewLevel, setHasReachedNewLevel] = useState(false);
 
   const { setIsVisible } = useSidebar();
 
@@ -53,6 +55,7 @@ export default function useGameLogic({
   const playerHitSequence = useRef<boolean[]>([]);
   const hasPressedButton = useRef(true);
   const shouldPressButton = useRef(false);
+  const maxLevel = useRef<number>(startingLevel);
 
   const showFeedback = useCallback(
     async (feedback: "correct" | "incorrect" | "missed") => {
@@ -94,6 +97,11 @@ export default function useGameLogic({
     );
     setPreviousLevel(currentLevel);
     setLevel(newLevel);
+
+    if (newLevel > maxLevel.current) {
+      setHasReachedNewLevel(true);
+      maxLevel.current = newLevel;
+    }
 
     await insertGameIntoDatabase(
       correctHitSequence.current,
@@ -157,6 +165,7 @@ export default function useGameLogic({
 
     setIsPlaying(true);
     setIsVisible(false);
+    setHasReachedNewLevel(false);
 
     gameSequence.current = generateGameSequence(level);
     correctHitSequence.current = getCorrectHitSequence(
@@ -189,6 +198,14 @@ export default function useGameLogic({
     });
   }, [handleButtonPress]);
 
+  useEffect(() => {
+    const fetchMaxLevel = async () => {
+      maxLevel.current = await getMaxLevel();
+    };
+
+    fetchMaxLevel();
+  }, []);
+
   return {
     feedback,
     isPlaying,
@@ -201,5 +218,7 @@ export default function useGameLogic({
     selectedSquare,
     isButtonPressed,
     handleButtonPress,
+    hasReachedNewLevel,
+    setHasReachedNewLevel,
   };
 }

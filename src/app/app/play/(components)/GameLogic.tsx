@@ -24,6 +24,8 @@ export default function GameLogic({
     selectedSquare,
     isButtonPressed,
     handleButtonPress,
+    hasReachedNewLevel,
+    setHasReachedNewLevel,
   } = useGameLogic({ startingLevel, showFeedbackEnabled });
 
   return (
@@ -39,6 +41,8 @@ export default function GameLogic({
       selectedSquare={selectedSquare}
       isButtonPressed={isButtonPressed}
       handleButtonPress={handleButtonPress}
+      hasReachedNewLevel={hasReachedNewLevel}
+      setHasReachedNewLevel={setHasReachedNewLevel}
     />
   );
 }

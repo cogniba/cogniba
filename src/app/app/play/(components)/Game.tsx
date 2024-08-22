@@ -6,6 +6,8 @@ import Board from "./GameBoard";
 import StartScreen from "./GameStartScreen";
 
 import { cn } from "@/lib/cn";
+import { type Dispatch, type SetStateAction } from "react";
+import GameNewLevelScreen from "./GameNewLevelScreen";
 
 interface GameProps {
   feedback: "correct" | "incorrect" | "missed" | null;
@@ -19,6 +21,8 @@ interface GameProps {
   selectedSquare: number | null;
   isButtonPressed: boolean;
   handleButtonPress: () => void;
+  hasReachedNewLevel: boolean;
+  setHasReachedNewLevel: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function Game({
@@ -33,6 +37,8 @@ export default function Game({
   selectedSquare,
   isButtonPressed,
   handleButtonPress,
+  hasReachedNewLevel,
+  setHasReachedNewLevel,
 }: GameProps) {
   return (
     <>
@@ -44,15 +50,22 @@ export default function Game({
           feedback === "missed" && "bg-yellow-200/50 dark:bg-yellow-950/70",
         )}
       >
-        <StartScreen
-          visible={isStartScreenVisible}
-          onStart={startPlaying}
-          correctHits={correctHits}
-          incorrectHits={incorrectHits}
-          missedHits={missedHits}
-          previousLevel={previousLevel}
-          newLevel={level}
-        />
+        {hasReachedNewLevel && level < 5 ? (
+          <GameNewLevelScreen
+            level={level}
+            setIsVisible={setHasReachedNewLevel}
+          />
+        ) : (
+          <StartScreen
+            visible={isStartScreenVisible}
+            onStart={startPlaying}
+            correctHits={correctHits}
+            incorrectHits={incorrectHits}
+            missedHits={missedHits}
+            previousLevel={previousLevel}
+            newLevel={level}
+          />
+        )}
         <div className="flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] [container-type:size] md:px-2">
           <div className="my-first-step my-[1.5cqh] flex-shrink-0 sm:mb-[2.5cqh] sm:mt-[1.5cqh]">
             <GameLevelDisplay level={level} />
