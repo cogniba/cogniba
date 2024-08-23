@@ -6,8 +6,10 @@ import Board from "./GameBoard";
 import StartScreen from "./GameStartScreen";
 
 import { cn } from "@/lib/cn";
-import { type Dispatch, type SetStateAction } from "react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import GameNewLevelScreen from "./GameNewLevelScreen";
+import Confetti from "react-confetti";
+import useWindowSize from "@/hooks/useWindowSize";
 
 interface GameProps {
   feedback: "correct" | "incorrect" | "missed" | null;
@@ -40,6 +42,26 @@ export default function Game({
   hasReachedNewLevel,
   setHasReachedNewLevel,
 }: GameProps) {
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [hideConfetti, setHideConfetti] = useState(true);
+
+  const { height, width } = useWindowSize();
+
+  const hasIncreasedLevel = level > previousLevel;
+
+  useEffect(() => {
+    if (hasIncreasedLevel) {
+      setShowConfetti(true);
+      setHideConfetti(false);
+      setTimeout(() => {
+        setShowConfetti(false);
+        setTimeout(() => {
+          setHideConfetti(true);
+        }, 10000);
+      }, 3000);
+    }
+  }, [hasIncreasedLevel]);
+
   return (
     <>
       <div
@@ -50,6 +72,16 @@ export default function Game({
           feedback === "missed" && "bg-yellow-200/50 dark:bg-yellow-950/70",
         )}
       >
+        {!hideConfetti && (
+          <Confetti
+            style={{ zIndex: 100 }}
+            height={height}
+            width={width}
+            numberOfPieces={300}
+            tweenDuration={10000}
+            recycle={showConfetti}
+          />
+        )}
         {hasReachedNewLevel && level < 5 ? (
           <GameNewLevelScreen
             level={level}

@@ -59,7 +59,7 @@ export default function GameTutorialTooltip({
             </AlertDialogTrigger>
             <AlertDialogOverlay className="z-[1000]" />
             <AlertDialogContent className="z-[1000]">
-              <AlertDialogHeader>
+              <DialogHeader>
                 <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                 <AlertDialogDescription className="dark:text-slate-300">
                   If you <Strong>skip</Strong> the tutorial you{" "}
@@ -67,7 +67,7 @@ export default function GameTutorialTooltip({
                   <Strong>skip</Strong> if you{" "}
                   <Strong>already know how to play</Strong>.
                 </AlertDialogDescription>
-              </AlertDialogHeader>
+              </DialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel
                   className={buttonVariants({ variant: "secondary" })}

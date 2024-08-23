@@ -1,4 +1,5 @@
 <!-- markdownlint-disable-file -->
+
 app.cogniaprendo.com
 Disabled state when signing out
 Handle the user reloading when in the middle of a game
@@ -9,12 +10,10 @@ Revalidate tag
 Spanish
 cognia.com
 Make an editor to write in vim
+
+Popup when user reload
 Full screen when playing
 Confeti when increasing level
-Show tutorial when reaching a new level
-
-
-
 
 Vim motions
 NeoVim
