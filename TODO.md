@@ -13,7 +13,6 @@ Make an editor to write in vim
 
 Popup when user reload
 Full screen when playing
-Confeti when increasing level
 
 Vim motions
 NeoVim
