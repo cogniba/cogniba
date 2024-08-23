@@ -11,9 +11,6 @@ Spanish
 cognia.com
 Make an editor to write in vim
 
-Popup when user reload
-Full screen when playing
-
 Vim motions
 NeoVim
 Change keyboard distribution to english

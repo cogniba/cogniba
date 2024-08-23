@@ -206,6 +206,14 @@ export default function useGameLogic({
     fetchMaxLevel();
   }, []);
 
+  useEffect(() => {
+    if (isPlaying || isTutorial) {
+      window.onbeforeunload = () => {
+        return "If you leave the page, you will lose your progress.";
+      };
+    }
+  }, [isPlaying, isTutorial]);
+
   return {
     feedback,
     isPlaying,
