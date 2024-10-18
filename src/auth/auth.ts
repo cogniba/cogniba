@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import Google from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import getUserByUsername from "@/database/queries/users/getUserByUsername";
 import Credentials from "next-auth/providers/credentials";
@@ -12,6 +13,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PostgresDrizzleAdapter(db),
   session: { strategy: "jwt" },
   providers: [
+    Google,
     Credentials({
       async authorize(credentials) {
         try {
