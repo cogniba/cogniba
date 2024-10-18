@@ -20,7 +20,7 @@ export default function RootLayoutWrapper({
       <SessionProvider>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

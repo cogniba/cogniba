@@ -17,75 +17,75 @@
   :root {
     --radius: 0.5rem;
 
-    --background: 248 250 252 /* #f8fafc */;
-    --foreground: 2 6 23 /* #020617 */;
+    --background: 248 250 252; /* #f8fafc */
+    --foreground: 2 6 23; /* #020617 */
 
-    --card: 0 0 0 /* #ffffff */;
-    --card-foreground: 2 6 23 /* #020617 */;
+    --card: 255 255 255; /* #ffffff */
+    --card-foreground: 2 6 23; /* #020617 */
 
-    --popover: 0 0 0 /* #ffffff */;
-    --popover-foreground: 2 6 23 /* #020617 */;
+    --popover: 255 255 255; /* #ffffff */
+    --popover-foreground: 2 6 23; /* #020617 */
 
-    --primary: 234 88 12 /* #ea580c */;
-    --primary-foreground: 255 247 237 /* #fff7ed */;
+    --primary: 234 88 12; /* #ea580c */
+    --primary-foreground: 255 247 237; /* #fff7ed */
 
-    --secondary: 255 237 213 /* #ffedd5 */;
-    --secondary-foreground: 67 20 7 /* #431407 */;
+    --secondary: 255 237 213; /* #ffedd5 */
+    --secondary-foreground: 67 20 7; /* #431407 */
 
-    --muted: 220 38 38 /* #dc2626 */;
-    --muted-foreground: 220 38 38 /* #dc2626 */;
+    --muted: 241 245 249; /* #f1f5f9 */
+    --muted-foreground: 100 116 139; /* #64748b */
 
-    --accent: 220 38 38 /*  */;
-    --accent-foreground: 220 38 38 /* #dc2626 */;
+    --accent: 220 38 38; /* #dc2626 */
+    --accent-foreground: 220 38 38; /* #dc2626 */
 
-    --destructive: 220 38 38 /* #dc2626 */;
-    --destructive-foreground: 220 38 38 /* #dc2626 */;
+    --destructive: 220 38 38; /* #dc2626 */
+    --destructive-foreground: 220 38 38; /* #dc2626 */
 
-    --border: 220 38 38 /* #dc2626 */;
-    --input: 220 38 38 /* #dc2626 */;
-    --ring: 2 6 23 /* #020617 */;
+    --border: 226 232 240; /* #e2e8f0 */
+    --input: 226 232 240; /* #e2e8f0 */
+    --ring: 234 88 12; /* #ea580c */
 
-    --chart-1: 12 76% 61% /*  */;
-    --chart-2: 173 58% 39% /*  */;
-    --chart-3: 197 37% 24% /*  */;
-    --chart-4: 43 74% 66% /*  */;
-    --chart-5: 27 87% 67% /*  */;
+    --chart-1: 12 76% 61%; /* #dc2626 */
+    --chart-2: 173 58% 39%; /* #dc2626 */
+    --chart-3: 197 37% 24%; /* #dc2626 */
+    --chart-4: 43 74% 66%; /* #dc2626 */
+    --chart-5: 27 87% 67%; /* #dc2626 */
   }
 
   .dark {
-    --background: 220 38 38 /* #dc2626 */;
-    --foreground: 220 38 38 /* #dc2626 */;
+    --background: 220 38 38; /* #dc2626 */
+    --foreground: 220 38 38; /* #dc2626 */
 
-    --card: 220 38 38 /* #dc2626 */;
-    --card-foreground: 220 38 38 /* #dc2626 */;
+    --card: 220 38 38; /* #dc2626 */
+    --card-foreground: 220 38 38; /* #dc2626 */
 
-    --popover: 220 38 38 /* #dc2626 */;
-    --popover-foreground: 220 38 38 /* #dc2626 */;
+    --popover: 220 38 38; /* #dc2626 */
+    --popover-foreground: 220 38 38; /* #dc2626 */
 
-    --primary: 220 38 38 /* #dc2626 */;
-    --primary-foreground: 220 38 38 /* #dc2626 */;
+    --primary: 220 38 38; /* #dc2626 */
+    --primary-foreground: 220 38 38; /* #dc2626 */
 
-    --secondary: 220 38 38 /* #dc2626 */;
-    --secondary-foreground: 220 38 38 /* #dc2626 */;
+    --secondary: 220 38 38; /* #dc2626 */
+    --secondary-foreground: 220 38 38; /* #dc2626 */
 
-    --muted: 220 38 38 /* #dc2626 */;
-    --muted-foreground: 220 38 38 /* #dc2626 */;
+    --muted: 220 38 38; /* #dc2626 */
+    --muted-foreground: 220 38 38; /* #dc2626 */
 
-    --accent: 220 38 38 /* #dc2626 */;
-    --accent-foreground: 220 38 38 /* #dc2626 */;
+    --accent: 220 38 38; /* #dc2626 */
+    --accent-foreground: 220 38 38; /* #dc2626 */
 
-    --destructive: 220 38 38 /* #dc2626 */;
-    --destructive-foreground: 220 38 38 /* #dc2626 */;
+    --destructive: 220 38 38; /* #dc2626 */
+    --destructive-foreground: 220 38 38; /* #dc2626 */
 
-    --border: 220 38 38 /* #dc2626 */;
-    --input: 220 38 38 /* #dc2626 */;
-    --ring: 220 38 38 /* #dc2626 */;
+    --border: 220 38 38; /* #dc2626 */
+    --input: 220 38 38; /* #dc2626 */
+    --ring: 220 38 38; /* #dc2626 */
 
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --chart-1: 220 70% 50%; /* #dc2626 */
+    --chart-2: 160 60% 45%; /* #dc2626 */
+    --chart-3: 30 80% 55%; /* #dc2626 */
+    --chart-4: 280 65% 60%; /* #dc2626 */
+    --chart-5: 340 75% 55%; /* #dc2626 */
   }
 }
 

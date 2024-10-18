@@ -23,34 +23,32 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { FaGoogle } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { SignInSchema } from "@/zod/schemas/SignInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
+import { Separator } from "@/components/ui/separator";
 
 export default function SignInPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
     defaultValues: {
-      username: "",
-      password: "",
+      email: "",
     },
   });
 
   function onSubmit(data: z.infer<typeof SignInSchema>) {
     setError(null);
-    setSuccess(null);
 
     startTransition(() => {
       handleSignIn(data).then((result) => {
         if (result) {
           setError(result.error ?? null);
-          setSuccess(result.success ?? null);
         }
       });
     });
@@ -59,85 +57,69 @@ export default function SignInPage() {
   return (
     <Form {...form}>
       <form
-        className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950"
+        className="flex min-h-screen items-center justify-center"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <Card className="flex min-h-screen w-full items-center justify-center space-y-1 bg-white dark:bg-slate-900/30 sm:my-8 sm:min-h-fit sm:max-w-sm">
-          <div className="max-w-sm">
-            <CardHeader>
-              <CardTitle className="text-2xl">Sign In</CardTitle>
-              <CardDescription>
-                Enter your credentials to sign in to your account
-              </CardDescription>
-            </CardHeader>
+        <Card className="xs:border-border w-full max-w-sm border-transparent px-2 shadow-none xs:shadow-sm">
+          <CardHeader className="pb-9">
+            <CardTitle className="text-2xl">Sign In</CardTitle>
+            <CardDescription>Sign in to your account</CardDescription>
+          </CardHeader>
 
-            <CardContent>
-              <div className="flex flex-col gap-5">
-                <FormField
-                  control={form.control}
-                  name="username"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel htmlFor="username">Username</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          id="username"
-                          name="username"
-                          type="text"
-                          placeholder="marcoshernanz123"
-                          autoComplete="username"
-                          required
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+          <CardContent className="grid gap-4">
+            <Button
+              type="button"
+              variant="outline"
+              className="bg-background text-foreground hover:bg-muted flex w-full items-center justify-center gap-2 font-semibold hover:text-black"
+            >
+              <FaGoogle className="" />
+              Continue with Google
+            </Button>
 
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <div className="flex items-center">
-                        <FormLabel htmlFor="Password">Password</FormLabel>
-                        <Link
-                          href="#"
-                          className="ml-auto inline-block text-sm underline"
-                          tabIndex={-1}
-                        >
-                          Forgot your password?
-                        </Link>
-                      </div>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          id="password"
-                          name="password"
-                          type="password"
-                          // placeholder="••••••••"
-                          required
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </CardContent>
+            <div className="flex w-full items-center pt-2">
+              <Separator className="w-full shrink" />
+              <span className="px-2 text-sm">or</span>
+              <Separator className="w-full shrink" />
+            </div>
+            <div className="flex flex-col gap-5">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        type="email"
+                        placeholder="marcos@example.com"
+                        autoComplete="email"
+                        required
+                        className="bg-transparent"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </CardContent>
 
-            <CardFooter className="flex flex-col gap-6">
-              <Button type="submit" className="w-full" disabled={isPending}>
-                Sign In
-              </Button>
+          <CardFooter className="flex flex-col gap-6">
+            <Button type="submit" className="w-full" disabled={isPending}>
+              Sign In
+            </Button>
 
-              {error && <FormAlert variant="destructive" message={error} />}
-              {success && <FormAlert variant="success" message={success} />}
-            </CardFooter>
-          </div>
+            {error && <FormAlert variant="destructive" message={error} />}
+
+            <div className="mt-2.5 text-center text-sm">
+              Don&apos;t have an account?{" "}
+              <Link href="/sign-up" className="underline">
+                Sign up
+              </Link>
+            </div>
+          </CardFooter>
         </Card>
       </form>
     </Form>
