@@ -1,1 +1,0 @@
-ALTER TABLE "games" ADD COLUMN "timeSpent" integer NOT NULL;

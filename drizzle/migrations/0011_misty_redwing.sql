@@ -1,1 +1,0 @@
-ALTER TABLE "auth"."users" ALTER COLUMN "settingsId" SET NOT NULL;

@@ -5,17 +5,16 @@ import {
   text,
   primaryKey,
   integer,
-  pgSchema,
   AnyPgColumn,
+  pgTable,
+  pgEnum,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 import { settings } from "./settings";
 
-export const authSchema = pgSchema("auth");
+export const roleEnum = pgEnum("role", ["child", "parent", "admin"]);
 
-export const roleEnum = authSchema.enum("role", ["child", "parent", "admin"]);
-
-export const users = authSchema.table("users", {
+export const users = pgTable("users", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID())
@@ -42,7 +41,7 @@ export const users = authSchema.table("users", {
   createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });
 
-export const accounts = authSchema.table(
+export const accounts = pgTable(
   "accounts",
   {
     userId: text("userId")
@@ -66,7 +65,7 @@ export const accounts = authSchema.table(
   }),
 );
 
-export const sessions = authSchema.table("sessions", {
+export const sessions = pgTable("sessions", {
   sessionToken: text("sessionToken").primaryKey(),
   userId: text("userId")
     .notNull()
@@ -74,7 +73,7 @@ export const sessions = authSchema.table("sessions", {
   expires: timestamp("expires", { mode: "date" }).notNull(),
 });
 
-export const verificationTokens = authSchema.table(
+export const verificationTokens = pgTable(
   "verificationTokens",
   {
     identifier: text("identifier").notNull(),
@@ -88,7 +87,7 @@ export const verificationTokens = authSchema.table(
   }),
 );
 
-export const authenticators = authSchema.table(
+export const authenticators = pgTable(
   "authenticators",
   {
     credentialID: text("credentialID").notNull().unique(),
