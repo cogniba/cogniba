@@ -30,6 +30,7 @@ import { SignInSchema } from "@/zod/schemas/SignInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
+import { signIn } from "next-auth/react";
 
 export default function SignInPage() {
   const [isPending, startTransition] = useTransition();
@@ -60,7 +61,7 @@ export default function SignInPage() {
         className="flex min-h-screen items-center justify-center"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <Card className="xs:border-border w-full max-w-sm border-transparent px-2 shadow-none xs:shadow-sm">
+        <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
           <CardHeader className="pb-9">
             <CardTitle className="text-2xl">Sign In</CardTitle>
             <CardDescription>Sign in to your account</CardDescription>
@@ -68,9 +69,10 @@ export default function SignInPage() {
 
           <CardContent className="grid gap-4">
             <Button
+              onClick={() => signIn("google")}
               type="button"
               variant="outline"
-              className="bg-background text-foreground hover:bg-muted flex w-full items-center justify-center gap-2 font-semibold hover:text-black"
+              className="flex w-full items-center justify-center gap-2 bg-background font-semibold text-foreground hover:bg-muted hover:text-black"
             >
               <FaGoogle className="" />
               Continue with Google
