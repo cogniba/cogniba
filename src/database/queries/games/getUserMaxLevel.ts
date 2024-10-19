@@ -1,6 +1,6 @@
 import { db } from "@/database/db";
 import getSessionUser from "../users/getSessionUser";
-import { games } from "@/database/schemas/games";
+import { gamesTable } from "@/database/schemas/games";
 import { desc, eq } from "drizzle-orm";
 
 export default async function getUserMaxLevel(): Promise<number> {
@@ -8,9 +8,9 @@ export default async function getUserMaxLevel(): Promise<number> {
 
   const level = await db
     .select()
-    .from(games)
-    .where(eq(games.userId, userId))
-    .orderBy(desc(games.newLevel))
+    .from(gamesTable)
+    .where(eq(gamesTable.userId, userId))
+    .orderBy(desc(gamesTable.newLevel))
     .limit(1)
     .then((res) => (res.length === 1 ? res[0].newLevel : 1));
 

@@ -1,12 +1,16 @@
 import { InferSelectModel } from "drizzle-orm";
-import { boolean, pgTable, text } from "drizzle-orm/pg-core";
+import { boolean, pgTable, uuid } from "drizzle-orm/pg-core";
+import { usersTable } from "./auth";
 
-export const settings = pgTable("settings", {
-  id: text("id")
+export const settingsTable = pgTable("settings_table", {
+  id: uuid("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  showFeedback: boolean("showFeedback").notNull(),
-  canChildrenChangeSettings: boolean("canChildrenChangeSettings"),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => usersTable.id, { onDelete: "cascade" }),
+
+  showFeedback: boolean("show_feedback").notNull(),
 });
 
-export type SettingsType = InferSelectModel<typeof settings>;
+export type SettingsType = InferSelectModel<typeof settingsTable>;

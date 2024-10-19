@@ -5,6 +5,7 @@ const projectDir = process.cwd();
 loadEnvConfig(projectDir);
 
 export default defineConfig({
+  schemaFilter: ["public"],
   dialect: "postgresql",
   schema: "./src/database/schemas/*",
   out: "./drizzle/migrations",

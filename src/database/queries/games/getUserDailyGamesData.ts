@@ -3,7 +3,7 @@ import calculateAccuracy from "@/lib/calculateAccuracy";
 
 import { avg, count, eq, sum } from "drizzle-orm";
 import { db } from "@/database/db";
-import { games } from "@/database/schemas/games";
+import { gamesTable } from "@/database/schemas/games";
 import { date } from "@/database/queries/functions";
 
 export type DailyGamesData = {
@@ -23,19 +23,19 @@ export default async function getUserDailyGamesData(): Promise<DailyGamesData> {
 
   const gamesData = await db
     .select({
-      userId: games.userId,
-      gamesPlayed: count(games.level),
-      level: avg(games.level).mapWith(Number),
-      correctHits: avg(games.correctHits).mapWith(Number),
-      incorrectHits: avg(games.incorrectHits).mapWith(Number),
-      missedHits: avg(games.missedHits).mapWith(Number),
-      timePlayed: sum(games.timePlayed).mapWith(Number),
-      date: date(games.createdAt),
+      userId: gamesTable.userId,
+      gamesPlayed: count(gamesTable.level),
+      level: avg(gamesTable.level).mapWith(Number),
+      correctHits: avg(gamesTable.correctHits).mapWith(Number),
+      incorrectHits: avg(gamesTable.incorrectHits).mapWith(Number),
+      missedHits: avg(gamesTable.missedHits).mapWith(Number),
+      timePlayed: sum(gamesTable.timePlayed).mapWith(Number),
+      date: date(gamesTable.createdAt),
     })
-    .from(games)
-    .where(eq(games.userId, userId))
-    .groupBy(date(games.createdAt), games.userId)
-    .orderBy(date(games.createdAt));
+    .from(gamesTable)
+    .where(eq(gamesTable.userId, userId))
+    .groupBy(date(gamesTable.createdAt), gamesTable.userId)
+    .orderBy(date(gamesTable.createdAt));
 
   const fullGamesData = gamesData.map((data) => ({
     accuracy: calculateAccuracy({

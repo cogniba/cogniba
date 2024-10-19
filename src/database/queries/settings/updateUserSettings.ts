@@ -1,6 +1,6 @@
 import getUser from "../users/getUser";
 
-import { settings, type SettingsType } from "@/database/schemas/settings";
+import { settingsTable, type SettingsType } from "@/database/schemas/settings";
 import { db } from "@/database/db";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
@@ -17,12 +17,12 @@ export default async function updateUserSettings({
   const { settingsId } = await getUser();
 
   const userSettings = await db
-    .update(settings)
+    .update(settingsTable)
     .set({
       showFeedback,
       canChildrenChangeSettings,
     })
-    .where(eq(settings.id, settingsId))
+    .where(eq(settingsTable.id, settingsId))
     .returning()
     .then((res) => (res.length === 1 ? res[0] : null));
   if (!userSettings) {

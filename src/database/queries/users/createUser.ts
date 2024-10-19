@@ -4,7 +4,7 @@ import getUserByEmail from "./getUserByEmail";
 
 import { db } from "@/database/db";
 import { type RoleType, users, type UserType } from "@/database/schemas/auth";
-import { settings } from "@/database/schemas/settings";
+import { settingsTable } from "@/database/schemas/settings";
 
 interface createUserProps {
   role: RoleType;
@@ -56,12 +56,12 @@ export default async function createUser({
   const hashedPassword = await saltAndHashPassword(password);
 
   const { settingsId } = await db
-    .insert(settings)
+    .insert(settingsTable)
     .values({
       showFeedback: true,
       canChildrenChangeSettings: false,
     })
-    .returning({ settingsId: settings.id })
+    .returning({ settingsId: settingsTable.id })
     .then((res) => (res.length === 1 ? res[0] : { settingsId: null }));
   if (!settingsId) {
     throw new Error("An error occurred");

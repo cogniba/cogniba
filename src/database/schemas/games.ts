@@ -1,25 +1,25 @@
-import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
-import { users } from "./auth";
+import { integer, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 import { InferSelectModel } from "drizzle-orm";
+import { usersTable } from "./auth";
 
-export const games = pgTable("games", {
-  id: text("id")
+export const gamesTable = pgTable("games_table", {
+  id: uuid("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  userId: text("userId")
+  userId: uuid("user_id")
     .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+    .references(() => usersTable.id, { onDelete: "cascade" }),
 
   level: integer("level").notNull(),
-  newLevel: integer("newLevel").notNull(),
+  newLevel: integer("new_level").notNull(),
 
-  correctHits: integer("correctHits").notNull(),
-  incorrectHits: integer("incorrectHits").notNull(),
-  missedHits: integer("missedHits").notNull(),
+  correctHits: integer("correct_hits").notNull(),
+  incorrectHits: integer("incorrect_hits").notNull(),
+  missedHits: integer("missed_hits").notNull(),
 
-  timePlayed: integer("timePlayed").notNull(),
+  timePlayed: integer("time_played").notNull(),
 
-  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
+  createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
 });
 
-export type GameType = InferSelectModel<typeof games>;
+export type GameType = InferSelectModel<typeof gamesTable>;
