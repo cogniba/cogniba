@@ -40,6 +40,7 @@ export default function SignInPage() {
     resolver: zodResolver(SignInSchema),
     defaultValues: {
       email: "",
+      password: "",
     },
   });
 
@@ -97,6 +98,27 @@ export default function SignInPage() {
                         type="email"
                         placeholder="marcos@example.com"
                         autoComplete="email"
+                        required
+                        className="bg-transparent"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        type="password"
+                        autoComplete="current-password"
                         required
                         className="bg-transparent"
                       />
