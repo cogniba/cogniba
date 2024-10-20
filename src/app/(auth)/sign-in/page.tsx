@@ -1,7 +1,8 @@
 "use client";
 
-import * as z from "zod";
+import { z } from "zod";
 
+import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import handleSignIn from "@/server-actions/auth/handleSignIn";
 import FormAlert from "@/components/FormAlert";
@@ -35,6 +36,11 @@ import { signIn } from "next-auth/react";
 export default function SignInPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  );
 
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
