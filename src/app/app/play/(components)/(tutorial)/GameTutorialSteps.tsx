@@ -4,7 +4,6 @@ import HighlightDialog, {
   type PlacementType,
 } from "@/components/HighlightDialog";
 import GameTutorialTooltip from "./GameTutorialTooltip";
-import { useSession } from "next-auth/react";
 import finishTutorial from "@/server-actions/game/finishTutorial";
 
 export type StepType = {
@@ -33,7 +32,8 @@ export default function GameTutorialSteps({
   isVisible,
   showSkipButton,
 }: GameTutorialStepsProps) {
-  const { update: updateSession } = useSession();
+  // TODO
+  // const { update: updateSession } = useSession();
 
   const handleSkip = useCallback(async () => {
     await updateSession({ hasFinishedTutorial: true });

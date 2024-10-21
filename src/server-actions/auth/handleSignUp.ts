@@ -1,8 +1,10 @@
+"use server";
+
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function handleSignUp(formData: FormData) {
+export default async function handleSignUp(formData: FormData) {
   const supabase = createClient();
 
   // type-casting here for convenience

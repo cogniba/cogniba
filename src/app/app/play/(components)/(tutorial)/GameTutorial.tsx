@@ -11,7 +11,6 @@ import {
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
-import { useSession } from "next-auth/react";
 import useGameLogic from "@/hooks/useGameLogic";
 import { Strong } from "@/components/ui/Strong";
 
@@ -216,7 +215,8 @@ export default function GameTutorial({
 
   const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
 
-  const { update: updateSession } = useSession();
+  // TODO
+  // const { update: updateSession } = useSession();
 
   const {
     feedback,

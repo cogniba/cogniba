@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 
-import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import FormAlert from "@/components/FormAlert";
 
@@ -30,15 +29,13 @@ import { SignInSchema } from "@/zod/schemas/SignInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
+import createClient from "@/lib/supabase/client";
 
 export default function SignInPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+  const supabase = createClient();
 
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
