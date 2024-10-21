@@ -15,7 +15,7 @@ const users = authSchema.table("users", {
 });
 
 export const usersTable = pgTable("users_table", {
-  id: uuid("id")
+  id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID())
     .notNull(),

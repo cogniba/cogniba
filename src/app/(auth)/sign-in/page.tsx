@@ -4,7 +4,6 @@ import { z } from "zod";
 
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
-import handleSignIn from "@/server-actions/auth/handleSignIn";
 import FormAlert from "@/components/FormAlert";
 
 import { Button } from "@/components/ui/button";
@@ -31,7 +30,6 @@ import { SignInSchema } from "@/zod/schemas/SignInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
-import { signIn } from "next-auth/react";
 
 export default function SignInPage() {
   const [isPending, startTransition] = useTransition();
@@ -54,13 +52,22 @@ export default function SignInPage() {
     setError(null);
 
     startTransition(() => {
-      handleSignIn(data).then((result) => {
-        if (result) {
-          setError(result.error ?? null);
-        }
-      });
+      // handleSignIn(data).then((result) => {
+      //   if (result) {
+      //     setError(result.error ?? null);
+      //   }
+      // });
     });
   }
+
+  const handleSignInWithGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`,
+      },
+    });
+  };
 
   return (
     <Form {...form}>
@@ -76,7 +83,7 @@ export default function SignInPage() {
 
           <CardContent className="grid gap-4">
             <Button
-              onClick={() => signIn("google")}
+              onClick={handleSignInWithGoogle}
               type="button"
               variant="outline"
               className="flex w-full items-center justify-center gap-2 bg-background font-semibold text-foreground hover:bg-muted hover:text-black"
@@ -138,7 +145,7 @@ export default function SignInPage() {
 
           <CardFooter className="flex flex-col gap-6">
             <Button type="submit" className="w-full" disabled={isPending}>
-              Sign In
+              Sign in
             </Button>
 
             {error && <FormAlert variant="destructive" message={error} />}

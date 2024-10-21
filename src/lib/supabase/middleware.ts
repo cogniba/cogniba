@@ -38,13 +38,13 @@ export async function updateSession(request: NextRequest) {
 
   if (!isAuthenticated) {
     if (pathname.startsWith("/app")) {
-      const newUrl = new URL("/login", request.nextUrl.origin);
+      const newUrl = new URL("/sign-in", request.nextUrl.origin);
       return NextResponse.redirect(newUrl);
     }
   } else if (isAuthenticated) {
     if (
       pathname === "/" ||
-      pathname.startsWith("/login") ||
+      pathname.startsWith("/sign-in") ||
       pathname.startsWith("/register")
     ) {
       const newUrl = new URL("/app", request.nextUrl.origin);

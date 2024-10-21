@@ -1,12 +1,12 @@
-import { integer, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
+import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { InferSelectModel } from "drizzle-orm";
 import { usersTable } from "./auth";
 
 export const gamesTable = pgTable("games_table", {
-  id: uuid("id")
+  id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  userId: uuid("user_id")
+  userId: text("user_id")
     .notNull()
     .references(() => usersTable.id, { onDelete: "cascade" }),
 
