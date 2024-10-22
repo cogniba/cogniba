@@ -17,13 +17,10 @@ const users = authSchema.table("users", {
 export const profilesTable = pgTable("profiles", {
   id: uuid("id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID())
-    .notNull(),
-  userId: uuid("user_id")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
 
-  email: text("email").unique(),
+  email: text("email").unique().notNull(),
   full_name: text("full_name").notNull(),
 
   hasFinishedTutorial: boolean("has_finished_tutorial")
