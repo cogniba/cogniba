@@ -19,7 +19,7 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/cn";
 
-import type { UserType } from "@/database/schemas/auth";
+import type { UserType } from "@/database/schemas/profiles";
 import type { DateRange } from "react-day-picker";
 import type { Dispatch, SetStateAction } from "react";
 
@@ -48,8 +48,8 @@ export default function AnalyticsFilters({
     : undefined;
 
   return (
-    <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
-      <div className="flex w-full flex-col items-center justify-start gap-3 sm:w-fit lg:flex-row">
+    <div className="sm:flex-row flex flex-col items-center justify-between gap-3">
+      <div className="sm:w-fit lg:flex-row flex w-full flex-col items-center justify-start gap-3">
         {isParent && (
           <Select
             value={selectedChildIndex}
@@ -57,7 +57,7 @@ export default function AnalyticsFilters({
               setSelectedChild(userChildren[Number(value)])
             }
           >
-            <SelectTrigger className="w-full sm:w-52 md:w-64">
+            <SelectTrigger className="sm:w-52 md:w-64 w-full">
               <SelectValue placeholder="Select a child" />
             </SelectTrigger>
             <SelectContent>
@@ -73,7 +73,7 @@ export default function AnalyticsFilters({
           value={chartMetric ?? undefined}
           onValueChange={(value) => setChartMetric(value as chartMetrics)}
         >
-          <SelectTrigger className="w-full sm:w-52 md:w-64">
+          <SelectTrigger className="sm:w-52 md:w-64 w-full">
             <SelectValue placeholder="Select a metric" />
           </SelectTrigger>
           <SelectContent>
@@ -89,7 +89,7 @@ export default function AnalyticsFilters({
         <PopoverTrigger asChild>
           <Button
             className={cn(
-              "flex w-full items-center justify-start gap-2 font-normal sm:w-64",
+              "sm:w-64 flex w-full items-center justify-start gap-2 font-normal",
               !date && "text-slate-800",
             )}
             variant="outline"

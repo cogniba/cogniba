@@ -3,7 +3,7 @@ import AnalyticsChart from "./AnalyticsChart";
 
 import { chartMetrics } from "./Analytics";
 
-import type { UserType } from "@/database/schemas/auth";
+import type { UserType } from "@/database/schemas/profiles";
 import type { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
 import type { ChartConfig } from "@/components/ui/chart";
 

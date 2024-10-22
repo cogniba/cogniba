@@ -1,6 +1,6 @@
 import getSessionUser from "./getSessionUser";
 
-import { users, type UserType } from "@/database/schemas/auth";
+import { users, type UserType } from "@/database/schemas/profiles";
 import { db } from "@/database/db";
 import { eq } from "drizzle-orm";
 

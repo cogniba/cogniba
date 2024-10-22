@@ -15,6 +15,13 @@
       "when": 1729579965272,
       "tag": "0001_condemned_nightshade",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1729580467211,
+      "tag": "0002_clear_giant_girl",
+      "breakpoints": true
     }
   ]
 }

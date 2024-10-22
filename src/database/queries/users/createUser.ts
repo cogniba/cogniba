@@ -3,7 +3,11 @@ import getUserByUsername from "@/database/queries/users/getUserByUsername";
 import getUserByEmail from "./getUserByEmail";
 
 import { db } from "@/database/db";
-import { type RoleType, users, type UserType } from "@/database/schemas/auth";
+import {
+  type RoleType,
+  users,
+  type UserType,
+} from "@/database/schemas/profiles";
 import { settingsTable } from "@/database/schemas/settings";
 
 interface createUserProps {

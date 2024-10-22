@@ -4,7 +4,7 @@ import { avg, count, inArray, sum } from "drizzle-orm";
 import { db } from "@/database/db";
 import { gamesTable } from "@/database/schemas/games";
 import { date } from "@/database/queries/functions";
-import type { UserType } from "@/database/schemas/auth";
+import type { UserType } from "@/database/schemas/profiles";
 import type { DailyGamesData } from "./getUserDailyGamesData";
 
 export default async function getChildrenDailyGamesData(

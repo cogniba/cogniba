@@ -9,7 +9,7 @@ import { useState } from "react";
 import { subDays } from "date-fns";
 
 import type { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
-import type { UserType } from "@/database/schemas/auth";
+import type { UserType } from "@/database/schemas/profiles";
 import type { DateRange } from "react-day-picker";
 
 export type chartMetrics =
@@ -52,7 +52,7 @@ export default function Analytics({
 
   return (
     <Card className="flex h-full w-full flex-col bg-white pb-4 pt-8 dark:bg-slate-900/30 xs:py-0">
-      <CardHeader className="border-b border-slate-200 p-5 dark:border-slate-800 sm:p-8">
+      <CardHeader className="sm:p-8 border-b border-slate-200 p-5 dark:border-slate-800">
         <AnalyticsFilters
           userChildren={userChildren}
           date={date}
@@ -63,7 +63,7 @@ export default function Analytics({
           setSelectedChild={setSelectedChild}
         />
       </CardHeader>
-      <CardContent className="flex h-full flex-col p-5 sm:p-8">
+      <CardContent className="sm:p-8 flex h-full flex-col p-5">
         <AnalyticsMetrics
           isParent={isParent}
           selectedChild={selectedChild}

@@ -1,7 +1,7 @@
 import getSessionUser from "./getSessionUser";
 
 import { db } from "@/database/db";
-import { users } from "@/database/schemas/auth";
+import { users } from "@/database/schemas/profiles";
 import { eq } from "drizzle-orm";
 
 export default async function updateUserHasFinishedTutorial(

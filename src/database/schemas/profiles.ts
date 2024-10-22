@@ -20,7 +20,7 @@ export const profilesTable = pgTable("profiles", {
     .$defaultFn(() => crypto.randomUUID())
     .notNull(),
   userId: uuid("user_id")
-    .references(() => users.id)
+    .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
 
   email: text("email").unique(),

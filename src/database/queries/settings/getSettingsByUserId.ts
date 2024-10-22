@@ -1,5 +1,5 @@
 import { db } from "@/database/db";
-import { users } from "@/database/schemas/auth";
+import { users } from "@/database/schemas/profiles";
 import { settingsTable, type SettingsType } from "@/database/schemas/settings";
 import { eq } from "drizzle-orm";
 
