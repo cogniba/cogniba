@@ -1,5 +1,3 @@
-import handleSignOut from "@/server-actions/auth/handleSignOut";
-
 import { useTransition } from "react";
 import { CircleUserIcon, LogOutIcon } from "lucide-react";
 import {
@@ -11,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/cn";
+import createClient from "@/lib/supabase/client";
 
 interface UserButtonProps {
   readonly name: string;
@@ -22,9 +21,11 @@ export default function UserButton({ name, username }: UserButtonProps) {
     useSidebar();
   const [isPending, startTransition] = useTransition();
 
+  const supabase = createClient();
+
   const onSignOut = () => {
-    startTransition(() => {
-      handleSignOut();
+    startTransition(async () => {
+      await supabase.auth.signOut();
     });
   };
 
