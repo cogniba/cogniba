@@ -1,3 +1,4 @@
+import { UserType } from "@/database/schemas/profiles";
 import AppSidebar from "./(components)/AppSidebar";
 
 import { SidebarProvider } from "@/context/SidebarContext";
@@ -7,6 +8,13 @@ interface AppLayoutProps {
 }
 
 export default async function AppLayout({ children }: AppLayoutProps) {
+  const response = await fetch("/api/get_user", { cache: "no-cache" });
+  if (!response.ok) {
+    return <div>An error has ocurred</div>;
+  }
+
+  const user: UserType = await response.json();
+
   return (
     <>
       {/* <FullScreenProvider /> */}
