@@ -24,8 +24,8 @@ export const profilesTable = pgTable("profiles", {
   full_name: text("full_name").notNull(),
 
   hasFinishedTutorial: boolean("has_finished_tutorial")
-    .notNull()
-    .default(false),
+    .default(false)
+    .notNull(),
 
   createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
 });

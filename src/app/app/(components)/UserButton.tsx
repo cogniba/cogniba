@@ -12,11 +12,11 @@ import { cn } from "@/lib/cn";
 import createClient from "@/lib/supabase/client";
 
 interface UserButtonProps {
-  readonly name: string;
-  readonly username: string;
+  full_name: string;
+  email: string;
 }
 
-export default function UserButton({ name, username }: UserButtonProps) {
+export default function UserButton({ full_name, email }: UserButtonProps) {
   const { isExpanded, isUserDropdownOpen, setIsUserDropdownOpen } =
     useSidebar();
   const [isPending, startTransition] = useTransition();
@@ -51,9 +51,9 @@ export default function UserButton({ name, username }: UserButtonProps) {
               className="absolute left-9 w-40 space-y-0.5 text-left text-base font-medium opacity-0 transition-[opacity,left] group-data-[state=expanded]:left-11 group-data-[state=expanded]:opacity-100"
               aria-hidden={isExpanded || isUserDropdownOpen || undefined}
             >
-              <div className="truncate font-semibold">{name}</div>
+              <div className="truncate font-semibold">{full_name}</div>
               <div className="truncate text-xs font-normal text-slate-600 transition duration-200 group-hover/item:text-slate-700 dark:text-slate-400 dark:group-hover/item:text-slate-300">
-                @{username}
+                {email}
               </div>
             </div>
           </button>

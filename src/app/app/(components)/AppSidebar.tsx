@@ -15,11 +15,11 @@ import { cn } from "@/lib/cn";
 import { useEffect, useState } from "react";
 
 interface AppSidebarProps {
-  name: string;
-  username: string;
+  full_name: string;
+  email: string;
 }
 
-export default function AppSidebar({ name, username }: AppSidebarProps) {
+export default function AppSidebar({ full_name, email }: AppSidebarProps) {
   const [isHoverable, setIsHoverable] = useState(false);
   const { isVisible, isExpanded, setIsExpanded, isUserDropdownOpen } =
     useSidebar();
@@ -38,14 +38,14 @@ export default function AppSidebar({ name, username }: AppSidebarProps) {
     >
       <div
         className={cn(
-          "invisible fixed inset-0 z-40 bg-black/30 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-data-[state=expanded]:visible group-data-[state=expanded]:opacity-100 lg:can-hover:hidden",
+          "lg:can-hover:hidden invisible fixed inset-0 z-40 bg-black/30 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-data-[state=expanded]:visible group-data-[state=expanded]:opacity-100",
           !isVisible && "-translate-x-full [transition:transform_300ms]",
         )}
         onClick={() => setIsExpanded(false)}
       ></div>
       <button
         className={cn(
-          "fixed z-50 p-1.5 text-slate-950 drop-shadow-lg dark:text-slate-50 lg:can-hover:hidden",
+          "lg:can-hover:hidden fixed z-50 p-1.5 text-slate-950 drop-shadow-lg dark:text-slate-50",
           !isVisible && "-translate-x-full [transition:transform_300ms]",
         )}
         onClick={() => setIsExpanded((expanded) => !expanded)}
@@ -55,9 +55,9 @@ export default function AppSidebar({ name, username }: AppSidebarProps) {
       </button>
       <nav
         className={cn(
-          "hide-scrollbar group fixed z-40 flex h-full w-16 -translate-x-full flex-col items-center justify-between overflow-y-auto border-r border-slate-200 bg-white py-2 pt-12 shadow-xl shadow-black/5 transition-all duration-200 group-data-[state=expanded]:w-full group-data-[state=expanded]:translate-x-0 group-data-[state=expanded]:shadow-black/10 dark:border-slate-800 dark:bg-slate-950 dark:shadow-black/30 dark:group-data-[state=expanded]:shadow-black/60 xs:group-data-[state=expanded]:w-60 lg:can-hover:translate-x-0 lg:can-hover:pt-2",
+          "hide-scrollbar lg:can-hover:translate-x-0 lg:can-hover:pt-2 group fixed z-40 flex h-full w-16 -translate-x-full flex-col items-center justify-between overflow-y-auto border-r border-slate-200 bg-white py-2 pt-12 shadow-xl shadow-black/5 transition-all duration-200 group-data-[state=expanded]:w-full group-data-[state=expanded]:translate-x-0 group-data-[state=expanded]:shadow-black/10 dark:border-slate-800 dark:bg-slate-950 dark:shadow-black/30 dark:group-data-[state=expanded]:shadow-black/60 xs:group-data-[state=expanded]:w-60",
           !isVisible &&
-            "-translate-x-full [transition:transform_300ms] group-data-[state=expanded]:-translate-x-full lg:can-hover:-translate-x-full",
+            "lg:can-hover:-translate-x-full -translate-x-full [transition:transform_300ms] group-data-[state=expanded]:-translate-x-full",
         )}
         onMouseEnter={() => isHoverable && setIsExpanded(true)}
         onMouseLeave={() => isHoverable && setIsExpanded(false)}
@@ -83,7 +83,7 @@ export default function AppSidebar({ name, username }: AppSidebarProps) {
             Icon={SettingsIcon}
             onClick={() => !isHoverable && setIsExpanded(false)}
           />
-          <UserButton name={name} username={username} />
+          <UserButton full_name={full_name} email={email} />
         </div>
       </nav>
     </div>
