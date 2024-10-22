@@ -14,7 +14,7 @@ const users = authSchema.table("users", {
   id: uuid("id").primaryKey(),
 });
 
-export const usersTable = pgTable("users_table", {
+export const profilesTable = pgTable("profiles", {
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID())
@@ -33,4 +33,4 @@ export const usersTable = pgTable("users_table", {
   createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
 });
 
-export type UserType = InferSelectModel<typeof usersTable>;
+export type UserType = InferSelectModel<typeof profilesTable>;

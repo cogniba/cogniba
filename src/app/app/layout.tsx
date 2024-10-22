@@ -4,13 +4,17 @@ import getSessionUser from "@/database/queries/users/getSessionUser";
 
 import { SidebarProvider } from "@/context/SidebarContext";
 import FullScreenProvider from "../../components/FullScreenProvider";
+import { createClient } from "@/lib/supabase/server";
 
 interface AppLayoutProps {
   readonly children: React.ReactNode;
 }
 
 export default async function AppLayout({ children }: AppLayoutProps) {
-  const { username, name } = await getSessionUser();
+  const supabase = createClient();
+
+  const { data } = await supabase.auth.getSession();
+  const user = data.session?.user;
 
   return (
     <>
@@ -20,7 +24,7 @@ export default async function AppLayout({ children }: AppLayoutProps) {
           {/* <AppHeader /> */}
           <div className="relative flex h-full w-full">
             <AppSidebar name={name} username={username} />
-            <main className="min-h-screen w-full bg-teal-50 dark:bg-slate-950 lg:can-hover:pl-16">
+            <main className="lg:can-hover:pl-16 min-h-screen w-full bg-teal-50 dark:bg-slate-950">
               {children}
             </main>
           </div>
