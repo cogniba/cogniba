@@ -211,16 +211,20 @@ export default function GameTutorial({ startingLevel }: GameTutorialProps) {
 
   const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
 
-  // TODO
-  // const { update: updateSession } = useSession();
-  const updateSession = async () => {
-    const response = await fetch("/api/user", { cache: "no-cache" });
-    if (!response.ok) {
-      return <div>An error has ocurred</div>;
-    }
+  const updateSession = useCallback(
+    async ({ hasFinishedTutorial }: { hasFinishedTutorial: boolean }) => {
+      const response = await fetch("/api/user/update_user", {
+        method: "POST",
+        body: JSON.stringify({ hasFinishedTutorial: true }),
+        cache: "no-cache",
+      });
 
-    const user: UserType = await response.json();
-  };
+      if (!response.ok) {
+        return <div>An error has ocurred</div>;
+      }
+    },
+    [],
+  );
 
   const {
     feedback,
