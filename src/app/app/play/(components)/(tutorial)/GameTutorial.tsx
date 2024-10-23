@@ -3,7 +3,6 @@
 import Game from "../Game";
 import GameTutorialSteps, { type StepType } from "./GameTutorialSteps";
 import sleep from "@/lib/sleep";
-import finishTutorial from "@/server-actions/game/finishTutorial";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -13,6 +12,7 @@ import {
 } from "@/settings/constants";
 import useGameLogic from "@/hooks/useGameLogic";
 import { Strong } from "@/components/ui/Strong";
+import { revalidatePath } from "next/cache";
 
 const steps = [
   {
@@ -211,11 +211,11 @@ export default function GameTutorial({ startingLevel }: GameTutorialProps) {
 
   const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
 
-  const updateSession = useCallback(
+  const updateUser = useCallback(
     async ({ hasFinishedTutorial }: { hasFinishedTutorial: boolean }) => {
       const response = await fetch("/api/user/update_user", {
         method: "POST",
-        body: JSON.stringify({ hasFinishedTutorial: true }),
+        body: JSON.stringify({ hasFinishedTutorial }),
         cache: "no-cache",
       });
 
@@ -309,8 +309,8 @@ export default function GameTutorial({ startingLevel }: GameTutorialProps) {
     };
 
     const handleLastStep = async () => {
-      await updateSession({ hasFinishedTutorial: true });
-      await finishTutorial();
+      await updateUser({ hasFinishedTutorial: true });
+      revalidatePath("/app/play");
     };
 
     if (stepRef.current === boardStep) {
@@ -346,7 +346,7 @@ export default function GameTutorial({ startingLevel }: GameTutorialProps) {
     step,
     startPlaying,
     isPlaying,
-    updateSession,
+    updateUser,
     isPlayingAnimation,
   ]);
 

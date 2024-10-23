@@ -1,10 +1,9 @@
 import { type Dispatch, type SetStateAction, useCallback } from "react";
-import { Strong } from "@/components/ui/Strong";
 import HighlightDialog, {
   type PlacementType,
 } from "@/components/HighlightDialog";
 import GameTutorialTooltip from "./GameTutorialTooltip";
-import finishTutorial from "@/server-actions/game/finishTutorial";
+import { revalidatePath } from "next/cache";
 
 export type StepType = {
   title: React.ReactNode;
@@ -30,13 +29,19 @@ export default function GameTutorialSteps({
   setStep,
   isVisible,
 }: GameTutorialStepsProps) {
-  // TODO
-  // const { update: updateSession } = useSession();
-
   const handleSkip = useCallback(async () => {
-    await updateSession({ hasFinishedTutorial: true });
-    await finishTutorial();
-  }, [updateSession]);
+    const response = await fetch("/api/user/update_user", {
+      method: "POST",
+      body: JSON.stringify({ hasFinishedTutorial: true }),
+      cache: "no-cache",
+    });
+
+    if (!response.ok) {
+      return <div>An error has ocurred</div>;
+    }
+
+    revalidatePath("/app/play");
+  }, []);
 
   const currentStep = steps[step - Number(step >= steps.length)];
   return (
