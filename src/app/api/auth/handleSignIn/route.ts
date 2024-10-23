@@ -1,49 +1,53 @@
-// import { signIn } from "@/auth/auth";
-// import { SignInSchema } from "@/zod/schemas/SignInSchema";
-// import { AuthError } from "next-auth";
-// import { isRedirectError } from "next/dist/client/components/redirect";
-// import { NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import { SignInSchema } from "@/zod/schemas/SignInSchema";
+import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
 
-// export async function POST(request: Request) {
-//   try {
-//     const data = await request.json();
-//     const parsedData = SignInSchema.safeParse(data);
+export async function POST(request: Request) {
+  try {
+    const data = await request.json();
+    const parsedData = SignInSchema.safeParse(data);
 
-//     if (!parsedData.success) {
-//       return NextResponse.json(
-//         { error: "Invalid credentials" },
-//         { status: 400 },
-//       );
-//     }
+    if (!parsedData.success) {
+      return NextResponse.json(
+        { error: "Invalid credentials" },
+        { status: 400 },
+      );
+    }
 
-//     const { username, password } = parsedData.data;
+    const { email, password } = parsedData.data;
 
-//     try {
-//       await signIn("credentials", {
-//         username,
-//         password,
-//         redirectTo: "/app/play",
-//       });
-//       return NextResponse.json({ success: "Sign in success" }, { status: 200 });
-//     } catch (error) {
-//       if (isRedirectError(error)) {
-//         throw error;
-//       } else if (
-//         error instanceof AuthError &&
-//         error.type === "CredentialsSignin"
-//       ) {
-//         return NextResponse.json(
-//           { error: "Invalid credentials" },
-//           { status: 401 },
-//         );
-//       } else {
-//         return NextResponse.json(
-//           { error: "Something went wrong" },
-//           { status: 500 },
-//         );
-//       }
-//     }
-//   } catch (error) {
-//     return NextResponse.json({ error: "Invalid request" }, { status: 500 });
-//   }
-// }
+    const supabase = createClient();
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      if (error.code === "email_exists") {
+        return NextResponse.json(
+          { error: "Email already in use" },
+          { status: 409 },
+        );
+      } else if (error.code === "invalid_credentials") {
+        return NextResponse.json(
+          { error: "Invalid credentials" },
+          { status: 401 },
+        );
+      } else {
+        console.error("Error signing in:", error);
+        return NextResponse.json({ error: "Invalid request" }, { status: 500 });
+      }
+    }
+
+    revalidatePath("/", "layout");
+    NextResponse.redirect("/");
+  } catch (error) {
+    console.error("Error signing in:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
+  }
+}
