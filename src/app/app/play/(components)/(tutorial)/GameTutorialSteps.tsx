@@ -30,7 +30,7 @@ export default function GameTutorialSteps({
   isVisible,
 }: GameTutorialStepsProps) {
   const handleSkip = useCallback(async () => {
-    const response = await fetch("/api/user/update_user", {
+    const response = await fetch("/api/user/update-user", {
       method: "POST",
       body: JSON.stringify({ hasFinishedTutorial: true }),
       cache: "no-cache",

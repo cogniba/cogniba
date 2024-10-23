@@ -8,7 +8,7 @@ export default async function GamePage() {
   const level = await getUserLevel();
   const { showFeedback } = await getUserSettings();
 
-  const response = await fetch("/api/user/get_user", { cache: "no-cache" });
+  const response = await fetch("/api/user/get-user", { cache: "no-cache" });
   if (!response.ok) {
     return <div>An error has ocurred</div>;
   }

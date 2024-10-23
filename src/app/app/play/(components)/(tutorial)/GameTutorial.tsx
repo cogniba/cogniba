@@ -213,7 +213,7 @@ export default function GameTutorial({ startingLevel }: GameTutorialProps) {
 
   const updateUser = useCallback(
     async ({ hasFinishedTutorial }: { hasFinishedTutorial: boolean }) => {
-      const response = await fetch("/api/user/update_user", {
+      const response = await fetch("/api/user/update-user", {
         method: "POST",
         body: JSON.stringify({ hasFinishedTutorial }),
         cache: "no-cache",
