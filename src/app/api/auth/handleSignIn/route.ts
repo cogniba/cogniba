@@ -25,12 +25,7 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      if (error.code === "email_exists") {
-        return NextResponse.json(
-          { error: "Email already in use" },
-          { status: 409 },
-        );
-      } else if (error.code === "invalid_credentials") {
+      if (error.code === "invalid_credentials") {
         return NextResponse.json(
           { error: "Invalid credentials" },
           { status: 401 },
