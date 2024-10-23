@@ -4,8 +4,16 @@ import { createClient } from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   try {
+    const body = await request.json();
+    if (typeof body.hasFinishedTutorial !== "boolean") {
+      return NextResponse.json(
+        { error: "Invalid hasFinishedTutorial value" },
+        { status: 400 },
+      );
+    }
+
     const supabase = createClient();
 
     const { data, error } = await supabase.auth.getSession();
@@ -21,19 +29,17 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "User ID not found" }, { status: 400 });
     }
 
-    const user = await db
-      .select()
-      .from(profilesTable)
-      .where(eq(profilesTable.id, userId))
-      .then((res) => (res.length === 1 ? res[0] : null));
+    await db
+      .update(profilesTable)
+      .set({ hasFinishedTutorial: body.hasFinishedTutorial })
+      .where(eq(profilesTable.id, userId));
 
-    if (!user) {
-      return NextResponse.json({ error: "Profile not found" }, { status: 400 });
-    }
-
-    return NextResponse.json({ user }, { status: 200 });
+    return NextResponse.json(
+      { message: "User updated successfully" },
+      { status: 200 },
+    );
   } catch (error) {
-    console.error("Error fetching profile:", error);
+    console.error("Error updating user:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

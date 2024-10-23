@@ -5,7 +5,7 @@ import GameTutorialSteps, { type StepType } from "./GameTutorialSteps";
 import sleep from "@/lib/sleep";
 import finishTutorial from "@/server-actions/game/finishTutorial";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   gameDelayBeforeStart,
   gameHiddenSquareDuration,
@@ -213,6 +213,14 @@ export default function GameTutorial({ startingLevel }: GameTutorialProps) {
 
   // TODO
   // const { update: updateSession } = useSession();
+  const updateSession = async () => {
+    const response = await fetch("/api/user", { cache: "no-cache" });
+    if (!response.ok) {
+      return <div>An error has ocurred</div>;
+    }
+
+    const user: UserType = await response.json();
+  };
 
   const {
     feedback,
