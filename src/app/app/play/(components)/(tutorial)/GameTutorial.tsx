@@ -197,13 +197,9 @@ const lastStep = 11;
 
 interface GameTutorialProps {
   startingLevel: number;
-  showSkipButton: boolean;
 }
 
-export default function GameTutorial({
-  startingLevel,
-  showSkipButton,
-}: GameTutorialProps) {
+export default function GameTutorial({ startingLevel }: GameTutorialProps) {
   const [step, setStep] = useState(startingLevel === 1 ? 0 : level1BeatStep);
   const [isVisible, setIsVisible] = useState(true);
   const [tutorialSelectedSquare, setTutorialSelectedSquare] = useState<
@@ -349,7 +345,6 @@ export default function GameTutorial({
         step={step - Number(isLoadingGame)}
         setStep={setStep}
         isVisible={isVisible}
-        showSkipButton={showSkipButton}
       />
       <Game
         feedback={feedback}

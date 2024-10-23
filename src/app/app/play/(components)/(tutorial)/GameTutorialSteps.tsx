@@ -22,7 +22,6 @@ interface GameTutorialStepsProps {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
   isVisible: boolean;
-  showSkipButton: boolean;
 }
 
 export default function GameTutorialSteps({
@@ -30,7 +29,6 @@ export default function GameTutorialSteps({
   step,
   setStep,
   isVisible,
-  showSkipButton,
 }: GameTutorialStepsProps) {
   // TODO
   // const { update: updateSession } = useSession();
@@ -51,7 +49,7 @@ export default function GameTutorialSteps({
       <GameTutorialTooltip
         title={currentStep.title}
         content={currentStep.content}
-        showSkipButton={showSkipButton && step === 0}
+        showSkipButton={step === 0}
         hideBackButton={currentStep.hideBackButton}
         hidePrimaryButton={currentStep.hidePrimaryButton}
         primaryButtonText={currentStep.primaryButtonText}
