@@ -1,7 +1,8 @@
 import { db } from "@/database/db";
+import { gamesTable } from "@/database/schemas/games";
 import { profilesTable } from "@/database/schemas/profiles";
 import { createClient } from "@/lib/supabase/server";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -21,17 +22,15 @@ export async function GET() {
       return NextResponse.json({ error: "User ID not found" }, { status: 400 });
     }
 
-    const user = await db
+    const level = await db
       .select()
-      .from(profilesTable)
-      .where(eq(profilesTable.id, userId))
-      .then((res) => (res.length === 1 ? res[0] : null));
+      .from(gamesTable)
+      .where(eq(gamesTable.userId, userId))
+      .orderBy(desc(gamesTable.newLevel))
+      .limit(1)
+      .then((res) => (res.length === 1 ? res[0].newLevel : 1));
 
-    if (!user) {
-      return NextResponse.json({ error: "Profile not found" }, { status: 400 });
-    }
-
-    return NextResponse.json({ user }, { status: 200 });
+    return NextResponse.json({ level }, { status: 200 });
   } catch (error) {
     console.error("Error fetching user:", error);
     return NextResponse.json(
