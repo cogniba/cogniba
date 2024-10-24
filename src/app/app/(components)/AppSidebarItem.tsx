@@ -1,4 +1,4 @@
-import OptionalLinkWrapper from "@/components/OptionalLinkWrapper";
+import OptionalLink from "@/components/OptionalLink";
 
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/cn";
@@ -21,7 +21,7 @@ export default function AppSidebarItem({
   const { isExpanded, isUserDropdownOpen } = useSidebar();
 
   return (
-    <OptionalLinkWrapper href={href}>
+    <OptionalLink href={href}>
       <div className="w-full">
         <button
           className={cn(
@@ -42,6 +42,6 @@ export default function AppSidebarItem({
           </div>
         </button>
       </div>
-    </OptionalLinkWrapper>
+    </OptionalLink>
   );
 }

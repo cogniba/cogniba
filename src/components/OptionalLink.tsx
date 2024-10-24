@@ -5,7 +5,7 @@ interface OptionalLinkWrapperProps {
   href?: string;
 }
 
-export default function OptionalLinkWrapper({
+export default function OptionalLink({
   children,
   href,
 }: OptionalLinkWrapperProps) {
