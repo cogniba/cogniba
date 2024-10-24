@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
     const supabase = createClient();
 
-    const { data, error } = await supabase.auth.getSession();
+    const { data, error } = await supabase.auth.getUser();
     if (error) {
       return NextResponse.json(
         { error: "Failed to get session" },
@@ -25,10 +25,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const userId = data.session?.user.id;
-    if (!userId) {
-      return NextResponse.json({ error: "User ID not found" }, { status: 400 });
-    }
+    const userId = data.user.id;
 
     await db
       .update(settingsTable)
@@ -47,5 +44,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
-// getSession -> getUser
