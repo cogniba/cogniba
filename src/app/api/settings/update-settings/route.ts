@@ -49,4 +49,3 @@ export async function POST(request: Request) {
 }
 
 // getSession -> getUser
-// Remove no-cache

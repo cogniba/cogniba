@@ -33,7 +33,6 @@ export default function GameTutorialSteps({
     const response = await fetch("/api/user/update-user", {
       method: "POST",
       body: JSON.stringify({ hasFinishedTutorial: true }),
-      cache: "no-cache",
     });
 
     if (!response.ok) {

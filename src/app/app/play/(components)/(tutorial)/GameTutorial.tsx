@@ -216,7 +216,6 @@ export default function GameTutorial({ startingLevel }: GameTutorialProps) {
       const response = await fetch("/api/user/update-user", {
         method: "POST",
         body: JSON.stringify({ hasFinishedTutorial }),
-        cache: "no-cache",
       });
 
       if (!response.ok) {
