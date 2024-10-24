@@ -107,15 +107,21 @@ export default function useGameLogic({
         (gameVisibleSquareDuration + gameHiddenSquareDuration) +
       gameDelayBeforeStart;
 
-    // await insertGame({
-    //   level,
-    //   newLevel,
-    //   correctHits,
-    //   incorrectHits,
-    //   missedHits,
-    //   timePlayed,
-    // });
-    // TODO: Insert game
+    const response = await fetch("/api/game/insert-game", {
+      method: "POST",
+      body: JSON.stringify({
+        level,
+        newLevel,
+        correctHits,
+        incorrectHits,
+        missedHits,
+        timePlayed,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("Error inserting game data");
+    }
   }, [level]);
 
   const playGame = useCallback(async () => {

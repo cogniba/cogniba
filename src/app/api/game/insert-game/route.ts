@@ -77,7 +77,7 @@ export async function POST(request: Request) {
       { status: 200 },
     );
   } catch (error) {
-    console.error("Error fetching user:", error);
+    console.error("Error inserting game:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
