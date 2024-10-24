@@ -1,6 +1,5 @@
 "use client";
 
-import updateSettings from "@/server-actions/settings/updateSettings";
 import SettingsItem from "../SettingsItem";
 
 import { useState } from "react";
@@ -17,7 +16,15 @@ export default function ShowFeedbackSettings({
 
   const updateShowFeedback = async (value: string) => {
     setShowFeedback(value === "enabled");
-    await updateSettings({ showFeedback: value === "enabled" });
+
+    const response = await fetch("/api/settings/update-settings", {
+      method: "POST",
+      body: JSON.stringify({ showFeedback: value === "enabled" }),
+    });
+
+    if (!response.ok) {
+      console.error("Failed to update show feedback setting");
+    }
   };
 
   return (
