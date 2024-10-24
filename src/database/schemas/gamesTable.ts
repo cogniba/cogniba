@@ -1,6 +1,6 @@
 import { integer, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 import { InferSelectModel } from "drizzle-orm";
-import { profilesTable } from "./profiles";
+import { profilesTable } from "./profilesTable";
 
 export const gamesTable = pgTable("games", {
   id: uuid("id")

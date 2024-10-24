@@ -2,7 +2,7 @@ import getSessionUser from "@/database/queries/users/getSessionUser";
 
 import { and, desc, eq, gte, lte } from "drizzle-orm";
 import { db } from "@/database/db";
-import { gamesTable, type GameType } from "@/database/schemas/games";
+import { gamesTable, type GameType } from "@/database/schemas/gamesTable";
 
 export default async function getGamesData(
   startDate: Date,

@@ -1,0 +1,86 @@
+import { db } from "@/database/db";
+import { gamesTable } from "@/database/schemas/gamesTable";
+import { createClient } from "@/lib/supabase/server";
+import { NextResponse } from "next/server";
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    if (typeof body.level !== "number") {
+      return NextResponse.json(
+        { error: "Invalid level value" },
+        { status: 400 },
+      );
+    } else if (typeof body.newLevel !== "number") {
+      return NextResponse.json(
+        { error: "Invalid newLevel value" },
+        { status: 400 },
+      );
+    } else if (typeof body.correctHits !== "number") {
+      return NextResponse.json(
+        { error: "Invalid correctHits value" },
+        { status: 400 },
+      );
+    } else if (typeof body.incorrectHits !== "number") {
+      return NextResponse.json(
+        { error: "Invalid missedHits value" },
+        { status: 400 },
+      );
+    } else if (typeof body.missedHits !== "number") {
+      return NextResponse.json(
+        { error: "Invalid missedHits value" },
+        { status: 400 },
+      );
+    } else if (typeof body.timePlayed !== "number") {
+      return NextResponse.json(
+        { error: "Invalid timePlayed value" },
+        { status: 400 },
+      );
+    }
+
+    const {
+      level,
+      newLevel,
+      correctHits,
+      incorrectHits,
+      missedHits,
+      timePlayed,
+    } = body;
+
+    const supabase = createClient();
+
+    const { data, error } = await supabase.auth.getSession();
+    if (error) {
+      return NextResponse.json(
+        { error: "Failed to get session" },
+        { status: 400 },
+      );
+    }
+
+    const userId = data.session?.user.id;
+    if (!userId) {
+      return NextResponse.json({ error: "User ID not found" }, { status: 400 });
+    }
+
+    await db.insert(gamesTable).values({
+      level,
+      newLevel,
+      correctHits,
+      incorrectHits,
+      missedHits,
+      timePlayed,
+      userId,
+    });
+
+    return NextResponse.json(
+      { message: "Game inserted successfully" },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
+  }
+}

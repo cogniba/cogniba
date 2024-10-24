@@ -1,7 +1,7 @@
 import getSessionUser from "@/database/queries/users/getSessionUser";
 
 import { db } from "@/database/db";
-import { gamesTable } from "@/database/schemas/games";
+import { gamesTable } from "@/database/schemas/gamesTable";
 
 interface insertGameProps {
   level: number;

@@ -1,4 +1,4 @@
-import { UserType } from "@/database/schemas/profiles";
+import { UserType } from "@/database/schemas/profilesTable";
 import AppSidebar from "./(components)/AppSidebar";
 
 import { SidebarProvider } from "@/context/SidebarContext";

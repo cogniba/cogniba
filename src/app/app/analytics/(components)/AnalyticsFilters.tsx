@@ -19,7 +19,7 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/cn";
 
-import type { UserType } from "@/database/schemas/profiles";
+import type { UserType } from "@/database/schemas/profilesTable";
 import type { DateRange } from "react-day-picker";
 import type { Dispatch, SetStateAction } from "react";
 

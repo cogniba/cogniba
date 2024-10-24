@@ -1,6 +1,5 @@
 import { db } from "@/database/db";
-import { gamesTable } from "@/database/schemas/games";
-import { profilesTable } from "@/database/schemas/profiles";
+import { gamesTable } from "@/database/schemas/gamesTable";
 import { createClient } from "@/lib/supabase/server";
 import { desc, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";

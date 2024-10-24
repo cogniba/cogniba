@@ -1,5 +1,5 @@
 import { db } from "@/database/db";
-import { profilesTable } from "@/database/schemas/profiles";
+import { profilesTable } from "@/database/schemas/profilesTable";
 import { createClient } from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";

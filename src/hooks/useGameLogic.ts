@@ -4,7 +4,6 @@ import getCorrectHitSequence from "@/lib/game-logic/getCorrectHitSequence";
 import waitFor from "@/lib/waitFor";
 import getHitStatistics from "@/lib/game-logic/getHitStatistics";
 import calculateNewLevel from "@/lib/game-logic/calculateNewLevel";
-import insertGameIntoDatabase from "@/server-actions/game/insertGameIntoDatabase";
 
 import {
   type Dispatch,
@@ -16,11 +15,11 @@ import {
 } from "react";
 import { useSidebar } from "@/context/SidebarContext";
 import {
+  gameBaseSequenceLength,
   gameDelayBeforeStart,
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
-import getMaxLevel from "@/server-actions/game/getMaxLevel";
 
 interface useGameLogicProps {
   startingLevel: number;
@@ -103,11 +102,20 @@ export default function useGameLogic({
       maxLevel.current = newLevel;
     }
 
-    await insertGameIntoDatabase(
-      correctHitSequence.current,
-      playerHitSequence.current,
-      currentLevel,
-    );
+    const timePlayed =
+      (gameBaseSequenceLength + level) *
+        (gameVisibleSquareDuration + gameHiddenSquareDuration) +
+      gameDelayBeforeStart;
+
+    // await insertGame({
+    //   level,
+    //   newLevel,
+    //   correctHits,
+    //   incorrectHits,
+    //   missedHits,
+    //   timePlayed,
+    // });
+    // TODO: Insert game
   }, [level]);
 
   const playGame = useCallback(async () => {
@@ -200,7 +208,8 @@ export default function useGameLogic({
 
   useEffect(() => {
     const fetchMaxLevel = async () => {
-      maxLevel.current = await getMaxLevel();
+      // maxLevel.current = await getMaxLevel();
+      // TODO: Get max level
     };
 
     fetchMaxLevel();

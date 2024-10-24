@@ -7,8 +7,8 @@ import {
   type RoleType,
   users,
   type UserType,
-} from "@/database/schemas/profiles";
-import { settingsTable } from "@/database/schemas/settings";
+} from "@/database/schemas/profilesTable";
+import { settingsTable } from "@/database/schemas/settingsTable";
 
 interface createUserProps {
   role: RoleType;

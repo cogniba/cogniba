@@ -3,7 +3,7 @@ import calculateAccuracy from "@/lib/calculateAccuracy";
 
 import { avg, count, eq, sum } from "drizzle-orm";
 import { db } from "@/database/db";
-import { gamesTable } from "@/database/schemas/games";
+import { gamesTable } from "@/database/schemas/gamesTable";
 import { date } from "@/database/queries/functions";
 
 export type DailyGamesData = {

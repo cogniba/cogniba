@@ -2,7 +2,7 @@ import getUserLevel from "@/database/queries/games/getUserLevel";
 import getUserSettings from "@/database/queries/settings/getUserSettings";
 import GameTutorial from "./(components)/(tutorial)/GameTutorial";
 import GameLogic from "./(components)/GameLogic";
-import { UserType } from "@/database/schemas/profiles";
+import { UserType } from "@/database/schemas/profilesTable";
 
 export default async function GamePage() {
   const level = await getUserLevel();

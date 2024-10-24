@@ -1,6 +1,9 @@
 import { db } from "@/database/db";
-import { users } from "@/database/schemas/profiles";
-import { settingsTable, type SettingsType } from "@/database/schemas/settings";
+import { users } from "@/database/schemas/profilesTable";
+import {
+  settingsTable,
+  type SettingsType,
+} from "@/database/schemas/settingsTable";
 import { eq } from "drizzle-orm";
 
 export default async function getSettingsByUserId(

@@ -9,7 +9,7 @@ import { useState } from "react";
 import { subDays } from "date-fns";
 
 import type { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
-import type { UserType } from "@/database/schemas/profiles";
+import type { UserType } from "@/database/schemas/profilesTable";
 import type { DateRange } from "react-day-picker";
 
 export type chartMetrics =

@@ -1,6 +1,9 @@
 import getUser from "../users/getUser";
 
-import { settingsTable, type SettingsType } from "@/database/schemas/settings";
+import {
+  settingsTable,
+  type SettingsType,
+} from "@/database/schemas/settingsTable";
 import { db } from "@/database/db";
 import { eq } from "drizzle-orm";
 

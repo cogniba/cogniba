@@ -1,5 +1,5 @@
 import { db } from "@/database/db";
-import { profilesTable } from "@/database/schemas/profiles";
+import { profilesTable } from "@/database/schemas/profilesTable";
 import { createClient } from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
@@ -13,6 +13,8 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
+
+    const { hasFinishedTutorial } = body;
 
     const supabase = createClient();
 
@@ -31,7 +33,7 @@ export async function POST(request: Request) {
 
     await db
       .update(profilesTable)
-      .set({ hasFinishedTutorial: body.hasFinishedTutorial })
+      .set({ hasFinishedTutorial })
       .where(eq(profilesTable.id, userId));
 
     return NextResponse.json(

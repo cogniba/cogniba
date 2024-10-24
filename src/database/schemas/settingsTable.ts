@@ -1,6 +1,6 @@
 import { InferSelectModel } from "drizzle-orm";
 import { boolean, pgTable, uuid } from "drizzle-orm/pg-core";
-import { profilesTable } from "./profiles";
+import { profilesTable } from "./profilesTable";
 
 export const settingsTable = pgTable("settings", {
   id: uuid("id")
