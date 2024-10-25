@@ -1,9 +1,4 @@
-import { db } from "@/database/db";
-import { gamesTable } from "@/database/schemas/gamesTable";
-import calculateAccuracy from "@/lib/calculateAccuracy";
 import getData from "@/lib/server/analytics/getData";
-import { createClient } from "@/lib/supabase/server";
-import { avg, count, eq, SQL, sql, sum } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export type GamesData = {
@@ -17,6 +12,8 @@ export type GamesData = {
   timePlayed: number;
   date: string;
 }[];
+
+export const dynamic = "force-dynamic";
 
 const validFrequencies = ["daily", "weekly", "monthly"];
 
