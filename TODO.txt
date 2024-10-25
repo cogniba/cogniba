@@ -1,4 +1,5 @@
 Supabase types
+Move components to it's own folder
 Create GitHub organization
 Row Level Security
 Custom SMTP

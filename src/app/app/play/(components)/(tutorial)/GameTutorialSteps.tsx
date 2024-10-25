@@ -21,6 +21,7 @@ interface GameTutorialStepsProps {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
   isVisible: boolean;
+  showSkipButton: boolean;
 }
 
 export default function GameTutorialSteps({
@@ -28,6 +29,7 @@ export default function GameTutorialSteps({
   step,
   setStep,
   isVisible,
+  showSkipButton,
 }: GameTutorialStepsProps) {
   const handleSkip = useCallback(async () => {
     const response = await fetch("/api/user/update-user", {
@@ -53,7 +55,7 @@ export default function GameTutorialSteps({
       <GameTutorialTooltip
         title={currentStep.title}
         content={currentStep.content}
-        showSkipButton={step === 0}
+        showSkipButton={showSkipButton && step === 0}
         hideBackButton={currentStep.hideBackButton}
         hidePrimaryButton={currentStep.hidePrimaryButton}
         primaryButtonText={currentStep.primaryButtonText}
