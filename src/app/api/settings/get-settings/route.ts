@@ -1,4 +1,4 @@
-import getSettings from "@/lib/server/game/getSettings";
+import getSettings from "@/lib/server/settings/getSettings";
 
 export async function GET() {
   return await getSettings();

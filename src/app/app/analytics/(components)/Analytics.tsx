@@ -9,7 +9,7 @@ import { useState } from "react";
 import { subDays } from "date-fns";
 
 import type { DateRange } from "react-day-picker";
-import { GamesData } from "@/app/api/game/get-data/route";
+import { GamesData } from "@/app/api/analytics/get-data/route";
 
 export type chartMetrics =
   | "level"

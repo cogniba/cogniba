@@ -1,39 +1,19 @@
+import { GamesData } from "@/app/api/analytics/get-data/route";
 import { db } from "@/database/db";
 import { gamesTable } from "@/database/schemas/gamesTable";
 import calculateAccuracy from "@/lib/calculateAccuracy";
 import { createClient } from "@/lib/supabase/server";
-import { avg, count, eq, SQL, sql, sum } from "drizzle-orm";
-import { NextRequest, NextResponse } from "next/server";
+import { avg, count, eq, sql, SQL, sum } from "drizzle-orm";
+import { NextResponse } from "next/server";
 
-export type GamesData = {
-  userId: string;
-  gamesPlayed: number;
-  level: number;
-  correctHits: number;
-  incorrectHits: number;
-  missedHits: number;
-  accuracy: number;
-  timePlayed: number;
-  date: string;
-}[];
+interface GetDataParams {
+  frequency: "daily" | "weekly" | "monthly";
+}
 
-const validFrequencies = ["daily", "weekly", "monthly"];
-
-export async function GET(request: NextRequest) {
+export default async function getData({
+  frequency,
+}: GetDataParams): Promise<NextResponse> {
   try {
-    const searchParams = request.nextUrl.searchParams;
-    const frequency = searchParams.get("frequency");
-
-    if (
-      typeof frequency !== "string" ||
-      !validFrequencies.includes(frequency)
-    ) {
-      return NextResponse.json(
-        { error: "Invalid frequency value" },
-        { status: 400 },
-      );
-    }
-
     const supabase = createClient();
 
     const { data, error } = await supabase.auth.getUser();
@@ -54,7 +34,7 @@ export async function GET(request: NextRequest) {
     } else if (frequency === "monthly") {
       dateGroupingFunction = sql`EXTRACT(MONTH FROM ${gamesTable.createdAt})`;
     } else {
-      return;
+      throw new Error("Invalid frequency value");
     }
 
     const rawData = await db

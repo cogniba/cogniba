@@ -1,4 +1,4 @@
-import { GamesData } from "@/app/api/game/get-data/route";
+import { GamesData } from "@/app/api/analytics/get-data/route";
 import { format, isEqual, startOfDay } from "date-fns";
 
 export default function cleanChartData(

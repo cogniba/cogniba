@@ -4,7 +4,7 @@ import GameLogic from "./(components)/GameLogic";
 import { UserType } from "@/database/schemas/profilesTable";
 import getLevel from "@/lib/server/game/getLevel";
 import getMaxLevel from "@/lib/server/game/getMaxLevel";
-import getSettings from "@/lib/server/game/getSettings";
+import getSettings from "@/lib/server/settings/getSettings";
 import getUser from "@/lib/server/game/getUser";
 
 export default async function GamePage() {

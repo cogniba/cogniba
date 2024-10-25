@@ -4,7 +4,7 @@ import AnalyticsChart from "./AnalyticsChart";
 import { chartMetrics } from "./Analytics";
 
 import type { ChartConfig } from "@/components/ui/chart";
-import { GamesData } from "@/app/api/game/get-data/route";
+import { GamesData } from "@/app/api/analytics/get-data/route";
 
 const charts = {
   level: {

@@ -1,4 +1,4 @@
-import { GamesData } from "@/app/api/game/get-data/route";
+import { GamesData } from "@/app/api/analytics/get-data/route";
 import ChartNoData from "@/components/ChartNoData";
 
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
