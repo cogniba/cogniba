@@ -5,8 +5,6 @@ import { createClient } from "@/lib/supabase/server";
 import { avg, count, eq, SQL, sql, sum } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
-
 export type GamesData = {
   userId: string;
   gamesPlayed: number;
