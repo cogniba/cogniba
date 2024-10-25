@@ -56,7 +56,7 @@ export default function useGameLogic({
   const playerHitSequence = useRef<boolean[]>([]);
   const hasPressedButton = useRef(true);
   const shouldPressButton = useRef(false);
-  const maxLevel = useRef<number>(startingLevel);
+  const maxLevel = useRef<number>(startingMaxLevel);
 
   const showFeedback = useCallback(
     async (feedback: "correct" | "incorrect" | "missed") => {
