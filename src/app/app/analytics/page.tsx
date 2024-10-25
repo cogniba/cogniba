@@ -10,7 +10,7 @@ export default async function AnalyticsPage() {
     return <div>Failed to get data</div>;
   }
 
-  const data: GamesData = await response.json();
+  const { data }: { data: GamesData } = await response.json();
 
   return (
     <div className="flex h-screen items-center justify-center">

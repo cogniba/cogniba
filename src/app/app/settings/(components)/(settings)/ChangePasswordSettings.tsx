@@ -4,7 +4,6 @@ import * as z from "zod";
 
 import SettingsItem from "../SettingsItem";
 import FormAlert from "@/components/FormAlert";
-import handleChangePassword from "@/server-actions/settings/handleChangePassword";
 
 import {
   Dialog,
@@ -48,12 +47,13 @@ export default function ChangePasswordSettings() {
     setSuccess(null);
 
     startTransition(() => {
-      handleChangePassword(data).then((result) => {
-        if (result) {
-          setError(result.error ?? null);
-          setSuccess(result.success ?? null);
-        }
-      });
+      // handleChangePassword(data).then((result) => {
+      //   if (result) {
+      //     setError(result.error ?? null);
+      //     setSuccess(result.success ?? null);
+      //   }
+      // });
+      // TODO: Implement password change
     });
   }
 
@@ -67,7 +67,7 @@ export default function ChangePasswordSettings() {
         onClick={() => setOpen(true)}
       />
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="flex h-full w-full max-w-none items-center justify-center sm:h-fit sm:max-w-lg">
+        <DialogContent className="sm:h-fit sm:max-w-lg flex h-full w-full max-w-none items-center justify-center">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
