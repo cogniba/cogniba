@@ -1,5 +1,5 @@
 import { db } from "@/database/db";
-import { profilesTable } from "@/database/schemas/profilesTable";
+import { settingsTable } from "@/database/schemas/settingsTable";
 import { createClient } from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
@@ -18,19 +18,15 @@ export async function GET() {
 
     const userId = data.user.id;
 
-    const user = await db
+    const settings = await db
       .select()
-      .from(profilesTable)
-      .where(eq(profilesTable.id, userId))
+      .from(settingsTable)
+      .where(eq(settingsTable.userId, userId))
       .then((res) => (res.length === 1 ? res[0] : null));
 
-    if (!user) {
-      return NextResponse.json({ error: "Profile not found" }, { status: 400 });
-    }
-
-    return NextResponse.json({ user }, { status: 200 });
+    return NextResponse.json({ settings }, { status: 200 });
   } catch (error) {
-    console.error("Error fetching user:", error);
+    console.error("Error updating settings:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

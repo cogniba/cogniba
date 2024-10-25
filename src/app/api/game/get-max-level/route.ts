@@ -11,7 +11,7 @@ export async function GET() {
     const { data, error } = await supabase.auth.getUser();
     if (error) {
       return NextResponse.json(
-        { error: "Failed to get session" },
+        { error: "Failed to get user" },
         { status: 400 },
       );
     }

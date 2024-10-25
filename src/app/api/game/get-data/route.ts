@@ -20,64 +20,75 @@ export type GamesData = {
 const validFrequencies = ["daily", "weekly", "monthly"];
 
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const frequency = searchParams.get("frequency");
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const frequency = searchParams.get("frequency");
 
-  if (typeof frequency !== "string" || !validFrequencies.includes(frequency)) {
+    if (
+      typeof frequency !== "string" ||
+      !validFrequencies.includes(frequency)
+    ) {
+      return NextResponse.json(
+        { error: "Invalid frequency value" },
+        { status: 400 },
+      );
+    }
+
+    const supabase = createClient();
+
+    const { data, error } = await supabase.auth.getUser();
+    if (error) {
+      return NextResponse.json(
+        { error: "Failed to get user" },
+        { status: 400 },
+      );
+    }
+
+    const userId = data.user.id;
+
+    let dateGroupingFunction: SQL<unknown>;
+    if (frequency === "daily") {
+      dateGroupingFunction = sql`DATE(${gamesTable.createdAt})`;
+    } else if (frequency === "weekly") {
+      dateGroupingFunction = sql`EXTRACT(WEEK FROM ${gamesTable.createdAt})`;
+    } else if (frequency === "monthly") {
+      dateGroupingFunction = sql`EXTRACT(MONTH FROM ${gamesTable.createdAt})`;
+    } else {
+      return;
+    }
+
+    const rawData = await db
+      .select({
+        userId: gamesTable.userId,
+        gamesPlayed: count(gamesTable.level),
+        level: avg(gamesTable.level).mapWith(Number),
+        correctHits: avg(gamesTable.correctHits).mapWith(Number),
+        incorrectHits: avg(gamesTable.incorrectHits).mapWith(Number),
+        missedHits: avg(gamesTable.missedHits).mapWith(Number),
+        timePlayed: sum(gamesTable.timePlayed).mapWith(Number),
+        date: dateGroupingFunction,
+      })
+      .from(gamesTable)
+      .where(eq(gamesTable.userId, userId))
+      .groupBy(dateGroupingFunction, gamesTable.userId)
+      .orderBy(dateGroupingFunction);
+
+    const processedData: GamesData = rawData.map((data) => ({
+      ...data,
+      accuracy: calculateAccuracy({
+        correctHits: data.correctHits,
+        incorrectHits: data.incorrectHits,
+        missedHits: data.missedHits,
+      }),
+      date: data.date as string,
+    }));
+
+    return NextResponse.json({ data: processedData }, { status: 200 });
+  } catch (error) {
+    console.error("Error updating settings:", error);
     return NextResponse.json(
-      { error: "Invalid frequency value" },
-      { status: 400 },
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
-
-  const supabase = createClient();
-
-  const { data, error } = await supabase.auth.getUser();
-  if (error) {
-    return NextResponse.json(
-      { error: "Failed to get session" },
-      { status: 400 },
-    );
-  }
-
-  const userId = data.user.id;
-
-  let dateGroupingFunction: SQL<unknown>;
-  if (frequency === "daily") {
-    dateGroupingFunction = sql`DATE(${gamesTable.createdAt})`;
-  } else if (frequency === "weekly") {
-    dateGroupingFunction = sql`EXTRACT(WEEK FROM ${gamesTable.createdAt})`;
-  } else if (frequency === "monthly") {
-    dateGroupingFunction = sql`EXTRACT(MONTH FROM ${gamesTable.createdAt})`;
-  } else {
-    return;
-  }
-
-  const rawData = await db
-    .select({
-      userId: gamesTable.userId,
-      gamesPlayed: count(gamesTable.level),
-      level: avg(gamesTable.level).mapWith(Number),
-      correctHits: avg(gamesTable.correctHits).mapWith(Number),
-      incorrectHits: avg(gamesTable.incorrectHits).mapWith(Number),
-      missedHits: avg(gamesTable.missedHits).mapWith(Number),
-      timePlayed: sum(gamesTable.timePlayed).mapWith(Number),
-      date: dateGroupingFunction,
-    })
-    .from(gamesTable)
-    .where(eq(gamesTable.userId, userId))
-    .groupBy(dateGroupingFunction, gamesTable.userId)
-    .orderBy(dateGroupingFunction);
-
-  const processedData: GamesData = rawData.map((data) => ({
-    ...data,
-    accuracy: calculateAccuracy({
-      correctHits: data.correctHits,
-      incorrectHits: data.incorrectHits,
-      missedHits: data.missedHits,
-    }),
-    date: data.date as string,
-  }));
-
-  return NextResponse.json({ data: processedData }, { status: 200 });
 }
