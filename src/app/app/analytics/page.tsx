@@ -2,12 +2,9 @@ import { GamesData } from "@/app/api/game/get-data/route";
 import Analytics from "./(components)/Analytics";
 
 export default async function AnalyticsPage() {
-  const response = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "/game/get-data?frequency=daily",
-    {
-      method: "GET",
-    },
-  );
+  const response = await fetch("/game/get-data?frequency=daily", {
+    method: "GET",
+  });
 
   if (!response.ok) {
     return <div>Failed to get data</div>;

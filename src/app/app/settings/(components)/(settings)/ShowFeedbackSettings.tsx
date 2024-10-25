@@ -17,13 +17,10 @@ export default function ShowFeedbackSettings({
   const updateShowFeedback = async (value: string) => {
     setShowFeedback(value === "enabled");
 
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + "/settings/update-settings",
-      {
-        method: "POST",
-        body: JSON.stringify({ showFeedback: value === "enabled" }),
-      },
-    );
+    const response = await fetch("/settings/update-settings", {
+      method: "POST",
+      body: JSON.stringify({ showFeedback: value === "enabled" }),
+    });
 
     if (!response.ok) {
       console.error("Failed to update show feedback setting");

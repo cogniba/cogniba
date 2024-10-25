@@ -109,20 +109,17 @@ export default function useGameLogic({
         (gameVisibleSquareDuration + gameHiddenSquareDuration) +
       gameDelayBeforeStart;
 
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + "/game/insert-game",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          level,
-          newLevel,
-          correctHits,
-          incorrectHits,
-          missedHits,
-          timePlayed,
-        }),
-      },
-    );
+    const response = await fetch("/game/insert-game", {
+      method: "POST",
+      body: JSON.stringify({
+        level,
+        newLevel,
+        correctHits,
+        incorrectHits,
+        missedHits,
+        timePlayed,
+      }),
+    });
 
     if (!response.ok) {
       console.error("Error inserting game data");

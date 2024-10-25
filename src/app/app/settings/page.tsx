@@ -5,10 +5,7 @@ import ChangePasswordSettings from "./(components)/(settings)/ChangePasswordSett
 import { SettingsType } from "@/database/schemas/settingsTable";
 
 export default async function SettingsPage() {
-  const response = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "/settings/get-settings",
-    { method: "GET" },
-  );
+  const response = await fetch("/settings/get-settings", { method: "GET" });
   if (!response.ok) {
     <div>Error getting settings</div>;
   }
