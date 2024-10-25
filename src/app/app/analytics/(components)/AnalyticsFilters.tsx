@@ -1,5 +1,3 @@
-import getFirstName from "@/lib/getFirstName";
-
 import {
   Select,
   SelectContent,
@@ -19,56 +17,25 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/cn";
 
-import type { UserType } from "@/database/schemas/profilesTable";
 import type { DateRange } from "react-day-picker";
 import type { Dispatch, SetStateAction } from "react";
 
 interface AnalyticsFiltersProps {
-  userChildren: UserType[];
   date: DateRange | undefined;
   setDate: Dispatch<SetStateAction<DateRange | undefined>>;
   chartMetric: chartMetrics;
   setChartMetric: Dispatch<SetStateAction<chartMetrics>>;
-  selectedChild: UserType | null;
-  setSelectedChild: Dispatch<SetStateAction<UserType | null>>;
 }
 
 export default function AnalyticsFilters({
-  userChildren,
   date,
   setDate,
   chartMetric,
   setChartMetric,
-  selectedChild,
-  setSelectedChild,
 }: AnalyticsFiltersProps) {
-  const isParent = userChildren.length > 0;
-  const selectedChildIndex = selectedChild
-    ? String(userChildren.findIndex((child) => child.id === selectedChild.id))
-    : undefined;
-
   return (
     <div className="sm:flex-row flex flex-col items-center justify-between gap-3">
       <div className="sm:w-fit lg:flex-row flex w-full flex-col items-center justify-start gap-3">
-        {isParent && (
-          <Select
-            value={selectedChildIndex}
-            onValueChange={(value) =>
-              setSelectedChild(userChildren[Number(value)])
-            }
-          >
-            <SelectTrigger className="sm:w-52 md:w-64 w-full">
-              <SelectValue placeholder="Select a child" />
-            </SelectTrigger>
-            <SelectContent>
-              {userChildren.map((child, index) => (
-                <SelectItem value={String(index)} key={index}>
-                  {getFirstName(child.name)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
         <Select
           value={chartMetric ?? undefined}
           onValueChange={(value) => setChartMetric(value as chartMetrics)}

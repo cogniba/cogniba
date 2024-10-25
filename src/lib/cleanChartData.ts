@@ -1,11 +1,11 @@
-import type { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
+import { GamesData } from "@/app/api/game/get-data/route";
 import { format, isEqual, startOfDay } from "date-fns";
 
 export default function cleanChartData(
-  data: DailyGamesData,
+  data: GamesData,
   startDate: Date,
   endDate: Date,
-): DailyGamesData {
+): GamesData {
   const formattedData = data.map((item) => ({
     ...item,
     level: Math.round(item.level * 10) / 10,

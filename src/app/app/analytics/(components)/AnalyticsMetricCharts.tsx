@@ -3,9 +3,8 @@ import AnalyticsChart from "./AnalyticsChart";
 
 import { chartMetrics } from "./Analytics";
 
-import type { UserType } from "@/database/schemas/profilesTable";
-import type { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
 import type { ChartConfig } from "@/components/ui/chart";
+import { GamesData } from "@/app/api/game/get-data/route";
 
 const charts = {
   level: {
@@ -80,26 +79,20 @@ const charts = {
 };
 
 interface AnalyticsMetricsProps {
-  isParent: boolean;
-  selectedChild: UserType | null;
   chartMetric: chartMetrics;
-  cleanData: DailyGamesData | null;
+  data: GamesData | null;
 }
 
 export default function AnalyticsMetrics({
-  isParent,
-  selectedChild,
   chartMetric,
-  cleanData,
+  data,
 }: AnalyticsMetricsProps) {
   return (
     <>
-      {isParent && selectedChild === null ? (
-        <ChartNoData text="No child selected" />
-      ) : chartMetric === null ? (
+      {chartMetric === null ? (
         <ChartNoData text="No metric selected" />
       ) : (
-        <AnalyticsChart data={cleanData} {...charts[chartMetric]} />
+        <AnalyticsChart data={data} {...charts[chartMetric]} />
       )}
     </>
   );

@@ -14,7 +14,7 @@ export type GamesData = {
   missedHits: number;
   accuracy: number;
   timePlayed: number;
-  date: unknown;
+  date: string;
 }[];
 
 const validFrequencies = ["daily", "weekly", "monthly"];
@@ -70,12 +70,13 @@ export async function GET(request: NextRequest) {
     .orderBy(dateGroupingFunction);
 
   const processedData: GamesData = rawData.map((data) => ({
+    ...data,
     accuracy: calculateAccuracy({
       correctHits: data.correctHits,
       incorrectHits: data.incorrectHits,
       missedHits: data.missedHits,
     }),
-    ...data,
+    date: data.date as string,
   }));
 
   return NextResponse.json({ data: processedData }, { status: 200 });
