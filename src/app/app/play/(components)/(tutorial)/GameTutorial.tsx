@@ -197,9 +197,13 @@ const lastStep = 11;
 
 interface GameTutorialProps {
   startingLevel: number;
+  startingMaxLevel: number;
 }
 
-export default function GameTutorial({ startingLevel }: GameTutorialProps) {
+export default function GameTutorial({
+  startingLevel,
+  startingMaxLevel,
+}: GameTutorialProps) {
   const [step, setStep] = useState(startingLevel === 1 ? 0 : level1BeatStep);
   const [isVisible, setIsVisible] = useState(true);
   const [tutorialSelectedSquare, setTutorialSelectedSquare] = useState<
@@ -239,6 +243,7 @@ export default function GameTutorial({ startingLevel }: GameTutorialProps) {
     handleButtonPress,
   } = useGameLogic({
     startingLevel,
+    startingMaxLevel,
     showFeedbackEnabled: true,
     isTutorial: true,
     setShowTutorialHint: setIsVisible,

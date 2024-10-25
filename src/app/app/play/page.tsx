@@ -55,7 +55,7 @@ export default async function GamePage() {
   return (
     <>
       {!user.hasFinishedTutorial ? (
-        <GameTutorial startingLevel={level} />
+        <GameTutorial startingLevel={level} startingMaxLevel={maxLevel} />
       ) : (
         <GameLogic
           startingLevel={level}
