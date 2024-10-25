@@ -5,3 +5,4 @@ try catch in fetch requests
 Create GitHub organization
 Row Level Security
 Custom SMTP
+Refactor fetch logic used in server components
