@@ -217,10 +217,13 @@ export default function GameTutorial({
 
   const updateUser = useCallback(
     async ({ hasFinishedTutorial }: { hasFinishedTutorial: boolean }) => {
-      const response = await fetch("/api/user/update-user", {
-        method: "POST",
-        body: JSON.stringify({ hasFinishedTutorial }),
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/user/update-user",
+        {
+          method: "POST",
+          body: JSON.stringify({ hasFinishedTutorial }),
+        },
+      );
 
       if (!response.ok) {
         return <div>An error has ocurred</div>;

@@ -4,18 +4,30 @@ import GameLogic from "./(components)/GameLogic";
 import { UserType } from "@/database/schemas/profilesTable";
 
 export default async function GamePage() {
-  const getLevelPromise = fetch("/api/settings/get-level", {
-    method: "GET",
-  });
-  const getMaxLevelPromise = fetch("/api/settings/get-max-level", {
-    method: "GET",
-  });
-  const getSettingsPromise = fetch("/api/settings/get-settings", {
-    method: "GET",
-  });
-  const getUserPromise = fetch("/api/user/get-user", {
-    method: "GET",
-  });
+  const getLevelPromise = fetch(
+    process.env.NEXT_PUBLIC_API_URL + "/settings/get-level",
+    {
+      method: "GET",
+    },
+  );
+  const getMaxLevelPromise = fetch(
+    process.env.NEXT_PUBLIC_API_URL + "/settings/get-max-level",
+    {
+      method: "GET",
+    },
+  );
+  const getSettingsPromise = fetch(
+    process.env.NEXT_PUBLIC_API_URL + "/settings/get-settings",
+    {
+      method: "GET",
+    },
+  );
+  const getUserPromise = fetch(
+    process.env.NEXT_PUBLIC_API_URL + "/user/get-user",
+    {
+      method: "GET",
+    },
+  );
 
   const [levelResponse, maxLevelResponse, settingsResponse, userResponse] =
     await Promise.all([

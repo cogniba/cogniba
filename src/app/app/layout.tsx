@@ -8,7 +8,9 @@ interface AppLayoutProps {
 }
 
 export default async function AppLayout({ children }: AppLayoutProps) {
-  const response = await fetch("/api/user/get-user");
+  const response = await fetch(
+    process.env.NEXT_PUBLIC_API_URL + "/user/get-user",
+  );
   if (!response.ok) {
     return <div>An error has ocurred</div>;
   }

@@ -32,10 +32,13 @@ export default function GameTutorialSteps({
   showSkipButton,
 }: GameTutorialStepsProps) {
   const handleSkip = useCallback(async () => {
-    const response = await fetch("/api/user/update-user", {
-      method: "POST",
-      body: JSON.stringify({ hasFinishedTutorial: true }),
-    });
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_API_URL + "/user/update-user",
+      {
+        method: "POST",
+        body: JSON.stringify({ hasFinishedTutorial: true }),
+      },
+    );
 
     if (!response.ok) {
       return <div>An error has ocurred</div>;
