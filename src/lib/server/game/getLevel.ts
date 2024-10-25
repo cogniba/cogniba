@@ -28,7 +28,7 @@ export default async function getLevel(): Promise<NextResponse> {
 
     return NextResponse.json({ level }, { status: 200 });
   } catch (error) {
-    console.error("Error updating settings:", error);
+    console.error("Error getting level:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

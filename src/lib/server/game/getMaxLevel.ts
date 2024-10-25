@@ -28,7 +28,7 @@ export default async function getMaxLevel(): Promise<NextResponse> {
 
     return NextResponse.json({ maxLevel: level }, { status: 200 });
   } catch (error) {
-    console.error("Error fetching user:", error);
+    console.error("Error getting max level:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

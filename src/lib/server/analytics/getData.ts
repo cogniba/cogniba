@@ -65,7 +65,7 @@ export default async function getData({
 
     return NextResponse.json({ data: processedData }, { status: 200 });
   } catch (error) {
-    console.error("Error updating settings:", error);
+    console.error("Error getting data:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

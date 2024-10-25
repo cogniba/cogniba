@@ -26,7 +26,7 @@ export default async function getSettings(): Promise<NextResponse> {
 
     return NextResponse.json({ settings }, { status: 200 });
   } catch (error) {
-    console.error("Error updating settings:", error);
+    console.error("Error getting settings:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

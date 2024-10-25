@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
 
     getData({ frequency: frequency as "daily" | "weekly" | "monthly" });
   } catch (error) {
-    console.error("Error updating settings:", error);
+    console.error("Error getting data:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
