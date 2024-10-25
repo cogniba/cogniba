@@ -1,3 +1,4 @@
+import { GamesData } from "@/app/api/game/get-data/route";
 import ChartNoData from "@/components/ChartNoData";
 
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,10 +12,8 @@ import {
 } from "@/components/ui/chart";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
-import type { DailyGamesData } from "@/database/queries/games/getUserDailyGamesData";
-
 interface AnalyticsChartProps {
-  data: DailyGamesData | null;
+  data: GamesData | null;
   chartConfig: ChartConfig;
   title: string;
   description: string;

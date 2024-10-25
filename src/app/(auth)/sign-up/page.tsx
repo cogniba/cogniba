@@ -3,7 +3,6 @@
 import * as z from "zod";
 
 import FormAlert from "@/components/FormAlert";
-import handleSignUp from "@/server-actions/auth/handleSignUp";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -57,10 +56,11 @@ export default function SignUpPage() {
     setSuccess(null);
 
     startTransition(() => {
-      handleSignUp(data).then((result) => {
-        setError(result.error ?? null);
-        setSuccess(result.success ?? null);
-      });
+      // handleSignUp(data).then((result) => {
+      //   setError(result.error ?? null);
+      //   setSuccess(result.success ?? null);
+      // });
+      // TODO: Handle sign up
     });
   };
 
@@ -71,7 +71,7 @@ export default function SignUpPage() {
         onSubmit={form.handleSubmit(onSubmit)}
         autoComplete="off"
       >
-        <Card className="flex min-h-screen w-full items-center justify-center space-y-1 bg-white dark:bg-slate-900/30 sm:my-8 sm:min-h-fit sm:max-w-sm">
+        <Card className="sm:my-8 sm:min-h-fit sm:max-w-sm flex min-h-screen w-full items-center justify-center space-y-1 bg-white dark:bg-slate-900/30">
           <div className="max-w-sm">
             <CardHeader>
               <CardTitle className="text-2xl">Sign Up</CardTitle>
