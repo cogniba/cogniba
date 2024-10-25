@@ -2,20 +2,16 @@ import { SettingsType } from "@/database/schemas/settingsTable";
 import GameTutorial from "./(components)/(tutorial)/GameTutorial";
 import GameLogic from "./(components)/GameLogic";
 import { UserType } from "@/database/schemas/profilesTable";
+import getLevel from "@/lib/server/game/getLevel";
+import getMaxLevel from "@/lib/server/game/getMaxLevel";
+import getSettings from "@/lib/server/game/getSettings";
+import getUser from "@/lib/server/game/getUser";
 
 export default async function GamePage() {
-  const getLevelPromise = fetch("/settings/get-level", {
-    method: "GET",
-  });
-  const getMaxLevelPromise = fetch("/settings/get-max-level", {
-    method: "GET",
-  });
-  const getSettingsPromise = fetch("/settings/get-settings", {
-    method: "GET",
-  });
-  const getUserPromise = fetch("/user/get-user", {
-    method: "GET",
-  });
+  const getLevelPromise = getLevel();
+  const getMaxLevelPromise = getMaxLevel();
+  const getSettingsPromise = getSettings();
+  const getUserPromise = getUser();
 
   const [levelResponse, maxLevelResponse, settingsResponse, userResponse] =
     await Promise.all([
