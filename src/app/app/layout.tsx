@@ -1,4 +1,3 @@
-import { UserType } from "@/database/schemas/profilesTable";
 import AppSidebar from "./(components)/AppSidebar";
 
 import { SidebarProvider } from "@/context/SidebarContext";
@@ -8,13 +7,6 @@ interface AppLayoutProps {
 }
 
 export default async function AppLayout({ children }: AppLayoutProps) {
-  const response = await fetch("/user/get-user");
-  if (!response.ok) {
-    return <div>An error has ocurred</div>;
-  }
-
-  const user: UserType = await response.json();
-
   return (
     <>
       {/* <FullScreenProvider /> */}
@@ -22,7 +14,7 @@ export default async function AppLayout({ children }: AppLayoutProps) {
         <div className="flex flex-col">
           {/* <AppHeader /> */}
           <div className="relative flex h-full w-full">
-            <AppSidebar full_name={user.full_name} email={user.email} />
+            <AppSidebar />
             <main className="lg:can-hover:pl-16 min-h-screen w-full bg-teal-50 dark:bg-slate-950">
               {children}
             </main>

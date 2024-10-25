@@ -7,6 +7,8 @@ import getMaxLevel from "@/lib/server/game/getMaxLevel";
 import getSettings from "@/lib/server/settings/getSettings";
 import getUser from "@/lib/server/game/getUser";
 
+export const dynamic = "force-dynamic";
+
 export default async function GamePage() {
   const getLevelPromise = getLevel();
   const getMaxLevelPromise = getMaxLevel();

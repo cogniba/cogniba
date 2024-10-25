@@ -2,6 +2,8 @@ import { GamesData } from "@/app/api/analytics/get-data/route";
 import Analytics from "./(components)/Analytics";
 import getData from "@/lib/server/analytics/getData";
 
+export const dynamic = "force-dynamic";
+
 export default async function AnalyticsPage() {
   const response = await getData({ frequency: "daily" });
 

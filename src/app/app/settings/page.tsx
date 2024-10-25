@@ -5,6 +5,8 @@ import ChangePasswordSettings from "./(components)/(settings)/ChangePasswordSett
 import { SettingsType } from "@/database/schemas/settingsTable";
 import getSettings from "@/lib/server/settings/getSettings";
 
+export const dynamic = "force-dynamic";
+
 export default async function SettingsPage() {
   const response = await getSettings();
   if (!response.ok) {
