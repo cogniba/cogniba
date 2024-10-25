@@ -51,7 +51,7 @@ export default function GameTutorialTooltip({
       <div className="text-md pb-2.5 text-slate-700 dark:text-slate-300">
         {content}
       </div>
-      <DialogFooter className="flex flex-row items-center justify-between sm:justify-between">
+      <DialogFooter className="sm:justify-between flex flex-row items-center justify-between">
         {showSkipButton ? (
           <AlertDialog>
             <AlertDialogTrigger asChild>
@@ -75,7 +75,7 @@ export default function GameTutorialTooltip({
                   Cancel
                 </AlertDialogCancel>
                 <AlertDialogAction
-                  className={buttonVariants({ variant: "orange" })}
+                  // className={buttonVariants({ variant: "orange" })}
                   onClick={handleSkipButtonClick}
                 >
                   Skip
@@ -93,7 +93,7 @@ export default function GameTutorialTooltip({
             </Button>
           )}
           {!hidePrimaryButton && (
-            <Button variant="orange" onClick={handlePrimaryButtonClick}>
+            <Button onClick={handlePrimaryButtonClick}>
               {primaryButtonText}
             </Button>
           )}
