@@ -361,6 +361,7 @@ export default function GameTutorial({
         step={step - Number(isLoadingGame)}
         setStep={setStep}
         isVisible={isVisible}
+        showSkipButton={true}
       />
       <Game
         feedback={feedback}
