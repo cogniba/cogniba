@@ -5,11 +5,13 @@ import Game from "./Game";
 
 interface GameLogicProps {
   startingLevel: number;
+  startingMaxLevel: number;
   showFeedbackEnabled: boolean;
 }
 
 export default function GameLogic({
   startingLevel,
+  startingMaxLevel,
   showFeedbackEnabled,
 }: GameLogicProps) {
   const {
@@ -26,7 +28,7 @@ export default function GameLogic({
     handleButtonPress,
     hasReachedNewLevel,
     setHasReachedNewLevel,
-  } = useGameLogic({ startingLevel, showFeedbackEnabled });
+  } = useGameLogic({ startingLevel, startingMaxLevel, showFeedbackEnabled });
 
   return (
     <Game

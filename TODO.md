@@ -9,7 +9,6 @@ Goal system
 Revalidate tag
 Spanish
 cognia.com
-Make an editor to write in vim
 
 Vim motions
 NeoVim

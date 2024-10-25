@@ -23,6 +23,7 @@ import {
 
 interface useGameLogicProps {
   startingLevel: number;
+  startingMaxLevel: number;
   showFeedbackEnabled: boolean;
   isTutorial?: boolean;
   setShowTutorialHint?: Dispatch<SetStateAction<boolean>>;
@@ -30,6 +31,7 @@ interface useGameLogicProps {
 
 export default function useGameLogic({
   startingLevel,
+  startingMaxLevel,
   showFeedbackEnabled,
   isTutorial = false,
   setShowTutorialHint = () => {},
@@ -211,15 +213,6 @@ export default function useGameLogic({
       }
     });
   }, [handleButtonPress]);
-
-  useEffect(() => {
-    const fetchMaxLevel = async () => {
-      // maxLevel.current = await getMaxLevel();
-      // TODO: Get max level
-    };
-
-    fetchMaxLevel();
-  }, []);
 
   useEffect(() => {
     if (isPlaying || isTutorial) {

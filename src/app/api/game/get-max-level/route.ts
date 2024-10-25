@@ -26,7 +26,7 @@ export async function GET() {
       .limit(1)
       .then((res) => (res.length === 1 ? res[0].newLevel : 1));
 
-    return NextResponse.json({ level }, { status: 200 });
+    return NextResponse.json({ maxLevel: level }, { status: 200 });
   } catch (error) {
     console.error("Error fetching user:", error);
     return NextResponse.json(
