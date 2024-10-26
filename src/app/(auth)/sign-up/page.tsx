@@ -40,21 +40,25 @@ export default function SignUpPage() {
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
+      fullName: "",
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof SignUpSchema>) {
+  function onSubmit(formData: z.infer<typeof SignUpSchema>) {
     setError(null);
 
-    startTransition(() => {
-      // handleSignIn(data).then((result) => {
-      //   if (result) {
-      //     setError(result.error ?? null);
-      //   }
-      // });
-      // TODO: Handle sign in
+    startTransition(async () => {
+      const response = await fetch("/api/auth/sign-up", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        setError(error);
+      }
     });
   }
 
@@ -75,8 +79,8 @@ export default function SignUpPage() {
       >
         <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
           <CardHeader className="pb-9">
-            <CardTitle className="text-2xl">Sign In</CardTitle>
-            <CardDescription>Sign in to your account</CardDescription>
+            <CardTitle className="text-2xl">Sign Up</CardTitle>
+            <CardDescription>Create a new account</CardDescription>
           </CardHeader>
 
           <CardContent className="grid gap-4">
@@ -96,6 +100,30 @@ export default function SignUpPage() {
               <Separator className="w-full shrink" />
             </div>
             <div className="flex flex-col gap-5">
+              <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="fullName">Full Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        id="fullName"
+                        name="fullName"
+                        type="text"
+                        placeholder="Marcos Hernanz"
+                        autoComplete="off"
+                        required
+                        className="bg-transparent"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <FormField
                 control={form.control}
                 name="email"
@@ -143,15 +171,15 @@ export default function SignUpPage() {
 
           <CardFooter className="flex flex-col gap-6">
             <Button type="submit" className="w-full" disabled={isPending}>
-              Sign in
+              Sign Up
             </Button>
 
             {error && <FormAlert variant="destructive" message={error} />}
 
             <div className="mt-2.5 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <Link href="/sign-up" className="underline">
-                Sign up
+              Already have an account?{" "}
+              <Link href="/sign-in" className="underline">
+                Sign in
               </Link>
             </div>
           </CardFooter>

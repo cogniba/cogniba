@@ -1,4 +1,4 @@
-import getData from "@/lib/server/analytics/getData";
+import getDataRequest from "@/lib/server/analytics/getDataRequest";
 import { NextRequest, NextResponse } from "next/server";
 
 export type GamesData = {
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    getData({ frequency: frequency as "daily" | "weekly" | "monthly" });
+    getDataRequest({ frequency: frequency as "daily" | "weekly" | "monthly" });
   } catch (error) {
     console.error("Error getting data:", error);
     return NextResponse.json(

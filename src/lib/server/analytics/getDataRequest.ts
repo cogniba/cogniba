@@ -10,7 +10,7 @@ interface GetDataParams {
   frequency: "daily" | "weekly" | "monthly";
 }
 
-export default async function getData({
+export default async function getDataRequest({
   frequency,
 }: GetDataParams): Promise<NextResponse> {
   try {

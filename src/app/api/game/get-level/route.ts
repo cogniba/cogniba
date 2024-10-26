@@ -1,5 +1,5 @@
-import getLevel from "@/lib/server/game/getLevel";
+import getLevelRequest from "@/lib/server/game/getLevel";
 
 export async function GET() {
-  return await getLevel();
+  return await getLevelRequest();
 }

@@ -1,12 +1,13 @@
 import { createClient } from "@/lib/supabase/server";
-import { SignInSchema } from "@/zod/schemas/SignInSchema";
+import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
 import { revalidatePath } from "next/cache";
-import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
-    const parsedData = SignInSchema.safeParse(data);
+    const parsedData = SignUpSchema.safeParse(data);
 
     if (!parsedData.success) {
       return NextResponse.json(
@@ -15,13 +16,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const { email, password } = parsedData.data;
+    const { fullName, email, password } = parsedData.data;
 
     const supabase = createClient();
 
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          full_name: fullName,
+        },
+      },
     });
 
     if (error) {
@@ -42,7 +48,7 @@ export async function POST(request: Request) {
     }
 
     revalidatePath("/", "layout");
-    NextResponse.redirect("/");
+    return redirect(`/confirm-email/${email}`);
   } catch (error) {
     console.error("Error signing up:", error);
     return NextResponse.json(

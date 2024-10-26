@@ -3,12 +3,12 @@ import ShowFeedbackSettings from "@/components/settings/options/ShowFeedbackSett
 import SettingsCard from "@/components/settings/SettingsCard";
 import ChangePasswordSettings from "@/components/settings/options/ChangePasswordSettings";
 import { SettingsType } from "@/database/schemas/settingsTable";
-import getSettings from "@/lib/server/settings/getSettings";
+import getSettingsRequest from "@/lib/server/settings/getSettings";
 
 export const dynamic = "force-dynamic";
 
 export default async function SettingsPage() {
-  const response = await getSettings();
+  const response = await getSettingsRequest();
   if (!response.ok) {
     <div>Error getting settings</div>;
   }

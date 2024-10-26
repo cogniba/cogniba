@@ -1,5 +1,5 @@
-import getSettings from "@/lib/server/settings/getSettings";
+import getSettingsRequest from "@/lib/server/settings/getSettings";
 
 export async function GET() {
-  return await getSettings();
+  return await getSettingsRequest();
 }

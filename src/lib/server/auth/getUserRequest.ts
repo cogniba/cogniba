@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-export default async function getUser(): Promise<NextResponse> {
+export default async function getUserRequest(): Promise<NextResponse> {
   try {
     const supabase = createClient();
 

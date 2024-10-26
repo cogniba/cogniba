@@ -45,7 +45,7 @@ export async function updateSession(request: NextRequest) {
     if (
       pathname === "/" ||
       pathname.startsWith("/sign-in") ||
-      pathname.startsWith("/register")
+      pathname.startsWith("/sign-up")
     ) {
       const newUrl = new URL("/app", request.nextUrl.origin);
       return NextResponse.redirect(newUrl);

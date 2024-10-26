@@ -1,5 +1,5 @@
-import getUser from "@/lib/server/game/getUser";
+import getUserRequest from "@/lib/server/auth/getUserRequest";
 
 export async function GET() {
-  return await getUser();
+  return await getUserRequest();
 }

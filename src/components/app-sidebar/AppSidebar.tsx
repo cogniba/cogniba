@@ -1,9 +1,9 @@
 import { UserType } from "@/database/schemas/profilesTable";
 import AppSidebarContent from "@/components/app-sidebar/AppSidebarContent";
-import getUser from "@/lib/server/game/getUser";
+import getUserRequest from "@/lib/server/auth/getUserRequest";
 
 export default async function AppSidebar() {
-  const response = await getUser();
+  const response = await getUserRequest();
   if (!response.ok) {
     return <div>An error has ocurred</div>;
   }

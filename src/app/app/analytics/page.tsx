@@ -1,11 +1,11 @@
 import { GamesData } from "@/app/api/analytics/get-data/route";
 import Analytics from "@/components/analytics/Analytics";
-import getData from "@/lib/server/analytics/getData";
+import getDataRequest from "@/lib/server/analytics/getDataRequest";
 
 export const dynamic = "force-dynamic";
 
 export default async function AnalyticsPage() {
-  const response = await getData({ frequency: "daily" });
+  const response = await getDataRequest({ frequency: "daily" });
 
   if (!response.ok) {
     return <div>Failed to get data</div>;
