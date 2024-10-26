@@ -30,12 +30,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
 import createClient from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
   const supabase = createClient();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -55,7 +57,11 @@ export default function SignUpPage() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
+      if (response.ok) {
+        router.push(
+          `/confirm-email?email=${formData.email}&full_name=${formData.fullName}`,
+        );
+      } else {
         const { error } = await response.json();
         setError(error);
       }
