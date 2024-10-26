@@ -1,7 +1,5 @@
-Move components to it's own folder
-Upgrade to Next.js 15
 Dark mode
 Create GitHub organization
 Row Level Security
 Custom SMTP
-Refactor fetch logic used in server components
+Upgrade to Next.js 15
