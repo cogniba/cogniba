@@ -1,5 +1,5 @@
 import { GamesData } from "@/app/api/analytics/get-data/route";
-import Analytics from "./(components)/Analytics";
+import Analytics from "@/components/analytics/Analytics";
 import getData from "@/lib/server/analytics/getData";
 
 export const dynamic = "force-dynamic";
