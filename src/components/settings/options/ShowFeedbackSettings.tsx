@@ -1,6 +1,6 @@
 "use client";
 
-import SettingsItem from "../SettingsItem";
+import SettingsItem from "@/components/settings/SettingsItem";
 
 import { useState } from "react";
 

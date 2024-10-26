@@ -1,6 +1,6 @@
 import { SettingsType } from "@/database/schemas/settingsTable";
-import GameTutorial from "../../../components/game/tutorial/GameTutorial";
-import GameLogic from "../../../components/game/GameLogic";
+import GameTutorial from "@/components/game/tutorial/GameTutorial";
+import GameLogic from "@/components/game/GameLogic";
 import { UserType } from "@/database/schemas/profilesTable";
 import getLevel from "@/lib/server/game/getLevel";
 import getMaxLevel from "@/lib/server/game/getMaxLevel";

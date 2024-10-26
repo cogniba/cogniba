@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 
-import SettingsItem from "../SettingsItem";
+import SettingsItem from "@/components/settings/SettingsItem";
 import FormAlert from "@/components/FormAlert";
 
 import {

@@ -1,5 +1,5 @@
-import getHitStatistics from "./getHitStatistics";
-import calculateAccuracy from "../calculateAccuracy";
+import getHitStatistics from "@/lib/game-logic/getHitStatistics";
+import calculateAccuracy from "@/lib/calculateAccuracy";
 
 import {
   gameDecreaseLevelThreshold,

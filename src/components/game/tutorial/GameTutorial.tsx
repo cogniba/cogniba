@@ -1,9 +1,9 @@
 "use client";
 
-import Game from "../Game";
+import Game from "@/components/game/Game";
 import GameTutorialSteps, {
   type StepType,
-} from "../../../app/app/play/(components)/(tutorial)/GameTutorialSteps";
+} from "@/components/game/tutorial/GameTutorialSteps";
 import sleep from "@/lib/sleep";
 
 import { useCallback, useEffect, useRef, useState } from "react";

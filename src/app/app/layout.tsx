@@ -1,4 +1,4 @@
-import AppSidebar from "../../components/app-sidebar/AppSidebar";
+import AppSidebar from "@/components/app-sidebar/AppSidebar";
 
 import { SidebarProvider } from "@/context/SidebarContext";
 
