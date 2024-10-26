@@ -1,7 +1,7 @@
 import { type Dispatch, type SetStateAction, useCallback } from "react";
 import HighlightDialog, {
   type PlacementType,
-} from "@/components/HighlightDialog";
+} from "@/components/highlight-dialog/HighlightDialog";
 import GameTutorialTooltip from "./GameTutorialTooltip";
 import { revalidatePath } from "next/cache";
 

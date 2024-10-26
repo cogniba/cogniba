@@ -1,11 +1,11 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import HighlightOverlay from "./HighlightOverlay";
-import { Dialog, DialogContent } from "./ui/dialog";
+import HighlightOverlay from "@/components/highlight-dialog/HighlightOverlay";
+import { Dialog, DialogContent } from "../ui/dialog";
 import useElementDimensions from "@/hooks/useElementDimensions";
 import { cn } from "@/lib/cn";
-import HighlightDialogArrow from "./HighlightDialogArrow";
+import HighlightDialogArrow from "@/components/highlight-dialog/HighlightDialogArrow";
 
 export type PlacementType =
   | "top"
