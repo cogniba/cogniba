@@ -1,5 +1,5 @@
 import { UserType } from "@/database/schemas/profilesTable";
-import AppSidebarContent from "./AppSidebarContent";
+import AppSidebarContent from "../../app/app/(components)/AppSidebarContent";
 import getUser from "@/lib/server/game/getUser";
 
 export default async function AppSidebar() {

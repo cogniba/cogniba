@@ -1,9 +1,7 @@
 "use client";
 
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
-import GameTutorialSteps, {
-  type StepType,
-} from "./(tutorial)/GameTutorialSteps";
+import GameTutorialSteps, { type StepType } from "./tutorial/GameTutorialSteps";
 import { Strong } from "@/components/ui/Strong";
 import sleep from "@/lib/sleep";
 

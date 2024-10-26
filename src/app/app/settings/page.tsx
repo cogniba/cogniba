@@ -1,7 +1,7 @@
-import AppearanceSetting from "./(components)/(settings)/AppearanceSetting";
-import ShowFeedbackSettings from "./(components)/(settings)/ShowFeedbackSettings";
-import SettingsCard from "./(components)/SettingsCard";
-import ChangePasswordSettings from "./(components)/(settings)/ChangePasswordSettings";
+import AppearanceSetting from "../../../components/settings/options/AppearanceSetting";
+import ShowFeedbackSettings from "../../../components/settings/options/ShowFeedbackSettings";
+import SettingsCard from "../../../components/settings/SettingsCard";
+import ChangePasswordSettings from "../../../components/settings/options/ChangePasswordSettings";
 import { SettingsType } from "@/database/schemas/settingsTable";
 import getSettings from "@/lib/server/settings/getSettings";
 
