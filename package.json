@@ -10,7 +10,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "supabase:types": "supabase gen types typescript --project-id mzuqkkfaglixfmlbgfon > database.types.ts",
+    "supabase:types": "supabase gen types typescript --project-id jljwytkxpopomojkroic > database.types.ts",
     "type-check": "tsc"
   },
   "dependencies": {
