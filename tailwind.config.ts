@@ -4,10 +4,6 @@ import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
-  screens: {
-    xs: "480px",
-    ...defaultTheme.screens,
-  },
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -18,6 +14,7 @@ const config = {
   theme: {
     screens: {
       xs: "480px",
+      ...defaultTheme.screens,
     },
     extend: {
       fontFamily: {

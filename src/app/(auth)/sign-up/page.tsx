@@ -59,7 +59,7 @@ export default function SignUpPage() {
 
       if (response.ok) {
         window.localStorage.setItem("signUpEmail", formData.email);
-        window.localStorage.setItem("signInFullName", formData.fullName);
+        window.localStorage.setItem("signUpFullName", formData.fullName);
         router.push("/confirm-email");
       } else {
         const { error } = await response.json();

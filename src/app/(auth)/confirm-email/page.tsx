@@ -12,15 +12,17 @@ export default function ConfirmEmailPage() {
 
   useEffect(() => {
     const email = window.localStorage.getItem("signUpEmail");
-    const fullName = window.localStorage.getItem("signInName");
+    const fullName = window.localStorage.getItem("signUpFullName");
 
     if (email) {
       setEmail(email);
     }
-
     if (fullName) {
-      setName(fullName.split(" ")[0]);
+      setName(fullName?.split(" ")[0] ?? null);
     }
+
+    window.localStorage.removeItem("signUpEmail");
+    window.localStorage.removeItem("signUpFullName");
 
     setIsLoading(false);
   }, []);
@@ -29,14 +31,21 @@ export default function ConfirmEmailPage() {
     router.push("/sign-in");
   }
 
-  if (isLoading) {
+  if (isLoading || !email || !name) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div>
-      <div>Hey, {name}. Please confirm your email</div>
-      <div>{email}</div>
+    <div className="flex min-h-screen items-center justify-center p-4">
+      <div className="flex h-full max-w-3xl flex-col items-center justify-center gap-6 text-center">
+        <div className="sm:text-3xl text-2xl">
+          Hey, {name}. Please confirm your email
+        </div>
+        <div className="sm:text-2xl text-xl text-foreground/75">
+          We have sent you a confirmation email to{" "}
+          <span className="underline [word-break:break-word]">{email}</span>
+        </div>
+      </div>
     </div>
   );
 }
