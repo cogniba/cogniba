@@ -30,6 +30,11 @@ export async function POST(request: Request) {
           { error: "Invalid credentials" },
           { status: 401 },
         );
+      } else if (error.code === "email_not_confirmed") {
+        return NextResponse.json(
+          { error: "Email not confirmed" },
+          { status: 403 },
+        );
       } else {
         console.error("Error signing in:", error);
         return NextResponse.json({ error: "Invalid request" }, { status: 500 });
