@@ -1,5 +1,6 @@
-Dark mode
+Change cogniaprendo for Cogniba
 Create GitHub organization
+Dark mode
+Responsive
 Row Level Security
-Custom SMTP
 Upgrade to Next.js 15

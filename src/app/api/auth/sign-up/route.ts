@@ -1,5 +1,8 @@
+import { db } from "@/database/db";
+import { profilesTable } from "@/database/schemas/profilesTable";
 import { createClient } from "@/lib/supabase/server";
 import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { NextRequest, NextResponse } from "next/server";
@@ -18,6 +21,19 @@ export async function POST(request: NextRequest) {
 
     const { fullName, email, password } = parsedData.data;
 
+    const emailInUse = await db
+      .select()
+      .from(profilesTable)
+      .where(eq(profilesTable.email, email))
+      .then((res) => (res.length > 0 ? true : false));
+
+    if (emailInUse) {
+      return NextResponse.json(
+        { error: "Email already in use" },
+        { status: 409 },
+      );
+    }
+
     const supabase = createClient();
 
     const { error } = await supabase.auth.signUp({
@@ -27,6 +43,7 @@ export async function POST(request: NextRequest) {
         data: {
           full_name: fullName,
         },
+        emailRedirectTo: process.env.NEXT_PUBLIC_SITE_URL + "/sign-in",
       },
     });
 
