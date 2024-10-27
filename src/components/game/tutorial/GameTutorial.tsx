@@ -20,7 +20,7 @@ const steps = [
   {
     title: (
       <>
-        Welcome to <Strong variant="orange">cogniaprendo</Strong>!
+        Welcome to <Strong variant="orange">Cogniba</Strong>!
       </>
     ),
     content: (
