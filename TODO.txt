@@ -1,5 +1,3 @@
-Google oauth
-Change cogniaprendo for Cogniba
 Create GitHub organization
 Dark mode
 Responsive

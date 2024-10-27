@@ -77,7 +77,7 @@ export default function SignInPage() {
   return (
     <Form {...form}>
       <form
-        className="flex min-h-screen items-center justify-center"
+        className="flex min-h-screen items-center justify-center bg-card xs:bg-background"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
@@ -90,10 +90,10 @@ export default function SignInPage() {
             <Button
               onClick={handleSignInWithGoogle}
               type="button"
-              variant="outline"
-              className="flex w-full items-center justify-center gap-2 bg-background font-semibold text-foreground hover:bg-muted hover:text-black"
+              variant="secondary"
+              className="font-semibold"
             >
-              <FaGoogle className="" />
+              <FaGoogle />
               Continue with Google
             </Button>
 
