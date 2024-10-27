@@ -30,12 +30,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
 import createClient from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
   const supabase = createClient();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
@@ -45,16 +47,21 @@ export default function SignInPage() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof SignInSchema>) {
+  function onSubmit(formData: z.infer<typeof SignInSchema>) {
     setError(null);
 
-    startTransition(() => {
-      // handleSignIn(data).then((result) => {
-      //   if (result) {
-      //     setError(result.error ?? null);
-      //   }
-      // });
-      // TODO: Handle sign in
+    startTransition(async () => {
+      const response = await fetch("/api/auth/sign-in", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        router.push("/confirm-email");
+      } else {
+        const { error } = await response.json();
+        setError(error);
+      }
     });
   }
 

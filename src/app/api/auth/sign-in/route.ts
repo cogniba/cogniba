@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     }
 
     revalidatePath("/", "layout");
-    NextResponse.redirect("/");
+    return NextResponse.json({ status: 200 });
   } catch (error) {
     console.error("Error signing in:", error);
     return NextResponse.json(

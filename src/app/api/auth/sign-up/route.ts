@@ -2,7 +2,6 @@ import { createClient } from "@/lib/supabase/server";
 import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
 import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect";
-import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
