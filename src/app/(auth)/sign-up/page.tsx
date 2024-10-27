@@ -80,7 +80,7 @@ export default function SignUpPage() {
   return (
     <Form {...form}>
       <form
-        className="flex min-h-screen items-center justify-center"
+        className="flex min-h-screen items-center justify-center bg-card xs:bg-background"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
@@ -93,8 +93,8 @@ export default function SignUpPage() {
             <Button
               onClick={handleSignInWithGoogle}
               type="button"
-              variant="outline"
-              className="flex w-full items-center justify-center gap-2 bg-background font-semibold text-foreground hover:bg-muted hover:text-black"
+              variant="secondary"
+              className="font-semibold"
             >
               <FaGoogle className="" />
               Continue with Google
@@ -120,7 +120,7 @@ export default function SignUpPage() {
                         name="fullName"
                         type="text"
                         placeholder="Marcos Hernanz"
-                        autoComplete="off"
+                        autoComplete="name"
                         required
                         className="bg-transparent"
                       />
@@ -163,7 +163,7 @@ export default function SignUpPage() {
                         {...field}
                         disabled={isPending}
                         type="password"
-                        autoComplete="current-password"
+                        autoComplete="new-password"
                         required
                         className="bg-transparent"
                       />
