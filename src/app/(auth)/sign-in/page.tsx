@@ -57,7 +57,7 @@ export default function SignInPage() {
       });
 
       if (response.ok) {
-        router.push("/confirm-email");
+        router.push("/app");
       } else {
         const { error } = await response.json();
         setError(error);
