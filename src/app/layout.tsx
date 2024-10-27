@@ -1,4 +1,5 @@
 import "./globals.css";
+// import "./defaultGlobals.css";
 
 import RootLayoutWrapper from "@/components/RootLayoutWrapper";
 
