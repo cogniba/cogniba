@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -32,7 +33,11 @@ export default function ConfirmEmailPage() {
   }
 
   if (isLoading || !email || !name) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loader2Icon className="h-12 w-12 animate-spin" />
+      </div>
+    );
   }
 
   return (
