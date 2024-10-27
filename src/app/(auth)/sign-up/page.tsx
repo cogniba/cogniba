@@ -58,9 +58,9 @@ export default function SignUpPage() {
       });
 
       if (response.ok) {
-        router.push(
-          `/confirm-email?email=${formData.email}&full_name=${formData.fullName}`,
-        );
+        window.localStorage.setItem("signUpEmail", formData.email);
+        window.localStorage.setItem("signInFullName", formData.fullName);
+        router.push("/confirm-email");
       } else {
         const { error } = await response.json();
         setError(error);
