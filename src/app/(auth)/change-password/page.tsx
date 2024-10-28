@@ -1,18 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ForgotPasswordSchema } from "@/zod/schemas/ForgotPasswordSchema";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import FormAlert from "@/components/FormAlert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,28 +10,39 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import FormAlert from "@/components/FormAlert";
+import { ChangePasswordSchema } from "@/zod/schemas/ChangePasswordSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-export default function ForgotPasswordPage() {
+export default function ChangePasswordPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
-    resolver: zodResolver(ForgotPasswordSchema),
+  const form = useForm<z.infer<typeof ChangePasswordSchema>>({
+    resolver: zodResolver(ChangePasswordSchema),
     defaultValues: {
-      email: "",
+      password: "",
+      confirmPassword: "",
     },
   });
 
-  function onSubmit(formData: z.infer<typeof ForgotPasswordSchema>) {
+  function onSubmit(formData: z.infer<typeof ChangePasswordSchema>) {
     setError(null);
 
     startTransition(async () => {
-      const response = await fetch("/api/auth/reset-password", {
+      const response = await fetch("/api/auth/change-password", {
         method: "POST",
         body: JSON.stringify(formData),
       });
@@ -64,27 +64,46 @@ export default function ForgotPasswordPage() {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
-          <CardHeader className="pb-9">
-            <CardTitle className="text-2xl">Reset password</CardTitle>
+          <CardHeader>
+            <CardTitle className="text-2xl">Change password</CardTitle>
             <CardDescription>
-              Enter your email to change your password
+              Choose a new password for your account
             </CardDescription>
           </CardHeader>
 
           <CardContent className="grid gap-4">
             <FormField
               control={form.control}
-              name="email"
+              name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       disabled={isPending}
-                      type="email"
-                      placeholder="marcos@example.com"
-                      autoComplete="email"
+                      type="password"
+                      autoComplete="new-password"
+                      required
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm password</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      type="password"
+                      autoComplete="new-password"
                       required
                     />
                   </FormControl>
@@ -101,13 +120,6 @@ export default function ForgotPasswordPage() {
 
             {error && <FormAlert variant="destructive" message={error} />}
             {success && <FormAlert variant="success" message={success} />}
-
-            <div className="mt-2.5 text-center text-sm">
-              Remember your password?{" "}
-              <Link href="/sign-in" className="underline">
-                Sign in
-              </Link>
-            </div>
           </CardFooter>
         </Card>
       </form>
