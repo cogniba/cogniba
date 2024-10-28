@@ -70,11 +70,15 @@ export default function SignUpPage() {
   }
 
   const handleSignInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`,
-      },
+    setError(null);
+
+    startTransition(async () => {
+      await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`,
+        },
+      });
     });
   };
 
@@ -93,6 +97,7 @@ export default function SignUpPage() {
           <CardContent className="grid gap-4">
             <Button
               onClick={handleSignInWithGoogle}
+              disabled={isPending}
               type="button"
               variant="secondary"
               className="font-semibold"
