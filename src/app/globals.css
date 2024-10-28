@@ -80,8 +80,8 @@
     --destructive: 127 29 29; /* #7f1d1d */
     --destructive-foreground: 248 250 252; /* #f8fafc */
 
-    --successs: 20 83 45; /* #14532d */
-    --successs-foreground: 248 250 252; /* #f8fafc */
+    --success: 20 83 45; /* #14532d */
+    --success-foreground: 248 250 252; /* #f8fafc */
 
     --border: 30 41 59; /* #1e293b */
     --input: 30 41 59; /* #1e293b */

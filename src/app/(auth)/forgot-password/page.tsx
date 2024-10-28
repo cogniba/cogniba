@@ -32,8 +32,6 @@ export default function ForgotPasswordPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const router = useRouter();
-
   const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
     resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
@@ -52,6 +50,7 @@ export default function ForgotPasswordPage() {
       if (response.ok) {
         const { message } = await response.json();
         setSuccess(message);
+        form.reset();
       } else {
         const { error } = await response.json();
         setError(error);
