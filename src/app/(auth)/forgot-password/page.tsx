@@ -50,7 +50,6 @@ export default function ForgotPasswordPage() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        router.push("/app");
         const { message } = await response.json();
         setSuccess(message);
       } else {
@@ -103,7 +102,7 @@ export default function ForgotPasswordPage() {
             </Button>
 
             {error && <FormAlert variant="destructive" message={error} />}
-            {success && <FormAlert variant="destructive" message={success} />}
+            {success && <FormAlert variant="success" message={success} />}
 
             <div className="mt-2.5 text-center text-sm">
               Remember your password?{" "}
