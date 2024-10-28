@@ -60,6 +60,7 @@ export default function SignUpPage() {
       if (response.ok) {
         window.localStorage.setItem("signUpEmail", formData.email);
         window.localStorage.setItem("signUpFullName", formData.fullName);
+        window.localStorage.setItem("emailConfirmed", JSON.stringify(true));
         router.push("/confirm-email");
       } else {
         const { error } = await response.json();

@@ -29,7 +29,7 @@ export default function ConfirmEmailPage() {
   }, []);
 
   if (!isLoading && (!email || !name)) {
-    router.push("/sign-in");
+    router.replace("/sign-in");
   }
 
   if (isLoading || !email || !name) {
