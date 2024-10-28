@@ -25,10 +25,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import FormAlert from "@/components/FormAlert";
 
 export default function ForgotPasswordPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -43,16 +45,18 @@ export default function ForgotPasswordPage() {
     setError(null);
 
     startTransition(async () => {
-      // const response = await fetch("/api/auth/sign-in", {
-      //   method: "POST",
-      //   body: JSON.stringify(formData),
-      // });
-      // if (response.ok) {
-      //   router.push("/app");
-      // } else {
-      //   const { error } = await response.json();
-      //   setError(error);
-      // }
+      const response = await fetch("/api/auth/reset-password", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        router.push("/app");
+        const { message } = await response.json();
+        setSuccess(message);
+      } else {
+        const { error } = await response.json();
+        setError(error);
+      }
     });
   }
 
@@ -95,8 +99,11 @@ export default function ForgotPasswordPage() {
 
           <CardFooter className="flex flex-col gap-6">
             <Button type="submit" className="w-full" disabled={isPending}>
-              Sign in
+              Send reset link
             </Button>
+
+            {error && <FormAlert variant="destructive" message={error} />}
+            {success && <FormAlert variant="destructive" message={success} />}
 
             <div className="mt-2.5 text-center text-sm">
               Remember your password?{" "}

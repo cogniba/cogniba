@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
         data: {
           full_name: fullName,
         },
-        emailRedirectTo: process.env.NEXT_PUBLIC_SITE_URL + "/email-confirmed",
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/email-confirmed`,
       },
     });
 
