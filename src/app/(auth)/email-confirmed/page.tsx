@@ -1,18 +1,25 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function EmailConfirmed() {
+  const redirectRef = useRef(true);
+
   const router = useRouter();
 
   useEffect(() => {
     const emailConfirmed = window.localStorage.getItem("emailConfirmed");
 
-    if (emailConfirmed === null) {
-      router.replace("/sign-in");
-    } else {
+    if (emailConfirmed !== null) {
+      redirectRef.current = false;
       window.localStorage.removeItem("emailConfirmed");
+    }
+
+    if (redirectRef.current) {
+      router.replace("/sign-in");
     }
   }, [router]);
 
