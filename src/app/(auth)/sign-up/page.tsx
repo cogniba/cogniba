@@ -122,7 +122,6 @@ export default function SignUpPage() {
                         placeholder="Marcos Hernanz"
                         autoComplete="name"
                         required
-                        className="bg-transparent"
                       />
                     </FormControl>
                     <FormMessage />
@@ -144,7 +143,6 @@ export default function SignUpPage() {
                         placeholder="marcos@example.com"
                         autoComplete="email"
                         required
-                        className="bg-transparent"
                       />
                     </FormControl>
                     <FormMessage />
@@ -165,7 +163,6 @@ export default function SignUpPage() {
                         type="password"
                         autoComplete="new-password"
                         required
-                        className="bg-transparent"
                       />
                     </FormControl>
                     <FormMessage />

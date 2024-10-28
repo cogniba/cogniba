@@ -117,7 +117,6 @@ export default function SignInPage() {
                         placeholder="marcos@example.com"
                         autoComplete="email"
                         required
-                        className="bg-transparent"
                       />
                     </FormControl>
                     <FormMessage />
@@ -138,7 +137,6 @@ export default function SignInPage() {
                         type="password"
                         autoComplete="current-password"
                         required
-                        className="bg-transparent"
                       />
                     </FormControl>
                     <FormMessage />
