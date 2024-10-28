@@ -132,7 +132,7 @@ export default function SignInPage() {
                     <div className="flex items-center justify-between">
                       <FormLabel>Password</FormLabel>
                       <Link
-                        href="Forgot password"
+                        href="forgot-password"
                         className="text-sm underline"
                       >
                         Forgot your password?
