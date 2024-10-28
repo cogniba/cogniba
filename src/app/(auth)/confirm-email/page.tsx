@@ -43,10 +43,10 @@ export default function ConfirmEmailPage() {
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
       <div className="flex h-full max-w-3xl flex-col items-center justify-center gap-6 text-center">
-        <div className="sm:text-3xl text-2xl">
+        <div className="text-2xl sm:text-3xl">
           Hey, {name}. Please confirm your email
         </div>
-        <div className="sm:text-2xl text-xl text-foreground/75">
+        <div className="text-xl text-muted-foreground sm:text-2xl">
           We have sent you a confirmation email to{" "}
           <span className="underline [word-break:break-word]">{email}</span>
         </div>
