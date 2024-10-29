@@ -31,13 +31,14 @@ import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
 import createClient from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import SimpleMessagePage from "@/components/SimpleMessagePage";
 
 export default function SignUpPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [hasSignedUp, setHasSignedUp] = useState(false);
 
   const supabase = createClient();
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -58,10 +59,7 @@ export default function SignUpPage() {
       });
 
       if (response.ok) {
-        window.localStorage.setItem("signUpEmail", formData.email);
-        window.localStorage.setItem("signUpFullName", formData.fullName);
-        window.localStorage.setItem("emailConfirmed", JSON.stringify(true));
-        router.push("/confirm-email");
+        setHasSignedUp(true);
       } else {
         const { error } = await response.json();
         setError(error);
@@ -81,6 +79,22 @@ export default function SignUpPage() {
       });
     });
   };
+
+  if (hasSignedUp) {
+    return (
+      <SimpleMessagePage
+        mainMessage={<>Hey, {name}. Please confirm your email</>}
+        secondaryMessage={
+          <>
+            We have sent you a confirmation email to{" "}
+            <span className="underline [word-break:break-word]">
+              {form.getValues().email}
+            </span>
+          </>
+        }
+      />
+    );
+  }
 
   return (
     <Form {...form}>
