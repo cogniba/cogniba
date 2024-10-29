@@ -36,8 +36,8 @@ export default function Analytics({ data }: AnalyticsProps) {
       : null;
 
   return (
-    <Card className="flex h-full w-full flex-col bg-white pb-4 pt-8 dark:bg-slate-900/30 xs:py-0">
-      <CardHeader className="sm:p-8 border-b border-slate-200 p-5 dark:border-slate-800">
+    <Card className="flex h-full w-full flex-col pb-4 pt-8 xs:py-0">
+      <CardHeader className="border-b p-5 sm:p-8">
         <AnalyticsFilters
           date={date}
           setDate={setDate}
@@ -45,7 +45,7 @@ export default function Analytics({ data }: AnalyticsProps) {
           setChartMetric={setChartMetric}
         />
       </CardHeader>
-      <CardContent className="sm:p-8 flex h-full flex-col p-5">
+      <CardContent className="flex h-full flex-col p-5 sm:p-8">
         <AnalyticsMetrics chartMetric={chartMetric} data={cleanData} />
       </CardContent>
     </Card>
