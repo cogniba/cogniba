@@ -83,7 +83,12 @@ export default function SignUpPage() {
   if (hasSignedUp) {
     return (
       <SimpleMessagePage
-        mainMessage={<>Hey, {name}. Please confirm your email</>}
+        mainMessage={
+          <>
+            Hey, {form.getValues().fullName.split(" ")[0]}. Please confirm your
+            email
+          </>
+        }
         secondaryMessage={
           <>
             We have sent you a confirmation email to{" "}

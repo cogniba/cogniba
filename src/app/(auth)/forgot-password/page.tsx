@@ -25,11 +25,12 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import FormAlert from "@/components/FormAlert";
+import SimpleMessagePage from "@/components/SimpleMessagePage";
 
 export default function ForgotPasswordPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  const [hasSentEmail, setHasSentEmail] = useState(false);
 
   const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
     resolver: zodResolver(ForgotPasswordSchema),
@@ -47,14 +48,23 @@ export default function ForgotPasswordPage() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        const { message } = await response.json();
-        setSuccess(message);
-        form.reset();
+        setHasSentEmail(true);
       } else {
         const { error } = await response.json();
         setError(error);
       }
     });
+  }
+
+  if (hasSentEmail) {
+    return (
+      <SimpleMessagePage
+        mainMessage={<>Reset email sent</>}
+        secondaryMessage={
+          <>Follow the instructions in the email to reset your password</>
+        }
+      />
+    );
   }
 
   return (
@@ -100,7 +110,6 @@ export default function ForgotPasswordPage() {
             </Button>
 
             {error && <FormAlert variant="destructive" message={error} />}
-            {success && <FormAlert variant="success" message={success} />}
 
             <div className="mt-2.5 text-center text-sm">
               Remember your password?{" "}
