@@ -115,7 +115,7 @@ export default function ChangePasswordPage() {
 
           <CardFooter className="flex flex-col gap-6">
             <Button type="submit" className="w-full" disabled={isPending}>
-              Send reset link
+              Change password
             </Button>
 
             {error && <FormAlert variant="destructive" message={error} />}
