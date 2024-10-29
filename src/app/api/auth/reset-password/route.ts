@@ -1,5 +1,8 @@
+import { db } from "@/database/db";
+import { profilesTable } from "@/database/schemas/profilesTable";
 import { createClient } from "@/lib/supabase/server";
 import { ForgotPasswordSchema } from "@/zod/schemas/ForgotPasswordSchema";
+import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -12,6 +15,19 @@ export async function POST(request: Request) {
     }
 
     const { email } = parsedData.data;
+
+    const emailInUse = await db
+      .select()
+      .from(profilesTable)
+      .where(eq(profilesTable.email, email))
+      .then((res) => (res.length > 0 ? true : false));
+
+    if (!emailInUse) {
+      return NextResponse.json(
+        { error: "Email is not registered" },
+        { status: 400 },
+      );
+    }
 
     const supabase = createClient();
 
