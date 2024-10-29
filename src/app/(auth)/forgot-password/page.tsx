@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import FormAlert from "@/components/FormAlert";
-import SimpleMessagePage from "@/components/SimpleMessagePage";
+import SimpleMessageScreen from "@/components/SimpleMessageScreen";
 
 export default function ForgotPasswordPage() {
   const [isPending, startTransition] = useTransition();
@@ -58,7 +58,7 @@ export default function ForgotPasswordPage() {
 
   if (hasSentEmail) {
     return (
-      <SimpleMessagePage
+      <SimpleMessageScreen
         mainMessage={<>Reset email sent</>}
         secondaryMessage={
           <>Follow the instructions in the email to reset your password</>

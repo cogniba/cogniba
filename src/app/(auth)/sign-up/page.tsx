@@ -31,7 +31,7 @@ import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
 import createClient from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-import SimpleMessagePage from "@/components/SimpleMessagePage";
+import SimpleMessageScreen from "@/components/SimpleMessageScreen";
 
 export default function SignUpPage() {
   const [isPending, startTransition] = useTransition();
@@ -82,7 +82,7 @@ export default function SignUpPage() {
 
   if (hasSignedUp) {
     return (
-      <SimpleMessagePage
+      <SimpleMessageScreen
         mainMessage={
           <>
             Hey, {form.getValues().fullName.split(" ")[0]}. Please confirm your

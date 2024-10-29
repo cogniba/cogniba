@@ -1,6 +1,7 @@
 "use client";
 
 import FormAlert from "@/components/FormAlert";
+import SimpleMessageScreen from "@/components/SimpleMessageScreen";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,6 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { ChangePasswordSchema } from "@/zod/schemas/ChangePasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,7 +30,8 @@ import { z } from "zod";
 export default function ChangePasswordPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+
+  const [passwordChanged, setPasswordChanged] = useState(false);
 
   const form = useForm<z.infer<typeof ChangePasswordSchema>>({
     resolver: zodResolver(ChangePasswordSchema),
@@ -47,14 +50,27 @@ export default function ChangePasswordPage() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        const { message } = await response.json();
-        setSuccess(message);
-        form.reset();
+        setPasswordChanged(true);
       } else {
         const { error } = await response.json();
         setError(error);
       }
     });
+  }
+
+  if (passwordChanged) {
+    return (
+      <SimpleMessageScreen
+        mainMessage={<>Password changed successfully</>}
+        secondaryMessage={
+          <>
+            <Link href="/app" className="underline">
+              &larr; Back to app
+            </Link>
+          </>
+        }
+      />
+    );
   }
 
   return (
@@ -119,7 +135,6 @@ export default function ChangePasswordPage() {
             </Button>
 
             {error && <FormAlert variant="destructive" message={error} />}
-            {success && <FormAlert variant="success" message={success} />}
           </CardFooter>
         </Card>
       </form>
