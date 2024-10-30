@@ -219,7 +219,7 @@ export default function GameTutorial({
 
   const updateUser = useCallback(
     async ({ hasFinishedTutorial }: { hasFinishedTutorial: boolean }) => {
-      const response = await fetch("/user/update-user", {
+      const response = await fetch("/api/user/update-user", {
         method: "POST",
         body: JSON.stringify({ hasFinishedTutorial }),
       });
@@ -316,7 +316,7 @@ export default function GameTutorial({
 
     const handleLastStep = async () => {
       await updateUser({ hasFinishedTutorial: true });
-      revalidatePath("/app/play");
+      revalidatePath("/app/play", "page");
     };
 
     if (stepRef.current === boardStep) {

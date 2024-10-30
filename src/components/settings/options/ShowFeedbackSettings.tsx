@@ -17,7 +17,7 @@ export default function ShowFeedbackSettings({
   const updateShowFeedback = async (value: string) => {
     setShowFeedback(value === "enabled");
 
-    const response = await fetch("/settings/update-settings", {
+    const response = await fetch("/api/settings/update-settings", {
       method: "POST",
       body: JSON.stringify({ showFeedback: value === "enabled" }),
     });

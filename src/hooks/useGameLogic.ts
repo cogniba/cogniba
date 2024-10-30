@@ -109,7 +109,7 @@ export default function useGameLogic({
         (gameVisibleSquareDuration + gameHiddenSquareDuration) +
       gameDelayBeforeStart;
 
-    const response = await fetch("/game/insert-game", {
+    const response = await fetch("/api/game/insert-game", {
       method: "POST",
       body: JSON.stringify({
         level,

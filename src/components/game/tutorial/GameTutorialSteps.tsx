@@ -32,7 +32,7 @@ export default function GameTutorialSteps({
   showSkipButton,
 }: GameTutorialStepsProps) {
   const handleSkip = useCallback(async () => {
-    const response = await fetch("/user/update-user", {
+    const response = await fetch("/api/user/update-user", {
       method: "POST",
       body: JSON.stringify({ hasFinishedTutorial: true }),
     });
@@ -41,7 +41,7 @@ export default function GameTutorialSteps({
       return <div>An error has ocurred</div>;
     }
 
-    revalidatePath("/app/play");
+    revalidatePath("/app/play", "page");
   }, []);
 
   const currentStep = steps[step - Number(step >= steps.length)];
