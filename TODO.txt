@@ -1,4 +1,4 @@
-Add dedicated pages instead of alerts for confirm email, forgot password, and change password
+.env.example
 Dark mode
 Responsive
 Create GitHub organization
