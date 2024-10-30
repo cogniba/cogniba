@@ -71,10 +71,7 @@ export default function GameTutorialTooltip({
                 >
                   Cancel
                 </AlertDialogCancel>
-                <AlertDialogAction
-                  // className={buttonVariants({ variant: "orange" })}
-                  onClick={handleSkipButtonClick}
-                >
+                <AlertDialogAction onClick={handleSkipButtonClick}>
                   Skip
                 </AlertDialogAction>
               </AlertDialogFooter>
