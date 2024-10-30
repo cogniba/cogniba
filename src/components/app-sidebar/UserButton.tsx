@@ -38,21 +38,21 @@ export default function UserButton({ full_name, email }: UserButtonProps) {
         <div className="w-full">
           <button
             className={cn(
-              "group/item relative flex h-12 w-full items-center justify-center rounded-md text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950 hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-50",
-              isUserDropdownOpen && "bg-slate-100 dark:bg-slate-900",
+              "group/item relative flex h-12 w-full items-center justify-center rounded-md text-secondary-foreground transition duration-200 hover:bg-secondary hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start",
+              isUserDropdownOpen && "bg-secondary",
             )}
           >
             <div className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 dark:bg-slate-950">
-                <CircleUserIcon className="h-6 w-6 text-slate-800 transition duration-200 dark:text-slate-200" />
+              <div className="flex h-7 w-7 items-center justify-center rounded-full">
+                <CircleUserIcon className="h-6 w-6 text-secondary-foreground transition duration-200" />
               </div>
             </div>
             <div
               className="absolute left-9 w-40 space-y-0.5 text-left text-base font-medium opacity-0 transition-[opacity,left] group-data-[state=expanded]:left-11 group-data-[state=expanded]:opacity-100"
               aria-hidden={isExpanded || isUserDropdownOpen || undefined}
             >
-              <div className="truncate font-semibold">{full_name}</div>
-              <div className="truncate text-xs font-normal text-slate-600 transition duration-200 group-hover/item:text-slate-700 dark:text-slate-400 dark:group-hover/item:text-slate-300">
+              <div className="truncate font-medium">{full_name}</div>
+              <div className="truncate text-xs font-normal text-muted-foreground transition duration-200">
                 {email}
               </div>
             </div>
@@ -67,7 +67,7 @@ export default function UserButton({ full_name, email }: UserButtonProps) {
       >
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className="font-medium text-slate-700 transition duration-200 hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-50"
+            className="font-medium"
             disabled={isPending}
             onClick={onSignOut}
           >

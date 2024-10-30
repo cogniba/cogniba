@@ -25,9 +25,9 @@ export default function AppSidebarItem({
       <div className="w-full">
         <button
           className={cn(
-            "group/item relative flex h-12 w-full items-center justify-center rounded-md text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950 hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-50",
+            "group/item relative flex h-12 w-full items-center justify-center rounded-md text-muted-foreground transition duration-200 hover:bg-secondary hover:text-secondary-foreground hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start",
             pathname === href &&
-              "bg-slate-200 text-slate-950 shadow-sm hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800",
+              "bg-secondary text-secondary-foreground shadow-sm",
           )}
           onClick={onClick}
         >

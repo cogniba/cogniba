@@ -15,7 +15,7 @@ export default async function AppLayout({ children }: AppLayoutProps) {
           {/* <AppHeader /> */}
           <div className="relative flex h-full w-full">
             <AppSidebar />
-            <main className="lg:can-hover:pl-16 min-h-screen w-full bg-teal-50 dark:bg-slate-950">
+            <main className="min-h-screen w-full lg:can-hover:pl-16">
               {children}
             </main>
           </div>
