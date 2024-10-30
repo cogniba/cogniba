@@ -6,7 +6,8 @@ import { cva, VariantProps } from "class-variance-authority";
 const strongVariants = cva("font-semibold", {
   variants: {
     variant: {
-      default: "dark:text-slate-50 text-slate-950",
+      default: "text-foreground",
+      primary: "text-primary",
       orange: "dark:text-orange-400 text-orange-500",
       teal: "dark:text-teal-400 text-teal-600",
       red: "dark:text-red-400 text-red-600",

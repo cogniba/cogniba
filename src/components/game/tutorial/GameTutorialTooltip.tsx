@@ -6,7 +6,6 @@ import {
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
-  AlertDialogHeader,
   AlertDialogOverlay,
   AlertDialogTitle,
   AlertDialogTrigger,
@@ -48,10 +47,8 @@ export default function GameTutorialTooltip({
       <DialogHeader className="pb-1">
         <DialogTitle className="text-2xl font-semibold">{title}</DialogTitle>
       </DialogHeader>
-      <div className="text-md pb-2.5 text-slate-700 dark:text-slate-300">
-        {content}
-      </div>
-      <DialogFooter className="sm:justify-between flex flex-row items-center justify-between">
+      <div className="pb-2.5 text-secondary-foreground">{content}</div>
+      <DialogFooter className="flex flex-row items-center justify-between sm:justify-between">
         {showSkipButton ? (
           <AlertDialog>
             <AlertDialogTrigger asChild>
@@ -61,7 +58,7 @@ export default function GameTutorialTooltip({
             <AlertDialogContent className="z-[1000]">
               <DialogHeader>
                 <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                <AlertDialogDescription className="dark:text-slate-300">
+                <AlertDialogDescription className="text-secondary-foreground">
                   If you <Strong>skip</Strong> the tutorial you{" "}
                   <Strong>won&apos;t be able to see it again</Strong>. Only{" "}
                   <Strong>skip</Strong> if you{" "}
