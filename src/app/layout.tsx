@@ -1,5 +1,5 @@
-import "./globals.css";
-// import "./defaultBlueGlobals.css";
+// import "./blueGlobals.css";
+import "./orangeGlobals.css";
 
 import RootLayoutWrapper from "@/components/RootLayoutWrapper";
 

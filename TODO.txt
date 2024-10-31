@@ -1,9 +1,10 @@
 Fix bug where after finishing the tutorial, the start screen isn't showing
-On Google oauth add Cogniba name instead of Supabase
 .env.example
 Create GitHub organization
+On Google oauth add Cogniba name instead of Supabase
 Toast when error
 Loaders
 Row Level Security
 Playwright tests
+GitHub actions
 Upgrade to Next.js 15
