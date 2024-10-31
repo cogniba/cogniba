@@ -34,7 +34,7 @@ export async function POST(request: Request) {
       .set({ hasFinishedTutorial })
       .where(eq(profilesTable.id, userId));
 
-    revalidatePath("/app");
+    revalidatePath("/");
     return NextResponse.json(
       { message: "User updated successfully" },
       { status: 200 },

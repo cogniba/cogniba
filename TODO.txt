@@ -1,4 +1,5 @@
-Fix bug where after finishing the tutorial, the start screen isn't showing
+Full screen when playing
+Reload warning only while playing
 .env.example
 Create GitHub organization
 On Google oauth add Cogniba name instead of Supabase
