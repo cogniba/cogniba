@@ -1,5 +1,3 @@
-.env.example
-Full screen when playing
 Create GitHub organization
 On Google oauth add Cogniba name instead of Supabase
 Toast when error

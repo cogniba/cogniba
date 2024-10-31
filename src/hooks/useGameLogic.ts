@@ -20,6 +20,8 @@ import {
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
+import enterFullScreen from "@/lib/enterFullScreen";
+import exitFullScreen from "@/lib/exitFullScreen";
 
 interface useGameLogicProps {
   startingLevel: number;
@@ -225,6 +227,14 @@ export default function useGameLogic({
       window.onbeforeunload = null;
     };
   }, [isPlaying, isTutorial]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      enterFullScreen();
+    } else {
+      exitFullScreen();
+    }
+  }, [isPlaying]);
 
   return {
     feedback,
