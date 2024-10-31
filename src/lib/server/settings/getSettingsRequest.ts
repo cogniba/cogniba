@@ -23,6 +23,12 @@ export default async function getSettingsRequest(): Promise<NextResponse> {
       .from(settingsTable)
       .where(eq(settingsTable.userId, userId))
       .then((res) => (res.length === 1 ? res[0] : null));
+    if (settings === null) {
+      return NextResponse.json(
+        { error: "Failed to get settings" },
+        { status: 400 },
+      );
+    }
 
     return NextResponse.json({ settings }, { status: 200 });
   } catch (error) {

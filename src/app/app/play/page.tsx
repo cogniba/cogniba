@@ -2,9 +2,9 @@ import { SettingsType } from "@/database/schemas/settingsTable";
 import GameTutorial from "@/components/game/tutorial/GameTutorial";
 import GameLogic from "@/components/game/GameLogic";
 import { UserType } from "@/database/schemas/profilesTable";
-import getLevelRequest from "@/lib/server/game/getLevel";
-import getMaxLevelRequest from "@/lib/server/game/getMaxLevel";
-import getSettingsRequest from "@/lib/server/settings/getSettings";
+import getLevelRequest from "@/lib/server/game/getLevelRequest";
+import getMaxLevelRequest from "@/lib/server/game/getMaxLevelRequest";
+import getSettingsRequest from "@/lib/server/settings/getSettingsRequest";
 import getUserRequest from "@/lib/server/auth/getUserRequest";
 
 export const dynamic = "force-dynamic";
@@ -24,11 +24,11 @@ export default async function GamePage() {
     ]);
 
   if (!levelResponse.ok) {
-    <div>Error getting level</div>;
+    return <div>Error getting level</div>;
   } else if (!maxLevelResponse.ok) {
-    <div>Error getting max level</div>;
+    return <div>Error getting max level</div>;
   } else if (!settingsResponse.ok) {
-    <div>Error getting settings</div>;
+    return <div>Error getting settings</div>;
   } else if (!userResponse.ok) {
     return <div>An error has ocurred</div>;
   }
@@ -44,6 +44,8 @@ export default async function GamePage() {
     settingsPromise,
     userPromise,
   ]);
+
+  console.log(settingsData);
 
   const level: number = levelData.level;
   const maxLevel: number = maxLevelData.maxLevel;

@@ -1,4 +1,4 @@
-import getSettingsRequest from "@/lib/server/settings/getSettings";
+import getSettingsRequest from "@/lib/server/settings/getSettingsRequest";
 
 export async function GET() {
   return await getSettingsRequest();

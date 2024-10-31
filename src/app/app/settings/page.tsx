@@ -3,7 +3,7 @@ import ShowFeedbackSettings from "@/components/settings/options/ShowFeedbackSett
 import SettingsCard from "@/components/settings/SettingsCard";
 import ChangePasswordSettings from "@/components/settings/options/ChangePasswordSettings";
 import { SettingsType } from "@/database/schemas/settingsTable";
-import getSettingsRequest from "@/lib/server/settings/getSettings";
+import getSettingsRequest from "@/lib/server/settings/getSettingsRequest";
 
 export const dynamic = "force-dynamic";
 
