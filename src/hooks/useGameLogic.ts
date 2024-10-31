@@ -220,6 +220,10 @@ export default function useGameLogic({
         return "If you leave the page, you will lose your progress.";
       };
     }
+
+    return () => {
+      window.onbeforeunload = null;
+    };
   }, [isPlaying, isTutorial]);
 
   return {

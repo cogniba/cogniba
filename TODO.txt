@@ -1,5 +1,5 @@
-Full screen when playing
 Reload warning only while playing
+Full screen when playing
 .env.example
 Create GitHub organization
 On Google oauth add Cogniba name instead of Supabase
