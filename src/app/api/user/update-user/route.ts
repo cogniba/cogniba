@@ -2,6 +2,7 @@ import { db } from "@/database/db";
 import { profilesTable } from "@/database/schemas/profilesTable";
 import { createClient } from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -33,6 +34,7 @@ export async function POST(request: Request) {
       .set({ hasFinishedTutorial })
       .where(eq(profilesTable.id, userId));
 
+    revalidatePath("/app");
     return NextResponse.json(
       { message: "User updated successfully" },
       { status: 200 },

@@ -45,8 +45,6 @@ export default async function GamePage() {
     userPromise,
   ]);
 
-  console.log(settingsData);
-
   const level: number = levelData.level;
   const maxLevel: number = maxLevelData.maxLevel;
   const settings: SettingsType = settingsData.settings;

@@ -1,6 +1,7 @@
 Fix colors
 Sign out route
-Skip tutorial
+Cards focus state
+On Google oauth add Cogniba name instead of Supabase
 .env.example
 Dark mode
 Responsive

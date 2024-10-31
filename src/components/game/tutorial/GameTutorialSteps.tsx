@@ -3,7 +3,6 @@ import HighlightDialog, {
   type PlacementType,
 } from "@/components/highlight-dialog/HighlightDialog";
 import GameTutorialTooltip from "./GameTutorialTooltip";
-import { revalidatePath } from "next/cache";
 
 export type StepType = {
   title: React.ReactNode;
@@ -40,8 +39,6 @@ export default function GameTutorialSteps({
     if (!response.ok) {
       return <div>An error has ocurred</div>;
     }
-
-    revalidatePath("/app/play", "page");
   }, []);
 
   const currentStep = steps[step - Number(step >= steps.length)];

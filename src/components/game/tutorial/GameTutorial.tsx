@@ -316,7 +316,6 @@ export default function GameTutorial({
 
     const handleLastStep = async () => {
       await updateUser({ hasFinishedTutorial: true });
-      revalidatePath("/app/play", "page");
     };
 
     if (stepRef.current === boardStep) {
