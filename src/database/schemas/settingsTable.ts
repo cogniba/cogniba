@@ -5,10 +5,8 @@ import { profilesTable } from "./profilesTable";
 export const settingsTable = pgTable("settings", {
   id: uuid("id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  userId: uuid("user_id")
-    .notNull()
-    .references(() => profilesTable.id, { onDelete: "cascade" }),
+    .references(() => profilesTable.id, { onDelete: "cascade" })
+    .notNull(),
 
   showFeedback: boolean("show_feedback").notNull(),
 });
