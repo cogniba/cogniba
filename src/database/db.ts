@@ -1,8 +1,22 @@
-import * as authSchema from "@/database/schemas/auth";
-import * as gamesSchema from "@/database/schemas/games";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
+function singleton<Value>(name: string, value: () => Value): Value {
+  const globalAny: any = global;
+  globalAny.__singletons = globalAny.__singletons || {};
 
-const sql = neon(process.env.DATABASE_URL!);
-export const db = drizzle(sql, { schema: { ...authSchema, ...gamesSchema } });
+  if (!globalAny.__singletons[name]) {
+    globalAny.__singletons[name] = value();
+  }
+
+  return globalAny.__singletons[name];
+}
+
+function createDatabaseConnection() {
+  const connection = postgres(process.env.DATABASE_URL!, {
+    prepare: false,
+  });
+  return drizzle(connection);
+}
+
+export const db = singleton("db", createDatabaseConnection);

@@ -1,25 +1,22 @@
-import getUserDailyGamesData from "@/database/queries/games/getUserDailyGamesData";
-import Analytics from "./(components)/Analytics";
-import getUserChildren from "@/database/queries/users/getUserChildren";
-import getChildrenDailyGamesData from "@/database/queries/games/getChildrenDailyGamesData";
+import { GamesData } from "@/app/api/analytics/get-data/route";
+import Analytics from "@/components/analytics/Analytics";
+import getDataRequest from "@/lib/server/analytics/getDataRequest";
+
+export const dynamic = "force-dynamic";
 
 export default async function AnalyticsPage() {
-  const children = await getUserChildren();
-  const isParent = children.length > 0;
+  const response = await getDataRequest({ frequency: "daily" });
 
-  const userData = !isParent ? await getUserDailyGamesData() : null;
-  const childrenData = isParent
-    ? await getChildrenDailyGamesData(children)
-    : null;
+  if (!response.ok) {
+    return <div>Failed to get data</div>;
+  }
+
+  const { data }: { data: GamesData } = await response.json();
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="flex h-full w-full max-w-7xl flex-col items-center gap-5 xs:mx-6 xs:py-10 sm:mx-10">
-        <Analytics
-          userData={userData}
-          childrenData={childrenData}
-          userChildren={children}
-        />
+      <div className="sm:mx-10 flex h-full w-full max-w-7xl flex-col items-center gap-5 xs:mx-6 xs:py-10">
+        <Analytics data={data} />
       </div>
     </div>
   );

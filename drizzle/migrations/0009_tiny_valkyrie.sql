@@ -1,1 +1,0 @@
-ALTER TABLE "auth"."users" ALTER COLUMN "createdAt" SET NOT NULL;

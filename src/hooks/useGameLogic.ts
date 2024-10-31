@@ -4,7 +4,6 @@ import getCorrectHitSequence from "@/lib/game-logic/getCorrectHitSequence";
 import waitFor from "@/lib/waitFor";
 import getHitStatistics from "@/lib/game-logic/getHitStatistics";
 import calculateNewLevel from "@/lib/game-logic/calculateNewLevel";
-import insertGameIntoDatabase from "@/server-actions/game/insertGameIntoDatabase";
 
 import {
   type Dispatch,
@@ -16,14 +15,17 @@ import {
 } from "react";
 import { useSidebar } from "@/context/SidebarContext";
 import {
+  gameBaseSequenceLength,
   gameDelayBeforeStart,
   gameHiddenSquareDuration,
   gameVisibleSquareDuration,
 } from "@/settings/constants";
-import getMaxLevel from "@/server-actions/game/getMaxLevel";
+import enterFullScreen from "@/lib/enterFullScreen";
+import exitFullScreen from "@/lib/exitFullScreen";
 
 interface useGameLogicProps {
   startingLevel: number;
+  startingMaxLevel: number;
   showFeedbackEnabled: boolean;
   isTutorial?: boolean;
   setShowTutorialHint?: Dispatch<SetStateAction<boolean>>;
@@ -31,6 +33,7 @@ interface useGameLogicProps {
 
 export default function useGameLogic({
   startingLevel,
+  startingMaxLevel,
   showFeedbackEnabled,
   isTutorial = false,
   setShowTutorialHint = () => {},
@@ -55,7 +58,7 @@ export default function useGameLogic({
   const playerHitSequence = useRef<boolean[]>([]);
   const hasPressedButton = useRef(true);
   const shouldPressButton = useRef(false);
-  const maxLevel = useRef<number>(startingLevel);
+  const maxLevel = useRef<number>(startingMaxLevel);
 
   const showFeedback = useCallback(
     async (feedback: "correct" | "incorrect" | "missed") => {
@@ -103,11 +106,26 @@ export default function useGameLogic({
       maxLevel.current = newLevel;
     }
 
-    await insertGameIntoDatabase(
-      correctHitSequence.current,
-      playerHitSequence.current,
-      currentLevel,
-    );
+    const timePlayed =
+      (gameBaseSequenceLength + level) *
+        (gameVisibleSquareDuration + gameHiddenSquareDuration) +
+      gameDelayBeforeStart;
+
+    const response = await fetch("/api/game/insert-game", {
+      method: "POST",
+      body: JSON.stringify({
+        level,
+        newLevel,
+        correctHits,
+        incorrectHits,
+        missedHits,
+        timePlayed,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("Error inserting game data");
+    }
   }, [level]);
 
   const playGame = useCallback(async () => {
@@ -199,20 +217,24 @@ export default function useGameLogic({
   }, [handleButtonPress]);
 
   useEffect(() => {
-    const fetchMaxLevel = async () => {
-      maxLevel.current = await getMaxLevel();
-    };
-
-    fetchMaxLevel();
-  }, []);
-
-  useEffect(() => {
     if (isPlaying || isTutorial) {
       window.onbeforeunload = () => {
         return "If you leave the page, you will lose your progress.";
       };
     }
+
+    return () => {
+      window.onbeforeunload = null;
+    };
   }, [isPlaying, isTutorial]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      enterFullScreen();
+    } else {
+      exitFullScreen();
+    }
+  }, [isPlaying]);
 
   return {
     feedback,
