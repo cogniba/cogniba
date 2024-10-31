@@ -1,4 +1,5 @@
 Fix colors
+Fix bug where after finishing the tutorial, the start screen isn't showing
 Sign out route
 Cards focus state
 On Google oauth add Cogniba name instead of Supabase
@@ -8,4 +9,5 @@ Responsive
 Create GitHub organization
 Loaders
 Row Level Security
+Playwright tests
 Upgrade to Next.js 15

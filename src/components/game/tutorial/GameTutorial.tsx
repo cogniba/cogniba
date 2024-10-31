@@ -14,7 +14,6 @@ import {
 } from "@/settings/constants";
 import useGameLogic from "@/hooks/useGameLogic";
 import { Strong } from "@/components/ui/Strong";
-import { revalidatePath } from "next/cache";
 
 const steps = [
   {
