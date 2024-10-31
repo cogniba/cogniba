@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import OptionalLink from "../OptionalLink";
 
 type SettingsItemProps =
   | {
@@ -21,6 +22,7 @@ type SettingsItemProps =
 
       buttonText?: never;
       onClick?: never;
+      href?: never;
     }
   | {
       title: string;
@@ -30,6 +32,20 @@ type SettingsItemProps =
       onClick: () => void;
       disabled?: boolean;
 
+      href?: never;
+      options?: never;
+      value?: never;
+      onValueChange?: never;
+    }
+  | {
+      title: string;
+      description: string;
+      type: "button";
+      buttonText: string;
+      href?: string;
+      disabled?: boolean;
+
+      onClick?: never;
       options?: never;
       value?: never;
       onValueChange?: never;
@@ -44,6 +60,7 @@ export default function SettingsItem({
   onValueChange,
   buttonText,
   onClick,
+  href,
   disabled = false,
 }: SettingsItemProps) {
   return (
@@ -82,7 +99,7 @@ export default function SettingsItem({
             variant="outline"
             className="w-full"
           >
-            {buttonText}
+            <OptionalLink href={href}>{buttonText}</OptionalLink>
           </Button>
         )}
       </div>
