@@ -1,5 +1,3 @@
-Sign out route
-Cards focus state
 Fix bug where after finishing the tutorial, the start screen isn't showing
 On Google oauth add Cogniba name instead of Supabase
 .env.example
