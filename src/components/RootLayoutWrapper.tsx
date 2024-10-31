@@ -12,8 +12,7 @@ export default function RootLayoutWrapper({
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="light"
-      // defaultTheme="dark"
+      defaultTheme="system"
       enableSystem
       disableTransitionOnChange
     >

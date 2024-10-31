@@ -1,8 +1,5 @@
-import { db } from "@/database/db";
-import { profilesTable } from "@/database/schemas/profilesTable";
 import { createClient } from "@/lib/supabase/server";
 import { ChangePasswordSchema } from "@/zod/schemas/ChangePasswordSchema";
-import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
