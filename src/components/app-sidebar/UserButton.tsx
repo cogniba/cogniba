@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/cn";
+import { useRouter } from "next/navigation";
 
 interface UserButtonProps {
   full_name: string;
@@ -20,9 +21,14 @@ export default function UserButton({ full_name, email }: UserButtonProps) {
     useSidebar();
   const [isPending, startTransition] = useTransition();
 
+  const router = useRouter();
+
   const onSignOut = () => {
     startTransition(async () => {
-      await fetch("/api/auth/sign-out", { method: "POST" });
+      const response = await fetch("/api/auth/sign-out", { method: "POST" });
+      if (response.ok) {
+        router.replace("/sign-in");
+      }
     });
   };
 
