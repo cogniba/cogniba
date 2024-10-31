@@ -14,7 +14,7 @@ const charts = {
     chartConfig: {
       level: {
         label: "Level",
-        color: "rgb(var(--chart-1))",
+        color: "#f97316",
       },
     } satisfies ChartConfig,
   },
@@ -27,7 +27,7 @@ const charts = {
     chartConfig: {
       accuracy: {
         label: "Accuracy",
-        color: "rgb(var(--chart-1))",
+        color: "rgb(var(--primary))",
       },
     } satisfies ChartConfig,
   },
@@ -39,15 +39,15 @@ const charts = {
     chartConfig: {
       correctHits: {
         label: "Correct",
-        color: "rgb(var(--chart-1))",
+        color: "#22c55e",
       },
       incorrectHits: {
         label: "Incorrect",
-        color: "rgb(var(--chart-2))",
+        color: "#ef4444",
       },
       missedHits: {
         label: "Missed",
-        color: "rgb(var(--chart-3))",
+        color: "#eab308",
       },
     } satisfies ChartConfig,
   },
@@ -59,7 +59,7 @@ const charts = {
     chartConfig: {
       gamesPlayed: {
         label: "Games Played",
-        color: "rgb(var(--chart-1))",
+        color: "rgb(var(--primary))",
       },
     } satisfies ChartConfig,
   },
@@ -72,7 +72,7 @@ const charts = {
     chartConfig: {
       timePlayed: {
         label: "Time Played",
-        color: "rgb(var(--chart-1))",
+        color: "rgb(var(--primary))",
       },
     } satisfies ChartConfig,
   },
