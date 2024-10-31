@@ -8,7 +8,7 @@ export const settingsTable = pgTable("settings", {
     .references(() => profilesTable.id, { onDelete: "cascade" })
     .notNull(),
 
-  showFeedback: boolean("show_feedback").notNull(),
+  showFeedback: boolean("show_feedback").default(true).notNull(),
 });
 
 export type SettingsType = InferSelectModel<typeof settingsTable>;
