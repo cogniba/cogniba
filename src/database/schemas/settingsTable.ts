@@ -3,7 +3,7 @@ import { boolean, pgTable, uuid } from "drizzle-orm/pg-core";
 import { profilesTable } from "./profilesTable";
 
 export const settingsTable = pgTable("settings", {
-  id: uuid("id")
+  userId: uuid("user_id")
     .primaryKey()
     .references(() => profilesTable.id, { onDelete: "cascade" })
     .notNull(),

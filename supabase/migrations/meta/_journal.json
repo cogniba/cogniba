@@ -57,6 +57,13 @@
       "when": 1730359494528,
       "tag": "0007_bent_manta",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1730359792399,
+      "tag": "0008_empty_doctor_octopus",
+      "breakpoints": true
     }
   ]
 }
