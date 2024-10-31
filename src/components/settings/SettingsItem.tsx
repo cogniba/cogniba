@@ -10,46 +10,49 @@ import {
 } from "@/components/ui/select";
 import OptionalLink from "../OptionalLink";
 
+type BaseSettingsItemProps = {
+  title: string;
+  description: string;
+  disabled?: boolean;
+};
+
+type SelectSettingsItemProps = BaseSettingsItemProps & {
+  type: "select";
+  options: { value: string; label: string }[];
+  value: string;
+  onValueChange: (value: string) => void;
+
+  buttonText?: never;
+  onClick?: never;
+  href?: never;
+};
+
+type ClickableButtonSettingsItemProps = BaseSettingsItemProps & {
+  type: "button";
+  buttonText: string;
+  onClick: () => void;
+
+  href?: never;
+  options?: never;
+  value?: never;
+  onValueChange?: never;
+};
+
+type LinkButtonSettingsItemProps = BaseSettingsItemProps & {
+  type: "button";
+  buttonText: string;
+  href?: string;
+
+  onClick?: never;
+  options?: never;
+  value?: never;
+  onValueChange?: never;
+};
+
 type SettingsItemProps =
-  | {
-      title: string;
-      description: string;
-      type: "select";
-      options: { value: string; label: string }[];
-      value: string;
-      onValueChange: (value: string) => void;
-      disabled?: boolean;
-
-      buttonText?: never;
-      onClick?: never;
-      href?: never;
-    }
-  | {
-      title: string;
-      description: string;
-      type: "button";
-      buttonText: string;
-      onClick: () => void;
-      disabled?: boolean;
-
-      href?: never;
-      options?: never;
-      value?: never;
-      onValueChange?: never;
-    }
-  | {
-      title: string;
-      description: string;
-      type: "button";
-      buttonText: string;
-      href?: string;
-      disabled?: boolean;
-
-      onClick?: never;
-      options?: never;
-      value?: never;
-      onValueChange?: never;
-    };
+  | SelectSettingsItemProps
+  | ClickableButtonSettingsItemProps
+  | LinkButtonSettingsItemProps;
 
 export default function SettingsItem({
   title,
