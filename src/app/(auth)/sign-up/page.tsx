@@ -30,7 +30,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
 import createClient from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
 import SimpleMessageScreen from "@/components/SimpleMessageScreen";
 
 export default function SignUpPage() {

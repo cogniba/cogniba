@@ -29,7 +29,7 @@ export default function EmailConfirmed() {
         <div className="text-2xl sm:text-3xl">
           Email confirmed successfully!
         </div>
-        <div className="text-xl text-foreground/75 sm:text-2xl">
+        <div className="text-xl sm:text-2xl">
           <Button
             variant="link"
             className="text-lg text-muted-foreground sm:text-xl"

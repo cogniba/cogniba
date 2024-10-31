@@ -224,8 +224,7 @@ export default function StartScreen({
               </>
             )}
             <Button
-              className="mt-14 w-full justify-center border border-orange-400/50 bg-orange-300 py-5 text-4xl font-bold uppercase tracking-wide text-slate-950 transition duration-200 hover:border-orange-500/50 hover:bg-orange-400 hover:shadow-lg focus-visible:outline-none focus-visible:ring-opacity-0 active:shadow-sm dark:border-orange-200/50 dark:bg-orange-300 dark:text-slate-950 dark:hover:border-orange-300/50 dark:hover:bg-orange-400"
-              // className="mt-14 py-5 text-4xl font-bold uppercase tracking-wide hover:shadow-lg active:shadow-sm"
+              className="mt-14 py-5 text-4xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm"
               size="custom"
               type="submit"
               onClick={onStart}
