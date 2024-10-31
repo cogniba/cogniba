@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/cn";
-import createClient from "@/lib/supabase/client";
 
 interface UserButtonProps {
   full_name: string;
@@ -21,11 +20,9 @@ export default function UserButton({ full_name, email }: UserButtonProps) {
     useSidebar();
   const [isPending, startTransition] = useTransition();
 
-  const supabase = createClient();
-
   const onSignOut = () => {
     startTransition(async () => {
-      await supabase.auth.signOut();
+      await fetch("/api/auth/sign-out", { method: "POST" });
     });
   };
 
