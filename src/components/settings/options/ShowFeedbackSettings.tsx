@@ -1,6 +1,7 @@
 "use client";
 
 import SettingsItem from "@/components/settings/SettingsItem";
+import { useToast } from "@/hooks/use-toast";
 
 import { useState } from "react";
 
@@ -14,6 +15,8 @@ export default function ShowFeedbackSettings({
   const [showFeedback, setShowFeedback] =
     useState<boolean>(startingShowFeedback);
 
+  const { toast } = useToast();
+
   const updateShowFeedback = async (value: string) => {
     setShowFeedback(value === "enabled");
 
@@ -23,7 +26,7 @@ export default function ShowFeedbackSettings({
     });
 
     if (!response.ok) {
-      console.error("Failed to update show feedback setting");
+      toast({ title: "Unexpected error ocurred", variant: "destructive" });
     }
   };
 

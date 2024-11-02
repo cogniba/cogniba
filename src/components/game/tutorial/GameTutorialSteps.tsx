@@ -3,6 +3,7 @@ import HighlightDialog, {
   type PlacementType,
 } from "@/components/highlight-dialog/HighlightDialog";
 import GameTutorialTooltip from "./GameTutorialTooltip";
+import { useToast } from "@/hooks/use-toast";
 
 export type StepType = {
   title: React.ReactNode;
@@ -30,6 +31,8 @@ export default function GameTutorialSteps({
   isVisible,
   showSkipButton,
 }: GameTutorialStepsProps) {
+  const { toast } = useToast();
+
   const handleSkip = useCallback(async () => {
     const response = await fetch("/api/user/update-user", {
       method: "POST",
@@ -37,9 +40,9 @@ export default function GameTutorialSteps({
     });
 
     if (!response.ok) {
-      return <div>An error has ocurred</div>;
+      toast({ title: "Unexpected error ocurred", variant: "destructive" });
     }
-  }, []);
+  }, [toast]);
 
   const currentStep = steps[step - Number(step >= steps.length)];
   return (

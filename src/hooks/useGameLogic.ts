@@ -22,6 +22,7 @@ import {
 } from "@/settings/constants";
 import enterFullScreen from "@/lib/enterFullScreen";
 import exitFullScreen from "@/lib/exitFullScreen";
+import { useToast } from "./use-toast";
 
 interface useGameLogicProps {
   startingLevel: number;
@@ -52,6 +53,7 @@ export default function useGameLogic({
   const [hasReachedNewLevel, setHasReachedNewLevel] = useState(false);
 
   const { setIsVisible } = useSidebar();
+  const { toast } = useToast();
 
   const gameSequence = useRef<number[]>([]);
   const correctHitSequence = useRef<boolean[]>([]);
@@ -124,9 +126,9 @@ export default function useGameLogic({
     });
 
     if (!response.ok) {
-      console.error("Error inserting game data");
+      toast({ title: "Unexpected error ocurred", variant: "destructive" });
     }
-  }, [level]);
+  }, [level, toast]);
 
   const playGame = useCallback(async () => {
     let step = 0;

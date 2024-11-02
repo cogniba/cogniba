@@ -14,6 +14,7 @@ import {
 } from "@/settings/constants";
 import useGameLogic from "@/hooks/useGameLogic";
 import { Strong } from "@/components/ui/Strong";
+import { useToast } from "@/hooks/use-toast";
 
 const steps = [
   {
@@ -216,6 +217,8 @@ export default function GameTutorial({
 
   const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
 
+  const { toast } = useToast();
+
   const updateUser = useCallback(
     async ({ hasFinishedTutorial }: { hasFinishedTutorial: boolean }) => {
       const response = await fetch("/api/user/update-user", {
@@ -224,10 +227,10 @@ export default function GameTutorial({
       });
 
       if (!response.ok) {
-        return <div>An error has ocurred</div>;
+        toast({ title: "Unexpected error ocurred", variant: "destructive" });
       }
     },
-    [],
+    [toast],
   );
 
   const {

@@ -1,6 +1,7 @@
 "use client";
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "./ui/toaster";
 
 interface RootLayoutWrapperProps {
   readonly children: React.ReactNode;
@@ -17,6 +18,7 @@ export default function RootLayoutWrapper({
       disableTransitionOnChange
     >
       {children}
+      <Toaster />
     </ThemeProvider>
   );
 }

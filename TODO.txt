@@ -1,8 +1,16 @@
-Create GitHub organization
 On Google oauth add Cogniba name instead of Supabase
-Toast when error
 Loaders
 Row Level Security
+app.cogniaprendo.com
+Disabled state when signing out
+Landing page
+
+GitHub release
+
 Playwright tests
 GitHub actions
 Upgrade to Next.js 15
+
+Track how much time has been spent with the tab open
+Streak system
+Goal system
