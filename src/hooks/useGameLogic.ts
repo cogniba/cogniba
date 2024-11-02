@@ -128,7 +128,7 @@ export default function useGameLogic({
     if (!response.ok) {
       toast({ title: "Unexpected error ocurred", variant: "destructive" });
     }
-  }, [level]);
+  }, [level, toast]);
 
   const playGame = useCallback(async () => {
     let step = 0;
