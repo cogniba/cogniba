@@ -4,13 +4,20 @@ import SettingsCard from "@/components/settings/SettingsCard";
 import ChangePasswordSettings from "@/components/settings/options/ChangePasswordSettings";
 import { SettingsType } from "@/database/schemas/settingsTable";
 import getSettingsRequest from "@/lib/server/settings/getSettingsRequest";
+import SimpleMessageScreen from "@/components/SimpleMessageScreen";
 
 export const dynamic = "force-dynamic";
 
 export default async function SettingsPage() {
   const response = await getSettingsRequest();
   if (!response.ok) {
-    <div>Error getting settings</div>;
+    return (
+      <SimpleMessageScreen
+        mainMessage="Error getting settings"
+        secondaryMessage="Please, reload the page to try again"
+        variant="error"
+      />
+    );
   }
 
   const { settings }: { settings: SettingsType } = await response.json();
