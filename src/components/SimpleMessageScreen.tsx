@@ -21,7 +21,12 @@ export default function SimpleMessageScreen({
       <div className="flex h-full max-w-3xl flex-col items-center justify-center gap-6 text-center">
         <div className="text-2xl sm:text-3xl">{mainMessage}</div>
         {secondaryMessage && (
-          <div className="text-xl text-muted-foreground sm:text-2xl">
+          <div
+            className={cn(
+              "text-xl text-muted-foreground sm:text-2xl",
+              variant === "error" && "text-destructive-foreground/85",
+            )}
+          >
             {secondaryMessage}
           </div>
         )}
