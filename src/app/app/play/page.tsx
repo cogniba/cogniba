@@ -6,6 +6,7 @@ import getLevelRequest from "@/lib/server/game/getLevelRequest";
 import getMaxLevelRequest from "@/lib/server/game/getMaxLevelRequest";
 import getSettingsRequest from "@/lib/server/settings/getSettingsRequest";
 import getUserRequest from "@/lib/server/auth/getUserRequest";
+import SimpleMessageScreen from "@/components/SimpleMessageScreen";
 
 export const dynamic = "force-dynamic";
 
@@ -24,13 +25,37 @@ export default async function GamePage() {
     ]);
 
   if (!levelResponse.ok) {
-    return <div>Error getting level</div>;
+    return (
+      <SimpleMessageScreen
+        mainMessage="Error getting level"
+        secondaryMessage="Please, reload the page to try again"
+        variant="error"
+      />
+    );
   } else if (!maxLevelResponse.ok) {
-    return <div>Error getting max level</div>;
+    return (
+      <SimpleMessageScreen
+        mainMessage="Error getting max level"
+        secondaryMessage="Please, reload the page to try again"
+        variant="error"
+      />
+    );
   } else if (!settingsResponse.ok) {
-    return <div>Error getting settings</div>;
+    return (
+      <SimpleMessageScreen
+        mainMessage="Error getting settings"
+        secondaryMessage="Please, reload the page to try again"
+        variant="error"
+      />
+    );
   } else if (!userResponse.ok) {
-    return <div>An error has ocurred</div>;
+    return (
+      <SimpleMessageScreen
+        mainMessage="Error getting user"
+        secondaryMessage="Please, reload the page to try again"
+        variant="error"
+      />
+    );
   }
 
   const levelPromise = levelResponse.json();
