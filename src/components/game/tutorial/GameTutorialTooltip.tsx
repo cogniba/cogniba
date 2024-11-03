@@ -1,3 +1,4 @@
+import LoaderWrapper from "@/components/LoaderWrapper";
 import { Strong } from "@/components/ui/Strong";
 import {
   AlertDialog,
@@ -24,6 +25,7 @@ interface GameTutorialTooltipProps {
   hideBackButton?: boolean;
   hidePrimaryButton?: boolean;
   primaryButtonText?: string;
+  isLoading?: boolean;
 
   handlePrimaryButtonClick: () => void;
   handleBackButtonClick: () => void;
@@ -37,6 +39,7 @@ export default function GameTutorialTooltip({
   hideBackButton = false,
   hidePrimaryButton = false,
   primaryButtonText = "Next",
+  isLoading = false,
 
   handlePrimaryButtonClick,
   handleBackButtonClick,
@@ -52,7 +55,9 @@ export default function GameTutorialTooltip({
         {showSkipButton ? (
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="outline">Skip</Button>
+              <Button variant="outline" disabled={isLoading}>
+                Skip
+              </Button>
             </AlertDialogTrigger>
             <AlertDialogOverlay className="z-[1000]" />
             <AlertDialogContent className="z-[1000]">
@@ -71,8 +76,13 @@ export default function GameTutorialTooltip({
                 >
                   Cancel
                 </AlertDialogCancel>
-                <AlertDialogAction onClick={handleSkipButtonClick}>
-                  Skip
+                <AlertDialogAction
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSkipButtonClick();
+                  }}
+                >
+                  <LoaderWrapper loading={isLoading}>Skip</LoaderWrapper>
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
@@ -82,13 +92,19 @@ export default function GameTutorialTooltip({
         )}
         <div className="flex items-center justify-end gap-4">
           {!hideBackButton && (
-            <Button variant="secondary" onClick={handleBackButtonClick}>
+            <Button
+              variant="secondary"
+              onClick={handleBackButtonClick}
+              disabled={isLoading}
+            >
               Back
             </Button>
           )}
           {!hidePrimaryButton && (
-            <Button onClick={handlePrimaryButtonClick}>
-              {primaryButtonText}
+            <Button onClick={handlePrimaryButtonClick} disabled={isLoading}>
+              <LoaderWrapper loading={isLoading}>
+                {primaryButtonText}
+              </LoaderWrapper>
             </Button>
           )}
         </div>
