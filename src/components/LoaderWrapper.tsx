@@ -10,7 +10,7 @@ export default function LoaderWrapper({
   children,
 }: LoaderWrapperProps) {
   if (isLoading) {
-    return <Loader2Icon className="animate-spin" />;
+    return <Loader2Icon className="mx-auto animate-spin" />;
   } else {
     return children;
   }

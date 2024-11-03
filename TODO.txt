@@ -1,7 +1,6 @@
 Loaders
 Row Level Security
 app.cogniba.com
-Disabled state when signing out
 Landing page
 
 GitHub release
