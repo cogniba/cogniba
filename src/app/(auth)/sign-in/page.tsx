@@ -31,13 +31,18 @@ import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
 import createClient from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import { Loader2Icon } from "lucide-react";
+import LoaderWrapper from "@/components/LoaderWrapper";
 
 export default function SignInPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [isSigningInWithGoogle, setIsSigningInWithGoogle] = useState(false);
 
   const supabase = createClient();
   const router = useRouter();
+
+  const disabled = isPending || isSigningInWithGoogle;
 
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
@@ -68,13 +73,12 @@ export default function SignInPage() {
   const handleSignInWithGoogle = async () => {
     setError(null);
 
-    startTransition(async () => {
-      await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback`,
-        },
-      });
+    setIsSigningInWithGoogle(true);
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback`,
+      },
     });
   };
 
@@ -93,13 +97,15 @@ export default function SignInPage() {
           <CardContent className="grid gap-4">
             <Button
               onClick={handleSignInWithGoogle}
-              disabled={isPending}
+              disabled={disabled}
               type="button"
               variant="secondary"
               className="font-semibold"
             >
-              <FaGoogle />
-              Continue with Google
+              <LoaderWrapper loading={isSigningInWithGoogle}>
+                <FaGoogle />
+                Continue with Google
+              </LoaderWrapper>
             </Button>
 
             <div className="flex w-full items-center pt-2">
@@ -117,7 +123,7 @@ export default function SignInPage() {
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isPending}
+                        disabled={disabled}
                         type="email"
                         placeholder="marcos@example.com"
                         autoComplete="email"
@@ -146,7 +152,7 @@ export default function SignInPage() {
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isPending}
+                        disabled={disabled}
                         type="password"
                         autoComplete="current-password"
                         required
@@ -160,8 +166,8 @@ export default function SignInPage() {
           </CardContent>
 
           <CardFooter className="flex flex-col gap-6">
-            <Button type="submit" className="w-full" disabled={isPending}>
-              Sign in
+            <Button type="submit" className="w-full" disabled={disabled}>
+              <LoaderWrapper loading={isPending}>Sign In</LoaderWrapper>
             </Button>
 
             {error && <FormAlert variant="destructive" message={error} />}
