@@ -1,4 +1,3 @@
-Loaders
 Row Level Security
 app.cogniba.com
 Landing page
