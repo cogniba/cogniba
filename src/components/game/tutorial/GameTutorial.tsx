@@ -6,7 +6,7 @@ import GameTutorialSteps, {
 } from "@/components/game/tutorial/GameTutorialSteps";
 import sleep from "@/lib/sleep";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import {
   gameDelayBeforeStart,
   gameHiddenSquareDuration,
@@ -15,6 +15,7 @@ import {
 import useGameLogic from "@/hooks/useGameLogic";
 import { Strong } from "@/components/ui/Strong";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 const steps = [
   {
@@ -217,20 +218,27 @@ export default function GameTutorial({
 
   const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
 
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
   const { toast } = useToast();
 
   const updateUser = useCallback(
     async ({ hasFinishedTutorial }: { hasFinishedTutorial: boolean }) => {
-      const response = await fetch("/api/user/update-user", {
-        method: "POST",
-        body: JSON.stringify({ hasFinishedTutorial }),
-      });
+      startTransition(async () => {
+        const response = await fetch("/api/user/update-user", {
+          method: "POST",
+          body: JSON.stringify({ hasFinishedTutorial }),
+        });
 
-      if (!response.ok) {
-        toast({ title: "Unexpected error ocurred", variant: "destructive" });
-      }
+        if (!response.ok) {
+          toast({ title: "Unexpected error ocurred", variant: "destructive" });
+        } else {
+          router.refresh();
+        }
+      });
     },
-    [toast],
+    [toast, router],
   );
 
   const {
@@ -365,6 +373,7 @@ export default function GameTutorial({
         setStep={setStep}
         isVisible={isVisible}
         showSkipButton={true}
+        isLoading={isPending}
       />
       <Game
         feedback={feedback}

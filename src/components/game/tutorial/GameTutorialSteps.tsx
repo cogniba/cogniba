@@ -1,9 +1,15 @@
-import { type Dispatch, type SetStateAction, useCallback } from "react";
+import {
+  type Dispatch,
+  type SetStateAction,
+  useCallback,
+  useTransition,
+} from "react";
 import HighlightDialog, {
   type PlacementType,
 } from "@/components/highlight-dialog/HighlightDialog";
 import GameTutorialTooltip from "./GameTutorialTooltip";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 export type StepType = {
   title: React.ReactNode;
@@ -22,6 +28,7 @@ interface GameTutorialStepsProps {
   setStep: Dispatch<SetStateAction<number>>;
   isVisible: boolean;
   showSkipButton: boolean;
+  isLoading?: boolean;
 }
 
 export default function GameTutorialSteps({
@@ -30,19 +37,26 @@ export default function GameTutorialSteps({
   setStep,
   isVisible,
   showSkipButton,
+  isLoading,
 }: GameTutorialStepsProps) {
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
   const { toast } = useToast();
 
   const handleSkip = useCallback(async () => {
-    const response = await fetch("/api/user/update-user", {
-      method: "POST",
-      body: JSON.stringify({ hasFinishedTutorial: true }),
-    });
+    startTransition(async () => {
+      const response = await fetch("/api/user/update-user", {
+        method: "POST",
+        body: JSON.stringify({ hasFinishedTutorial: true }),
+      });
 
-    if (!response.ok) {
-      toast({ title: "Unexpected error ocurred", variant: "destructive" });
-    }
-  }, [toast]);
+      if (!response.ok) {
+        toast({ title: "Unexpected error ocurred", variant: "destructive" });
+      } else {
+        router.refresh();
+      }
+    });
+  }, [toast, router]);
 
   const currentStep = steps[step - Number(step >= steps.length)];
   return (
@@ -59,6 +73,7 @@ export default function GameTutorialSteps({
         hideBackButton={currentStep.hideBackButton}
         hidePrimaryButton={currentStep.hidePrimaryButton}
         primaryButtonText={currentStep.primaryButtonText}
+        isLoading={isLoading || isPending}
         handlePrimaryButtonClick={() => setStep((prevStep) => prevStep + 1)}
         handleBackButtonClick={() => setStep((prevStep) => prevStep - 1)}
         handleSkipButtonClick={handleSkip}

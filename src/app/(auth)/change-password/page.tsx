@@ -1,6 +1,7 @@
 "use client";
 
 import FormAlert from "@/components/FormAlert";
+import LoaderWrapper from "@/components/LoaderWrapper";
 import SimpleMessageScreen from "@/components/SimpleMessageScreen";
 import { Button } from "@/components/ui/button";
 import {
@@ -131,7 +132,7 @@ export default function ChangePasswordPage() {
 
           <CardFooter className="flex flex-col gap-6">
             <Button type="submit" className="w-full" disabled={isPending}>
-              Change password
+              <LoaderWrapper loading={isPending}>Change password</LoaderWrapper>
             </Button>
 
             {error && <FormAlert variant="destructive" message={error} />}

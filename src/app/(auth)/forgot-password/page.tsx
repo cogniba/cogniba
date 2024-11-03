@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import FormAlert from "@/components/FormAlert";
 import SimpleMessageScreen from "@/components/SimpleMessageScreen";
+import LoaderWrapper from "@/components/LoaderWrapper";
 
 export default function ForgotPasswordPage() {
   const [isPending, startTransition] = useTransition();
@@ -106,7 +107,7 @@ export default function ForgotPasswordPage() {
 
           <CardFooter className="flex flex-col gap-6">
             <Button type="submit" className="w-full" disabled={isPending}>
-              Send reset link
+              <LoaderWrapper loading={isPending}>Send reset link</LoaderWrapper>
             </Button>
 
             {error && <FormAlert variant="destructive" message={error} />}

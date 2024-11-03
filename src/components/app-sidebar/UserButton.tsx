@@ -10,6 +10,7 @@ import {
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/cn";
 import { useRouter } from "next/navigation";
+import LoaderWrapper from "../LoaderWrapper";
 
 interface UserButtonProps {
   full_name: string;
@@ -23,7 +24,7 @@ export default function UserButton({ full_name, email }: UserButtonProps) {
 
   const router = useRouter();
 
-  const onSignOut = () => {
+  const handleSignOut = () => {
     startTransition(async () => {
       const response = await fetch("/api/auth/sign-out", { method: "POST" });
       if (response.ok) {
@@ -72,10 +73,13 @@ export default function UserButton({ full_name, email }: UserButtonProps) {
           <DropdownMenuItem
             className="font-medium"
             disabled={isPending}
-            onClick={onSignOut}
+            onClick={handleSignOut}
+            onSelect={(e) => e.preventDefault()}
           >
-            <LogOutIcon className="mr-2 h-4 w-4" />
-            <div>Sign Out</div>
+            <LoaderWrapper loading={isPending}>
+              <LogOutIcon className="mr-2 h-4 w-4" />
+              <div>Sign Out</div>
+            </LoaderWrapper>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
