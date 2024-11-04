@@ -1,15 +1,14 @@
-import Link from "next/link";
+import LandingPageHeader from "@/components/landing-page/LandingPageHeader";
+import LandingPageHero from "@/components/landing-page/LandingPageHero";
 
 export default function LandingPagePage() {
   return (
     <div>
-      <h1>Landing Page</h1>
-      <p>
-        <Link href="/sign-in">Sign In</Link>
-      </p>
-      <p>
-        <Link href="/sign-up">Sign Up</Link>
-      </p>
+      <LandingPageHeader />
+
+      <main>
+        <LandingPageHero />
+      </main>
     </div>
   );
 }
