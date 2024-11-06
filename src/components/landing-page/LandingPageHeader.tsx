@@ -6,13 +6,14 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import Logo from "../svg/Logo";
+import Logo from "../svg/LogoIcon";
 import LandingPageGitHubButton from "./LandingPageGitHubButton";
+import { Button } from "../ui/button";
 
 export default function LandingPageHeader() {
   return (
-    <div className="flex w-full justify-center border-b bg-secondary/50 pb-16 shadow-md">
-      <NavigationMenu className="fixed mx-auto flex h-16 w-full max-w-7xl justify-between">
+    <div className="flex w-full justify-center border-b bg-secondary/25 pb-16 shadow-md">
+      <NavigationMenu className="fixed mx-auto flex h-16 w-full max-w-7xl justify-between px-6">
         <NavigationMenuList>
           <NavigationMenuItem className="mr-9 text-xl font-bold">
             <Link href="/" className="flex items-center justify-center gap-2.5">
@@ -43,20 +44,33 @@ export default function LandingPageHeader() {
           </NavigationMenuItem>
         </NavigationMenuList>
 
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <a
-              href="https://github.com/Cogniba/Cogniba"
-              target="_blank"
-              rel="noopener noreferrer"
+        <NavigationMenuList className="gap-2">
+          <NavigationMenuItem className="mr-2">
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              asChild
             >
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <a
+                href="https://github.com/Cogniba/Cogniba"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <LandingPageGitHubButton />
-              </NavigationMenuLink>
-            </a>
+              </a>
+            </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem>Sign in</NavigationMenuItem>
-          <NavigationMenuItem>Sign up</NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Link href="/sign-in">
+                <Button variant="secondary">Sign In</Button>
+              </Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem asChild>
+            <Link href="/sign-up">
+              <Button>Get Started</Button>
+            </Link>
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
     </div>

@@ -13,7 +13,8 @@ export default function RootLayoutWrapper({
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="system"
+      // defaultTheme="system"
+      defaultTheme="light"
       enableSystem
       disableTransitionOnChange
     >
