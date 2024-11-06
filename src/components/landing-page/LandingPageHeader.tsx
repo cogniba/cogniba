@@ -6,20 +6,17 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import Logo from "../svg/LogoIcon";
 import LandingPageGitHubButton from "./LandingPageGitHubButton";
 import { Button } from "../ui/button";
+import CognibaLogo from "../CognibaLogo";
 
 export default function LandingPageHeader() {
   return (
     <div className="flex w-full justify-center border-b bg-secondary/25 pb-16 shadow-md">
       <NavigationMenu className="fixed mx-auto flex h-16 w-full max-w-7xl justify-between px-6">
         <NavigationMenuList>
-          <NavigationMenuItem className="mr-9 text-xl font-bold">
-            <Link href="/" className="flex items-center justify-center gap-2.5">
-              <Logo className="text-2xl" />
-              <span className="text-primary">Cogniba</span>
-            </Link>
+          <NavigationMenuItem className="mr-9">
+            <CognibaLogo />
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link href="#features" legacyBehavior passHref>
