@@ -106,7 +106,7 @@ export default function SignUpPage() {
   return (
     <Form {...form}>
       <form
-        className="flex min-h-screen items-center justify-center bg-card xs:bg-background"
+        className="flex min-h-screen items-center justify-center bg-card py-5 xs:bg-background"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
