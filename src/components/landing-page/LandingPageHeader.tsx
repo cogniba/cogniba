@@ -7,6 +7,7 @@ import {
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import Logo from "../svg/Logo";
+import LandingPageGitHubButton from "./LandingPageGitHubButton";
 
 export default function LandingPageHeader() {
   return (
@@ -43,7 +44,17 @@ export default function LandingPageHeader() {
         </NavigationMenuList>
 
         <NavigationMenuList>
-          <NavigationMenuItem>Github</NavigationMenuItem>
+          <NavigationMenuItem>
+            <a
+              href="https://github.com/Cogniba/Cogniba"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <LandingPageGitHubButton />
+              </NavigationMenuLink>
+            </a>
+          </NavigationMenuItem>
           <NavigationMenuItem>Sign in</NavigationMenuItem>
           <NavigationMenuItem>Sign up</NavigationMenuItem>
         </NavigationMenuList>
