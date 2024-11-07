@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Strong } from "../ui/Strong";
 
 export default function Hero() {
   return (
@@ -11,27 +12,19 @@ export default function Hero() {
       </div>
       {/* TODO: Balanced text */}
       <h2 className="max-w-2xl text-xl text-foreground/90">
-        <span className="font-semibold text-primary">Cogniba</span> is an{" "}
-        <strong className="font-semibold text-foreground">open-source</strong>{" "}
-        tool based on the{" "}
-        <a
-          href="https://en.wikipedia.org/wiki/N-back"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-link-foreground font-semibold hover:underline"
-          // TODO: Link color to globals.css
-        >
-          N-Back task
-        </a>
-        , the only proven method to{" "}
-        <strong className="font-semibold text-foreground">
-          enhance your IQ
-        </strong>{" "}
-        through{" "}
-        <strong className="font-semibold text-foreground">
-          science-backed training
-        </strong>
-        .
+        <Strong variant="primary">Cogniba</Strong> is an{" "}
+        <Strong>open-source</Strong> tool based on the{" "}
+        <Strong variant="link" className="hover:underline">
+          <a
+            href="https://en.wikipedia.org/wiki/N-back"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            N-Back task
+          </a>
+        </Strong>
+        , the only proven method to <Strong>enhance your IQ</Strong> through{" "}
+        <Strong>science-backed training</Strong>.
       </h2>
     </main>
   );

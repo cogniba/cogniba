@@ -1,5 +1,3 @@
-Blue color to globals
-Strong component
 Balanced text
 
 Row Level Security
