@@ -113,6 +113,10 @@ const config = {
           DEFAULT: "rgb(var(--success) / <alpha-value>)",
           foreground: "rgb(var(--success-foreground) / <alpha-value>)",
         },
+        link: {
+          DEFAULT: "rgb(var(--link) / <alpha-value>)",
+          foreground: "rgb(var(--link-foreground) / <alpha-value>)",
+        },
         border: "rgb(var(--border) / <alpha-value>)",
         input: "rgb(var(--input) / <alpha-value>)",
         ring: "rgb(var(--ring) / <alpha-value>)",

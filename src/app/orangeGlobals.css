@@ -44,6 +44,8 @@
     --successs: 34 197 94; /* #22c55e */
     --successs-foreground: 248 250 252; /* #f8fafc */
 
+    --link-foreground: 37 99 235; /* #2563eb */
+
     --border: 226 232 240; /* #e2e8f0 */
     --input: 226 232 240; /* #e2e8f0 */
     --ring: 234 88 12; /* #ea580c */
@@ -82,6 +84,8 @@
 
     --success: 20 83 45; /* #14532d */
     --success-foreground: 248 250 252; /* #f8fafc */
+
+    --link-foreground: 59 130 246; /* #3b82f6 */
 
     --border: 30 41 59; /* #1e293b */
     --input: 30 41 59; /* #1e293b */
