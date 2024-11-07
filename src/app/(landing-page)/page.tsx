@@ -1,13 +1,50 @@
-import LandingPageHeader from "@/components/landing-page/LandingPageHeader";
-import LandingPageHero from "@/components/landing-page/LandingPageHero";
+import Header from "@/components/landing-page/Header";
+import Hero from "@/components/landing-page/Hero";
 
 export default function LandingPagePage() {
   return (
     <div>
-      <LandingPageHeader />
+      <Header />
 
       <main>
-        <LandingPageHero />
+        <Hero />
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+        asdf
       </main>
     </div>
   );

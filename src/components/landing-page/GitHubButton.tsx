@@ -1,7 +1,7 @@
 import { Octokit } from "@octokit/core";
 import { FaGithub } from "react-icons/fa6";
 
-export default async function LandingPageGitHubButton() {
+export default async function GitHubButton() {
   const octokit = new Octokit();
 
   const res = await octokit.request("GET /repos/{org}/{repo}", {
