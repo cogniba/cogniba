@@ -8,43 +8,6 @@ export default function LandingPagePage() {
 
       <main>
         <Hero />
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-        asdf
       </main>
     </div>
   );

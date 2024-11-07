@@ -48,10 +48,30 @@ const config = {
             height: "0",
           },
         },
+        "gradient-x": {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
+        "gradient-x-infinite": {
+          "0%, 100%": {
+            "background-position": "0% 50%",
+          },
+          "50%": {
+            "background-position": "100% 50%",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "gradient-x": "gradient-x 3s linear infinite",
+        "gradient-x-infinite": "gradient-x-infinite 3s linear infinite",
       },
       borderRadius: {
         lg: "var(--radius)",
