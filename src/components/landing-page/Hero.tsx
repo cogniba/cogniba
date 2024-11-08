@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Strong } from "../ui/Strong";
 import { Button } from "../ui/button";
+import FancyButton from "../ui/FancyButton";
 
 export default function Hero() {
   return (
@@ -29,14 +30,16 @@ export default function Hero() {
       </h2>
       <div className="mx-auto flex gap-4">
         <Link href="sign-up">
-          <Button
+          <FancyButton
             size="lg"
-            animatedBorder
-            borderColors={["blue", "transparent", "blue"]}
-            className=""
+            borderColors={[
+              "rgb(var(--link-foreground))",
+              "rgb(var(--primary))",
+              "rgb(var(--link-foreground))",
+            ]}
           >
             Get Started
-          </Button>
+          </FancyButton>
         </Link>
         <Link href="sign-in">
           <Button variant="secondary" size="lg">

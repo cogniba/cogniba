@@ -25,26 +25,16 @@ export default function FancyButton({
       <Button
         variant={variant}
         size={size}
-        // className={cn("animated-border relative", className)}
-        className="animated-border relative"
+        className={cn("animated-border relative", className)}
         {...props}
       >
         {children}
       </Button>
-      <style jsx>{`
-        .animated-border {
-          background-color: red;
-        }
-      `}</style>
       <style jsx global>{`
         @property --angle {
           syntax: "<angle>";
           initial-value: 0deg;
           inherits: false;
-        }
-
-        .animated-border {
-          background-color: red;
         }
 
         .animated-border::before,

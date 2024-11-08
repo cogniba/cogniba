@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -36,105 +34,21 @@ const buttonVariants = cva(
   },
 );
 
-interface BaseButtonProps
+export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
-interface NormalButtonProps {
-  animatedBorder?: false;
-  borderColors?: never;
-  borderWidth?: never;
-  animationDuration?: never;
-}
-
-interface FancyButtonProps {
-  animatedBorder: true;
-  borderColors: string[];
-  borderWidth?: string;
-  animationDuration?: string;
-}
-
-export type ButtonProps = BaseButtonProps &
-  (NormalButtonProps | FancyButtonProps);
-
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant,
-      size,
-      animatedBorder = false,
-      borderColors,
-      borderWidth = "0.125rem",
-      animationDuration = "2s",
-      asChild = false,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
-      <>
-        <Comp
-          className={cn(
-            "animated-border relative",
-            buttonVariants({ variant, size, className }),
-          )}
-          ref={ref}
-          {...props}
-        />
-        {animatedBorder && borderColors && (
-          <style jsx>{`
-            @property --angle {
-              syntax: "<angle>";
-              initial-value: 0deg;
-              inherits: false;
-            }
-
-            .animated-border {
-              background-color: red;
-            }
-
-            .animated-border::before,
-            .animated-border::after {
-              --angle: 0deg;
-
-              content: "";
-              box-sizing: content-box;
-              position: absolute;
-              height: 100%;
-              width: 100%;
-              top: 50%;
-              left: 50%;
-              translate: -50% -50%;
-              z-index: -1;
-              padding: ${borderWidth};
-              border-radius: inherit;
-              background-image: conic-gradient(
-                from var(--angle),
-                ${borderColors.join(", ")}
-              );
-              animation: ${animationDuration} spin linear infinite;
-            }
-
-            .animated-border::before {
-              filter: blur(1.5rem);
-              opacity: 0.5;
-            }
-
-            @keyframes spin {
-              from {
-                --angle: 0deg;
-              }
-              to {
-                --angle: 360deg;
-              }
-            }
-          `}</style>
-        )}
-      </>
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
     );
   },
 );
