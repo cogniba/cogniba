@@ -39,8 +39,6 @@ export default function FancyButton({
 
         .animated-border::before,
         .animated-border::after {
-          --angle: 0deg;
-
           content: "";
           box-sizing: content-box;
           position: absolute;

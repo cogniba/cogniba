@@ -33,10 +33,13 @@ export default function Hero() {
           <FancyButton
             size="lg"
             borderColors={[
-              "rgb(var(--link-foreground))",
-              "rgb(var(--primary))",
-              "rgb(var(--link-foreground))",
+              "rgb(var(--cyan))",
+              "rgb(var(--fuchsia))",
+              "rgb(var(--cyan))",
+              "rgb(var(--fuchsia))",
+              "rgb(var(--cyan))",
             ]}
+            borderWidth="1px"
           >
             Get Started
           </FancyButton>
