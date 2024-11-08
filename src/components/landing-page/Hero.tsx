@@ -7,13 +7,20 @@ export default function Hero() {
   return (
     <main className="grid justify-center pt-40 text-center">
       <div className="space-y-1 pb-8 text-7xl">
-        <h1 className="font-medium">Train Your Mind</h1>
-        <h1 className="inline-block animate-gradient-x bg-gradient-to-r from-orange-500 to-pink-500 bg-[length:400%_100%] bg-clip-text pb-4 font-semibold text-transparent">
+        <h1 className="relative font-medium">
+          <h1 className="absolute left-1/2 top-1/2 -z-10 size-full -translate-x-1/2 -translate-y-1/2 font-medium opacity-20 blur-3xl">
+            Train Your Mind
+          </h1>
+          Train Your Mind
+        </h1>
+        <h1 className="relative inline-block animate-gradient-x bg-gradient-to-r from-orange-500 to-pink-500 bg-[length:400%_100%] bg-clip-text pb-4 font-semibold text-transparent">
           Boost your IQ
+          <h1 className="absolute left-1/2 top-1/2 -z-10 inline-block h-full w-full -translate-x-1/2 -translate-y-1/2 animate-gradient-x bg-gradient-to-r from-orange-500 to-pink-500 bg-[length:400%_100%] bg-clip-text pb-4 font-semibold text-transparent opacity-50 blur-3xl">
+            Boost your IQ
+          </h1>
         </h1>
       </div>
-      {/* TODO: Balanced text */}
-      <h2 className="max-w-2xl text-balance pb-16 text-xl text-foreground/90">
+      <h2 className="relative max-w-2xl text-balance pb-16 text-xl text-foreground/90">
         <Strong variant="primary">Cogniba</Strong> is an{" "}
         <Strong>open-source</Strong> tool based on the{" "}
         <Strong variant="link" className="hover:underline">
