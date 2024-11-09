@@ -1,3 +1,5 @@
+Fix gradient banding
+
 Row Level Security
 app.cogniba.com
 Landing page
