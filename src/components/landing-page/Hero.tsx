@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Strong } from "../ui/Strong";
 import { Button } from "../ui/button";
-import FancyButton from "../ui/FancyButton";
+import FancyButton from "../ui/FancyButton/FancyButton";
 import Glow from "../Glow";
-import BackgroundGlow from "../BackgroundGlow";
+import BackgroundGlow from "../ui/BackgroundGlow/BackgroundGlow";
 
 export default function Hero() {
   return (
-    <main className="grid justify-center pt-40 text-center">
+    <section className="grid justify-center pt-40 text-center">
       <BackgroundGlow
         glowColors={[
           "rgb(var(--blue) / 0.05)",
@@ -70,6 +70,6 @@ export default function Hero() {
           </Button>
         </Link>
       </div>
-    </main>
+    </section>
   );
 }
