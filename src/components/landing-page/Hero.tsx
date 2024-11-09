@@ -3,10 +3,20 @@ import { Strong } from "../ui/Strong";
 import { Button } from "../ui/button";
 import FancyButton from "../ui/FancyButton";
 import Glow from "../Glow";
+import BackgroundGlow from "../BackgroundGlow";
 
 export default function Hero() {
   return (
     <main className="grid justify-center pt-40 text-center">
+      <BackgroundGlow
+        glowColors={[
+          "rgb(var(--blue) / 0.05)",
+          "rgb(var(--blue) / 0)",
+          "rgb(var(--blue) / 0.15)",
+          "rgb(var(--blue) / 0)",
+          "rgb(var(--blue) / 0.05)",
+        ]}
+      />
       <div className="space-y-1 pb-8 text-7xl">
         <Glow glowOpacity={25} display="block">
           <h1 className="relative font-medium">Train Your Mind</h1>
