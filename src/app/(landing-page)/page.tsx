@@ -1,3 +1,4 @@
+import FeaturesSection from "@/components/landing-page/FeaturesSection";
 import Header from "@/components/landing-page/Header";
 import HeroSection from "@/components/landing-page/HeroSection";
 import HowItWorksSection from "@/components/landing-page/HowItWorksSection";
@@ -7,9 +8,10 @@ export default function LandingPagePage() {
     <div>
       <Header />
 
-      <main className="grid gap-56 py-40">
+      <main className="grid gap-40 py-40">
         <HeroSection />
         <HowItWorksSection />
+        <FeaturesSection />
       </main>
     </div>
   );

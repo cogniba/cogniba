@@ -29,7 +29,7 @@ export default function LandingPageBoard() {
           <div key={i} className="size-full bg-background">
             <div
               className={cn(
-                "size-full rounded-md border border-primary/70 bg-primary/60 transition duration-500",
+                "size-full rounded-md border border-primary/70 bg-primary/50 shadow-sm transition duration-500",
                 i - Number(i > 4) === selectedSquare && "bg-primary shadow-md",
               )}
             ></div>
