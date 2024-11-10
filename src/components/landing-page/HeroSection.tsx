@@ -7,7 +7,7 @@ import BackgroundGlow from "../ui/BackgroundGlow/BackgroundGlow";
 
 export default function HeroSection() {
   return (
-    <section className="grid justify-center text-center">
+    <section className="relative grid justify-center text-center">
       <BackgroundGlow
         glowColors={[
           "rgb(var(--blue) / 0.05)",

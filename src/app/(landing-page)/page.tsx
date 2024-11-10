@@ -7,7 +7,7 @@ export default function LandingPagePage() {
     <div>
       <Header />
 
-      <main className="grid gap-64 py-40">
+      <main className="grid gap-56 py-40">
         <HeroSection />
         <HowItWorksSection />
       </main>
