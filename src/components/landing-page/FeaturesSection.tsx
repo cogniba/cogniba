@@ -77,11 +77,11 @@ export default function FeaturesSection() {
           <BackgroundGlow
             zIndex={0}
             glowColors={[
-              "rgb(var(--primary) / 0.10)",
+              "rgb(var(--primary) / 0.05)",
               "rgb(var(--primary) / 0)",
-              "rgb(var(--primary) / 0.20)",
+              "rgb(var(--primary) / 0.15)",
               "rgb(var(--primary) / 0)",
-              "rgb(var(--primary) / 0.10)",
+              "rgb(var(--primary) / 0.05)",
             ]}
             // glowColors={[
             //   "rgb(var(--red))",
