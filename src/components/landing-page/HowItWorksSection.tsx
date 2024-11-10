@@ -1,5 +1,5 @@
 import Glow from "../Glow";
-import BackgroundGlow from "../ui/BackgroundGlow/BackgroundGlow";
+import BackgroundGlow from "../ui/BackgroundGlow";
 import LandingPageAnalytics from "./LandingPageAnalytics";
 import LandingPageBoard from "./LandingPageBoard";
 

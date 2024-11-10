@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Strong } from "../ui/Strong";
 import { Button } from "../ui/button";
-import FancyButton from "../ui/FancyButton/FancyButton";
+import FancyButton from "../ui/FancyButton";
 import Glow from "../Glow";
-import BackgroundGlow from "../ui/BackgroundGlow/BackgroundGlow";
+import BackgroundGlow from "../ui/BackgroundGlow";
 
 export default function HeroSection() {
   return (
