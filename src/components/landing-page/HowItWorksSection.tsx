@@ -3,7 +3,7 @@ import LandingPageBoard from "./LandingPageBoard";
 
 export default function HowItWorksSection() {
   return (
-    <section className="mx-auto w-full max-w-4xl">
+    <section className="mx-auto grid w-full max-w-4xl gap-32">
       <div className="flex w-full items-center justify-between gap-24">
         <div className="grid w-full gap-4">
           <h2 className="text-4xl font-semibold">Train Your Brain</h2>
@@ -15,7 +15,7 @@ export default function HowItWorksSection() {
         </div>
         <LandingPageBoard />
       </div>
-      <div className="flex w-full items-center justify-between gap-12">
+      <div className="flex w-full items-center justify-between gap-24">
         <LandingPageAnalytics />
         <div className="w-full">
           <h2 className="text-4xl font-semibold">See Your Improvement</h2>

@@ -1,8 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ChartContainer } from "../ui/chart";
-import { Area, AreaChart } from "recharts";
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "../ui/chart";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import sleep from "@/lib/sleep";
 
 const chartConfig = {
@@ -81,8 +87,8 @@ export default function LandingPageAnalytics() {
               />
             </linearGradient>
           </defs>
-          {/* <CartesianGrid vertical={false} opacity={0.3} />
-          <XAxis
+          <CartesianGrid vertical={false} opacity={0.3} />
+          {/* <XAxis
             dataKey="date"
             tickLine={false}
             axisLine={false}
@@ -111,7 +117,6 @@ export default function LandingPageAnalytics() {
                   });
                 }}
                 indicator="dot"
-                postfix={postfix}
               />
             }
           /> */}
@@ -121,7 +126,7 @@ export default function LandingPageAnalytics() {
             fill={`url(#level)`}
             stroke={`var(--color-level)`}
           />
-          {/* <ChartLegend content={<ChartLegendContent />} /> */}
+          <ChartLegend content={<ChartLegendContent />} />
         </AreaChart>
       </ChartContainer>
     </div>
