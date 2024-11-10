@@ -14,7 +14,7 @@ const charts = {
     chartConfig: {
       level: {
         label: "Level",
-        color: "#f97316",
+        color: "rgb(var(--primary))",
       },
     } satisfies ChartConfig,
   },
@@ -39,15 +39,15 @@ const charts = {
     chartConfig: {
       correctHits: {
         label: "Correct",
-        color: "#22c55e",
+        color: "rgb(var(--green))",
       },
       incorrectHits: {
         label: "Incorrect",
-        color: "#ef4444",
+        color: "rgb(var(--red))",
       },
       missedHits: {
         label: "Missed",
-        color: "#eab308",
+        color: "rgb(var(--yellow))",
       },
     } satisfies ChartConfig,
   },

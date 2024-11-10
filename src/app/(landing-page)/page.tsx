@@ -1,13 +1,15 @@
 import Header from "@/components/landing-page/Header";
-import Hero from "@/components/landing-page/Hero";
+import HeroSection from "@/components/landing-page/HeroSection";
+import HowItWorksSection from "@/components/landing-page/HowItWorksSection";
 
 export default function LandingPagePage() {
   return (
     <div>
       <Header />
 
-      <main>
-        <Hero />
+      <main className="grid gap-64 py-40">
+        <HeroSection />
+        <HowItWorksSection />
       </main>
     </div>
   );

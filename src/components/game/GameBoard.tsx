@@ -1,11 +1,11 @@
 import GameCrosshair from "./GameCrosshair";
 import GameSquare from "./GameSquare";
 
-interface BoardProps {
+interface GameBoardProps {
   selectedSquare: number | null;
 }
 
-export default function Board({ selectedSquare }: BoardProps) {
+export default function GameBoard({ selectedSquare }: GameBoardProps) {
   return (
     <div className="flex h-full w-full items-center justify-center [container-type:size]">
       <div

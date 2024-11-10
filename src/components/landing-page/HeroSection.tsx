@@ -5,9 +5,9 @@ import FancyButton from "../ui/FancyButton/FancyButton";
 import Glow from "../Glow";
 import BackgroundGlow from "../ui/BackgroundGlow/BackgroundGlow";
 
-export default function Hero() {
+export default function HeroSection() {
   return (
-    <section className="grid justify-center pt-40 text-center">
+    <section className="grid justify-center text-center">
       <BackgroundGlow
         glowColors={[
           "rgb(var(--blue) / 0.05)",

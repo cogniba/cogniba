@@ -14,8 +14,8 @@ import MobileSidebar from "./MobileSidebar";
 export default function Header() {
   return (
     <div className="pb-16">
-      <div className="fixed h-16 w-full bg-background"></div>
-      <div className="fixed flex h-16 w-full justify-center border-b bg-secondary/25 shadow-md">
+      <div className="fixed z-40 h-16 w-full bg-background/80"></div>
+      <div className="fixed z-50 flex h-16 w-full justify-center border-b bg-secondary/25 shadow-md backdrop-blur">
         <div className="fixed flex h-16 w-full items-center justify-between px-6 lg:hidden">
           <CognibaLogo className="z-50" />
           <MobileSidebar />
