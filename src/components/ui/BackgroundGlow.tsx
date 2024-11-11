@@ -1,3 +1,4 @@
+import { cn } from "@/lib/cn";
 import styles from "@/styles/BackgroundGlow.module.css";
 
 interface BackgroundGlowProps {
@@ -5,6 +6,7 @@ interface BackgroundGlowProps {
   animationDuration?: string;
   glowSize?: string;
   zIndex?: number;
+  className?: string;
 }
 
 export default function BackgroundGlow({
@@ -12,10 +14,11 @@ export default function BackgroundGlow({
   animationDuration = "10s",
   glowSize = "10rem",
   zIndex = -1,
+  className,
 }: BackgroundGlowProps) {
   return (
     <span
-      className={styles.backgroundGlow}
+      className={cn(className, styles.backgroundGlow)}
       style={
         {
           "--glow-colors": glowColors.join(", "),

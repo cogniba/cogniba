@@ -15,7 +15,7 @@ export default function HowItWorksSection() {
           "rgb(var(--violet) / 0.05)",
         ]}
       />
-      <div className="flex w-full flex-col items-center justify-between gap-12 xs:flex-row sm:gap-16 md:gap-20 lg:gap-24 xl:gap-36">
+      <div className="flex w-full flex-col items-center justify-between gap-9 xs:flex-row xs:gap-12 sm:gap-16 md:gap-20 lg:gap-24 xl:gap-36">
         <Glow display="block" className="w-full" glowOpacity={25}>
           <div className="grid w-full gap-2 sm:gap-3 md:gap-4">
             <h2 className="text-2xl font-semibold sm:text-3xl md:text-4xl">
@@ -37,7 +37,7 @@ export default function HowItWorksSection() {
           <LandingPageBoard />
         </Glow>
       </div>
-      <div className="flex w-full flex-col-reverse items-center justify-between gap-12 xs:flex-row sm:gap-16 md:gap-20 lg:gap-24 xl:gap-36">
+      <div className="flex w-full flex-col-reverse items-center justify-between gap-9 xs:flex-row xs:gap-12 sm:gap-16 md:gap-20 lg:gap-24 xl:gap-36">
         <Glow
           display="block"
           className="w-full"
@@ -59,7 +59,6 @@ export default function HowItWorksSection() {
           </div>
         </Glow>
       </div>
-      <div className="flex w-full items-center justify-between gap-12"></div>
     </section>
   );
 }

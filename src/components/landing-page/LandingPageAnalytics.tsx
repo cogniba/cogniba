@@ -38,32 +38,36 @@ export default function LandingPageAnalytics() {
 
   const [chartData, setChartData] = useState(initialChartData);
 
-  const isInitialRender = useRef(true);
+  const isAnimationPlayingRef = useRef(false);
 
   useEffect(() => {
-    if (isInitialRender.current) {
-      isInitialRender.current = false;
+    if (isAnimationPlayingRef.current) {
       return;
     }
 
-    (async () => {
-      await sleep(1500);
+    isAnimationPlayingRef.current = true;
 
-      const newData = chartData.map((day, index) => {
-        const variability = Math.ceil((index + 1) / 10) * 3;
-        const level = Math.max(
-          1,
-          index + 1 + (Math.random() - 0.5) * variability,
-        );
+    const intervalId = setInterval(() => {
+      setChartData((prevData) => {
+        return prevData.map((day, index) => {
+          const variability = Math.ceil((index + 1) / 10) * 3;
+          const level = Math.max(
+            1,
+            index + 1 + (Math.random() - 0.5) * variability,
+          );
 
-        return {
-          level,
-          date: day.date,
-        };
+          return {
+            level,
+            date: day.date,
+          };
+        });
       });
+    }, 1500);
 
-      setChartData(newData);
-    })();
+    return () => {
+      clearInterval(intervalId);
+      isAnimationPlayingRef.current = false;
+    };
   }, [chartData]);
 
   return (

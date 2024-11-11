@@ -55,12 +55,12 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="mx-auto flex w-full max-w-6xl items-center justify-center gap-6 shadow-md">
+    <section className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-6 shadow-md lg:flex-row">
       {features.map((feature, index) => (
         <div
           key={index}
           className={cn(
-            "relative size-full rounded-lg border bg-background px-8 py-10",
+            "relative size-full rounded-lg border bg-background px-8 py-7 lg:py-10",
             styles.animatedBorder,
           )}
           style={
@@ -75,6 +75,7 @@ export default function FeaturesSection() {
           }
         >
           <BackgroundGlow
+            className="hidden lg:block"
             zIndex={0}
             glowColors={[
               "rgb(var(--primary) / 0.075)",
@@ -84,16 +85,29 @@ export default function FeaturesSection() {
               "rgb(var(--primary) / 0.075)",
             ]}
           />
+          <BackgroundGlow
+            className="lg:hidden"
+            zIndex={0}
+            glowColors={[
+              "rgb(var(--primary) / 0.025)",
+              "rgb(var(--primary) / 0)",
+              "rgb(var(--primary) / 0.075)",
+              "rgb(var(--primary) / 0)",
+              "rgb(var(--primary) / 0.025)",
+            ]}
+          />
           <Glow display="block" glowSize="32px" glowOpacity={75}>
-            <feature.Icon className="size-10 text-primary" />
+            <feature.Icon className="size-8 text-primary xs:size-10" />
           </Glow>
           <Glow display="block" glowOpacity={25}>
-            <h2 className="pb-2 pt-5 text-2xl font-semibold">
+            <h2 className="pb-1.5 pt-3 text-xl font-semibold xs:pb-2 xs:text-2xl lg:pt-5">
               {feature.title}
             </h2>
           </Glow>
           <Glow display="block" glowOpacity={25}>
-            <p className="text-foreground/90">{feature.description}</p>
+            <p className="text-sm text-foreground/90 xs:text-base">
+              {feature.description}
+            </p>
           </Glow>
         </div>
       ))}

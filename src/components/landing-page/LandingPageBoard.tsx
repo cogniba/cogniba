@@ -8,16 +8,16 @@ export default function LandingPageBoard() {
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
 
   useEffect(() => {
-    (async () => {
-      while (true) {
-        setSelectedSquare(null);
-        await sleep(500);
+    const intervalId = setInterval(() => {
+      setSelectedSquare(null);
 
+      setTimeout(() => {
         const newSelectedSquare = Math.floor(Math.random() * 8);
         setSelectedSquare(newSelectedSquare);
-        await sleep(1000);
-      }
-    })();
+      }, 500);
+    }, 1500);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
