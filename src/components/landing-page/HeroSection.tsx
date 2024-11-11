@@ -48,7 +48,7 @@ export default function HeroSection() {
           <Strong>science-backed training</Strong>.
         </h2>
       </Glow>
-      <div className="mx-auto flex gap-4">
+      <div className="z-10 mx-auto flex gap-4">
         <Link href="sign-up">
           <FancyButton
             className="h-10 rounded-md px-6 xs:h-11 xs:px-8"
@@ -64,7 +64,7 @@ export default function HeroSection() {
             Get Started
           </FancyButton>
         </Link>
-        <Link href="sign-in">
+        <Link href="research">
           <Button
             className="h-10 rounded-md px-6 xs:h-11 xs:px-8"
             variant="secondary"
