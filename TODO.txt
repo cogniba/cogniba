@@ -1,3 +1,6 @@
+Use primary/80 instead of orange
+Add colors to tailwind
+Fix light mode
 Fix gradient banding
 
 Row Level Security
