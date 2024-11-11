@@ -8,7 +8,7 @@ const strongVariants = cva("font-semibold", {
     variant: {
       default: "text-foreground",
       primary: "text-primary",
-      link: "text-link-foreground",
+      link: "text-link hover:underline underline-offset-4",
       teal: "dark:text-teal-400 text-teal-600",
       red: "dark:text-red-400 text-red-600",
       green: "dark:text-green-400 text-green-600",
