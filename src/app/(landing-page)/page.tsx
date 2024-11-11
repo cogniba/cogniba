@@ -12,7 +12,7 @@ export default function LandingPagePage() {
 
       <main className="grid gap-40 py-40">
         <HeroSection />
-        <HowItWorksSection />
+        {/* <HowItWorksSection />
         <FeaturesSection />
 
         <div className="mx-auto">
@@ -31,7 +31,7 @@ export default function LandingPagePage() {
               Get Started
             </FancyButton>
           </Link>
-        </div>
+        </div> */}
       </main>
     </div>
   );

@@ -7,7 +7,7 @@ import BackgroundGlow from "../ui/BackgroundGlow";
 
 export default function HeroSection() {
   return (
-    <section className="relative grid justify-center text-center">
+    <section className="relative grid justify-center px-4 text-center xs:px-8">
       <BackgroundGlow
         glowColors={[
           "rgb(var(--blue) / 0.05)",
@@ -17,7 +17,7 @@ export default function HeroSection() {
           "rgb(var(--blue) / 0.05)",
         ]}
       />
-      <div className="space-y-1 pb-8 text-7xl">
+      <div className="space-y-1 pb-2 text-4xl xs:pb-4 xs:text-5xl sm:pb-8 sm:text-7xl">
         <Glow glowOpacity={25} display="block">
           <h1 className="relative font-medium">Train Your Mind</h1>
         </Glow>
@@ -28,7 +28,7 @@ export default function HeroSection() {
         </Glow>
       </div>
       <Glow glowOpacity={25}>
-        <h2 className="relative max-w-2xl text-balance pb-16 text-xl text-foreground/90">
+        <h2 className="relative max-w-2xl text-balance pb-10 text-sm text-foreground/90 xs:pb-12 xs:text-base sm:pb-16 sm:text-xl">
           <Glow glowSize="24px" glowOpacity={75}>
             <Strong variant="primary">Cogniba</Strong>
           </Glow>{" "}
@@ -51,7 +51,7 @@ export default function HeroSection() {
       <div className="mx-auto flex gap-4">
         <Link href="sign-up">
           <FancyButton
-            size="lg"
+            className="h-10 rounded-md px-6 xs:h-11 xs:px-8"
             borderColors={[
               "rgb(var(--cyan))",
               "rgb(var(--fuchsia))",
@@ -65,7 +65,10 @@ export default function HeroSection() {
           </FancyButton>
         </Link>
         <Link href="sign-in">
-          <Button variant="secondary" size="lg">
+          <Button
+            className="h-10 rounded-md px-6 xs:h-11 xs:px-8"
+            variant="secondary"
+          >
             Learn More
           </Button>
         </Link>
