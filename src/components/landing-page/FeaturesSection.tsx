@@ -77,19 +77,12 @@ export default function FeaturesSection() {
           <BackgroundGlow
             zIndex={0}
             glowColors={[
-              "rgb(var(--primary) / 0.05)",
+              "rgb(var(--primary) / 0.075)",
               "rgb(var(--primary) / 0)",
-              "rgb(var(--primary) / 0.15)",
+              "rgb(var(--primary) / 0.175)",
               "rgb(var(--primary) / 0)",
-              "rgb(var(--primary) / 0.05)",
+              "rgb(var(--primary) / 0.075)",
             ]}
-            // glowColors={[
-            //   "rgb(var(--red))",
-            //   "rgb(var(--red))",
-            //   "rgb(var(--red))",
-            //   "rgb(var(--red))",
-            //   "rgb(var(--red))",
-            // ]}
           />
           <Glow display="block" glowSize="32px" glowOpacity={75}>
             <feature.Icon className="size-10 text-primary" />

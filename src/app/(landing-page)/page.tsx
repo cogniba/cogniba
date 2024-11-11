@@ -10,12 +10,12 @@ export default function LandingPagePage() {
     <div>
       <Header />
 
-      <main className="grid gap-40 py-40">
+      <main className="grid gap-40 px-6 py-28 xs:gap-48 xs:py-32 md:gap-56 md:py-40">
         <HeroSection />
-        {/* <HowItWorksSection />
-        <FeaturesSection />
+        <HowItWorksSection />
+        {/* <FeaturesSection /> */}
 
-        <div className="mx-auto">
+        {/* <div className="mx-auto">
           <Link href="sign-up">
             <FancyButton
               size="lg"
