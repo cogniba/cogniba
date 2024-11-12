@@ -15,7 +15,8 @@ const pricingPlans = [
     name: "Pro",
     description: "For serious users aiming for top results.",
     buttonText: "Get Started",
-    price: 20,
+    // TODO
+    price: "0",
     features: ["Unlimited games", "Unlimited analytics history"],
     highlighted: true,
   },
@@ -25,6 +26,9 @@ export default function PricingPage() {
   return (
     <div className="md flex h-full min-h-[calc(100vh-4rem)] flex-col items-center gap-12 px-4 pb-12 pt-12 md:pt-24">
       <div className="grid gap-2 text-center">
+        {/* TODO */}
+        <span>Every free for now :)</span>
+
         <h1 className="text-4xl font-semibold xs:text-5xl">Choose Your Plan</h1>
         <p className="text-base text-foreground/80 xs:text-lg">
           Start for free or go unlimited for the best results!

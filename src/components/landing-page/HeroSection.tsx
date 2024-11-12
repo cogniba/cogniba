@@ -22,7 +22,7 @@ export default function HeroSection() {
           <h1 className="relative font-medium">Train Your Mind</h1>
         </Glow>
         <Glow display="block">
-          <h1 className="glow inline-block animate-gradient-x bg-gradient-to-r from-orange-500 to-pink-500 bg-[length:400%_100%] bg-clip-text pb-4 font-semibold text-transparent">
+          <h1 className="glow from-orange to-pink inline-block animate-gradient-x bg-gradient-to-r bg-[length:400%_100%] bg-clip-text pb-4 font-semibold text-transparent">
             Boost your IQ
           </h1>
         </Glow>
