@@ -1,6 +1,7 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config = {
   darkMode: ["class"],
@@ -181,7 +182,53 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ addUtilities, theme, e }) {
+      const colors = theme("colors");
+      const utilities: { [key: string]: any } = {};
+
+      const properties = {
+        bg: "background-color",
+        text: "color",
+        border: "border-color",
+      };
+
+      for (const colorName in colors) {
+        if (
+          typeof colors[colorName] === "object" &&
+          colors[colorName]["DEFAULT"]
+        ) {
+          for (let opacity = 0; opacity <= 100; opacity += 10) {
+            const opacityFraction = (opacity / 100).toFixed(2);
+
+            for (const [prefix, cssProperty] of Object.entries(properties)) {
+              const className = `.${e(`${prefix}-overlay-${colorName}/${opacity}`)}`;
+
+              if (prefix === "bg") {
+                utilities[className] = {
+                  backgroundImage: `linear-gradient(rgb(var(--${colorName}) / ${opacityFraction}), rgb(var(--${colorName}) / ${opacityFraction})), linear-gradient(rgb(var(--background)), rgb(var(--background)))`,
+                };
+              } else if (prefix === "text") {
+                utilities[className] = {
+                  backgroundImage: `linear-gradient(rgb(var(--${colorName}) / ${opacityFraction}), rgb(var(--${colorName}) / ${opacityFraction})), linear-gradient(rgb(var(--background)), rgb(var(--background)))`,
+                  backgroundClip: "text",
+                  color: "transparent",
+                  "-webkit-background-clip": "text",
+                };
+              } else if (prefix === "border") {
+                utilities[className] = {
+                  borderImage: `linear-gradient(rgb(var(--${colorName}) / ${opacityFraction}), rgb(var(--${colorName}) / ${opacityFraction})), linear-gradient(rgb(var(--border)), rgb(var(--border)))`,
+                };
+              }
+            }
+          }
+        }
+      }
+
+      addUtilities(utilities);
+    }),
+  ],
 } satisfies Config;
 
 export default config;
