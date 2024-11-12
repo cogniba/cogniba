@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from "lucide-react";
-import styles from "@/styles/AnimatedBorder.module.css";
+import styles from "@/styles/modules/AnimatedBorder.module.css";
 import { cn } from "@/lib/cn";
 
 const pricingPlans = [

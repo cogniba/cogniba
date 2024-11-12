@@ -11,25 +11,6 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-
-  .glow-base {
-    position: relative;
-    --glow-color: inherit; /* Inherit the parent's color or gradient */
-  }
-
-  .glow-base::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    border-radius: inherit;
-    background: var(--glow-color);
-    opacity: 0.7; /* Adjust this as needed */
-    filter: blur(10px);
-  }
 }
 
 @layer base {
@@ -45,7 +26,7 @@
     --popover: 255 255 255; /* #ffffff */
     --popover-foreground: 2 8 23; /* #020817 */
 
-    --primary: 234 88 12; /* #ea580c */
+    --primary: 37 99 235; /* #2563eb */
     --primary-foreground: 248 250 252; /* #f8fafc */
 
     --secondary: 241 245 249; /* #f1f5f9 */
@@ -67,7 +48,7 @@
 
     --border: 226 232 240; /* #e2e8f0 */
     --input: 226 232 240; /* #e2e8f0 */
-    --ring: 234 88 12; /* #ea580c */
+    --ring: 37 99 235; /* #2563eb */
 
     --chart-1: 231 110 80; /* #e76e50 */
     --chart-2: 42 157 144; /* #2a9d90 */
@@ -104,7 +85,7 @@
     --popover: 2 8 23; /* #020817 */
     --popover-foreground: 248 250 252; /* #f8fafc */
 
-    --primary: 249 115 22; /* #f97316 */
+    --primary: 59 130 246; /* #3b82f6 */
     --primary-foreground: 15 23 42; /* #0f172a */
 
     --secondary: 30 41 59; /* #1e293b */
@@ -126,7 +107,7 @@
 
     --border: 30 41 59; /* #1e293b */
     --input: 30 41 59; /* #1e293b */
-    --ring: 194 65 12; /* #c2410c */
+    --ring: 29 78 216; /* #1d4ed8 */
 
     --chart-1: 38 98 217; /* #2662d9 */
     --chart-2: 46 184 138; /* #2eb88a */

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/cn";
-import styles from "@/styles/BackgroundGlow.module.css";
+import styles from "@/styles/modules/BackgroundGlow.module.css";
 
 interface BackgroundGlowProps {
   glowColors: string[];

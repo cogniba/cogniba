@@ -3,7 +3,7 @@ import { Strong } from "../ui/Strong";
 import Glow from "../Glow";
 import { cn } from "@/lib/cn";
 
-import styles from "@/styles/AnimatedBorder.module.css";
+import styles from "@/styles/modules/AnimatedBorder.module.css";
 import BackgroundGlow from "../ui/BackgroundGlow";
 
 const features = [

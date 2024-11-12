@@ -1,7 +1,7 @@
 import { cn } from "@/lib/cn";
 import { Button, type ButtonProps } from "./button";
 
-import styles from "@/styles/AnimatedBorder.module.css";
+import styles from "@/styles/modules/AnimatedBorder.module.css";
 
 interface FancyButtonProps extends ButtonProps {
   children: React.ReactNode;
