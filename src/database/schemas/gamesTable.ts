@@ -8,7 +8,7 @@ export const gamesTable = pgTable("games", {
     .$defaultFn(() => crypto.randomUUID()),
   userId: uuid("user_id")
     .notNull()
-    .references(() => profilesTable.id, { onDelete: "cascade" }),
+    .references(() => profilesTable.userId, { onDelete: "cascade" }),
 
   level: integer("level").notNull(),
   newLevel: integer("new_level").notNull(),

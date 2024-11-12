@@ -5,7 +5,7 @@ import { profilesTable } from "./profilesTable";
 export const settingsTable = pgTable("settings", {
   userId: uuid("user_id")
     .primaryKey()
-    .references(() => profilesTable.id, { onDelete: "cascade" })
+    .references(() => profilesTable.userId, { onDelete: "cascade" })
     .notNull(),
 
   showFeedback: boolean("show_feedback").default(true).notNull(),

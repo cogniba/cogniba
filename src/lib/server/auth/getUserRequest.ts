@@ -21,7 +21,7 @@ export default async function getUserRequest(): Promise<NextResponse> {
     const user = await db
       .select()
       .from(profilesTable)
-      .where(eq(profilesTable.id, userId))
+      .where(eq(profilesTable.userId, userId))
       .then((res) => (res.length === 1 ? res[0] : null));
 
     if (!user) {

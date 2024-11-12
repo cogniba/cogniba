@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     await db
       .update(profilesTable)
       .set({ hasFinishedTutorial })
-      .where(eq(profilesTable.id, userId));
+      .where(eq(profilesTable.userId, userId));
 
     revalidatePath("/");
     return NextResponse.json(
