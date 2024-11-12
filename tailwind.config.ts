@@ -126,6 +126,58 @@ const config = {
           "4": "rgb(var(--chart-4) / <alpha-value>)",
           "5": "rgb(var(--chart-5) / <alpha-value>)",
         },
+
+        red: {
+          DEFAULT: "rgb(var(--red) / <alpha-value>)",
+        },
+        orange: {
+          DEFAULT: "rgb(var(--orange) / <alpha-value>)",
+        },
+        amber: {
+          DEFAULT: "rgb(var(--amber) / <alpha-value>)",
+        },
+        yellow: {
+          DEFAULT: "rgb(var(--yellow) / <alpha-value>)",
+        },
+        lime: {
+          DEFAULT: "rgb(var(--lime) / <alpha-value>)",
+        },
+        green: {
+          DEFAULT: "rgb(var(--green) / <alpha-value>)",
+        },
+        emerald: {
+          DEFAULT: "rgb(var(--emerald) / <alpha-value>)",
+        },
+        teal: {
+          DEFAULT: "rgb(var(--teal) / <alpha-value>)",
+        },
+        cyan: {
+          DEFAULT: "rgb(var(--cyan) / <alpha-value>)",
+        },
+        sky: {
+          DEFAULT: "rgb(var(--sky) / <alpha-value>)",
+        },
+        blue: {
+          DEFAULT: "rgb(var(--blue) / <alpha-value>)",
+        },
+        indigo: {
+          DEFAULT: "rgb(var(--indigo) / <alpha-value>)",
+        },
+        violet: {
+          DEFAULT: "rgb(var(--violet) / <alpha-value>)",
+        },
+        purple: {
+          DEFAULT: "rgb(var(--purple) / <alpha-value>)",
+        },
+        fuchsia: {
+          DEFAULT: "rgb(var(--fuchsia) / <alpha-value>)",
+        },
+        pink: {
+          DEFAULT: "rgb(var(--pink) / <alpha-value>)",
+        },
+        rose: {
+          DEFAULT: "rgb(var(--rose) / <alpha-value>)",
+        },
       },
     },
   },
