@@ -2,7 +2,7 @@
 
 import GameLevelDisplay from "./GameLevelDisplay";
 import GameButton from "./GameButton";
-import Board from "./GameBoard";
+import GameBoard from "./GameBoard";
 import StartScreen from "./GameStartScreen";
 
 import { cn } from "@/lib/cn";
@@ -103,7 +103,7 @@ export default function Game({
             <GameLevelDisplay level={level} />
           </div>
           <div className="h-[100cqmin] w-[100cqmin]">
-            <Board selectedSquare={selectedSquare} />
+            <GameBoard selectedSquare={selectedSquare} />
           </div>
           <div className="mb-[2.5cqh] mt-[3cqh] h-[11cqh] w-[100cqmin] max-w-5xl flex-shrink-0 2xl:w-[max(100cqmin,90vh)]">
             <GameButton

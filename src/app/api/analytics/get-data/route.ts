@@ -32,7 +32,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    getDataRequest({ frequency: frequency as "daily" | "weekly" | "monthly" });
+    return await getDataRequest({
+      frequency: frequency as "daily" | "weekly" | "monthly",
+    });
   } catch (error) {
     console.error("Error getting data:", error);
     return NextResponse.json(

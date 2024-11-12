@@ -78,7 +78,7 @@ export default function StartScreen({
       ></div>
       <Dialog defaultOpen open={visible} modal={false}>
         <DialogContent
-          className="z-50 flex h-full w-full max-w-full justify-center p-0 data-[state=closed]:duration-500 data-[state=open]:duration-500 sm:h-fit sm:max-w-lg sm:p-6"
+          className="z-40 flex h-full w-full max-w-full justify-center p-0 data-[state=closed]:duration-500 data-[state=open]:duration-500 sm:h-fit sm:max-w-lg sm:p-6"
           closeButton={false}
           backdrop={true}
           hideOverlay

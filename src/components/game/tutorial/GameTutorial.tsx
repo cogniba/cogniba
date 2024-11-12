@@ -88,10 +88,10 @@ const steps = [
     title: <>How to play</>,
     content: (
       <>
-        You are on <Strong variant="orange">level 1</Strong>, so you have to{" "}
+        You are on <Strong variant="primary">level 1</Strong>, so you have to{" "}
         <Strong>press the button</Strong> when the square appears{" "}
         <Strong>in the same spot as</Strong>{" "}
-        <Strong variant="orange">1 step</Strong> <Strong>before</Strong>. In
+        <Strong variant="primary">1 step</Strong> <Strong>before</Strong>. In
         other words, <Strong>press the button</Strong> when the square appears{" "}
         <Strong>two consecutive times</Strong> on the same spot.
       </>
@@ -129,8 +129,8 @@ const steps = [
     title: <>Congratulations!</>,
     content: (
       <>
-        You beat <Strong variant="orange">level 1</Strong>, you will now{" "}
-        <Strong>advance</Strong> to <Strong variant="orange">level 2</Strong>!
+        You beat <Strong variant="primary">level 1</Strong>, you will now{" "}
+        <Strong>advance</Strong> to <Strong variant="primary">level 2</Strong>!
       </>
     ),
     target: "body",
@@ -140,15 +140,15 @@ const steps = [
   {
     title: (
       <>
-        How to play <Strong variant="orange">level 2</Strong>
+        How to play <Strong variant="primary">level 2</Strong>
       </>
     ),
     content: (
       <>
-        You are now on <Strong variant="orange">level 2</Strong>, so you will
+        You are now on <Strong variant="primary">level 2</Strong>, so you will
         have to <Strong>press the button</Strong> when the square appears{" "}
         <Strong>in the same spot as</Strong>{" "}
-        <Strong variant="orange">2 steps</Strong> <Strong>before</Strong>.
+        <Strong variant="primary">2 steps</Strong> <Strong>before</Strong>.
       </>
     ),
     target: "#game-board",

@@ -1,0 +1,36 @@
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animatedBorder::before,
+.animatedBorder::after {
+  content: "";
+  box-sizing: content-box;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: var(--border-width, 0.125rem);
+  border-radius: inherit;
+  background-image: conic-gradient(from var(--angle), var(--border-colors));
+  animation: var(--animation-duration, 2s) spin linear infinite;
+}
+
+.animatedBorder::before {
+  filter: blur(var(--glow-size, 1.5rem));
+  opacity: var(--glow-opacity, 0.5);
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}

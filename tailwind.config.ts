@@ -1,6 +1,7 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config = {
   darkMode: ["class"],
@@ -48,10 +49,30 @@ const config = {
             height: "0",
           },
         },
+        "gradient-x": {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
+        "gradient-x-infinite": {
+          "0%, 100%": {
+            "background-position": "0% 50%",
+          },
+          "50%": {
+            "background-position": "100% 50%",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "gradient-x": "gradient-x 3s linear infinite",
+        "gradient-x-infinite": "gradient-x-infinite 3s linear infinite",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -93,6 +114,9 @@ const config = {
           DEFAULT: "rgb(var(--success) / <alpha-value>)",
           foreground: "rgb(var(--success-foreground) / <alpha-value>)",
         },
+        link: {
+          DEFAULT: "rgb(var(--link) / <alpha-value>)",
+        },
         border: "rgb(var(--border) / <alpha-value>)",
         input: "rgb(var(--input) / <alpha-value>)",
         ring: "rgb(var(--ring) / <alpha-value>)",
@@ -103,10 +127,108 @@ const config = {
           "4": "rgb(var(--chart-4) / <alpha-value>)",
           "5": "rgb(var(--chart-5) / <alpha-value>)",
         },
+
+        red: {
+          DEFAULT: "rgb(var(--red) / <alpha-value>)",
+        },
+        orange: {
+          DEFAULT: "rgb(var(--orange) / <alpha-value>)",
+        },
+        amber: {
+          DEFAULT: "rgb(var(--amber) / <alpha-value>)",
+        },
+        yellow: {
+          DEFAULT: "rgb(var(--yellow) / <alpha-value>)",
+        },
+        lime: {
+          DEFAULT: "rgb(var(--lime) / <alpha-value>)",
+        },
+        green: {
+          DEFAULT: "rgb(var(--green) / <alpha-value>)",
+        },
+        emerald: {
+          DEFAULT: "rgb(var(--emerald) / <alpha-value>)",
+        },
+        teal: {
+          DEFAULT: "rgb(var(--teal) / <alpha-value>)",
+        },
+        cyan: {
+          DEFAULT: "rgb(var(--cyan) / <alpha-value>)",
+        },
+        sky: {
+          DEFAULT: "rgb(var(--sky) / <alpha-value>)",
+        },
+        blue: {
+          DEFAULT: "rgb(var(--blue) / <alpha-value>)",
+        },
+        indigo: {
+          DEFAULT: "rgb(var(--indigo) / <alpha-value>)",
+        },
+        violet: {
+          DEFAULT: "rgb(var(--violet) / <alpha-value>)",
+        },
+        purple: {
+          DEFAULT: "rgb(var(--purple) / <alpha-value>)",
+        },
+        fuchsia: {
+          DEFAULT: "rgb(var(--fuchsia) / <alpha-value>)",
+        },
+        pink: {
+          DEFAULT: "rgb(var(--pink) / <alpha-value>)",
+        },
+        rose: {
+          DEFAULT: "rgb(var(--rose) / <alpha-value>)",
+        },
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ addUtilities, theme, e }) {
+      const colors = theme("colors");
+      const utilities: { [key: string]: any } = {};
+
+      const properties = {
+        bg: "background-color",
+        text: "color",
+        border: "border-color",
+      };
+
+      for (const colorName in colors) {
+        if (
+          typeof colors[colorName] === "object" &&
+          colors[colorName]["DEFAULT"]
+        ) {
+          for (let opacity = 0; opacity <= 100; opacity += 10) {
+            const opacityFraction = (opacity / 100).toFixed(2);
+
+            for (const [prefix, cssProperty] of Object.entries(properties)) {
+              const className = `.${e(`${prefix}-overlay-${colorName}/${opacity}`)}`;
+
+              if (prefix === "bg") {
+                utilities[className] = {
+                  backgroundImage: `linear-gradient(rgb(var(--${colorName}) / ${opacityFraction}), rgb(var(--${colorName}) / ${opacityFraction})), linear-gradient(rgb(var(--background)), rgb(var(--background)))`,
+                };
+              } else if (prefix === "text") {
+                utilities[className] = {
+                  backgroundImage: `linear-gradient(rgb(var(--${colorName}) / ${opacityFraction}), rgb(var(--${colorName}) / ${opacityFraction})), linear-gradient(rgb(var(--background)), rgb(var(--background)))`,
+                  backgroundClip: "text",
+                  color: "transparent",
+                  "-webkit-background-clip": "text",
+                };
+              } else if (prefix === "border") {
+                utilities[className] = {
+                  borderImage: `linear-gradient(rgb(var(--${colorName}) / ${opacityFraction}), rgb(var(--${colorName}) / ${opacityFraction})), linear-gradient(rgb(var(--border)), rgb(var(--border)))`,
+                };
+              }
+            }
+          }
+        }
+      }
+
+      addUtilities(utilities);
+    }),
+  ],
 } satisfies Config;
 
 export default config;

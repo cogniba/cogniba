@@ -15,7 +15,7 @@ const users = authSchema.table("users", {
 });
 
 export const profilesTable = pgTable("profiles", {
-  id: uuid("id")
+  userId: uuid("user_id")
     .primaryKey()
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),

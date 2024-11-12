@@ -10,13 +10,13 @@ function getSteps(level: number) {
     {
       title: (
         <>
-          You reached <Strong variant="orange"> level {level}</Strong>!
+          You reached <Strong variant="primary"> level {level}</Strong>!
         </>
       ),
       content: (
         <>
           <Strong>Congratulations</Strong> on reaching{" "}
-          <Strong variant="orange">level {level}</Strong>, you are{" "}
+          <Strong variant="primary">level {level}</Strong>, you are{" "}
           <Strong>doing great!</Strong>
         </>
       ),
@@ -27,15 +27,15 @@ function getSteps(level: number) {
     {
       title: (
         <>
-          How to play <Strong variant="orange">level {level}</Strong>
+          How to play <Strong variant="primary">level {level}</Strong>
         </>
       ),
       content: (
         <>
-          You are now on <Strong variant="orange">level {level}</Strong>, so you
-          will have to <Strong>press the button</Strong> when the square appears{" "}
-          <Strong>in the same spot as</Strong>{" "}
-          <Strong variant="orange">{level} steps</Strong>{" "}
+          You are now on <Strong variant="primary">level {level}</Strong>, so
+          you will have to <Strong>press the button</Strong> when the square
+          appears <Strong>in the same spot as</Strong>{" "}
+          <Strong variant="primary">{level} steps</Strong>{" "}
           <Strong>before</Strong>.
         </>
       ),

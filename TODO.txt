@@ -1,6 +1,4 @@
-Row Level Security
 app.cogniba.com
-Landing page
 
 GitHub release
 
