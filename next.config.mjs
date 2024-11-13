@@ -9,6 +9,23 @@ const nextConfig = {
 
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: "/:path*",
+        destination: "/app/:path*",
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: "/app/:path*",
+        destination: "https://app.cogniba.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
