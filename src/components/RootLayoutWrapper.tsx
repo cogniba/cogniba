@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "./ui/toaster";
+import { Analytics } from "@vercel/analytics/react";
 
 interface RootLayoutWrapperProps {
   readonly children: React.ReactNode;
@@ -20,6 +21,7 @@ export default function RootLayoutWrapper({
     >
       {children}
       <Toaster />
+      <Analytics />
     </ThemeProvider>
   );
 }
