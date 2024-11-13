@@ -1,3 +1,4 @@
+import FadeInOnScroll from "@/components/FadeInOnScroll";
 import FeaturesSection from "@/components/landing-page/FeaturesSection";
 import HeroSection from "@/components/landing-page/HeroSection";
 import HowItWorksSection from "@/components/landing-page/HowItWorksSection";
@@ -12,21 +13,23 @@ export default function LandingPagePage() {
       <FeaturesSection />
 
       <div className="mx-auto -mt-12 xs:-mt-16 md:-mt-16">
-        <Link href="sign-up">
-          <FancyButton
-            size="lg"
-            borderColors={[
-              "rgb(var(--cyan))",
-              "rgb(var(--fuchsia))",
-              "rgb(var(--cyan))",
-              "rgb(var(--fuchsia))",
-              "rgb(var(--cyan))",
-            ]}
-            borderWidth="1px"
-          >
-            Get Started
-          </FancyButton>
-        </Link>
+        <FadeInOnScroll from="bottom">
+          <Link href="sign-up">
+            <FancyButton
+              size="lg"
+              borderColors={[
+                "rgb(var(--cyan))",
+                "rgb(var(--fuchsia))",
+                "rgb(var(--cyan))",
+                "rgb(var(--fuchsia))",
+                "rgb(var(--cyan))",
+              ]}
+              borderWidth="1px"
+            >
+              Get Started
+            </FancyButton>
+          </Link>
+        </FadeInOnScroll>
       </div>
     </main>
   );
