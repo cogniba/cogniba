@@ -1,4 +1,9 @@
+Vercel analytics
+cogniba.com
 app.cogniba.com
+Fix gradient banding
+Vercel deployment on release
+Stripe
 
 GitHub release
 
