@@ -1,4 +1,8 @@
+Vercel analytics
+cogniba.com
 app.cogniba.com
+Vercel deployment on release
+Stripe
 
 GitHub release
 
