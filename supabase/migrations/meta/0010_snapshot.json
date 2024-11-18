@@ -1,9 +1,14 @@
 {
+<<<<<<< HEAD
   "id": "6e455fb1-742c-474b-b060-0cde0829ae72",
+=======
+  "id": "c7043906-07f3-450d-80c8-add7dfee0cd2",
+>>>>>>> c44cfa4 (Add subscriptions table migration with user reference and status enum)
   "prevId": "3de61ab0-126b-4e15-a59f-97b70dddbaca",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+<<<<<<< HEAD
     "public.feedback": {
       "name": "feedback",
       "schema": "",
@@ -60,6 +65,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+=======
+>>>>>>> c44cfa4 (Add subscriptions table migration with user reference and status enum)
     "public.games": {
       "name": "games",
       "schema": "",
@@ -240,6 +247,7 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
+<<<<<<< HEAD
     }
   },
   "enums": {
@@ -250,6 +258,66 @@
         "bug",
         "feature",
         "other"
+=======
+    },
+    "public.subscriptions": {
+      "name": "subscriptions",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "subscription_id": {
+          "name": "subscription_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_payment_date": {
+          "name": "last_payment_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "subscriptions_user_id_profiles_user_id_fk": {
+          "name": "subscriptions_user_id_profiles_user_id_fk",
+          "tableFrom": "subscriptions",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "public.status": {
+      "name": "status",
+      "schema": "public",
+      "values": [
+        "active",
+        "inactive"
+>>>>>>> c44cfa4 (Add subscriptions table migration with user reference and status enum)
       ]
     }
   },
