@@ -18,13 +18,17 @@ const nextConfig = {
     ];
   },
   async redirects() {
-    return [
-      {
-        source: "/app/:path*",
-        destination: "https://app.cogniba.com/:path*",
-        permanent: true,
-      },
-    ];
+    if (process.env.NODE_ENV === "production") {
+      return [
+        {
+          source: "/app/:path*",
+          destination: "https://app.cogniba.com/:path*",
+          permanent: true,
+        },
+      ];
+    } else {
+      return [];
+    }
   },
 };
 
