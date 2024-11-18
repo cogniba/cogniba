@@ -60,7 +60,7 @@ export default function PricingPage() {
               <span className="text-5xl font-medium">${plan.price}</span>
               <span className="text-foreground/80">/ month</span>
             </p>
-            <Link href="/sign-in">
+            <Link href="/sign-up">
               <Button className="w-full">{plan.buttonText}</Button>
             </Link>
             <hr className="my-8" />
