@@ -3,6 +3,8 @@ cogniba.com
 app.cogniba.com
 Vercel deployment on release
 Stripe
+Row level security on Drizzle ORM
+Triggers and functions on Drizzle ORM
 
 GitHub release
 
