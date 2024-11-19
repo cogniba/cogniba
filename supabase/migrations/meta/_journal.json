@@ -71,6 +71,20 @@
       "when": 1731437994552,
       "tag": "0009_fantastic_groot",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1731953227545,
+      "tag": "0010_broken_smiling_tiger",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1731954318162,
+      "tag": "0011_living_richard_fisk",
+      "breakpoints": true
     }
   ]
 }
