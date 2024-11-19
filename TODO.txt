@@ -1,5 +1,6 @@
 Fix email confirmation workflow
 Fix app.cogniba.com
+Fix slow landing page animations
 
 Vercel analytics
 cogniba.com
