@@ -1,3 +1,8 @@
+const appUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_APP_URL
+    : "http://localhost:3001";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config) {
@@ -9,19 +14,11 @@ const nextConfig = {
 
     return config;
   },
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        destination: "/app/:path*",
-      },
-    ];
-  },
   async redirects() {
     return [
       {
         source: "/app/:path*",
-        destination: "https://app.cogniba.com/:path*",
+        destination: `${appUrl}/:path*`,
         permanent: true,
       },
     ];
