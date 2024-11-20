@@ -38,9 +38,10 @@ export async function updateSession(request: NextRequest) {
       ? process.env.NEXT_PUBLIC_SITE_URL
       : "http://localhost:3000";
   const isAuthenticated = user !== null;
+
   const { pathname, hostname } = request.nextUrl;
-  const isAppSubdomain = hostname?.startsWith("app.cogniba.com");
-  const extendedPathname = isAppSubdomain ? "/app" + pathname : pathname;
+  const isAppSubdomain = hostname === "app.cogniba.com";
+  const extendedPathname = isAppSubdomain ? `/app${pathname}` : pathname;
 
   if (!isAuthenticated) {
     if (
