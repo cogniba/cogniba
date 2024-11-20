@@ -52,16 +52,12 @@ export async function updateSession(request: NextRequest) {
     ? `/app${pathname !== "/" ? pathname : ""}`
     : pathname;
 
-  console.log(isAppSubdomain, pathname, extendedPathname);
-  console.log(isAuthenticated, user);
-
   if (!isAuthenticated) {
     if (
       extendedPathname.startsWith("/app") ||
       extendedPathname.startsWith("/change-password")
     ) {
       const newUrl = new URL("/sign-in", siteUrl);
-      console.log("AAA", newUrl);
       return NextResponse.redirect(newUrl);
     }
   } else if (isAuthenticated) {
@@ -71,11 +67,9 @@ export async function updateSession(request: NextRequest) {
       extendedPathname.startsWith("/sign-up")
     ) {
       const newUrl = new URL("/app", siteUrl);
-      console.log("BBB", newUrl);
       return NextResponse.redirect(newUrl);
     } else if (extendedPathname === "/app") {
       const newUrl = new URL("/app/play", siteUrl);
-      console.log("CCC", newUrl);
       return NextResponse.redirect(newUrl);
     }
   }
