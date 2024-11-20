@@ -34,25 +34,27 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const isAuthenticated = user !== null;
-  const pathname = request.nextUrl.pathname;
+  const { pathname, hostname } = request.nextUrl;
+  const isAppSubdomain = hostname?.startsWith("app.cogniba.com");
+  const extendedPathname = isAppSubdomain ? "/app" + pathname : pathname;
 
   if (!isAuthenticated) {
     if (
-      pathname.startsWith("/app") ||
-      pathname.startsWith("/change-password")
+      extendedPathname.startsWith("/app") ||
+      extendedPathname.startsWith("/change-password")
     ) {
       const newUrl = new URL("/sign-in", request.nextUrl.origin);
       return NextResponse.redirect(newUrl);
     }
   } else if (isAuthenticated) {
     if (
-      pathname === "/" ||
-      pathname.startsWith("/sign-in") ||
-      pathname.startsWith("/sign-up")
+      extendedPathname === "/" ||
+      extendedPathname.startsWith("/sign-in") ||
+      extendedPathname.startsWith("/sign-up")
     ) {
       const newUrl = new URL("/app", request.nextUrl.origin);
       return NextResponse.redirect(newUrl);
-    } else if (pathname === "/app") {
+    } else if (extendedPathname === "/app") {
       const newUrl = new URL("/app/play", request.nextUrl.origin);
       return NextResponse.redirect(newUrl);
     }
