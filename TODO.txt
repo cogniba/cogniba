@@ -1,13 +1,12 @@
-Google oauth
-GitHub starts API rate limits
 Fix errors when signing in
 Fix prefetch in app
-Some redirects might not be working
 Fix slow landing page animations (remove blur?)
 /error
 Fix favicon
 .env.development
 .env.production
+GitHub starts API rate limits
+Accessibility (aria-describedby)
 
 Vercel analytics
 cogniba.com
