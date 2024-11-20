@@ -10,7 +10,9 @@ export default function createClient() {
     {
       cookieOptions: {
         domain:
-          process.env.NODE_ENV === "production" ? ".example.com" : undefined,
+          process.env.NODE_ENV === "production" ? ".cogniba.com" : undefined,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
       },
     },
   );
