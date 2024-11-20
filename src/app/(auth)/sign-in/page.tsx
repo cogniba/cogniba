@@ -61,7 +61,7 @@ export default function SignInPage() {
       });
 
       if (response.ok) {
-        router.push("/app");
+        router.replace(process.env.NEXT_PUBLIC_APP_URL!);
       } else {
         const { error } = await response.json();
         setError(error);
