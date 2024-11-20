@@ -1,5 +1,4 @@
-Fix email confirmation workflow
-Fix app.cogniba.com
+Google oauth
 GitHub starts API rate limits
 Fix errors when signing in
 Fix prefetch in app
