@@ -1,7 +1,4 @@
-const appUrl =
-  process.env.NODE_ENV === "production"
-    ? process.env.NEXT_PUBLIC_APP_URL
-    : "http://localhost:3001";
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,11 +12,29 @@ const nextConfig = {
     return config;
   },
   async redirects() {
+    return isDevelopment
+      ? []
+      : [
+          {
+            source: "/app/:path*",
+            destination: `${process.env.NEXT_PUBLIC_APP_URL}/:path*`,
+            permanent: true,
+          },
+        ];
+  },
+  async rewrites() {
     return [
       {
-        source: "/app/:path*",
-        destination: `${appUrl}/:path*`,
-        permanent: true,
+        source: isDevelopment ? "/app/:path*" : "/:path*",
+        has: isDevelopment
+          ? []
+          : [
+              {
+                type: "host",
+                value: "app.cogniba.com",
+              },
+            ],
+        destination: "/app/:path*",
       },
     ];
   },
