@@ -1,5 +1,6 @@
 Fix email confirmation workflow
 Fix app.cogniba.com
+Some redirects might not be working
 Fix slow landing page animations (remove blur?)
 /error
 Fix favicon
