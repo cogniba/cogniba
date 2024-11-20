@@ -35,7 +35,7 @@ export async function updateSession(request: NextRequest) {
 
   const siteUrl =
     process.env.NODE_ENV === "production"
-      ? process.env.SITE_URL
+      ? process.env.NEXT_PUBLIC_SITE_URL
       : "http://localhost:3000";
   const isAuthenticated = user !== null;
   const { pathname, hostname } = request.nextUrl;
