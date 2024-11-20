@@ -33,6 +33,10 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const siteUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.SITE_URL
+      : "http://localhost:3000";
   const isAuthenticated = user !== null;
   const { pathname, hostname } = request.nextUrl;
   const isAppSubdomain = hostname?.startsWith("app.cogniba.com");
@@ -43,7 +47,7 @@ export async function updateSession(request: NextRequest) {
       extendedPathname.startsWith("/app") ||
       extendedPathname.startsWith("/change-password")
     ) {
-      const newUrl = new URL("/sign-in", request.nextUrl.origin);
+      const newUrl = new URL("/sign-in", siteUrl);
       return NextResponse.redirect(newUrl);
     }
   } else if (isAuthenticated) {
@@ -52,10 +56,10 @@ export async function updateSession(request: NextRequest) {
       extendedPathname.startsWith("/sign-in") ||
       extendedPathname.startsWith("/sign-up")
     ) {
-      const newUrl = new URL("/app", request.nextUrl.origin);
+      const newUrl = new URL("/app", siteUrl);
       return NextResponse.redirect(newUrl);
     } else if (extendedPathname === "/app") {
-      const newUrl = new URL("/app/play", request.nextUrl.origin);
+      const newUrl = new URL("/app/play", siteUrl);
       return NextResponse.redirect(newUrl);
     }
   }
