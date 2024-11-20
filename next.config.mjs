@@ -34,10 +34,6 @@ const nextConfig = {
         ],
         destination: "/app/:path*",
       },
-      {
-        source: "/app/:path*",
-        destination: "/app/:path*",
-      },
     ];
   },
 };
