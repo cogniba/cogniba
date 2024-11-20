@@ -1,6 +1,8 @@
 Fix email confirmation workflow
 Fix app.cogniba.com
 GitHub starts API rate limits
+Fix errors when signing in
+Fix prefetch in app
 Some redirects might not be working
 Fix slow landing page animations (remove blur?)
 /error
