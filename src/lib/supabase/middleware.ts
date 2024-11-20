@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import createUrl from "../createUrl";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -40,10 +41,6 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const siteUrl =
-    process.env.NODE_ENV === "production"
-      ? process.env.NEXT_PUBLIC_SITE_URL
-      : "http://localhost:3000";
   const isAuthenticated = user !== null;
 
   const { pathname, hostname } = request.nextUrl;
@@ -57,7 +54,7 @@ export async function updateSession(request: NextRequest) {
       extendedPathname.startsWith("/app") ||
       extendedPathname.startsWith("/change-password")
     ) {
-      const newUrl = new URL("/sign-in", siteUrl);
+      const newUrl = createUrl("/sign-in");
       return NextResponse.redirect(newUrl);
     }
   } else if (isAuthenticated) {
@@ -66,10 +63,10 @@ export async function updateSession(request: NextRequest) {
       extendedPathname.startsWith("/sign-in") ||
       extendedPathname.startsWith("/sign-up")
     ) {
-      const newUrl = new URL("/app", siteUrl);
+      const newUrl = createUrl("/app");
       return NextResponse.redirect(newUrl);
     } else if (extendedPathname === "/app") {
-      const newUrl = new URL("/app/play", siteUrl);
+      const newUrl = createUrl("/app/play");
       return NextResponse.redirect(newUrl);
     }
   }
