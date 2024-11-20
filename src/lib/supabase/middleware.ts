@@ -41,9 +41,13 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname, hostname } = request.nextUrl;
   const isAppSubdomain = hostname === "app.cogniba.com";
-  const extendedPathname = isAppSubdomain ? `/app${pathname}` : pathname;
+  const extendedPathname = isAppSubdomain
+    ? `/app${pathname !== "/" ? pathname : ""}`
+    : pathname;
 
   console.log(isAppSubdomain, pathname, extendedPathname);
+  console.log(isAuthenticated, user);
+
   if (!isAuthenticated) {
     if (
       extendedPathname.startsWith("/app") ||
