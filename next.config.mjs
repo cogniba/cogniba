@@ -25,15 +25,17 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: isDevelopment ? "/app/:path*" : "/:path*",
-        has: isDevelopment
-          ? []
-          : [
-              {
-                type: "host",
-                value: "app.cogniba.com",
-              },
-            ],
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "app.cogniba.com",
+          },
+        ],
+        destination: "/app/:path*",
+      },
+      {
+        source: "/app/:path*",
         destination: "/app/:path*",
       },
     ];
