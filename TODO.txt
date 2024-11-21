@@ -1,4 +1,3 @@
-Highlight selected route in app sidebar
 Loading states
 Fix slow landing page animations (remove blur?)
 /error
