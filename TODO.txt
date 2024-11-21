@@ -1,9 +1,5 @@
-Loading states
 Fix slow landing page animations (remove blur?)
 /error
-Fix favicon
-.env.development
-.env.production
 GitHub starts API rate limits
 Accessibility (aria-describedby)
 
