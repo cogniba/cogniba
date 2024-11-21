@@ -12,7 +12,7 @@ export default function OptionalLink({
   return (
     <>
       {href ? (
-        <Link className="w-full" href={href}>
+        <Link className="w-full" href={href} prefetch={true}>
           {children}
         </Link>
       ) : (
