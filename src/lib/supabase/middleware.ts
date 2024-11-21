@@ -45,27 +45,27 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname, hostname } = request.nextUrl;
   const isAppSubdomain = hostname === "app.cogniba.com";
-  const extendedPathname = isAppSubdomain
+  const fullPathname = isAppSubdomain
     ? `/app${pathname !== "/" ? pathname : ""}`
     : pathname;
 
   if (!isAuthenticated) {
     if (
-      extendedPathname.startsWith("/app") ||
-      extendedPathname.startsWith("/change-password")
+      fullPathname.startsWith("/app") ||
+      fullPathname.startsWith("/change-password")
     ) {
       const newUrl = createUrl("/sign-in");
       return NextResponse.redirect(newUrl);
     }
   } else if (isAuthenticated) {
     if (
-      extendedPathname === "/" ||
-      extendedPathname.startsWith("/sign-in") ||
-      extendedPathname.startsWith("/sign-up")
+      fullPathname === "/" ||
+      fullPathname.startsWith("/sign-in") ||
+      fullPathname.startsWith("/sign-up")
     ) {
       const newUrl = createUrl("/app");
       return NextResponse.redirect(newUrl);
-    } else if (extendedPathname === "/app") {
+    } else if (fullPathname === "/app") {
       const newUrl = createUrl("/app/play");
       return NextResponse.redirect(newUrl);
     }
