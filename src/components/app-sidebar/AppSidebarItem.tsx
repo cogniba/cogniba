@@ -18,6 +18,8 @@ export default function AppSidebarItem({
   href,
 }: AppSidebarItemProps) {
   const pathname = usePathname();
+  const fullPathname =
+    process.env.NODE_ENV === "production" ? `/app${pathname}` : pathname;
   const { isExpanded, isUserDropdownOpen } = useSidebar();
 
   return (
@@ -26,7 +28,7 @@ export default function AppSidebarItem({
         <button
           className={cn(
             "group/item relative flex h-12 w-full items-center justify-center rounded-md text-muted-foreground transition duration-200 hover:bg-secondary hover:text-secondary-foreground hover:shadow-sm group-data-[state=expanded]:w-full group-data-[state=expanded]:justify-start",
-            pathname === href &&
+            fullPathname === href &&
               "bg-secondary text-secondary-foreground shadow-sm",
           )}
           onClick={onClick}
