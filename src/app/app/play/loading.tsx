@@ -7,7 +7,7 @@ export default function GameLoading() {
             className="relative rounded-[0.75cqmin] border bg-secondary/30 px-[5cqmin] py-[1cqmin] text-[9cqmin] font-semibold shadow-sm xs:text-[8cqmin] sm:text-[7cqmin] md:text-[6cqmin]"
             id="game-level-display"
           >
-            <h1 className="text-transparent">Level 1</h1>
+            <h1 className="text-transparent">Level 5</h1>
           </div>
         </div>
         <div className="h-[100cqmin] w-[100cqmin]">
