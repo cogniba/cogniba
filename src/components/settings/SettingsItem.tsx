@@ -80,7 +80,7 @@ export default function SettingsItem({
             disabled={disabled}
           >
             <SelectTrigger>
-              <SelectValue></SelectValue>
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
               {options.map((option, index) => (
