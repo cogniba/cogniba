@@ -15,7 +15,7 @@ export default function AnalyticsLoading() {
             </div>
           </CardHeader>
           <CardContent className="flex h-full flex-col p-5 sm:p-8">
-            <div className="flex h-full w-full items-center justify-center pb-20">
+            <div className="flex h-10 w-full items-center justify-center pb-20">
               <Loader2Icon className="absolute z-50 size-10 animate-spin" />
             </div>
           </CardContent>
