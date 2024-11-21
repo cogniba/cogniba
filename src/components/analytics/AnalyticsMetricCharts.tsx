@@ -1,7 +1,7 @@
 import ChartNoData from "@/components/ChartNoData";
 import AnalyticsChart from "./AnalyticsChart";
 
-import { chartMetrics } from "./Analytics";
+import { ChartMetrics } from "./Analytics";
 
 import type { ChartConfig } from "@/components/ui/chart";
 import { GamesData } from "@/app/api/analytics/get-data/route";
@@ -79,7 +79,7 @@ const charts = {
 };
 
 interface AnalyticsMetricsProps {
-  chartMetric: chartMetrics;
+  chartMetric: ChartMetrics;
   data: GamesData | null;
 }
 
