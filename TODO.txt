@@ -1,14 +1,8 @@
-GitHub starts API rate limits
-Accessibility (aria-describedby)
-
-Vercel analytics
-cogniba.com
-app.cogniba.com
-Vercel deployment on release
 Stripe
 
 Lighthouse
 
+Accessibility (aria-describedby)
 Playwright tests
 GitHub actions
 Upgrade to Next.js 15
