@@ -1,4 +1,3 @@
-Fix slow landing page animations (remove blur?)
 /error
 GitHub starts API rate limits
 Accessibility (aria-describedby)
