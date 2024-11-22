@@ -232,7 +232,7 @@ export default function GameTutorial({
         });
 
         if (!response.ok) {
-          toast({ title: "Unexpected error ocurred", variant: "destructive" });
+          toast({ title: "Unexpected error occurred", variant: "destructive" });
         } else {
           router.refresh();
         }
