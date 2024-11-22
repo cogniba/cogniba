@@ -11,7 +11,7 @@ interface FadeInOnScrollProps {
 export default function FadeInOnScroll({
   children,
   delay = 0,
-  duration = 0.8,
+  duration = 0.5,
   from = "top",
   className,
 }: FadeInOnScrollProps) {
