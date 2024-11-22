@@ -3,19 +3,26 @@ import { FaGithub } from "react-icons/fa6";
 
 export default async function GitHubButton() {
   const octokit = new Octokit();
+  let hasFetched;
+  let stars;
 
-  const res = await octokit.request("GET /repos/{org}/{repo}", {
-    org: "Cogniba",
-    repo: "Cogniba",
-    type: "public",
-  });
+  try {
+    const res = await octokit.request("GET /repos/{org}/{repo}", {
+      org: "cogniba",
+      repo: "cogniba",
+      type: "public",
+    });
 
-  const stars = res.data?.stargazers_count;
+    stars = res.data?.stargazers_count;
+    hasFetched = true;
+  } catch (err) {
+    hasFetched = true;
+  }
 
   return (
     <div className="flex items-center justify-center gap-2">
       <FaGithub className="text-lg" />
-      <span>{stars}</span>
+      {stars && <span>{stars}</span>}
     </div>
   );
 }
