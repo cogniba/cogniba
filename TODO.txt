@@ -9,7 +9,7 @@ app.cogniba.com
 Vercel deployment on release
 Stripe
 
-GitHub release
+Lighthouse
 
 Playwright tests
 GitHub actions
