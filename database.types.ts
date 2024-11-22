@@ -45,11 +45,11 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "games_user_id_profiles_id_fk"
+            foreignKeyName: "games_user_id_profiles_user_id_fk"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
-            referencedColumns: ["id"]
+            referencedColumns: ["user_id"]
           },
         ]
       }
@@ -59,47 +59,76 @@ export type Database = {
           email: string
           full_name: string
           has_finished_tutorial: boolean
-          id: string
+          user_id: string
         }
         Insert: {
           created_at?: string
           email: string
           full_name: string
           has_finished_tutorial?: boolean
-          id: string
+          user_id: string
         }
         Update: {
           created_at?: string
           email?: string
           full_name?: string
           has_finished_tutorial?: boolean
-          id?: string
+          user_id?: string
         }
         Relationships: []
       }
       settings: {
         Row: {
-          id: string
           show_feedback: boolean
           user_id: string
         }
         Insert: {
-          id: string
-          show_feedback: boolean
+          show_feedback?: boolean
           user_id: string
         }
         Update: {
-          id?: string
           show_feedback?: boolean
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "settings_user_id_profiles_id_fk"
+            foreignKeyName: "settings_user_id_profiles_user_id_fk"
             columns: ["user_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "profiles"
-            referencedColumns: ["id"]
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          id: string | null
+          last_payment_date: string | null
+          status: Database["public"]["Enums"]["status"]
+          subscription_id: string
+          user_id: string
+        }
+        Insert: {
+          id?: string | null
+          last_payment_date?: string | null
+          status?: Database["public"]["Enums"]["status"]
+          subscription_id: string
+          user_id: string
+        }
+        Update: {
+          id?: string | null
+          last_payment_date?: string | null
+          status?: Database["public"]["Enums"]["status"]
+          subscription_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_user_id_profiles_user_id_fk"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
           },
         ]
       }
@@ -111,7 +140,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      status: "active" | "inactive"
     }
     CompositeTypes: {
       [_ in never]: never

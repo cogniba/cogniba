@@ -11,13 +11,12 @@ import { subDays } from "date-fns";
 import type { DateRange } from "react-day-picker";
 import { GamesData } from "@/app/api/analytics/get-data/route";
 
-export type chartMetrics =
+export type ChartMetrics =
   | "level"
   | "accuracy"
   | "stats"
   | "gamesPlayed"
-  | "timePlayed"
-  | null;
+  | "timePlayed";
 
 interface AnalyticsProps {
   data: GamesData;
@@ -28,7 +27,7 @@ export default function Analytics({ data }: AnalyticsProps) {
     from: subDays(new Date(), 7),
     to: new Date(),
   });
-  const [chartMetric, setChartMetric] = useState<chartMetrics>(null);
+  const [chartMetric, setChartMetric] = useState<ChartMetrics>("level");
 
   const cleanData =
     date && date.from && date.to && data && data.length > 0

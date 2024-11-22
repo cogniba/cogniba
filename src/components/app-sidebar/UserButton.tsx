@@ -28,7 +28,7 @@ export default function UserButton({ full_name, email }: UserButtonProps) {
     startTransition(async () => {
       const response = await fetch("/api/auth/sign-out", { method: "POST" });
       if (response.ok) {
-        router.replace("/sign-in");
+        router.replace(process.env.NEXT_PUBLIC_SITE_URL!);
       }
     });
   };

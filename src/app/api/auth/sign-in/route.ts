@@ -31,6 +31,13 @@ export async function POST(request: Request) {
           { status: 401 },
         );
       } else if (error.code === "email_not_confirmed") {
+        supabase.auth.resend({
+          type: "signup",
+          email,
+          options: {
+            emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/app/play`,
+          },
+        });
         return NextResponse.json(
           { error: "Email not confirmed" },
           { status: 403 },

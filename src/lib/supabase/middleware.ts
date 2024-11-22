@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import createUrl from "../createUrl";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -10,6 +11,13 @@ export async function updateSession(request: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
+      cookieOptions: {
+        domain:
+          process.env.NODE_ENV === "production" ? ".cogniba.com" : undefined,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+      },
+
       cookies: {
         getAll() {
           return request.cookies.getAll();
@@ -34,26 +42,31 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const isAuthenticated = user !== null;
-  const pathname = request.nextUrl.pathname;
+
+  const { pathname, hostname } = request.nextUrl;
+  const isAppSubdomain = hostname === "app.cogniba.com";
+  const fullPathname = isAppSubdomain
+    ? `/app${pathname !== "/" ? pathname : ""}`
+    : pathname;
 
   if (!isAuthenticated) {
     if (
-      pathname.startsWith("/app") ||
-      pathname.startsWith("/change-password")
+      fullPathname.startsWith("/app") ||
+      fullPathname.startsWith("/change-password")
     ) {
-      const newUrl = new URL("/sign-in", request.nextUrl.origin);
+      const newUrl = createUrl("/sign-in");
       return NextResponse.redirect(newUrl);
     }
   } else if (isAuthenticated) {
     if (
-      pathname === "/" ||
-      pathname.startsWith("/sign-in") ||
-      pathname.startsWith("/sign-up")
+      fullPathname === "/" ||
+      fullPathname.startsWith("/sign-in") ||
+      fullPathname.startsWith("/sign-up")
     ) {
-      const newUrl = new URL("/app", request.nextUrl.origin);
+      const newUrl = createUrl("/app");
       return NextResponse.redirect(newUrl);
-    } else if (pathname === "/app") {
-      const newUrl = new URL("/app/play", request.nextUrl.origin);
+    } else if (fullPathname === "/app") {
+      const newUrl = createUrl("/app/play");
       return NextResponse.redirect(newUrl);
     }
   }

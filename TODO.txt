@@ -1,3 +1,8 @@
+Fix slow landing page animations (remove blur?)
+/error
+GitHub starts API rate limits
+Accessibility (aria-describedby)
+
 Vercel analytics
 cogniba.com
 app.cogniba.com

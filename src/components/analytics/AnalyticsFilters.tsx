@@ -5,7 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { chartMetrics } from "./Analytics";
+import { ChartMetrics } from "./Analytics";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -23,8 +23,8 @@ import type { Dispatch, SetStateAction } from "react";
 interface AnalyticsFiltersProps {
   date: DateRange | undefined;
   setDate: Dispatch<SetStateAction<DateRange | undefined>>;
-  chartMetric: chartMetrics;
-  setChartMetric: Dispatch<SetStateAction<chartMetrics>>;
+  chartMetric: ChartMetrics;
+  setChartMetric: Dispatch<SetStateAction<ChartMetrics>>;
 }
 
 export default function AnalyticsFilters({
@@ -38,7 +38,7 @@ export default function AnalyticsFilters({
       <div className="flex w-full flex-col items-center justify-start gap-3 sm:w-fit lg:flex-row">
         <Select
           value={chartMetric ?? undefined}
-          onValueChange={(value) => setChartMetric(value as chartMetrics)}
+          onValueChange={(value) => setChartMetric(value as ChartMetrics)}
         >
           <SelectTrigger className="w-full sm:w-52 md:w-64">
             <SelectValue placeholder="Select a metric" />
