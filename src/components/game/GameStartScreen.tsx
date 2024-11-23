@@ -78,37 +78,37 @@ export default function StartScreen({
       ></div>
       <Dialog defaultOpen open={visible} modal={false}>
         <DialogContent
-          className="z-40 flex h-full w-full max-w-full justify-center p-0 data-[state=closed]:duration-500 data-[state=open]:duration-500 sm:h-fit sm:max-w-lg sm:p-6"
+          className="z-40 duration-500 data-[state=closed]:duration-500 data-[state=open]:duration-500 sm:max-w-lg"
           closeButton={false}
           backdrop={true}
           hideOverlay
         >
-          <div className="flex w-full max-w-lg flex-col justify-center px-6 xs:px-7 sm:px-0">
+          <div className="flex w-full max-w-lg flex-col justify-center">
             {!hasStatistics ? (
               <>
-                <DialogTitle className="mb-8 text-3xl">
+                <DialogTitle className="mb-5 text-2xl xs:mb-8 xs:text-3xl">
                   Welcome back!
                 </DialogTitle>
-                <blockquote className="font-serif text-lg font-normal italic text-muted-foreground">
-                  <div className="mb-1">&ldquo;{quote}&rdquo;</div>
-                  <div className="text-right text-xl text-muted-foreground">
+                <blockquote className="font-serif text-base font-normal italic text-muted-foreground xs:text-lg">
+                  <div className="xs:mb-1">&ldquo;{quote}&rdquo;</div>
+                  <div className="text-right text-lg text-muted-foreground xs:text-xl">
                     &mdash; {author}
                   </div>
                 </blockquote>
               </>
             ) : (
               <>
-                <DialogTitle className="mb-6 text-3xl">
+                <DialogTitle className="mb-5 text-2xl xs:mb-6 xs:text-3xl">
                   Well played!
                 </DialogTitle>
                 <div className="flex flex-col items-center justify-center gap-2 whitespace-nowrap rounded-lg border p-2 xs:flex-row">
-                  <div className="flex w-full flex-col gap-1 text-lg xs:w-fit">
+                  <div className="flex w-full flex-col gap-1 text-base xs:w-fit xs:text-lg">
                     <div
                       className={cn(
                         boxVariants({ size: "small", color: "green" }),
                       )}
                     >
-                      <CheckIcon className="h-6 w-6" />
+                      <CheckIcon className="size-5 xs:size-6" />
                       <div>
                         <span className="font-semibold">{correctHits}</span>{" "}
                         correct
@@ -119,7 +119,7 @@ export default function StartScreen({
                         boxVariants({ size: "small", color: "red" }),
                       )}
                     >
-                      <XIcon className="h-6 w-6" />
+                      <XIcon className="size-5 xs:size-6" />
                       <div>
                         <span className="font-semibold">{incorrectHits}</span>{" "}
                         incorrect
@@ -130,7 +130,7 @@ export default function StartScreen({
                         boxVariants({ size: "small", color: "yellow" }),
                       )}
                     >
-                      <TriangleAlert className="h-6 w-6" />
+                      <TriangleAlert className="size-5 xs:size-6" />
                       <div>
                         <span className="font-semibold">{missedHits}</span>{" "}
                         missed
@@ -141,7 +141,7 @@ export default function StartScreen({
                   <div className="hidden h-[calc(100%+1rem)] border-l xs:block"></div>
                   <div className="block w-[calc(100%+1rem)] border-t xs:hidden"></div>
 
-                  <div className="flex h-full w-full flex-col gap-1 text-lg">
+                  <div className="flex h-full w-full flex-col gap-1 text-base xs:text-lg">
                     <div
                       className={cn(
                         boxVariants({
@@ -155,7 +155,7 @@ export default function StartScreen({
                         }),
                       )}
                     >
-                      <CrosshairIcon className="h-6 w-6" />
+                      <CrosshairIcon className="size-5 xs:size-6" />
                       <div>
                         <span className="font-semibold">{accuracy}%</span>{" "}
                         accuracy
@@ -170,7 +170,7 @@ export default function StartScreen({
                           }),
                         )}
                       >
-                        <MoveUpRightIcon className="h-6 w-6" />
+                        <MoveUpRightIcon className="size-5 xs:size-6" />
                         <div className="font-medium">Level Increased</div>
                       </div>
                     )}
@@ -180,7 +180,7 @@ export default function StartScreen({
                           boxVariants({ size: "big", color: "blue" }),
                         )}
                       >
-                        <MoveRightIcon className="h-6 w-6" />
+                        <MoveRightIcon className="size-5 xs:size-6" />
                         <div className="font-medium">Level Maintained</div>
                       </div>
                     )}
@@ -190,7 +190,7 @@ export default function StartScreen({
                           boxVariants({ size: "big", color: "red" }),
                         )}
                       >
-                        <MoveDownRightIcon className="h-6 w-6" />
+                        <MoveDownRightIcon className="size-5 xs:size-6" />
                         <div className="font-medium">Level Decreased</div>
                       </div>
                     )}
@@ -206,7 +206,7 @@ export default function StartScreen({
                       >
                         Level {previousLevel}
                       </div>
-                      <MoveRightIcon className="h-6 w-6 flex-shrink-0" />
+                      <MoveRightIcon className="size-5 flex-shrink-0 xs:size-6" />
                       <div
                         className={cn(
                           boxVariants({
@@ -224,7 +224,7 @@ export default function StartScreen({
               </>
             )}
             <Button
-              className="mt-14 py-5 text-4xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm"
+              className="mt-10 py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5"
               size="custom"
               type="submit"
               onClick={onStart}
