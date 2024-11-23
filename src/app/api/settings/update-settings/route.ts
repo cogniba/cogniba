@@ -2,6 +2,7 @@ import { db } from "@/database/db";
 import { settingsTable } from "@/database/schemas/settingsTable";
 import { createClient } from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
       .set({ showFeedback: body.showFeedback })
       .where(eq(settingsTable.userId, userId));
 
+    revalidatePath("/settings");
     return NextResponse.json(
       { message: "Settings updated successfully" },
       { status: 200 },
