@@ -1,6 +1,7 @@
 import { db } from "@/database/db";
 import { gamesTable } from "@/database/schemas/gamesTable";
 import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -68,6 +69,9 @@ export async function POST(request: Request) {
       timePlayed,
       userId,
     });
+
+    revalidatePath("/play");
+    revalidatePath("/analytics");
 
     return NextResponse.json(
       { message: "Game inserted successfully" },
