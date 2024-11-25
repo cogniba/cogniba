@@ -1,3 +1,5 @@
+Fix bug where level won't change after playing a game and switching to the analytics tab - Data revalidation
+
 Stripe
 
 Lighthouse
