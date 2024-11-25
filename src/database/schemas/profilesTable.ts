@@ -21,7 +21,7 @@ export const profilesTable = pgTable("profiles", {
     .notNull(),
 
   email: text("email").unique().notNull(),
-  full_name: text("full_name").notNull(),
+  fullName: text("full_name").notNull(),
 
   hasFinishedTutorial: boolean("has_finished_tutorial")
     .default(false)
