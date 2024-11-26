@@ -71,13 +71,13 @@ export async function POST(request: Request) {
     });
 
     console.log("AAA");
-    // if (process.env.NODE_ENV === "production") {
-    // revalidatePath("/play");
-    // revalidatePath("/analytics");
-    // } else {
-    revalidatePath("/app/play");
-    revalidatePath("/app/analytics");
-    // }
+    if (process.env.NODE_ENV === "production") {
+      revalidatePath("/play");
+      revalidatePath("/analytics");
+    } else {
+      revalidatePath("/app/play");
+      revalidatePath("/app/analytics");
+    }
 
     return NextResponse.json(
       { message: "Game inserted successfully" },
