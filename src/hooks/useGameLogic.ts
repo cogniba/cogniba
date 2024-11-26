@@ -23,7 +23,6 @@ import {
 import enterFullScreen from "@/lib/enterFullScreen";
 import exitFullScreen from "@/lib/exitFullScreen";
 import { useToast } from "./use-toast";
-import { useRouter } from "next/navigation";
 
 interface useGameLogicProps {
   startingLevel: number;
@@ -55,7 +54,6 @@ export default function useGameLogic({
 
   const { setIsVisible } = useSidebar();
   const { toast } = useToast();
-  const router = useRouter();
 
   const gameSequence = useRef<number[]>([]);
   const correctHitSequence = useRef<boolean[]>([]);
@@ -127,12 +125,10 @@ export default function useGameLogic({
       }),
     });
 
-    router.refresh();
-
     if (!response.ok) {
       toast({ title: "Unexpected error occurred", variant: "destructive" });
     }
-  }, [level, toast, router]);
+  }, [level, toast]);
 
   const playGame = useCallback(async () => {
     let step = 0;
