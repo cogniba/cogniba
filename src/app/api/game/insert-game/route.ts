@@ -70,7 +70,6 @@ export async function POST(request: Request) {
       userId,
     });
 
-    console.log("AAA");
     if (process.env.NODE_ENV === "production") {
       revalidatePath("/play");
       revalidatePath("/analytics");
