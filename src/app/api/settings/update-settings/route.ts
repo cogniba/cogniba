@@ -34,9 +34,9 @@ export async function POST(request: Request) {
       .where(eq(settingsTable.userId, userId));
 
     if (process.env.NODE_ENV === "production") {
-      revalidatePath("/settings", "page");
+      revalidatePath("/settings");
     } else {
-      revalidatePath("app/settings", "page");
+      revalidatePath("/app/settings");
     }
     return NextResponse.json(
       { message: "Settings updated successfully" },
