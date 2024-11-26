@@ -11,6 +11,8 @@ import SimpleMessageScreen from "@/components/SimpleMessageScreen";
 export const dynamic = "force-dynamic";
 
 export default async function GamePage() {
+  console.log("BBB");
+
   const getLevelPromise = getLevelRequest();
   const getMaxLevelPromise = getMaxLevelRequest();
   const getSettingsPromise = getSettingsRequest();

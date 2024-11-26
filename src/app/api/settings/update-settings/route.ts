@@ -33,7 +33,11 @@ export async function POST(request: Request) {
       .set({ showFeedback: body.showFeedback })
       .where(eq(settingsTable.userId, userId));
 
-    revalidatePath("/settings", "page");
+    if (process.env.NODE_ENV === "production") {
+      revalidatePath("/settings", "page");
+    } else {
+      revalidatePath("app/settings", "page");
+    }
     return NextResponse.json(
       { message: "Settings updated successfully" },
       { status: 200 },
