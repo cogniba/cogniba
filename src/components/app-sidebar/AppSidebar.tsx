@@ -17,5 +17,5 @@ export default async function AppSidebar() {
 
   const { user }: { user: UserType } = await response.json();
 
-  return <AppSidebarContent full_name={user.full_name} email={user.email} />;
+  return <AppSidebarContent fullName={user.fullName} email={user.email} />;
 }

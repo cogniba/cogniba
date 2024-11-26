@@ -13,11 +13,11 @@ import { useRouter } from "next/navigation";
 import LoaderWrapper from "../LoaderWrapper";
 
 interface UserButtonProps {
-  full_name: string;
+  fullName: string;
   email: string;
 }
 
-export default function UserButton({ full_name, email }: UserButtonProps) {
+export default function UserButton({ fullName, email }: UserButtonProps) {
   const { isExpanded, isUserDropdownOpen, setIsUserDropdownOpen } =
     useSidebar();
   const [isPending, startTransition] = useTransition();
@@ -55,7 +55,7 @@ export default function UserButton({ full_name, email }: UserButtonProps) {
               className="absolute left-9 w-40 space-y-0.5 text-left text-base font-medium opacity-0 transition-[opacity,left] group-data-[state=expanded]:left-11 group-data-[state=expanded]:opacity-100"
               aria-hidden={isExpanded || isUserDropdownOpen || undefined}
             >
-              <div className="truncate font-medium">{full_name}</div>
+              <div className="truncate font-medium">{fullName}</div>
               <div className="truncate text-xs font-normal text-muted-foreground transition duration-200">
                 {email}
               </div>

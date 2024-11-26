@@ -15,12 +15,12 @@ import { cn } from "@/lib/cn";
 import { useEffect, useState } from "react";
 
 interface AppSidebarContentProps {
-  full_name: string;
+  fullName: string;
   email: string;
 }
 
 export default function AppSidebarContent({
-  full_name,
+  fullName,
   email,
 }: AppSidebarContentProps) {
   const [isHoverable, setIsHoverable] = useState(false);
@@ -86,7 +86,7 @@ export default function AppSidebarContent({
             Icon={SettingsIcon}
             onClick={() => !isHoverable && setIsExpanded(false)}
           />
-          <UserButton full_name={full_name} email={email} />
+          <UserButton fullName={fullName} email={email} />
         </div>
       </nav>
     </div>
