@@ -70,8 +70,8 @@ export async function POST(request: Request) {
       userId,
     });
 
-    revalidatePath("/play");
-    revalidatePath("/analytics");
+    revalidatePath("/play", "page");
+    revalidatePath("/analytics", "page");
 
     return NextResponse.json(
       { message: "Game inserted successfully" },
