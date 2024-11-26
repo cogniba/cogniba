@@ -72,11 +72,11 @@ export async function POST(request: Request) {
 
     console.log("AAA");
     // if (process.env.NODE_ENV === "production") {
-    revalidatePath("/play", "page");
-    revalidatePath("/analytics", "page");
+    revalidatePath("/play");
+    revalidatePath("/analytics");
     // } else {
-    revalidatePath("/app/play", "page");
-    revalidatePath("/app/analytics", "page");
+    revalidatePath("/app/play");
+    revalidatePath("/app/analytics");
     // }
 
     return NextResponse.json(
