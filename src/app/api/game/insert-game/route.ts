@@ -72,8 +72,8 @@ export async function POST(request: Request) {
 
     console.log("AAA");
     // if (process.env.NODE_ENV === "production") {
-    revalidatePath("/play");
-    revalidatePath("/analytics");
+    // revalidatePath("/play");
+    // revalidatePath("/analytics");
     // } else {
     revalidatePath("/app/play");
     revalidatePath("/app/analytics");
