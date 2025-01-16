@@ -70,13 +70,8 @@ export async function POST(request: Request) {
       userId,
     });
 
-    if (process.env.NODE_ENV === "production") {
-      revalidatePath("/play");
-      revalidatePath("/analytics");
-    } else {
-      revalidatePath("/app/play");
-      revalidatePath("/app/analytics");
-    }
+    revalidatePath("/app/play");
+    revalidatePath("/app/analytics");
 
     return NextResponse.json(
       { message: "Game inserted successfully" },
