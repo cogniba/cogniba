@@ -1,5 +1,3 @@
-const isDevelopment = process.env.NODE_ENV !== "production";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config) {
@@ -10,31 +8,6 @@ const nextConfig = {
     });
 
     return config;
-  },
-  async redirects() {
-    return isDevelopment
-      ? []
-      : [
-          {
-            source: "/app/:path*",
-            destination: `${process.env.NEXT_PUBLIC_APP_URL}/:path*`,
-            permanent: true,
-          },
-        ];
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "app.cogniba.com",
-          },
-        ],
-        destination: "/app/:path*",
-      },
-    ];
   },
 };
 
