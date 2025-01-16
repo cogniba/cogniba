@@ -6,6 +6,7 @@ import UserButton from "./UserButton";
 import {
   AreaChartIcon,
   MenuIcon,
+  MessageSquarePlus,
   PlayIcon,
   SettingsIcon,
   XIcon,
@@ -80,6 +81,12 @@ export default function AppSidebarContent({
           />
         </div>
         <div className="flex w-full flex-col items-center justify-center gap-y-1 p-2">
+          <AppSidebarItem
+            href="/app/feedback"
+            text="Feedback"
+            Icon={MessageSquarePlus}
+            onClick={() => !isHoverable && setIsExpanded(false)}
+          />
           <AppSidebarItem
             href="/app/settings"
             text="Settings"
