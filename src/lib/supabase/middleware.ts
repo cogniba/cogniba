@@ -1,6 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import createUrl from "../createUrl";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -43,30 +42,26 @@ export async function updateSession(request: NextRequest) {
 
   const isAuthenticated = user !== null;
 
-  const { pathname, hostname } = request.nextUrl;
-  const isAppSubdomain = hostname === "app.cogniba.com";
-  const fullPathname = isAppSubdomain
-    ? `/app${pathname !== "/" ? pathname : ""}`
-    : pathname;
+  const { pathname } = request.nextUrl;
 
   if (!isAuthenticated) {
     if (
-      fullPathname.startsWith("/app") ||
-      fullPathname.startsWith("/change-password")
+      pathname.startsWith("/app") ||
+      pathname.startsWith("/change-password")
     ) {
-      const newUrl = createUrl("/sign-in");
+      const newUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/sign-in`;
       return NextResponse.redirect(newUrl);
     }
   } else if (isAuthenticated) {
     if (
-      fullPathname === "/" ||
-      fullPathname.startsWith("/sign-in") ||
-      fullPathname.startsWith("/sign-up")
+      pathname === "/" ||
+      pathname.startsWith("/sign-in") ||
+      pathname.startsWith("/sign-up")
     ) {
-      const newUrl = createUrl("/app");
+      const newUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/app`;
       return NextResponse.redirect(newUrl);
-    } else if (fullPathname === "/app") {
-      const newUrl = createUrl("/app/play");
+    } else if (pathname === "/app") {
+      const newUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/app/play`;
       return NextResponse.redirect(newUrl);
     }
   }
