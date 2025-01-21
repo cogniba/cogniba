@@ -58,6 +58,7 @@ export async function updateSession(request: NextRequest) {
       return NextResponse.redirect(newUrl);
     }
   } else if (isAuthenticated) {
+    // TODO: Handle more paths and refactor logic
     if (
       fullPathname === "/" ||
       fullPathname.startsWith("/sign-in") ||
