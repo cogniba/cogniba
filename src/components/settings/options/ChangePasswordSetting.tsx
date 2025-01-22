@@ -2,7 +2,7 @@
 
 import SettingsItem from "@/components/settings/SettingsItem";
 
-export default function ChangePasswordSettings() {
+export default function ChangePasswordSetting() {
   return (
     <SettingsItem
       title="Change password"
