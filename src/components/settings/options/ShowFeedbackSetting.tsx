@@ -5,13 +5,13 @@ import { useToast } from "@/hooks/use-toast";
 
 import { useState } from "react";
 
-interface ShowFeedbackSettingsProps {
+interface ShowFeedbackSettingProps {
   startingShowFeedback: boolean;
 }
 
-export default function ShowFeedbackSettings({
+export default function ShowFeedbackSetting({
   startingShowFeedback,
-}: ShowFeedbackSettingsProps) {
+}: ShowFeedbackSettingProps) {
   const [showFeedback, setShowFeedback] =
     useState<boolean>(startingShowFeedback);
 
