@@ -1,14 +1,11 @@
 import Link from "next/link";
 
-interface OptionalLinkWrapperProps {
+interface OptionalLinkProps {
   children: React.ReactNode;
   href?: string;
 }
 
-export default function OptionalLink({
-  children,
-  href,
-}: OptionalLinkWrapperProps) {
+export default function OptionalLink({ children, href }: OptionalLinkProps) {
   return (
     <>
       {href ? (
