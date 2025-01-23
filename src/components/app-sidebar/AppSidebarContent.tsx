@@ -59,7 +59,7 @@ export default function AppSidebarContent({
       </button>
       <nav
         className={cn(
-          "hide-scrollbar group fixed z-40 flex h-full w-16 -translate-x-full flex-col items-center justify-between overflow-y-auto border-r bg-background py-2 pt-12 shadow-lg transition-all duration-200 group-data-[state=expanded]:w-full group-data-[state=expanded]:translate-x-0 group-data-[state=expanded]:shadow-xl xs:group-data-[state=expanded]:w-60 lg:can-hover:translate-x-0 lg:can-hover:pt-2",
+          "hide-scrollbar group fixed z-40 flex h-full w-16 -translate-x-full flex-col items-center justify-between overflow-y-auto border-r bg-background pb-2 pt-12 shadow-lg transition-all duration-200 group-data-[state=expanded]:w-full group-data-[state=expanded]:translate-x-0 group-data-[state=expanded]:shadow-xl xs:group-data-[state=expanded]:w-60 lg:can-hover:translate-x-0 lg:can-hover:pt-2",
           !isVisible &&
             "-translate-x-full [transition:transform_300ms] group-data-[state=expanded]:-translate-x-full lg:can-hover:-translate-x-full",
         )}
@@ -78,6 +78,7 @@ export default function AppSidebarContent({
             text="Analytics"
             Icon={AreaChartIcon}
             onClick={() => !isHoverable && setIsExpanded(false)}
+            hide-sc
           />
         </div>
         <div className="flex w-full flex-col items-center justify-center gap-y-1 p-2">
