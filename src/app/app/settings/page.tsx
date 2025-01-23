@@ -1,7 +1,7 @@
 import AppearanceSetting from "@/components/settings/options/AppearanceSetting";
-import ShowFeedbackSettings from "@/components/settings/options/ShowFeedbackSettings";
+import ShowFeedbackSettings from "@/components/settings/options/ShowFeedbackSetting";
 import SettingsCard from "@/components/settings/SettingsCard";
-import ChangePasswordSettings from "@/components/settings/options/ChangePasswordSettings";
+import ChangePasswordSettings from "@/components/settings/options/ChangePasswordSetting";
 import { SettingsType } from "@/database/schemas/settingsTable";
 import getSettingsRequest from "@/lib/server/settings/getSettingsRequest";
 import SimpleMessageScreen from "@/components/SimpleMessageScreen";
