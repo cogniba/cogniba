@@ -12,7 +12,7 @@ interface AppSidebarItemProps {
 }
 
 export default function AppSidebarItem({
-  text = "",
+  text,
   Icon,
   onClick,
   href,
