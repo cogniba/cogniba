@@ -1,4 +1,4 @@
-import * as z from "zod";
+import { z } from "zod";
 
 export const SignInSchema = z.object({
   email: z
@@ -12,3 +12,5 @@ export const SignInSchema = z.object({
     .min(1, { message: "Password is required" })
     .max(64, { message: "Password is too long" }),
 });
+
+export type SignInSchemaType = z.infer<typeof SignInSchema>;

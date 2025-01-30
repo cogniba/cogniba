@@ -1,16 +1,9 @@
-import Header from "@/components/landing-page/Header";
+import Header from "@/components/www/header/Header";
 
-interface LandingPageLayoutProps {
+interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
-export default function LandingPageLayout({
-  children,
-}: LandingPageLayoutProps) {
-  return (
-    <>
-      <Header />
-      {children}
-    </>
-  );
+export default function AuthLayout({ children }: AuthLayoutProps) {
+  return <Header>{children}</Header>;
 }

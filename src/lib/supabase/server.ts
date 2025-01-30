@@ -1,21 +1,13 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { Database } from "@/../database.types";
 
-export function createClient() {
-  const cookieStore = cookies();
+export default async function createClient() {
+  const cookieStore = await cookies();
 
-  return createServerClient<Database>(
+  return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
-      cookieOptions: {
-        domain:
-          process.env.NODE_ENV === "production" ? ".cogniba.com" : undefined,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-      },
-
       cookies: {
         getAll() {
           return cookieStore.getAll();
@@ -25,7 +17,11 @@ export function createClient() {
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options),
             );
-          } catch {}
+          } catch {
+            // The `setAll` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
+          }
         },
       },
     },

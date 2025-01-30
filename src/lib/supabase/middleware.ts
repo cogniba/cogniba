@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import handleAuthorization from "../handleRouteProtection";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -10,19 +11,12 @@ export async function updateSession(request: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
-      cookieOptions: {
-        domain:
-          process.env.NODE_ENV === "production" ? ".cogniba.com" : undefined,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-      },
-
       cookies: {
         getAll() {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value),
           );
           supabaseResponse = NextResponse.next({
@@ -36,35 +30,37 @@ export async function updateSession(request: NextRequest) {
     },
   );
 
+  // Do not run code between createServerClient and
+  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
+  // issues with users being randomly logged out.
+
+  // IMPORTANT: DO NOT REMOVE auth.getUser()
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isAuthenticated = user !== null;
+  const { redirectUrl } = handleAuthorization({
+    isSignedIn: !!user,
+    nextUrl: request.nextUrl,
+  });
 
-  const { pathname } = request.nextUrl;
-
-  if (!isAuthenticated) {
-    if (
-      pathname.startsWith("/app") ||
-      pathname.startsWith("/change-password")
-    ) {
-      const newUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/sign-in`;
-      return NextResponse.redirect(newUrl);
-    }
-  } else if (isAuthenticated) {
-    if (
-      pathname === "/" ||
-      pathname.startsWith("/sign-in") ||
-      pathname.startsWith("/sign-up")
-    ) {
-      const newUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/app`;
-      return NextResponse.redirect(newUrl);
-    } else if (pathname === "/app") {
-      const newUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/app/play`;
-      return NextResponse.redirect(newUrl);
-    }
+  if (redirectUrl) {
+    return NextResponse.redirect(redirectUrl);
   }
+
+  // IMPORTANT: You *must* return the supabaseResponse object as it is.
+  // If you're creating a new response object with NextResponse.next() make sure to:
+  // 1. Pass the request in it, like so:
+  //    const myNewResponse = NextResponse.next({ request })
+  // 2. Copy over the cookies, like so:
+  //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
+  // 3. Change the myNewResponse object to fit your needs, but avoid changing
+  //    the cookies!
+  // 4. Finally:
+  //    return myNewResponse
+  // If this is not done, you may be causing the browser and server to go out
+  // of sync and terminate the user's session prematurely!
 
   return supabaseResponse;
 }

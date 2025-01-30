@@ -6,3 +6,5 @@ export const FeedbackSchema = z.object({
   }),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
+
+export type FeedbackSchemaType = z.infer<typeof FeedbackSchema>;

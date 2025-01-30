@@ -1,4 +1,8 @@
 Stripe
+Row level security on Drizzle ORM
+Triggers and functions on Drizzle ORM
+
+Change game config
 
 Lighthouse
 
@@ -10,3 +14,7 @@ Upgrade to Next.js 15
 Track how much time has been spent with the tab open
 Streak system
 Goal system
+
+Types to all variables
+Return types to all functions
+Api routes with NextRequest and NextResponse

@@ -1,4 +1,4 @@
-import * as z from "zod";
+import { z } from "zod";
 
 export const ChangePasswordSchema = z
   .object({
@@ -20,3 +20,5 @@ export const ChangePasswordSchema = z
       });
     }
   });
+
+export type ChangePasswordSchemaType = z.infer<typeof ChangePasswordSchema>;

@@ -26,6 +26,7 @@ import LoaderWrapper from "@/components/LoaderWrapper";
 import FormAlert from "@/components/FormAlert";
 import { FeedbackSchema } from "@/zod/schemas/FeedbackSchema";
 import { z } from "zod";
+import sendFeedback from "@/actions/sendFeedback";
 
 export default function FeedbackPage() {
   const [isPending, startTransition] = useTransition();
@@ -45,23 +46,15 @@ export default function FeedbackPage() {
     setSuccess(false);
 
     startTransition(async () => {
-      const response = await fetch("/api/feedback", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        setSuccess(true);
-        form.reset();
-      } else {
-        const { error } = await response.json();
+      const { error } = await sendFeedback(data);
+      if (error) {
         setError(error);
       }
     });
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-card py-5 xs:bg-background">
+    <div className="flex flex-1 items-center justify-center bg-card py-5 xs:bg-background">
       <Card className="w-full max-w-lg border-transparent px-2 shadow-none xs:mx-6 xs:border-border xs:shadow-sm">
         <CardHeader>
           <CardTitle>Send Feedback</CardTitle>

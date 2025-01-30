@@ -1,21 +1,31 @@
-import { UserType } from "@/database/schemas/profilesTable";
-import AppSidebarContent from "@/components/app-sidebar/AppSidebarContent";
-import getUserRequest from "@/lib/server/auth/getUserRequest";
-import SimpleMessageScreen from "../SimpleMessageScreen";
+"use client";
 
-export default async function AppSidebar() {
-  const response = await getUserRequest();
-  if (!response.ok) {
-    return (
-      <SimpleMessageScreen
-        mainMessage="Error getting settings"
-        secondaryMessage="Please, reload the page to try again"
-        variant="error"
-      />
-    );
-  }
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+} from "../ui/sidebar";
+import SidebarUser from "./SidebarUser";
+import SidebarTopGroup from "./SidebarTopGroup";
+import SidebarBottomGroup from "./SidebarBottomGroup";
+import SidebarLogo from "./SidebarLogo";
 
-  const { user }: { user: UserType } = await response.json();
+export default function AppSidebar() {
+  return (
+    <Sidebar variant="inset">
+      <SidebarHeader>
+        <SidebarLogo />
+      </SidebarHeader>
 
-  return <AppSidebarContent fullName={user.fullName} email={user.email} />;
+      <SidebarContent>
+        <SidebarTopGroup />
+        <SidebarBottomGroup />
+      </SidebarContent>
+
+      <SidebarFooter>
+        <SidebarUser />
+      </SidebarFooter>
+    </Sidebar>
+  );
 }

@@ -7,3 +7,5 @@ export const ForgotPasswordSchema = z.object({
     .min(1, { message: "Email is required" })
     .max(64, { message: "Email is too long" }),
 });
+
+export type ForgotPasswordSchemaType = z.infer<typeof ForgotPasswordSchema>;

@@ -41,7 +41,7 @@ type ClickableButtonSettingsItemProps = BaseSettingsItemProps & {
 type LinkButtonSettingsItemProps = BaseSettingsItemProps & {
   type: "button";
   buttonText: string;
-  href?: string;
+  href: string;
 
   onClick?: never;
   options?: never;
