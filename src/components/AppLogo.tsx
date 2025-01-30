@@ -1,20 +1,19 @@
-import { cn } from "@/lib/utils";
-import { AtomIcon } from "lucide-react";
+import Link from "next/link";
+import LogoIcon from "./svg/LogoIcon";
+import { cn } from "@/lib/cn";
 
-interface AppLogoProps {
+interface CognibaLogoProps {
   className?: string;
 }
 
-export default function AppLogo({ className }: AppLogoProps) {
+export default function CognibaLogo({ className }: CognibaLogoProps) {
   return (
-    <span
-      className={cn(
-        "flex cursor-pointer items-center justify-center gap-2 text-primary",
-        className,
-      )}
+    <Link
+      href="/"
+      className={cn("flex items-center justify-center gap-2", className)}
     >
-      <AtomIcon className="text-2xl" />
-      <span className="text-xl font-bold">Wemplate</span>
-    </span>
+      <LogoIcon className="text-2xl" />
+      <span className="text-xl font-bold text-primary">Cogniba</span>
+    </Link>
   );
 }
