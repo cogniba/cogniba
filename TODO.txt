@@ -2,6 +2,8 @@ Stripe
 Row level security on Drizzle ORM
 Triggers and functions on Drizzle ORM
 
+Change game config
+
 Lighthouse
 
 Accessibility (aria-describedby)
