@@ -1,14 +1,9 @@
 {
-<<<<<<< HEAD
-  "id": "6e455fb1-742c-474b-b060-0cde0829ae72",
-=======
   "id": "c7043906-07f3-450d-80c8-add7dfee0cd2",
->>>>>>> c44cfa4 (Add subscriptions table migration with user reference and status enum)
   "prevId": "3de61ab0-126b-4e15-a59f-97b70dddbaca",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-<<<<<<< HEAD
     "public.feedback": {
       "name": "feedback",
       "schema": "",
@@ -65,8 +60,6 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-=======
->>>>>>> c44cfa4 (Add subscriptions table migration with user reference and status enum)
     "public.games": {
       "name": "games",
       "schema": "",
@@ -247,7 +240,6 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
-<<<<<<< HEAD
     }
   },
   "enums": {
@@ -258,7 +250,6 @@
         "bug",
         "feature",
         "other"
-=======
     },
     "public.subscriptions": {
       "name": "subscriptions",
@@ -317,7 +308,6 @@
       "values": [
         "active",
         "inactive"
->>>>>>> c44cfa4 (Add subscriptions table migration with user reference and status enum)
       ]
     }
   },
