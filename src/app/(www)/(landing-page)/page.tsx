@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function LandingPagePage() {
   return (
-    <main className="grid gap-40 px-6 py-28 xs:gap-48 xs:py-32 md:gap-56 md:py-32">
+    <main className="mx-auto grid gap-40 px-6 py-28 xs:gap-48 xs:py-32 md:gap-56 md:py-32">
       <HeroSection />
       <HowItWorksSection />
       <FeaturesSection />
