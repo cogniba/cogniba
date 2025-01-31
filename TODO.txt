@@ -3,7 +3,6 @@ Update next.js
 Linting errors
 Update error
 Landing page header and sidebar
-Fix Logo problem
 
 Stripe
 Row level security on Drizzle ORM
