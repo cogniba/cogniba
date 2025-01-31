@@ -9,7 +9,7 @@ export default function AppLogo({ className }: AppLogoProps) {
   return (
     <span
       className={cn(
-        "flex items-center justify-center gap-2 text-primary",
+        "flex cursor-pointer items-center justify-center gap-2 text-primary",
         className,
       )}
     >

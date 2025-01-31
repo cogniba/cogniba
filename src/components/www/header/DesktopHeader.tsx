@@ -22,9 +22,9 @@ export default function DesktopHeader() {
 
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/pricing" legacyBehavior passHref>
+            <Link href="/research" legacyBehavior passHref>
               <NavigationMenuLink asChild>
-                <Button variant="ghost">Pricing</Button>
+                <Button variant="ghost">Research</Button>
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -32,6 +32,20 @@ export default function DesktopHeader() {
             <Link href="/faq" legacyBehavior passHref>
               <NavigationMenuLink asChild>
                 <Button variant="ghost">FAQ</Button>
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/blog" legacyBehavior passHref>
+              <NavigationMenuLink asChild>
+                <Button variant="ghost">Blog</Button>
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/pricing" legacyBehavior passHref>
+              <NavigationMenuLink asChild>
+                <Button variant="ghost">Pricing</Button>
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>

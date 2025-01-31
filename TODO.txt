@@ -1,5 +1,4 @@
 Typescript errors
-Blue N-Back task
 Update next.js
 Linting errors
 Update error
