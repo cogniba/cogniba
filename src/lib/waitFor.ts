@@ -2,8 +2,7 @@ export default function waitFor(
   conditionFunction: () => boolean,
   interval = 10,
 ) {
-  // TODO
-  const poll = (resolve: any) => {
+  const poll = (resolve: (value: void | PromiseLike<void>) => void) => {
     if (conditionFunction()) {
       resolve();
     } else {
@@ -11,5 +10,5 @@ export default function waitFor(
     }
   };
 
-  return new Promise(poll);
+  return new Promise<void>(poll);
 }

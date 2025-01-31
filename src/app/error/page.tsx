@@ -9,12 +9,12 @@ import {
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 
-export default function ErrorPage({
-  searchParams,
-}: {
-  searchParams: { message?: string };
-}) {
-  const errorMessage = searchParams.message || "Something went wrong";
+interface ErrorPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function ErrorPage({ searchParams }: ErrorPageProps) {
+  const errorMessage = (await searchParams).message || "Something went wrong";
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">

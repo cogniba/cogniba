@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/cn";
-import sleep from "@/lib/sleep";
 import { useEffect, useState } from "react";
 
 export default function LandingPageBoard() {

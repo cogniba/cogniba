@@ -1,19 +1,20 @@
-import Link from "next/link";
 import LogoIcon from "./svg/LogoIcon";
 import { cn } from "@/lib/cn";
 
-interface CognibaLogoProps {
+interface AppLogoProps {
   className?: string;
 }
 
-export default function CognibaLogo({ className }: CognibaLogoProps) {
+export default function AppLogo({ className }: AppLogoProps) {
   return (
-    <Link
-      href="/"
-      className={cn("flex items-center justify-center gap-2", className)}
+    <span
+      className={cn(
+        "flex items-center justify-center gap-2 text-primary",
+        className,
+      )}
     >
       <LogoIcon className="text-2xl" />
-      <span className="text-xl font-bold text-primary">Cogniba</span>
-    </Link>
+      <span className="text-xl font-bold">Cogniba</span>
+    </span>
   );
 }
