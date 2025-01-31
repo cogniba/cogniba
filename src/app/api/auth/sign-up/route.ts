@@ -4,7 +4,7 @@ import createClient from "@/lib/supabase/server";
 import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { isRedirectError } from "next/dist/client/components/redirect";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
