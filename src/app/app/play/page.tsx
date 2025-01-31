@@ -1,7 +1,7 @@
 import { SettingsType } from "@/database/schemas/settingsTable";
 import GameTutorial from "@/components/game/tutorial/GameTutorial";
 import GameLogic from "@/components/game/GameLogic";
-import { UserType } from "@/database/schemas/profilesTable";
+import { ProfileType } from "@/database/schemas/profilesTable";
 import getLevelRequest from "@/lib/server/game/getLevelRequest";
 import getMaxLevelRequest from "@/lib/server/game/getMaxLevelRequest";
 import getSettingsRequest from "@/lib/server/settings/getSettingsRequest";
@@ -73,11 +73,11 @@ export default async function GamePage() {
   const level: number = levelData.level;
   const maxLevel: number = maxLevelData.maxLevel;
   const settings: SettingsType = settingsData.settings;
-  const user: UserType = userData.user;
+  const profile: ProfileType = userData.user;
 
   return (
     <>
-      {!user.hasFinishedTutorial ? (
+      {!profile.hasFinishedTutorial ? (
         <GameTutorial startingLevel={level} startingMaxLevel={maxLevel} />
       ) : (
         <GameLogic
