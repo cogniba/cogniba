@@ -65,7 +65,7 @@ export default function Game({
   return (
     <div
       className={cn(
-        "flex h-screen items-center justify-center transition duration-300 lg:can-hover:-ml-16",
+        "lg:can-hover:-ml-16 flex h-screen items-center justify-center transition duration-300",
         feedback === "correct" && "bg-green-200/80 dark:bg-green-950",
         feedback === "incorrect" && "bg-red-200/80 dark:bg-red-950",
         feedback === "missed" && "bg-yellow-200/50 dark:bg-yellow-950/70",
