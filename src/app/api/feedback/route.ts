@@ -1,8 +1,8 @@
-import { createClient } from "@/lib/supabase/server";
+import createClient from "@/lib/supabase/server";
 import { FeedbackSchema } from "@/zod/schemas/FeedbackSchema";
 import { NextResponse } from "next/server";
 import { feedbackTable } from "@/database/schemas/feedbackTable";
-import { db } from "@/database/db";
+import { db } from "@/database";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     const { type, message } = parsedData.data;
 
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const { data, error } = await supabase.auth.getUser();
     if (error) {

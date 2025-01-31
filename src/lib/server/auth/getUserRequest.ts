@@ -1,12 +1,12 @@
-import { db } from "@/database/db";
+import { db } from "@/database";
 import { profilesTable } from "@/database/schemas/profilesTable";
-import { createClient } from "@/lib/supabase/server";
+import createClient from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export default async function getUserRequest(): Promise<NextResponse> {
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const { data, error } = await supabase.auth.getUser();
     if (error) {

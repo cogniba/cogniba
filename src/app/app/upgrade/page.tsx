@@ -6,7 +6,7 @@ import { db } from "@/database";
 import { customersTable } from "@/database/schemas/customersTable";
 import getFreePlan from "@/lib/stripe/getFreePlan";
 import createClient from "@/lib/supabase/server";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import { eq } from "drizzle-orm";
 import { CheckIcon } from "lucide-react";
 import { redirect } from "next/navigation";

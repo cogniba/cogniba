@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import stripeConfig from "@/config/stripe";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import { CheckIcon } from "lucide-react";
 import Link from "next/link";
 

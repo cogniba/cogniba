@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import createClient from "@/lib/supabase/server";
 import { ChangePasswordSchema } from "@/zod/schemas/ChangePasswordSchema";
 import { NextResponse } from "next/server";
 
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
     const { password } = parsedData.data;
 
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const { error } = await supabase.auth.updateUser({ password });
 

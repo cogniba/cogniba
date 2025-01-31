@@ -13,7 +13,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { useSidebar } from "@/context/SidebarContext";
 import enterFullScreen from "@/lib/enterFullScreen";
 import exitFullScreen from "@/lib/exitFullScreen";
 import { useToast } from "./use-toast";
@@ -23,6 +22,7 @@ import {
   HIDDEN_SQUARE_DURATION,
   VISIBLE_SQUARE_DURATION,
 } from "@/config/game";
+import { useSidebar } from "@/components/ui/sidebar";
 
 interface useGameLogicProps {
   startingLevel: number;
@@ -52,7 +52,7 @@ export default function useGameLogic({
   >(null);
   const [hasReachedNewLevel, setHasReachedNewLevel] = useState(false);
 
-  const { setIsVisible } = useSidebar();
+  const { toggleSidebar } = useSidebar();
   const { toast } = useToast();
 
   const gameSequence = useRef<number[]>([]);
@@ -169,22 +169,22 @@ export default function useGameLogic({
     }
 
     setIsPlaying(false);
-    setIsVisible(true);
+    toggleSidebar();
 
     await updateGameData();
   }, [
-    setIsVisible,
-    showFeedback,
+    toggleSidebar,
     updateGameData,
     isTutorial,
     setShowTutorialHint,
+    showFeedback,
   ]);
 
   const startPlaying = useCallback(async () => {
     if (!level) return;
 
     setIsPlaying(true);
-    setIsVisible(false);
+    toggleSidebar();
     setHasReachedNewLevel(false);
 
     gameSequence.current = generateGameSequence(level);
@@ -196,7 +196,7 @@ export default function useGameLogic({
 
     await sleep(DELAY_BEFORE_START);
     await playGame();
-  }, [level, playGame, setIsVisible]);
+  }, [level, playGame, toggleSidebar]);
 
   const handleButtonPress = useCallback(async () => {
     if (!hasPressedButton.current) {

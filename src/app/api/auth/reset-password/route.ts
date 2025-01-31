@@ -1,6 +1,6 @@
-import { db } from "@/database/db";
+import { db } from "@/database";
 import { profilesTable } from "@/database/schemas/profilesTable";
-import { createClient } from "@/lib/supabase/server";
+import createClient from "@/lib/supabase/server";
 import { ForgotPasswordSchema } from "@/zod/schemas/ForgotPasswordSchema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/change-password`,

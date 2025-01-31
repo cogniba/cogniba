@@ -1,12 +1,12 @@
-import { db } from "@/database/db";
+import { db } from "@/database";
 import { gamesTable } from "@/database/schemas/gamesTable";
-import { createClient } from "@/lib/supabase/server";
+import createClient from "@/lib/supabase/server";
 import { desc, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export default async function getLevelRequest(): Promise<NextResponse> {
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const { data, error } = await supabase.auth.getUser();
     if (error) {

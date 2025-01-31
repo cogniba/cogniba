@@ -1,6 +1,6 @@
-import { db } from "@/database/db";
+import { db } from "@/database";
 import { profilesTable } from "@/database/schemas/profilesTable";
-import { createClient } from "@/lib/supabase/server";
+import createClient from "@/lib/supabase/server";
 import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const { error } = await supabase.auth.signUp({
       email,
