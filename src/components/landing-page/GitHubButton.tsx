@@ -15,14 +15,14 @@ export default async function GitHubButton() {
 
     stars = res.data?.stargazers_count;
     hasFetched = true;
-  } catch (err) {
-    hasFetched = true;
+  } catch {
+    hasFetched = false;
   }
 
   return (
     <div className="flex items-center justify-center gap-2">
       <FaGithub className="text-lg" />
-      {stars && <span>{stars}</span>}
+      {stars && <span>{hasFetched ? stars : "?"}</span>}
     </div>
   );
 }
