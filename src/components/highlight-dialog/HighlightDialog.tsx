@@ -38,7 +38,7 @@ export default function HighlightDialog({
   }, []);
 
   const elementDimensions = useElementDimensions(targetElement);
-  const { height, width, top, left } = elementDimensions ?? {
+  const { height, top } = elementDimensions ?? {
     height: 0,
     width: 0,
     top: 0,
