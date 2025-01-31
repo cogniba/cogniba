@@ -24,12 +24,12 @@ import {
   useSidebar,
 } from "../ui/sidebar";
 import { useTransition } from "react";
-import { cn } from "../../lib/utils";
 import createClient from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import createCustomerPortal from "@/actions/stripe/createCustomerPortal";
 import { useAuthContext } from "@/context/AuthContext";
+import { cn } from "@/lib/cn";
 
 export default function SidebarUser() {
   const { status, fullName, email } = useAuthContext();
