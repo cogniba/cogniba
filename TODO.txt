@@ -1,4 +1,5 @@
 Typescript errors
+Landing page header and sidebar
 
 Stripe
 Row level security on Drizzle ORM
