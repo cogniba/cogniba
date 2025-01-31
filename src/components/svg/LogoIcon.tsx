@@ -1,6 +1,5 @@
 "use client";
 
-// import Logo from "@/public/logo.svg";
 import Logo from "@/public/logo.svg";
 
 interface LogoIconProps {
