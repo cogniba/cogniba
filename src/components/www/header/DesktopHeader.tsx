@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function DesktopHeader() {
   return (
-    <div className="fixed top-0 h-16 w-full max-w-6xl px-4 pt-2">
+    <div className="fixed top-0 z-50 h-16 w-full max-w-6xl px-4 pt-2">
       <NavigationMenu className="flex h-full w-full max-w-full items-center justify-between rounded-2xl border border-muted bg-blue-600 bg-muted/70 px-6 shadow-xl backdrop-blur">
         <NavigationMenuList>
           <NavigationMenuItem>
