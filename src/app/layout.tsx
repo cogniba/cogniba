@@ -28,7 +28,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn("antialiased", fontSans.variable, fontSerif.variable)}
+        className={cn(
+          "font-sans antialiased",
+          fontSans.variable,
+          fontSerif.variable,
+        )}
       >
         <RootLayoutWrapper>{children}</RootLayoutWrapper>
       </body>
