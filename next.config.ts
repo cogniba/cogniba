@@ -3,11 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
+      test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
-
     return config;
   },
 };
