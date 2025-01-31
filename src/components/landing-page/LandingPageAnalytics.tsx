@@ -1,15 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "../ui/chart";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import sleep from "@/lib/sleep";
+import { ChartContainer, ChartLegend, ChartLegendContent } from "../ui/chart";
+import { Area, AreaChart, CartesianGrid } from "recharts";
 
 const chartConfig = {
   level: {
