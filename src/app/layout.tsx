@@ -1,27 +1,35 @@
-import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import "./globals.css";
-import RootLayoutWrapper from "@/components/RootLayoutWrapper";
+import "@/styles/globals/globals.css";
 
-const roboto = Roboto({
-  variable: "--font-roboto",
+import type { Metadata } from "next";
+import RootLayoutWrapper from "@/components/RootLayoutWrapper";
+import { Inter, Playfair_Display } from "next/font/google";
+import { cn } from "@/lib/cn";
+
+const fontSans = Inter({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  variable: "--font-sans",
+});
+
+const fontSerif = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
 });
 
 export const metadata: Metadata = {
-  title: "Web Template",
-  description: "A web template",
+  title: "Cogniba",
+  description: "The only proven way to increase your intelligence.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+interface RootLayoutProps {
+  readonly children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${roboto.variable} antialiased`}>
+      <body
+        className={cn("antialiased", fontSans.variable, fontSerif.variable)}
+      >
         <RootLayoutWrapper>{children}</RootLayoutWrapper>
       </body>
     </html>
