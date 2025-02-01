@@ -18,6 +18,8 @@ Change game config
 
 Lighthouse
 
+Change full screen
+
 Accessibility (aria-describedby)
 Playwright tests
 GitHub actions
