@@ -10,6 +10,7 @@ export const protectedRoutes = {
     { path: "/sign-in", type: "exact" },
     { path: "/sign-up", type: "exact" },
     { path: "/forgot-password", type: "exact" },
+    { path: "/app", type: "exact" },
   ] as RouteMatch[],
   nonAuthenticatedRedirects: [
     { path: "/app", type: "startsWith" },

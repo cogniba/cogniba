@@ -18,7 +18,7 @@ export default function handleRouteProtection({
       : pathname.startsWith(route.path);
 
   if (isSignedIn && protectedRoutes.authenticatedRedirects.some(matchesRoute)) {
-    const newUrl = new NextURL("/app", nextUrl);
+    const newUrl = new NextURL("/app/play", nextUrl);
     return { redirectUrl: newUrl };
   } else if (
     !isSignedIn &&
