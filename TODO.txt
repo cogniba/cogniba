@@ -1,3 +1,4 @@
+Layout shift when opening the landing page sidebar
 Mobile header
 Typescript errors
 Update next.js

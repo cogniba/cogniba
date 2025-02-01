@@ -3,6 +3,11 @@
 import AppLogo from "@/components/AppLogo";
 import { Button } from "@/components/ui/button";
 import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -14,7 +19,7 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { CreditCardIcon, HelpCircleIcon } from "lucide-react";
+import { navigationItems } from "@/config/landing-page/navigation";
 import Link from "next/link";
 
 export default function MobileHeader() {
@@ -22,8 +27,21 @@ export default function MobileHeader() {
 
   return (
     <>
-      <div className="fixed left-0 top-0 h-16 px-2 py-2">
-        <SidebarTrigger className="size-10 [&_svg]:size-6" />
+      <div className="fixed top-0 z-50 h-16 w-full max-w-6xl px-4 pt-2">
+        <NavigationMenu className="flex h-full w-full max-w-full items-center justify-between rounded-2xl border border-muted bg-muted/70 px-6 shadow-xl backdrop-blur">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="/">
+                <AppLogo />
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+          <NavigationMenuList className="gap-1">
+            <NavigationMenuItem>
+              <SidebarTrigger className="size-10 [&_svg]:size-6" />
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
       </div>
 
       <Sidebar>
@@ -48,32 +66,21 @@ export default function MobileHeader() {
         <SidebarContent className="px-2">
           <SidebarGroup className="my-auto">
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  onClick={() => setOpenMobile(false)}
-                  size="lg"
-                  asChild
-                  className="text-base [&>svg]:size-5"
-                >
-                  <Link href="/pricing">
-                    <CreditCardIcon />
-                    <span>Pricing</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  onClick={() => setOpenMobile(false)}
-                  asChild
-                  size="lg"
-                  className="text-base [&>svg]:size-5"
-                >
-                  <Link href="/faq">
-                    <HelpCircleIcon />
-                    <span>FAQ</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              {navigationItems.map((item) => (
+                <SidebarMenuItem key={item.name}>
+                  <SidebarMenuButton
+                    onClick={() => setOpenMobile(false)}
+                    asChild
+                    size="lg"
+                    className="text-base [&>svg]:size-5"
+                  >
+                    <Link href={item.href}>
+                      <item.Icon />
+                      <span>{item.name}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroup>
         </SidebarContent>
