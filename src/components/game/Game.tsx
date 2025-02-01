@@ -1,8 +1,8 @@
 "use client";
 
-import GameLevelDisplay from "./GameLevelDisplay";
-import GameButton from "./GameButton";
-import GameBoard from "./GameBoard";
+import GameLevelDisplay from "./board/GameLevelDisplay";
+import GameButton from "./board/GameButton";
+import GameBoard from "./board/GameBoard";
 import StartScreen from "./GameStartScreen";
 
 import { cn } from "@/lib/cn";
@@ -65,7 +65,7 @@ export default function Game({
   return (
     <div
       className={cn(
-        "lg:can-hover:-ml-16 flex h-screen items-center justify-center transition duration-300",
+        "flex h-full items-center justify-center transition duration-300",
         feedback === "correct" && "bg-green-200/80 dark:bg-green-950",
         feedback === "incorrect" && "bg-red-200/80 dark:bg-red-950",
         feedback === "missed" && "bg-yellow-200/50 dark:bg-yellow-950/70",
@@ -97,7 +97,8 @@ export default function Game({
           newLevel={level}
         />
       )}
-      <div className="flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] [container-type:size] md:px-2">
+
+      <div className="relative z-20 flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] [container-type:size] md:px-2">
         <div className="my-[1.5cqh] flex-shrink-0 sm:mb-[2.5cqh] sm:mt-[1.5cqh]">
           <GameLevelDisplay level={level} />
         </div>

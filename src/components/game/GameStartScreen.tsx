@@ -32,7 +32,7 @@ const boxVariants = cva("flex items-center gap-2 rounded-md py-2 pl-4 border", {
   },
 });
 
-interface StartScreenProps {
+interface GameStartScreenProps {
   visible: boolean;
   onStart: () => void;
   correctHits: number | null;
@@ -42,7 +42,7 @@ interface StartScreenProps {
   newLevel: number;
 }
 
-export default function StartScreen({
+export default function GameStartScreen({
   visible,
   onStart,
   correctHits,
@@ -50,7 +50,7 @@ export default function StartScreen({
   missedHits,
   previousLevel,
   newLevel,
-}: StartScreenProps) {
+}: GameStartScreenProps) {
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
 
@@ -74,13 +74,12 @@ export default function StartScreen({
     <>
       <div
         data-state={visible ? "open" : "closed"}
-        className="pointer-events-auto fixed inset-0 z-40 bg-black/80 backdrop-blur-sm data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+        className="pointer-events-auto absolute inset-0 z-40 bg-black/80 backdrop-blur-sm data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
       ></div>
       <Dialog defaultOpen open={visible} modal={false}>
         <DialogContent
-          className="z-40 duration-500 data-[state=closed]:duration-500 data-[state=open]:duration-500 sm:max-w-lg"
+          className="absolute z-40 duration-500 data-[state=closed]:duration-500 data-[state=open]:duration-500 sm:max-w-lg"
           closeButton={false}
-          backdrop={true}
           hideOverlay
         >
           <div className="flex w-full max-w-lg flex-col justify-center">

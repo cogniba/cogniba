@@ -10,6 +10,8 @@ Stripe
 Row level security on Drizzle ORM
 Triggers and functions on Drizzle ORM
 
+Remove useEffect when fetching quote
+
 Change game config
 
 Lighthouse

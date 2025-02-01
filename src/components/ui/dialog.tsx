@@ -49,7 +49,8 @@ const DialogContent = React.forwardRef<
     { closeButton, backdrop, hideOverlay, className, children, ...props },
     ref,
   ) => (
-    <DialogPortal>
+    // <DialogPortal>
+    <>
       {!hideOverlay && <DialogOverlay backdrop={backdrop} />}
       <DialogPrimitive.Content
         ref={ref}
@@ -67,7 +68,8 @@ const DialogContent = React.forwardRef<
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Content>
-    </DialogPortal>
+    </>
+    // </DialogPortal>
   ),
 );
 DialogContent.displayName = DialogPrimitive.Content.displayName;
