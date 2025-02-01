@@ -1,6 +1,5 @@
 Customize stripe
 Update next.js
-Linting errors
 
 Stripe
 Row level security on Drizzle ORM
