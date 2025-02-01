@@ -1,55 +1,49 @@
 {
-  "id": "00000000-0000-0000-0000-000000000000",
-  "prevId": "",
+  "id": "e049c812-6334-49ca-83fa-4d085c021004",
+  "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.subscriptions": {
-      "name": "subscriptions",
+    "public.customers": {
+      "name": "customers",
       "schema": "",
       "columns": {
-        "user_id": {
-          "name": "user_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "subscription_id": {
-          "name": "subscription_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "status": {
-          "name": "status",
-          "type": "status",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'inactive'"
-        },
-        "last_payment_date": {
-          "name": "last_payment_date",
-          "type": "date",
-          "primaryKey": false,
-          "notNull": false
-        },
         "id": {
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
           "notNull": true
+        },
+        "customer_id": {
+          "name": "customer_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subscription_type": {
+          "name": "subscription_type",
+          "type": "subscription_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Free'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "subscriptions_user_id_profiles_user_id_fk": {
-          "name": "subscriptions_user_id_profiles_user_id_fk",
-          "tableFrom": "subscriptions",
+        "customers_id_profiles_user_id_fk": {
+          "name": "customers_id_profiles_user_id_fk",
+          "tableFrom": "customers",
           "tableTo": "profiles",
-          "schemaTo": "public",
           "columnsFrom": [
-            "user_id"
+            "id"
           ],
           "columnsTo": [
             "user_id"
@@ -59,36 +53,18 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {},
-      "policies": {
-        "Enable insert for users based on user_id": {
-          "name": "Enable insert for users based on user_id",
-          "as": "PERMISSIVE",
-          "for": "INSERT",
-          "to": [
-            "public"
-          ],
-          "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
-        },
-        "Enable update for users based on user_id": {
-          "name": "Enable update for users based on user_id",
-          "as": "PERMISSIVE",
-          "for": "UPDATE",
-          "to": [
-            "public"
-          ]
-        },
-        "Enable users to view their own data only": {
-          "name": "Enable users to view their own data only",
-          "as": "PERMISSIVE",
-          "for": "SELECT",
-          "to": [
-            "authenticated"
+      "uniqueConstraints": {
+        "customers_customer_id_unique": {
+          "name": "customers_customer_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "customer_id"
           ]
         }
       },
-      "isRLSEnabled": true
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.feedback": {
       "name": "feedback",
@@ -103,6 +79,13 @@
         "user_id": {
           "name": "user_id",
           "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "feedback_type",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
@@ -126,7 +109,6 @@
           "name": "feedback_user_id_profiles_user_id_fk",
           "tableFrom": "feedback",
           "tableTo": "profiles",
-          "schemaTo": "public",
           "columnsFrom": [
             "user_id"
           ],
@@ -139,19 +121,9 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
+      "policies": {},
       "checkConstraints": {},
-      "policies": {
-        "Enable insert for users based on user_id": {
-          "name": "Enable insert for users based on user_id",
-          "as": "PERMISSIVE",
-          "for": "INSERT",
-          "to": [
-            "public"
-          ],
-          "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
-        }
-      },
-      "isRLSEnabled": true
+      "isRLSEnabled": false
     },
     "public.games": {
       "name": "games",
@@ -219,7 +191,6 @@
           "name": "games_user_id_profiles_user_id_fk",
           "tableFrom": "games",
           "tableTo": "profiles",
-          "schemaTo": "public",
           "columnsFrom": [
             "user_id"
           ],
@@ -232,27 +203,9 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
+      "policies": {},
       "checkConstraints": {},
-      "policies": {
-        "Enable insert for users based on user_id": {
-          "name": "Enable insert for users based on user_id",
-          "as": "PERMISSIVE",
-          "for": "INSERT",
-          "to": [
-            "public"
-          ],
-          "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
-        },
-        "Enable users to view their own data only": {
-          "name": "Enable users to view their own data only",
-          "as": "PERMISSIVE",
-          "for": "SELECT",
-          "to": [
-            "authenticated"
-          ]
-        }
-      },
-      "isRLSEnabled": true
+      "isRLSEnabled": false
     },
     "public.profiles": {
       "name": "profiles",
@@ -270,6 +223,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "full_name": {
+          "name": "full_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
         "has_finished_tutorial": {
           "name": "has_finished_tutorial",
           "type": "boolean",
@@ -283,12 +242,6 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
-        },
-        "full_name": {
-          "name": "full_name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
         }
       },
       "indexes": {},
@@ -311,42 +264,16 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "profiles_email_unique": {
+          "name": "profiles_email_unique",
+          "nullsNotDistinct": false,
           "columns": [
             "email"
-          ],
-          "nullsNotDistinct": false,
-          "name": "profiles_email_unique"
+          ]
         }
       },
+      "policies": {},
       "checkConstraints": {},
-      "policies": {
-        "Enable insert for users based on user_id": {
-          "name": "Enable insert for users based on user_id",
-          "as": "PERMISSIVE",
-          "for": "INSERT",
-          "to": [
-            "public"
-          ],
-          "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
-        },
-        "Enable update for users based on email": {
-          "name": "Enable update for users based on email",
-          "as": "PERMISSIVE",
-          "for": "UPDATE",
-          "to": [
-            "public"
-          ]
-        },
-        "Enable users to view their own data only": {
-          "name": "Enable users to view their own data only",
-          "as": "PERMISSIVE",
-          "for": "SELECT",
-          "to": [
-            "authenticated"
-          ]
-        }
-      },
-      "isRLSEnabled": true
+      "isRLSEnabled": false
     },
     "public.settings": {
       "name": "settings",
@@ -372,7 +299,6 @@
           "name": "settings_user_id_profiles_user_id_fk",
           "tableFrom": "settings",
           "tableTo": "profiles",
-          "schemaTo": "public",
           "columnsFrom": [
             "user_id"
           ],
@@ -385,45 +311,145 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
+      "policies": {},
       "checkConstraints": {},
-      "policies": {
-        "Enable insert for users based on user_id": {
-          "name": "Enable insert for users based on user_id",
-          "as": "PERMISSIVE",
-          "for": "INSERT",
-          "to": [
-            "public"
+      "isRLSEnabled": false
+    },
+    "public.stripe": {
+      "name": "stripe",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "customer_id": {
+          "name": "customer_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subscription_id": {
+          "name": "subscription_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "subscription_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_id": {
+          "name": "price_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_period_start": {
+          "name": "current_period_start",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_period_end": {
+          "name": "current_period_end",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cancel_at_period_end": {
+          "name": "cancel_at_period_end",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "payment_method_brand": {
+          "name": "payment_method_brand",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "payment_method_last4": {
+          "name": "payment_method_last4",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stripe_id_profiles_user_id_fk": {
+          "name": "stripe_id_profiles_user_id_fk",
+          "tableFrom": "stripe",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "id"
           ],
-          "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
-        },
-        "Enable update for users based on user_id": {
-          "name": "Enable update for users based on user_id",
-          "as": "PERMISSIVE",
-          "for": "UPDATE",
-          "to": [
-            "public"
-          ]
-        },
-        "Enable users to view their own data only": {
-          "name": "Enable users to view their own data only",
-          "as": "PERMISSIVE",
-          "for": "SELECT",
-          "to": [
-            "authenticated"
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stripe_customer_id_unique": {
+          "name": "stripe_customer_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "customer_id"
           ]
         }
       },
-      "isRLSEnabled": true
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {
-    "public.status": {
-      "name": "status",
+    "public.subscription_type": {
+      "name": "subscription_type",
+      "schema": "public",
+      "values": [
+        "Free",
+        "Pro"
+      ]
+    },
+    "public.feedback_type": {
+      "name": "feedback_type",
+      "schema": "public",
+      "values": [
+        "bug",
+        "feature",
+        "other"
+      ]
+    },
+    "public.subscription_status": {
+      "name": "subscription_status",
+      "schema": "public",
       "values": [
         "active",
-        "inactive"
-      ],
-      "schema": "public"
+        "canceled",
+        "incomplete",
+        "incomplete_expired",
+        "past_due",
+        "paused",
+        "trialing",
+        "unpaid"
+      ]
     }
   },
   "schemas": {},
@@ -432,11 +458,8 @@
   "policies": {},
   "views": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "internal": {
     "tables": {}
   }
 }
