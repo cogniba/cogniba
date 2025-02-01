@@ -6,7 +6,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "../ui/sidebar";
-import { LayoutDashboardIcon } from "lucide-react";
+import { AreaChartIcon, PlayIcon } from "lucide-react";
 
 export default function SidebarTopGroup() {
   const { setOpenMobile } = useSidebar();
@@ -14,7 +14,7 @@ export default function SidebarTopGroup() {
   return (
     <SidebarGroup>
       <SidebarMenu>
-        <SidebarMenuItem>
+        {/* <SidebarMenuItem>
           <SidebarMenuButton
             onClick={() => setOpenMobile(false)}
             asChild
@@ -26,6 +26,20 @@ export default function SidebarTopGroup() {
               <span>Dashboard</span>
             </Link>
           </SidebarMenuButton>
+        </SidebarMenuItem> */}
+
+        <SidebarMenuItem>
+          <SidebarMenuButton
+            onClick={() => setOpenMobile(false)}
+            asChild
+            size="lg"
+            className="text-base [&>svg]:size-5"
+          >
+            <Link href="/app/play">
+              <PlayIcon />
+              <span>Play</span>
+            </Link>
+          </SidebarMenuButton>
         </SidebarMenuItem>
 
         <SidebarMenuItem>
@@ -35,9 +49,9 @@ export default function SidebarTopGroup() {
             size="lg"
             className="text-base [&>svg]:size-5"
           >
-            <Link href="/app/dashboard">
-              <LayoutDashboardIcon />
-              <span>Dashboard</span>
+            <Link href="/app/analytics">
+              <AreaChartIcon />
+              <span>Analytics</span>
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
