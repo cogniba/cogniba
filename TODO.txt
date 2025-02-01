@@ -1,3 +1,4 @@
+Customize stripe
 Update next.js
 Linting errors
 Update error

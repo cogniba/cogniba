@@ -10,6 +10,8 @@ export type PlanType = {
   highlighted?: boolean;
 };
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 const stripeConfig = {
   plans: [
     {
@@ -22,8 +24,9 @@ const stripeConfig = {
       features: ["Feature 1", "Feature 2", "Feature 3"],
     },
     {
-      // priceId: "<PRICE_ID>",
-      priceId: "price_1QjH3nLFH14fApTKJJSoPgva",
+      priceId: isDevelopment
+        ? "price_1Qnd87RprLy2N53jYmRQE4DC"
+        : "price_1QndAKRprLy2N53jEjWArTKJ",
       price: 9.99,
 
       name: "Pro",
