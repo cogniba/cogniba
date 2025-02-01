@@ -3,7 +3,7 @@
 import GameLevelDisplay from "./board/GameLevelDisplay";
 import GameButton from "./board/GameButton";
 import GameBoard from "./board/GameBoard";
-import StartScreen from "./GameStartScreen";
+import StartScreen from "./start-screen/GameStartScreen";
 
 import { cn } from "@/lib/cn";
 import { type Dispatch, type SetStateAction } from "react";

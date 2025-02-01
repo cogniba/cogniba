@@ -1,4 +1,3 @@
-import quotes from "@/content/quotes.json";
 import calculateAccuracy from "@/lib/calculateAccuracy";
 
 import { Button } from "@/components/ui/button";
@@ -14,7 +13,7 @@ import {
   TriangleAlert,
   XIcon,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import GameWelcomeScreen from "./GameWelcomeScreen";
 
 const boxVariants = cva("flex items-center gap-2 rounded-md py-2 pl-4 border", {
   variants: {
@@ -51,9 +50,6 @@ export default function GameStartScreen({
   previousLevel,
   newLevel,
 }: GameStartScreenProps) {
-  const [quote, setQuote] = useState("");
-  const [author, setAuthor] = useState("");
-
   const hasStatistics =
     correctHits !== null && incorrectHits !== null && missedHits !== null;
   let accuracy = 0;
@@ -62,13 +58,6 @@ export default function GameStartScreen({
       calculateAccuracy({ correctHits, incorrectHits, missedHits }) * 100,
     );
   }
-
-  useEffect(() => {
-    const { quote: fetchedQuote, author: fetchedAuthor } =
-      quotes[Math.floor(Math.random() * quotes.length)];
-    setQuote(fetchedQuote);
-    setAuthor(fetchedAuthor);
-  }, []);
 
   return (
     <>
@@ -84,17 +73,7 @@ export default function GameStartScreen({
         >
           <div className="flex w-full max-w-lg flex-col justify-center">
             {!hasStatistics ? (
-              <>
-                <DialogTitle className="mb-5 text-2xl xs:mb-8 xs:text-3xl">
-                  Welcome back!
-                </DialogTitle>
-                <blockquote className="font-serif text-base font-normal italic text-muted-foreground xs:text-lg">
-                  <div className="xs:mb-1">&ldquo;{quote}&rdquo;</div>
-                  <div className="text-right text-lg text-muted-foreground xs:text-xl">
-                    &mdash; {author}
-                  </div>
-                </blockquote>
-              </>
+              <GameWelcomeScreen />
             ) : (
               <>
                 <DialogTitle className="mb-5 text-2xl xs:mb-6 xs:text-3xl">
