@@ -119,14 +119,14 @@ export default {
           "5": "rgb(var(--chart-5))",
         },
         sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+          DEFAULT: "rgb(var(--sidebar-background))",
+          foreground: "rgb(var(--sidebar-foreground))",
+          primary: "rgb(var(--sidebar-primary))",
+          "primary-foreground": "rgb(var(--sidebar-primary-foreground))",
+          accent: "rgb(var(--sidebar-accent))",
+          "accent-foreground": "rgb(var(--sidebar-accent-foreground))",
+          border: "rgb(var(--sidebar-border))",
+          ring: "rgb(var(--sidebar-ring))",
         },
 
         red: {
