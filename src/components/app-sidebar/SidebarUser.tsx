@@ -52,7 +52,7 @@ export default function SidebarUser() {
         const error = new Error("Failed to open customer portal");
         console.error(error);
 
-        const errorUrl = new URL("/error", origin);
+        const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
         errorUrl.searchParams.set("message", error.message);
         router.push(errorUrl.toString());
         return;

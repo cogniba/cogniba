@@ -17,7 +17,7 @@ export default async function SuccessPage() {
     const error = new Error("Failed to load user data");
     console.error(error);
 
-    const errorUrl = new URL("/error", origin);
+    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
     errorUrl.searchParams.set("message", error.message);
     redirect(errorUrl.toString());
   }
@@ -33,7 +33,7 @@ export default async function SuccessPage() {
 
   const { error } = await syncStripeData(customer.customerId);
   if (error) {
-    const errorUrl = new URL("/error", origin);
+    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
     errorUrl.searchParams.set("message", "Failed to sync Stripe data");
     redirect(errorUrl.toString());
   }

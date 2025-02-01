@@ -23,7 +23,7 @@ export default async function PricingPage() {
     const error = new Error("Failed to get user");
     console.error(error);
 
-    const errorUrl = new URL("/error", origin);
+    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
     errorUrl.searchParams.set("message", error.message);
     redirect(errorUrl.toString());
   }
@@ -33,7 +33,7 @@ export default async function PricingPage() {
     const error = new Error("Failed to load free pricing plan");
     console.error(error);
 
-    const errorUrl = new URL("/error", origin);
+    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
     errorUrl.searchParams.set("message", error.message);
     redirect(errorUrl.toString());
   }
@@ -51,7 +51,7 @@ export default async function PricingPage() {
     const error = new Error("Failed to load current plan");
     console.error(error);
 
-    const errorUrl = new URL("/error", origin);
+    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
     errorUrl.searchParams.set("message", error.message);
     redirect(errorUrl.toString());
   }
