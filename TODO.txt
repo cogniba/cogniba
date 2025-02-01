@@ -1,8 +1,6 @@
 Customize stripe
 Update next.js
 Linting errors
-Update error
-Landing page header and sidebar
 
 Stripe
 Row level security on Drizzle ORM
