@@ -20,17 +20,17 @@ const stripeConfig = {
       isFreePlan: true,
 
       name: "Free",
-      description: "Great for getting started.",
+      description: "Great for beginners exploring Cogniba.",
       features: ["Feature 1", "Feature 2", "Feature 3"],
     },
     {
       priceId: isDevelopment
         ? "price_1Qnd87RprLy2N53jYmRQE4DC"
         : "price_1QndAKRprLy2N53jEjWArTKJ",
-      price: 9.99,
+      price: 20,
 
       name: "Pro",
-      description: "Great for professionals.",
+      description: "For serious users aiming for top results.",
       features: ["Feature 1", "Feature 2", "Feature 3"],
 
       highlighted: true,
