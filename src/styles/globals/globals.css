@@ -147,6 +147,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply min-w-full bg-background text-foreground;
   }
 }
