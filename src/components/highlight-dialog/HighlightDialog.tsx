@@ -54,7 +54,7 @@ export default function HighlightDialog({
   };
 
   return (
-    <Dialog open={isOpen} defaultOpen>
+    <Dialog open={isOpen} defaultOpen modal={false}>
       <HighlightOverlay
         targetElement={targetElement}
         isVisible={isOpen}
