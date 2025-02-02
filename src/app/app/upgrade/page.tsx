@@ -57,7 +57,7 @@ export default async function PricingPage() {
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center gap-12 px-4 pb-12 pt-12 md:pt-24">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-12 px-4 py-10">
       <div className="grid gap-2 text-center">
         <h1 className="text-4xl font-semibold xs:text-5xl">Choose Your Plan</h1>
         {/* TODO */}

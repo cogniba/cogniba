@@ -1,6 +1,3 @@
-Fix landing page padding
-Fix app
-
 Refactor game into context
 
 Customize stripe

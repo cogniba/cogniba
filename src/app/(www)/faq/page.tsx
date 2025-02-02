@@ -21,7 +21,7 @@ import { Strong } from "@/components/ui/Strong";
 
 export default function FAQ() {
   return (
-    // <div className="h-full w-full px-4 py-12 md:pt-24">
+    // <div className="h-full w-full px-4 py-10">
     //   <Accordion type="multiple" className="mx-auto max-w-3xl">
     //     {questions.map((question, index) => (
     //       <AccordionItem key={index} value={`item-${index + 1}`}>
