@@ -223,7 +223,7 @@ export default function GameTutorial({
   const router = useRouter();
 
   const { toast } = useToast();
-  const { toggleSidebar } = useSidebar();
+  const { setOpen } = useSidebar();
 
   const updateUser = useCallback(
     async ({ hasFinishedTutorial }: { hasFinishedTutorial: boolean }) => {
@@ -328,7 +328,7 @@ export default function GameTutorial({
 
     const handleLastStep = async () => {
       await updateUser({ hasFinishedTutorial: true });
-      toggleSidebar();
+      setOpen(true);
     };
 
     if (stepRef.current === boardStep) {
@@ -366,7 +366,7 @@ export default function GameTutorial({
     isPlaying,
     updateUser,
     isPlayingAnimation,
-    toggleSidebar,
+    setOpen,
   ]);
 
   return (

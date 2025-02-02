@@ -51,7 +51,7 @@ export default function useGameLogic({
   >(null);
   const [hasReachedNewLevel, setHasReachedNewLevel] = useState(false);
 
-  const { toggleSidebar } = useSidebar();
+  const { setOpen } = useSidebar();
   const { toast } = useToast();
 
   const gameSequence = useRef<number[]>([]);
@@ -168,22 +168,16 @@ export default function useGameLogic({
     }
 
     setIsPlaying(false);
-    toggleSidebar();
+    setOpen(true);
 
     await updateGameData();
-  }, [
-    toggleSidebar,
-    updateGameData,
-    isTutorial,
-    setShowTutorialHint,
-    showFeedback,
-  ]);
+  }, [setOpen, updateGameData, isTutorial, setShowTutorialHint, showFeedback]);
 
   const startPlaying = useCallback(async () => {
     if (!level) return;
 
     setIsPlaying(true);
-    toggleSidebar();
+    setOpen(false);
     setHasReachedNewLevel(false);
 
     gameSequence.current = generateGameSequence(level);
@@ -195,7 +189,7 @@ export default function useGameLogic({
 
     await sleep(DELAY_BEFORE_START);
     await playGame();
-  }, [level, playGame, toggleSidebar]);
+  }, [level, playGame, setOpen]);
 
   const handleButtonPress = useCallback(async () => {
     if (!hasPressedButton.current) {
