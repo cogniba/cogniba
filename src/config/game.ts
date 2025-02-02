@@ -1,5 +1,7 @@
 // TODO
-export const BASE_SEQUENCE_LENGTH = 8;
+const isDevelopment = process.env.NODE_ENV === "development";
+
+export const BASE_SEQUENCE_LENGTH = isDevelopment ? 8 : 20;
 export const NUM_TARGETS = 6;
 export const VISIBLE_SQUARE_DURATION = 1000;
 export const HIDDEN_SQUARE_DURATION = 2000;
