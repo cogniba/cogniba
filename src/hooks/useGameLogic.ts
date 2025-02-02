@@ -14,7 +14,6 @@ import {
   useState,
 } from "react";
 import enterFullScreen from "@/lib/enterFullScreen";
-import exitFullScreen from "@/lib/exitFullScreen";
 import { useToast } from "./use-toast";
 import {
   BASE_SEQUENCE_LENGTH,
@@ -234,7 +233,7 @@ export default function useGameLogic({
     if (isPlaying) {
       enterFullScreen();
     } else {
-      exitFullScreen();
+      // exitFullScreen();
     }
   }, [isPlaying]);
 

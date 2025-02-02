@@ -16,6 +16,7 @@ import useGameLogic from "@/hooks/useGameLogic";
 import { Strong } from "@/components/ui/Strong";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import { useSidebar } from "@/components/ui/sidebar";
 
 const steps = [
   {
@@ -222,6 +223,7 @@ export default function GameTutorial({
   const router = useRouter();
 
   const { toast } = useToast();
+  const { toggleSidebar } = useSidebar();
 
   const updateUser = useCallback(
     async ({ hasFinishedTutorial }: { hasFinishedTutorial: boolean }) => {
@@ -326,6 +328,7 @@ export default function GameTutorial({
 
     const handleLastStep = async () => {
       await updateUser({ hasFinishedTutorial: true });
+      toggleSidebar();
     };
 
     if (stepRef.current === boardStep) {
@@ -363,6 +366,7 @@ export default function GameTutorial({
     isPlaying,
     updateUser,
     isPlayingAnimation,
+    toggleSidebar,
   ]);
 
   return (
