@@ -64,7 +64,7 @@ export default function HighlightDialog({
         hideOverlay
         closeButton={false}
         className={cn(
-          "top-auto z-50 duration-500 data-[state=closed]:duration-500 data-[state=open]:duration-500",
+          "absolute top-auto z-50 duration-500 data-[state=closed]:duration-500 data-[state=open]:duration-500",
           (placement === "top" || placement === "center-top") &&
             "-translate-y-full",
           (placement === "bottom" || placement === "center-bottom") &&

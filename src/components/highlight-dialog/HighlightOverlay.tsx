@@ -54,11 +54,11 @@ export default function HighlightOverlay({
   return (
     <div
       data-state={isVisible ? "open" : "closed"}
-      className="fixed inset-0 z-50 bg-black/50 mix-blend-hard-light data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+      className="absolute inset-0 z-50 bg-black/50 mix-blend-hard-light data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
     >
       <div
         className={cn(
-          "pointer-events-none absolute rounded-lg bg-[#808080] opacity-100",
+          "pointer-events-none fixed rounded-lg bg-[#808080] opacity-100",
           targetElement === "body" ||
             previousTargetElementRef.current === "body"
             ? "transition-opacity duration-500"
