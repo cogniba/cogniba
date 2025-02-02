@@ -27,7 +27,7 @@ export default function AppHeader() {
     return (
       <div
         className={cn(
-          "fixed right-0 top-0 z-[60] m-1 rounded border border-border bg-background transition duration-500",
+          "fixed right-0 top-0 z-[60] m-1 rounded border border-border bg-background transition duration-500 md:hidden",
           !open && "-translate-y-full",
         )}
       >
