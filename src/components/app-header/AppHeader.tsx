@@ -10,17 +10,30 @@ import {
   BreadcrumbPage,
 } from "../ui/breadcrumb";
 import { Separator } from "../ui/separator";
-import { SidebarTrigger } from "../ui/sidebar";
+import { SidebarTrigger, useSidebar } from "../ui/sidebar";
 import { Fragment } from "react";
 import formatPathForHeader from "@/lib/formatPathForHeader";
+import { cn } from "@/lib/cn";
 
 export default function AppHeader() {
   const pathname = usePathname();
   const segments = pathname ? formatPathForHeader(pathname) : [];
   const pathParts = pathname?.split("/").filter(Boolean) || [];
 
-  if (pathname === "/app/play") {
-    return null;
+  const isPlayScreen = pathname === "/app/play";
+  const { open } = useSidebar();
+
+  if (isPlayScreen) {
+    return (
+      <div
+        className={cn(
+          "fixed right-0 top-0 z-50 m-1 rounded border border-border bg-background transition duration-500",
+          !open && "-translate-y-full",
+        )}
+      >
+        <SidebarTrigger className="size-10 [&_svg]:size-6" />
+      </div>
+    );
   }
 
   return (
