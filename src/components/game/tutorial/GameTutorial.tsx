@@ -351,6 +351,8 @@ export default function GameTutorial() {
     setSelectedSquare,
     setIsButtonPressed,
     setIsVisible,
+    setIsTutorial,
+    setShowTutorial,
   ]);
 
   return (
