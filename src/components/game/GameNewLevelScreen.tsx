@@ -1,9 +1,10 @@
 "use client";
 
-import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import GameTutorialSteps, { type StepType } from "./tutorial/GameTutorialSteps";
 import { Strong } from "@/components/ui/Strong";
 import sleep from "@/lib/sleep";
+import { useGameContext } from "@/context/GameContext";
 
 function getSteps(level: number) {
   return [
@@ -47,15 +48,9 @@ function getSteps(level: number) {
   ] satisfies StepType[];
 }
 
-interface GameNewLevelScreenProps {
-  level: number;
-  setIsVisible: Dispatch<SetStateAction<boolean>>;
-}
+export default function GameNewLevelScreen() {
+  const { level, setHasReachedNewLevel } = useGameContext();
 
-export default function GameNewLevelScreen({
-  level,
-  setIsVisible,
-}: GameNewLevelScreenProps) {
   const [step, setStep] = useState(0);
 
   const steps = getSteps(level);
@@ -63,13 +58,13 @@ export default function GameNewLevelScreen({
   useEffect(() => {
     const handleHideScreen = async () => {
       await sleep(500);
-      setIsVisible(false);
+      setHasReachedNewLevel(false);
     };
 
     if (step === steps.length) {
       handleHideScreen();
     }
-  }, [step, setIsVisible, steps.length]);
+  }, [step, setHasReachedNewLevel, steps.length]);
 
   return (
     <GameTutorialSteps
