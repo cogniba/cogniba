@@ -1,6 +1,7 @@
 "use client";
 
 import { DialogTitle } from "@/components/ui/dialog";
+import { useGameContext } from "@/context/GameContext";
 import calculateAccuracy from "@/lib/calculateAccuracy";
 import { cn } from "@/lib/cn";
 import { cva } from "class-variance-authority";
@@ -30,21 +31,10 @@ const boxVariants = cva("flex items-center gap-2 rounded-md py-2 pl-4 border", {
   },
 });
 
-interface GameStatsScreenProps {
-  correctHits: number;
-  incorrectHits: number;
-  missedHits: number;
-  previousLevel: number;
-  newLevel: number;
-}
+export default function GameStatsScreen() {
+  const { correctHits, incorrectHits, missedHits, previousLevel, level } =
+    useGameContext();
 
-export default function GameStatsScreen({
-  correctHits,
-  incorrectHits,
-  missedHits,
-  previousLevel,
-  newLevel,
-}: GameStatsScreenProps) {
   const accuracy = Math.round(
     calculateAccuracy({ correctHits, incorrectHits, missedHits }) * 100,
   );
@@ -85,9 +75,9 @@ export default function GameStatsScreen({
               boxVariants({
                 size: "big",
                 color:
-                  newLevel > previousLevel
+                  level > previousLevel
                     ? "green"
-                    : newLevel === previousLevel
+                    : level === previousLevel
                       ? "blue"
                       : "red",
               }),
@@ -98,7 +88,7 @@ export default function GameStatsScreen({
               <span className="font-semibold">{accuracy}%</span> accuracy
             </div>
           </div>
-          {newLevel > previousLevel && (
+          {level > previousLevel && (
             <div
               className={cn(
                 boxVariants({
@@ -111,13 +101,13 @@ export default function GameStatsScreen({
               <div className="font-medium">Level Increased</div>
             </div>
           )}
-          {newLevel === previousLevel && (
+          {level === previousLevel && (
             <div className={cn(boxVariants({ size: "big", color: "blue" }))}>
               <MoveRightIcon className="size-5 xs:size-6" />
               <div className="font-medium">Level Maintained</div>
             </div>
           )}
-          {newLevel < previousLevel && (
+          {level < previousLevel && (
             <div className={cn(boxVariants({ size: "big", color: "red" }))}>
               <MoveDownRightIcon className="size-5 xs:size-6" />
               <div className="font-medium">Level Decreased</div>
@@ -145,7 +135,7 @@ export default function GameStatsScreen({
                 }),
               )}
             >
-              Level {newLevel ?? 0}
+              Level {level ?? 0}
             </div>
           </div>
         </div>
