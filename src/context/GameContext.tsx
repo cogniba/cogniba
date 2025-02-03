@@ -47,8 +47,9 @@ interface GameContextValue {
   handleButtonPress: () => Promise<void>;
   setSelectedSquare: Dispatch<SetStateAction<number | null>>;
   setIsButtonPressed: Dispatch<SetStateAction<boolean>>;
-  showTutorialHint: boolean;
-  setShowTutorialHint: Dispatch<SetStateAction<boolean>>;
+  showTutorial: boolean;
+  setShowTutorial: Dispatch<SetStateAction<boolean>>;
+  setIsTutorial: Dispatch<SetStateAction<boolean>>;
 }
 
 export const GameContext = createContext<GameContextValue>({
@@ -70,8 +71,9 @@ export const GameContext = createContext<GameContextValue>({
   handleButtonPress: async () => {},
   setSelectedSquare: () => {},
   setIsButtonPressed: () => {},
-  showTutorialHint: false,
-  setShowTutorialHint: () => {},
+  showTutorial: false,
+  setShowTutorial: () => {},
+  setIsTutorial: () => {},
 });
 
 interface GameContextProviderProps {
@@ -96,7 +98,7 @@ export default function GameContextProvider({
   >(null);
   const [isTutorial, setIsTutorial] = useState(false);
   const [showFeedbackEnabled, setShowFeedbackEnabled] = useState(true);
-  const [showTutorialHint, setShowTutorialHint] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   const { setOpen } = useSidebar();
   const { toast } = useToast();
@@ -108,7 +110,7 @@ export default function GameContextProvider({
   const shouldPressButtonRef = useRef(false);
   const maxLevelRef = useRef(-1);
 
-  const isStartScreenVisible = !isPlaying;
+  const isStartScreenVisible = !isPlaying && !isTutorial;
 
   useEffect(() => {
     (async () => {
@@ -129,7 +131,8 @@ export default function GameContextProvider({
 
       setLevel(level);
       setPreviousLevel(level);
-      setIsTutorial(hasFinishedTutorial);
+      setIsTutorial(!hasFinishedTutorial);
+      setShowTutorial(!hasFinishedTutorial);
       setShowFeedbackEnabled(showFeedback);
       maxLevelRef.current = maxLevel;
 
@@ -214,9 +217,9 @@ export default function GameContextProvider({
         correctHitSequenceRef.current[step] &&
         !hasPressedButtonRef.current
       ) {
-        setShowTutorialHint(true);
+        setShowTutorial(true);
         await waitFor(() => hasPressedButtonRef.current);
-        setShowTutorialHint(false);
+        setShowTutorial(false);
       }
 
       setSelectedSquare(null);
@@ -241,7 +244,7 @@ export default function GameContextProvider({
     setOpen(true);
 
     await updateGameData();
-  }, [setOpen, updateGameData, isTutorial, setShowTutorialHint, showFeedback]);
+  }, [setOpen, updateGameData, isTutorial, setShowTutorial, showFeedback]);
 
   const startPlaying = useCallback(async () => {
     if (!level) return;
@@ -328,8 +331,9 @@ export default function GameContextProvider({
         handleButtonPress,
         setSelectedSquare,
         setIsButtonPressed,
-        showTutorialHint,
-        setShowTutorialHint,
+        showTutorial,
+        setShowTutorial,
+        setIsTutorial,
       }}
     >
       {children}

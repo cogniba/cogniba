@@ -206,8 +206,10 @@ export default function GameTutorial() {
     isPlaying,
     setSelectedSquare,
     setIsButtonPressed,
-    showTutorialHint: isVisible,
-    setShowTutorialHint: setIsVisible,
+    showTutorial: isVisible,
+    setShowTutorial: setIsVisible,
+    setIsTutorial,
+    setShowTutorial,
   } = useGameContext();
 
   const [step, setStep] = useState(level === 1 ? 0 : level1BeatStep);
@@ -305,6 +307,8 @@ export default function GameTutorial() {
 
     const handleLastStep = async () => {
       await updateUser({ hasFinishedTutorial: true });
+      setIsTutorial(false);
+      setShowTutorial(false);
       setOpen(true);
     };
 

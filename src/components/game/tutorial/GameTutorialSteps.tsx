@@ -9,7 +9,7 @@ import HighlightDialog, {
 } from "@/components/highlight-dialog/HighlightDialog";
 import GameTutorialTooltip from "./GameTutorialTooltip";
 import { useToast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
+import { useGameContext } from "@/context/GameContext";
 
 export type StepType = {
   title: React.ReactNode;
@@ -40,8 +40,8 @@ export default function GameTutorialSteps({
   isLoading,
 }: GameTutorialStepsProps) {
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
   const { toast } = useToast();
+  const { setIsTutorial, setShowTutorial } = useGameContext();
 
   const handleSkip = useCallback(async () => {
     startTransition(async () => {
@@ -53,10 +53,11 @@ export default function GameTutorialSteps({
       if (!response.ok) {
         toast({ title: "Unexpected error occurred", variant: "destructive" });
       } else {
-        router.refresh();
+        setIsTutorial(false);
+        setShowTutorial(false);
       }
     });
-  }, [toast, router]);
+  }, [setIsTutorial, setShowTutorial, toast]);
 
   const currentStep = steps[step - Number(step >= steps.length)];
   return (
