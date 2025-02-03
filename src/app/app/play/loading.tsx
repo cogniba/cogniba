@@ -1,6 +1,6 @@
 export default function GameLoading() {
   return (
-    <div className="flex h-screen animate-pulse items-center justify-center lg:can-hover:-ml-16">
+    <div className="lg:can-hover:-ml-16 flex h-full animate-pulse items-center justify-center">
       <div className="flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] [container-type:size] md:px-2">
         <div className="my-[1.5cqh] flex-shrink-0 sm:mb-[2.5cqh] sm:mt-[1.5cqh]">
           <div
@@ -22,8 +22,8 @@ export default function GameLoading() {
                     key={i}
                     className="relative flex h-full w-full items-center justify-center"
                   >
-                    <div className="absolute h-[1cqmin] w-[5cqmin] rounded-full bg-overlay-secondary/50"></div>
-                    <div className="absolute h-[1cqmin] w-[5cqmin] rotate-90 rounded-full bg-overlay-secondary/50"></div>
+                    <div className="bg-overlay-secondary/50 absolute h-[1cqmin] w-[5cqmin] rounded-full"></div>
+                    <div className="bg-overlay-secondary/50 absolute h-[1cqmin] w-[5cqmin] rotate-90 rounded-full"></div>
                   </div>
                 ) : (
                   <div key={i} className="h-full w-full">
