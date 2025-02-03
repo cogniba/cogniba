@@ -1,7 +1,7 @@
 import { GamesData } from "@/app/api/analytics/get-data/route";
 import { db } from "@/database";
 import { gamesTable } from "@/database/schemas/gamesTable";
-import calculateAccuracy from "@/lib/calculateAccuracy";
+import calculateAccuracy from "@/lib/game/game-logic/calculateAccuracy";
 import createClient from "@/lib/supabase/server";
 import { avg, count, eq, sql, SQL, sum } from "drizzle-orm";
 import { NextResponse } from "next/server";

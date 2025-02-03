@@ -1,5 +1,5 @@
 import quotes from "@/content/quotes.json";
-import calculateAccuracy from "@/lib/calculateAccuracy";
+import calculateAccuracy from "@/lib/game/game-logic/calculateAccuracy";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";

@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/database";
 import { settingsTable, SettingsType } from "@/database/schemas/settingsTable";
 import createClient from "@/lib/supabase/server";

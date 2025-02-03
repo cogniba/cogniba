@@ -2,7 +2,7 @@
 
 import { DialogTitle } from "@/components/ui/dialog";
 import { useGameContext } from "@/context/GameContext";
-import calculateAccuracy from "@/lib/calculateAccuracy";
+import calculateAccuracy from "@/lib/game/game-logic/calculateAccuracy";
 import { cn } from "@/lib/cn";
 import { cva } from "class-variance-authority";
 import {
