@@ -13,7 +13,7 @@ export default function GamePage() {
   // TODO: suspense
   if (isLoading) {
     return <GameLoading />;
-  } else if (!isTutorial) {
+  } else if (isTutorial) {
     return <GameTutorial />;
   } else {
     return <Game />;
