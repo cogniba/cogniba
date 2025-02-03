@@ -12,11 +12,11 @@ import {
   HIDDEN_SQUARE_DURATION,
   VISIBLE_SQUARE_DURATION,
 } from "@/config/game";
-import useGameLogic from "@/hooks/useGameLogic";
 import { Strong } from "@/components/ui/Strong";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useSidebar } from "@/components/ui/sidebar";
+import { useGameContext } from "@/context/GameContext";
 
 const steps = [
   {
@@ -199,25 +199,22 @@ const level1BeatStep = 8;
 const level2ExplanationStep = 9;
 const lastStep = 11;
 
-interface GameTutorialProps {
-  startingLevel: number;
-  startingMaxLevel: number;
-}
+export default function GameTutorial() {
+  const {
+    level,
+    startPlaying,
+    isPlaying,
+    setSelectedSquare,
+    setIsButtonPressed,
+    showTutorialHint: isVisible,
+    setShowTutorialHint: setIsVisible,
+  } = useGameContext();
 
-export default function GameTutorial({
-  startingLevel,
-  startingMaxLevel,
-}: GameTutorialProps) {
-  const [step, setStep] = useState(startingLevel === 1 ? 0 : level1BeatStep);
-  const [isVisible, setIsVisible] = useState(true);
-  const [tutorialSelectedSquare, setTutorialSelectedSquare] = useState<
-    number | null
-  >(null);
-  const [isTutorialButtonPressed, setIsTutorialButtonPressed] = useState(false);
+  const [step, setStep] = useState(level === 1 ? 0 : level1BeatStep);
   const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
   const [isLoadingGame, setIsLoadingGame] = useState(false);
 
-  const stepRef = useRef(startingLevel === 1 ? 0 : level1BeatStep);
+  const stepRef = useRef(level === 1 ? 0 : level1BeatStep);
 
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -243,26 +240,6 @@ export default function GameTutorial({
     [toast, router],
   );
 
-  const {
-    feedback,
-    isPlaying,
-    startPlaying,
-    correctHits,
-    incorrectHits,
-    missedHits,
-    previousLevel,
-    level,
-    selectedSquare,
-    isButtonPressed,
-    handleButtonPress,
-  } = useGameLogic({
-    startingLevel,
-    startingMaxLevel,
-    showFeedbackEnabled: true,
-    isTutorial: true,
-    setShowTutorialHint: setIsVisible,
-  });
-
   useEffect(() => {
     stepRef.current = step;
   }, [step]);
@@ -272,9 +249,9 @@ export default function GameTutorial({
 
     const boardStepAnimation = async () => {
       while (stepRef.current === boardStep) {
-        setTutorialSelectedSquare(Math.floor(Math.random() * 8));
+        setSelectedSquare(Math.floor(Math.random() * 8));
         await sleep(VISIBLE_SQUARE_DURATION);
-        setTutorialSelectedSquare(null);
+        setSelectedSquare(null);
         await sleep(HIDDEN_SQUARE_DURATION);
       }
       setIsPlayingAnimation(false);
@@ -282,18 +259,18 @@ export default function GameTutorial({
 
     const buttonStepAnimation = async () => {
       while (stepRef.current === buttonStep) {
-        setIsTutorialButtonPressed(true);
+        setIsButtonPressed(true);
         await sleep(400);
-        setIsTutorialButtonPressed(false);
+        setIsButtonPressed(false);
         await sleep(2000);
       }
       setIsPlayingAnimation(false);
     };
     const level1ExplanationAnimation = async () => {
       while (stepRef.current === level1ExplanationStep) {
-        setTutorialSelectedSquare(6);
+        setSelectedSquare(6);
         await sleep(VISIBLE_SQUARE_DURATION);
-        setTutorialSelectedSquare(null);
+        setSelectedSquare(null);
         await sleep(HIDDEN_SQUARE_DURATION);
       }
 
@@ -317,9 +294,9 @@ export default function GameTutorial({
       let square = 5;
 
       while (stepRef.current === level2ExplanationStep) {
-        setTutorialSelectedSquare(square);
+        setSelectedSquare(square);
         await sleep(VISIBLE_SQUARE_DURATION);
-        setTutorialSelectedSquare(null);
+        setSelectedSquare(null);
         await sleep(HIDDEN_SQUARE_DURATION);
         square = square === 5 ? 6 : 5;
       }
@@ -367,6 +344,9 @@ export default function GameTutorial({
     updateUser,
     isPlayingAnimation,
     setOpen,
+    setSelectedSquare,
+    setIsButtonPressed,
+    setIsVisible,
   ]);
 
   return (
@@ -379,25 +359,7 @@ export default function GameTutorial({
         showSkipButton={true}
         isLoading={isPending}
       />
-      <Game
-        feedback={feedback}
-        isStartScreenVisible={false}
-        startPlaying={startPlaying}
-        correctHits={correctHits}
-        incorrectHits={incorrectHits}
-        missedHits={missedHits}
-        previousLevel={previousLevel}
-        level={level}
-        selectedSquare={
-          tutorialSelectedSquare !== null
-            ? tutorialSelectedSquare
-            : selectedSquare
-        }
-        isButtonPressed={isButtonPressed || isTutorialButtonPressed}
-        handleButtonPress={handleButtonPress}
-        hasReachedNewLevel={false}
-        setHasReachedNewLevel={() => {}}
-      />
+      <Game />
     </>
   );
 }
