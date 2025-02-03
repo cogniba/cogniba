@@ -29,15 +29,24 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import createCustomerPortal from "@/actions/stripe/createCustomerPortal";
 import { useAuthContext } from "@/context/AuthContext";
+import getFreePlan from "@/lib/stripe/getFreePlan";
+import redirectToError from "@/actions/redirectToError";
 import { cn } from "@/lib/cn";
+import { Badge } from "../ui/badge";
 
 export default function SidebarUser() {
-  const { status, fullName, email } = useAuthContext();
+  const { status, fullName, email, subscriptionType } = useAuthContext();
   const [isLoggingOut, startLoggingOut] = useTransition();
   const [isOpeningCustomerPortal, startOpeningCustomerPortal] = useTransition();
 
   const { isMobile, setOpenMobile } = useSidebar();
   const router = useRouter();
+
+  const { freePlan, error } = getFreePlan();
+  if (error || !freePlan) {
+    redirectToError("Failed to open customer portal");
+    return;
+  }
 
   const isLoading = status === "loading" || !fullName || !email;
   const isDisabled = isLoading || isLoggingOut || isOpeningCustomerPortal;
@@ -49,12 +58,7 @@ export default function SidebarUser() {
       });
 
       if (error || !url) {
-        const error = new Error("Failed to open customer portal");
-        console.error(error);
-
-        const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-        errorUrl.searchParams.set("message", error.message);
-        router.push(errorUrl.toString());
+        redirectToError("Failed to open customer portal");
         return;
       }
 
@@ -104,6 +108,11 @@ export default function SidebarUser() {
           >
             <DropdownMenuLabel className={cn("p-0 font-normal")}>
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                {subscriptionType !== freePlan.name && (
+                  <Badge className="absolute right-0 top-0 m-1.5 px-1.5 py-0">
+                    Pro
+                  </Badge>
+                )}
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarFallback className="rounded-lg">
                     {fullName?.substring(0, 2) ?? "U"}
@@ -118,20 +127,24 @@ export default function SidebarUser() {
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuGroup>
-              <DropdownMenuItem
-                onClick={() => setOpenMobile(false)}
-                asChild
-                disabled={isDisabled}
-              >
-                <Link href="/app/upgrade">
-                  <SparklesIcon />
-                  Upgrade to Pro
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
+            {subscriptionType === freePlan.name && (
+              <>
+                <DropdownMenuGroup>
+                  <DropdownMenuItem
+                    onClick={() => setOpenMobile(false)}
+                    asChild
+                    disabled={isDisabled}
+                  >
+                    <Link href="/app/upgrade">
+                      <SparklesIcon />
+                      Upgrade to Pro
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
 
-            <DropdownMenuSeparator />
+                <DropdownMenuSeparator />
+              </>
+            )}
 
             <DropdownMenuGroup>
               <DropdownMenuItem
