@@ -3,44 +3,24 @@
 import GameLevelDisplay from "./board/GameLevelDisplay";
 import GameButton from "./board/GameButton";
 import GameBoard from "./board/GameBoard";
-import StartScreen from "./start-screen/GameStartScreen";
+import GameStartScreen from "./start-screen/GameStartScreen";
 
 import { cn } from "@/lib/cn";
-import { type Dispatch, type SetStateAction } from "react";
 import GameNewLevelScreen from "./GameNewLevelScreen";
 import GameConfetti from "./GameConfetti";
+import { useGameContext } from "@/context/GameContext";
 
-interface GameProps {
-  feedback: "correct" | "incorrect" | "missed" | null;
-  isStartScreenVisible: boolean;
-  startPlaying: () => void;
-  correctHits: number | null;
-  incorrectHits: number | null;
-  missedHits: number | null;
-  previousLevel: number;
-  level: number;
-  selectedSquare: number | null;
-  isButtonPressed: boolean;
-  handleButtonPress: () => void;
-  hasReachedNewLevel: boolean;
-  setHasReachedNewLevel: Dispatch<SetStateAction<boolean>>;
-}
+export default function Game() {
+  const {
+    level,
+    previousLevel,
+    feedback,
+    hasReachedNewLevel,
+    selectedSquare,
+    isButtonPressed,
+    handleButtonPress,
+  } = useGameContext();
 
-export default function Game({
-  feedback,
-  isStartScreenVisible,
-  startPlaying,
-  correctHits,
-  incorrectHits,
-  missedHits,
-  previousLevel,
-  level,
-  selectedSquare,
-  isButtonPressed,
-  handleButtonPress,
-  hasReachedNewLevel,
-  setHasReachedNewLevel,
-}: GameProps) {
   const hasIncreasedLevel = level > previousLevel;
 
   return (
@@ -54,20 +34,9 @@ export default function Game({
     >
       <GameConfetti hasIncreasedLevel={hasIncreasedLevel} />
       {hasReachedNewLevel && level < 5 ? (
-        <GameNewLevelScreen
-          level={level}
-          setIsVisible={setHasReachedNewLevel}
-        />
+        <GameNewLevelScreen />
       ) : (
-        <StartScreen
-          visible={isStartScreenVisible}
-          onStart={startPlaying}
-          correctHits={correctHits}
-          incorrectHits={incorrectHits}
-          missedHits={missedHits}
-          previousLevel={previousLevel}
-          newLevel={level}
-        />
+        <GameStartScreen />
       )}
 
       <div className="relative z-20 flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] [container-type:size] md:px-2">
