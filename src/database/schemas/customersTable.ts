@@ -30,4 +30,5 @@ export const customersTable = pgTable("customers", {
   createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
 });
 
+export type SubscriptionType = (typeof planNames)[number];
 export type CustomerType = InferSelectModel<typeof customersTable>;
