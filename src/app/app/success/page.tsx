@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { SuccessScreen } from "@/components/SuccessScreen";
+import redirectToError from "@/actions/redirectToError";
 
 export default async function SuccessPage() {
   const supabase = await createClient();
@@ -14,12 +15,8 @@ export default async function SuccessPage() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    const error = new Error("Failed to load user data");
-    console.error(error);
-
-    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-    errorUrl.searchParams.set("message", error.message);
-    redirect(errorUrl.toString());
+    redirectToError("Failed to load user data");
+    return;
   }
 
   const customer = await db
@@ -33,9 +30,8 @@ export default async function SuccessPage() {
 
   const { error } = await syncStripeData(customer.customerId);
   if (error) {
-    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-    errorUrl.searchParams.set("message", "Failed to sync Stripe data");
-    redirect(errorUrl.toString());
+    redirectToError("Failed to sync Stripe data");
+    return;
   }
 
   return (

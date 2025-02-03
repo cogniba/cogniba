@@ -2,9 +2,9 @@
 
 import createCheckout from "@/actions/stripe/createCheckout";
 import { Button } from "./ui/button";
-import { redirect } from "next/navigation";
 import { useTransition } from "react";
 import LoaderWrapper from "./LoaderWrapper";
+import redirectToError from "@/actions/redirectToError";
 
 interface CheckoutButtonProps {
   children?: React.ReactNode;
@@ -29,12 +29,8 @@ export default function CheckoutButton({
       });
 
       if (error || !url) {
-        const error = new Error("Failed to create checkout session");
-        console.error(error);
-
-        const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-        errorUrl.searchParams.set("message", error.message);
-        redirect(errorUrl.toString());
+        redirectToError("Failed to create checkout session");
+        return;
       }
 
       window.location.href = url;

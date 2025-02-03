@@ -1,6 +1,6 @@
+import redirectToError from "@/actions/redirectToError";
 import createCustomerPortal from "@/actions/stripe/createCustomerPortal";
 import SettingsItem from "@/components/settings/SettingsItem";
-import { redirect } from "next/navigation";
 
 export default async function BillingSetting() {
   const { url: customerPortalUrl } = await createCustomerPortal({
@@ -8,12 +8,8 @@ export default async function BillingSetting() {
   });
 
   if (!customerPortalUrl) {
-    const error = new Error("Failed to create customer portal");
-    console.error(error);
-
-    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-    errorUrl.searchParams.set("message", error.message);
-    redirect(errorUrl.toString());
+    redirectToError("Failed to create customer portal");
+    return;
   }
 
   return (

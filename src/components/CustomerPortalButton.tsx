@@ -1,10 +1,10 @@
 "use client";
 
-import { redirect } from "next/navigation";
 import { Button } from "./ui/button";
 import createCustomerPortal from "@/actions/stripe/createCustomerPortal";
 import { useTransition } from "react";
 import LoaderWrapper from "./LoaderWrapper";
+import redirectToError from "@/actions/redirectToError";
 
 interface CustomerPortalButtonProps {
   children?: React.ReactNode;
@@ -24,12 +24,8 @@ export default function CustomerPortalButton({
       });
 
       if (error || !url) {
-        const error = new Error("Failed to open customer portal");
-        console.error(error);
-
-        const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-        errorUrl.searchParams.set("message", error.message);
-        redirect(errorUrl.toString());
+        redirectToError("Failed to open customer portal");
+        return;
       }
 
       window.location.href = url;

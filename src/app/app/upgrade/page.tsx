@@ -1,3 +1,4 @@
+import redirectToError from "@/actions/redirectToError";
 import CheckoutButton from "@/components/CheckoutButton";
 import CustomerPortalButton from "@/components/CustomerPortalButton";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,6 @@ import createClient from "@/lib/supabase/server";
 import { cn } from "@/lib/cn";
 import { eq } from "drizzle-orm";
 import { CheckIcon } from "lucide-react";
-import { redirect } from "next/navigation";
 
 export default async function PricingPage() {
   const plans = stripeConfig.plans;
@@ -20,22 +20,14 @@ export default async function PricingPage() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    const error = new Error("Failed to get user");
-    console.error(error);
-
-    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-    errorUrl.searchParams.set("message", error.message);
-    redirect(errorUrl.toString());
+    redirectToError("Failed to get user");
+    return;
   }
 
   const { freePlan, error } = getFreePlan();
   if (error || !freePlan) {
-    const error = new Error("Failed to load free pricing plan");
-    console.error(error);
-
-    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-    errorUrl.searchParams.set("message", error.message);
-    redirect(errorUrl.toString());
+    redirectToError("Failed to load free pricing plan");
+    return;
   }
 
   const currentPlanName = await db
@@ -48,16 +40,12 @@ export default async function PricingPage() {
 
   const currentPlan = plans.find((plan) => plan.name === currentPlanName);
   if (!currentPlan) {
-    const error = new Error("Failed to load current plan");
-    console.error(error);
-
-    const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-    errorUrl.searchParams.set("message", error.message);
-    redirect(errorUrl.toString());
+    redirectToError("Failed to load current plan");
+    return;
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-12 px-4 py-10">
+    <div className="flex h-full w-full flex-col items-center gap-12 px-4 pb-12 pt-12 md:pt-24">
       <div className="grid gap-2 text-center">
         <h1 className="text-4xl font-semibold xs:text-5xl">Choose Your Plan</h1>
         {/* TODO */}
