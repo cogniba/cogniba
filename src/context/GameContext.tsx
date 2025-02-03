@@ -285,11 +285,14 @@ export default function GameContextProvider({
   }, [handleShowFeedback, isTutorial]);
 
   useEffect(() => {
-    addEventListener("keydown", (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === "Space") {
         handleButtonPress();
       }
-    });
+    };
+    addEventListener("keydown", handleKeyDown);
+
+    return () => removeEventListener("keydown", handleKeyDown);
   }, [handleButtonPress]);
 
   useEffect(() => {
