@@ -1,14 +1,18 @@
 "use client";
 
 import getProfile from "@/actions/getProfile";
-import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
+import { SubscriptionType } from "../database/schemas/customersTable";
+import getCustomer from "@/actions/getCustomer";
+import getFreePlan from "@/lib/stripe/getFreePlan";
+import redirectToError from "@/actions/redirectToError";
 
 interface AuthContextValue {
   status: "loading" | "authenticated";
   userId?: string;
   fullName?: string;
   email?: string;
+  subscriptionType?: SubscriptionType;
 }
 
 export const AuthContext = createContext<AuthContextValue>({
@@ -16,6 +20,7 @@ export const AuthContext = createContext<AuthContextValue>({
   userId: undefined,
   fullName: undefined,
   email: undefined,
+  subscriptionType: undefined,
 });
 
 interface AuthContextProviderProps {
@@ -25,25 +30,30 @@ interface AuthContextProviderProps {
 export default function AuthContextProvider({
   children,
 }: AuthContextProviderProps) {
-  const router = useRouter();
-
   const [state, setState] = useState<AuthContextValue>({
     status: "loading",
     userId: undefined,
     fullName: undefined,
     email: undefined,
+    subscriptionType: undefined,
   });
 
   useEffect(() => {
     (async () => {
-      const { profile, error } = await getProfile();
-      if (error || !profile) {
-        const error = new Error("Failed to get profile");
-        console.error(error);
+      const { freePlan, error } = getFreePlan();
+      if (error || !freePlan) {
+        redirectToError("Failed to get free plan");
+        return;
+      }
 
-        const errorUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/error`);
-        errorUrl.searchParams.set("message", error.message);
-        router.push(errorUrl.toString());
+      const profilePromise = getProfile();
+      const customerPromise = getCustomer();
+
+      const [{ profile, error: profileError }, { customer }] =
+        await Promise.all([profilePromise, customerPromise]);
+
+      if (profileError || !profile) {
+        redirectToError("Failed to get profile");
         return;
       }
 
@@ -52,9 +62,10 @@ export default function AuthContextProvider({
         userId: profile.userId,
         fullName: profile.fullName,
         email: profile.email,
+        subscriptionType: customer?.subscriptionType || freePlan.name,
       });
     })();
-  }, [router]);
+  }, []);
 
   return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
 }
