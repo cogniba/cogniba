@@ -39,9 +39,9 @@ interface GameContextValue {
   hasReachedNewLevel: boolean;
   setHasReachedNewLevel: Dispatch<SetStateAction<boolean>>;
   isStartScreenVisible: boolean;
-  correctHits: number;
-  incorrectHits: number;
-  missedHits: number;
+  correctHits: number | null;
+  incorrectHits: number | null;
+  missedHits: number | null;
   selectedSquare: number | null;
   isButtonPressed: boolean;
   handleButtonPress: () => Promise<void>;
@@ -62,9 +62,9 @@ export const GameContext = createContext<GameContextValue>({
   hasReachedNewLevel: false,
   setHasReachedNewLevel: () => {},
   isStartScreenVisible: false,
-  correctHits: -1,
-  incorrectHits: -1,
-  missedHits: -1,
+  correctHits: null,
+  incorrectHits: null,
+  missedHits: null,
   selectedSquare: null,
   isButtonPressed: false,
   handleButtonPress: async () => {},
@@ -88,9 +88,9 @@ export default function GameContextProvider({
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
   const [isButtonPressed, setIsButtonPressed] = useState(false);
-  const [correctHits, setCorrectHits] = useState(-1);
-  const [incorrectHits, setIncorrectHits] = useState(-1);
-  const [missedHits, setMissedHits] = useState(-1);
+  const [correctHits, setCorrectHits] = useState<number | null>(null);
+  const [incorrectHits, setIncorrectHits] = useState<number | null>(null);
+  const [missedHits, setMissedHits] = useState<number | null>(null);
   const [feedback, setFeedback] = useState<
     "correct" | "incorrect" | "missed" | null
   >(null);
