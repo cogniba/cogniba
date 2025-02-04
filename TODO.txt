@@ -1,6 +1,4 @@
-Refactor game into context
 Refactor game tutorial into context
-Fix button click on tutorial
 Check mobile
 
 Customize stripe
