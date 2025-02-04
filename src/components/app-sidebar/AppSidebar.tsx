@@ -13,7 +13,7 @@ import SidebarLogo from "./SidebarLogo";
 
 export default function AppSidebar() {
   return (
-    <Sidebar variant="inset">
+    <Sidebar variant="inset" className="pointer-events-auto">
       <SidebarHeader>
         <SidebarLogo />
       </SidebarHeader>
