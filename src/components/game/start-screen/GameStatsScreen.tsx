@@ -35,6 +35,10 @@ export default function GameStatsScreen() {
   const { correctHits, incorrectHits, missedHits, previousLevel, level } =
     useGameContext();
 
+  if (correctHits === null || incorrectHits === null || missedHits === null) {
+    return null;
+  }
+
   const accuracy = Math.round(
     calculateAccuracy({ correctHits, incorrectHits, missedHits }) * 100,
   );
