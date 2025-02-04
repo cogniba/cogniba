@@ -1,4 +1,5 @@
 Refactor game tutorial into context
+Refactor tutorial into config
 Check mobile
 
 Customize stripe
