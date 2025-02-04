@@ -24,7 +24,7 @@ export default function HighlightOverlay({
     targetElement === "body" ? previousTargetElementRef.current : targetElement,
     padding,
   );
-  const { height, width, top, left, element } = elementDimensions ?? {
+  const { height, width, top, left } = elementDimensions ?? {
     height: 0,
     width: 0,
     top: 0,
@@ -40,16 +40,20 @@ export default function HighlightOverlay({
   useEffect(() => {
     if (!elementClickable) return;
 
-    if (element instanceof HTMLElement) {
-      element.style.pointerEvents = "none";
-    }
-
     const newElement = document.querySelector(targetElement);
 
     if (newElement instanceof HTMLElement && targetElement !== "body") {
       newElement.style.pointerEvents = "auto";
+      console.log("1: ", newElement);
     }
-  }, [targetElement, element, elementClickable]);
+
+    return () => {
+      if (newElement instanceof HTMLElement) {
+        newElement.style.pointerEvents = "none";
+        console.log("2: ", newElement);
+      }
+    };
+  }, [targetElement, elementClickable]);
 
   return (
     <div
@@ -58,7 +62,7 @@ export default function HighlightOverlay({
     >
       <div
         className={cn(
-          "pointer-events-none fixed rounded-lg bg-[#808080] opacity-100",
+          "fixed rounded-lg bg-[#808080] opacity-100",
           targetElement === "body" ||
             previousTargetElementRef.current === "body"
             ? "transition-opacity duration-500"
