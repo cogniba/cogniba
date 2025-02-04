@@ -17,40 +17,25 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useGameTutorialContext } from "@/context/GameTutorialContext";
 
-interface GameTutorialTooltipProps {
-  title: React.ReactNode;
-  content: React.ReactNode;
-  showSkipButton?: boolean;
-  hideBackButton?: boolean;
-  hidePrimaryButton?: boolean;
-  primaryButtonText?: string;
-  isLoading?: boolean;
+export default function GameTutorialTooltip() {
+  const { steps, step, setStep, isLoading, handleFinishTutorial } =
+    useGameTutorialContext();
 
-  handlePrimaryButtonClick: () => void;
-  handleBackButtonClick: () => void;
-  handleSkipButtonClick: () => void;
-}
+  const currentStep = steps[step - Number(step >= steps.length)];
+  const showSkipButton = step === 0;
 
-export default function GameTutorialTooltip({
-  title,
-  content,
-  showSkipButton = false,
-  hideBackButton = false,
-  hidePrimaryButton = false,
-  primaryButtonText = "Next",
-  isLoading = false,
-
-  handlePrimaryButtonClick,
-  handleBackButtonClick,
-  handleSkipButtonClick,
-}: GameTutorialTooltipProps) {
   return (
     <>
       <DialogHeader className="pb-1">
-        <DialogTitle className="text-2xl font-semibold">{title}</DialogTitle>
+        <DialogTitle className="text-2xl font-semibold">
+          {currentStep.title}
+        </DialogTitle>
       </DialogHeader>
-      <div className="pb-2.5 text-secondary-foreground">{content}</div>
+      <div className="pb-2.5 text-secondary-foreground">
+        {currentStep.content}
+      </div>
       <DialogFooter className="flex flex-row items-center justify-between sm:justify-between">
         {showSkipButton ? (
           <AlertDialog>
@@ -79,7 +64,7 @@ export default function GameTutorialTooltip({
                 <AlertDialogAction
                   onClick={(e) => {
                     e.preventDefault();
-                    handleSkipButtonClick();
+                    handleFinishTutorial();
                   }}
                 >
                   <LoaderWrapper loading={isLoading}>Skip</LoaderWrapper>
@@ -91,19 +76,22 @@ export default function GameTutorialTooltip({
           <span></span>
         )}
         <div className="flex items-center justify-end gap-4">
-          {!hideBackButton && (
+          {!currentStep.hideBackButton && (
             <Button
               variant="secondary"
-              onClick={handleBackButtonClick}
+              onClick={() => setStep((prevStep) => prevStep - 1)}
               disabled={isLoading}
             >
               Back
             </Button>
           )}
-          {!hidePrimaryButton && (
-            <Button onClick={handlePrimaryButtonClick} disabled={isLoading}>
+          {!currentStep.hidePrimaryButton && (
+            <Button
+              onClick={() => setStep((prevStep) => prevStep + 1)}
+              disabled={isLoading}
+            >
               <LoaderWrapper loading={isLoading}>
-                {primaryButtonText}
+                {currentStep.primaryButtonText}
               </LoaderWrapper>
             </Button>
           )}
