@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import GameTutorialSteps, { type StepType } from "./tutorial/GameTutorialSteps";
+import { useEffect } from "react";
+import GameTutorialSteps from "./tutorial/GameTutorialSteps";
 import { Strong } from "@/components/ui/Strong";
 import sleep from "@/lib/sleep";
 import { useGameContext } from "@/context/GameContext";
+import { StepType } from "@/config/gameTutorial";
+import { useGameTutorialContext } from "@/context/GameTutorialContext";
 
 function getSteps(level: number) {
   return [
@@ -50,8 +52,7 @@ function getSteps(level: number) {
 
 export default function GameNewLevelScreen() {
   const { level, setHasReachedNewLevel } = useGameContext();
-
-  const [step, setStep] = useState(0);
+  const { step } = useGameTutorialContext();
 
   const steps = getSteps(level);
 
@@ -66,13 +67,5 @@ export default function GameNewLevelScreen() {
     }
   }, [step, setHasReachedNewLevel, steps.length]);
 
-  return (
-    <GameTutorialSteps
-      isVisible={true}
-      setStep={setStep}
-      showSkipButton={false}
-      step={step}
-      steps={steps}
-    />
-  );
+  return <GameTutorialSteps showSkipButton={false} />;
 }

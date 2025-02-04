@@ -8,7 +8,7 @@ export default function GameTutorial() {
   return (
     <>
       <GameTutorialContextProvider>
-        <GameTutorialSteps />
+        <GameTutorialSteps showSkipButton={true} />
       </GameTutorialContextProvider>
       <Game />
     </>

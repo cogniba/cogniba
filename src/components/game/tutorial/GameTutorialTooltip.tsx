@@ -19,12 +19,18 @@ import {
 } from "@/components/ui/dialog";
 import { useGameTutorialContext } from "@/context/GameTutorialContext";
 
-export default function GameTutorialTooltip() {
+interface GameTutorialTooltipProps {
+  showSkipButton: boolean;
+}
+
+export default function GameTutorialTooltip({
+  showSkipButton,
+}: GameTutorialTooltipProps) {
   const { steps, step, setStep, isLoading, handleFinishTutorial } =
     useGameTutorialContext();
 
   const currentStep = steps[step - Number(step >= steps.length)];
-  const showSkipButton = step === 0;
+  const skipButton = showSkipButton && step === 0;
 
   return (
     <>
@@ -37,7 +43,7 @@ export default function GameTutorialTooltip() {
         {currentStep.content}
       </div>
       <DialogFooter className="flex flex-row items-center justify-between sm:justify-between">
-        {showSkipButton ? (
+        {skipButton ? (
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="outline" disabled={isLoading}>

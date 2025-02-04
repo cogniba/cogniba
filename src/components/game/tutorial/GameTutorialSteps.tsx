@@ -2,7 +2,13 @@ import HighlightDialog from "@/components/highlight-dialog/HighlightDialog";
 import GameTutorialTooltip from "./GameTutorialTooltip";
 import { useGameTutorialContext } from "@/context/GameTutorialContext";
 
-export default function GameTutorialSteps() {
+interface GameTutorialStepsProps {
+  showSkipButton: boolean;
+}
+
+export default function GameTutorialSteps({
+  showSkipButton,
+}: GameTutorialStepsProps) {
   const { steps, step, isVisible } = useGameTutorialContext();
 
   const currentStep = steps[step - Number(step >= steps.length)];
@@ -13,7 +19,7 @@ export default function GameTutorialSteps() {
       elementClickable={currentStep.elementClickable}
       targetElement={currentStep.target}
     >
-      <GameTutorialTooltip />
+      <GameTutorialTooltip showSkipButton={showSkipButton} />
     </HighlightDialog>
   );
 }
