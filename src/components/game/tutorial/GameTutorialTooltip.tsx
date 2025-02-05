@@ -97,7 +97,7 @@ export default function GameTutorialTooltip({
               disabled={isLoading}
             >
               <LoaderWrapper loading={isLoading}>
-                {currentStep.primaryButtonText}
+                {currentStep.primaryButtonText ?? "Next"}
               </LoaderWrapper>
             </Button>
           )}
