@@ -54,10 +54,11 @@ export default function GameTutorialContextProvider({
     setIsButtonPressed,
     showTutorial: isVisible,
     setShowTutorial: setIsVisible,
+    isTutorial,
     setIsTutorial,
     setShowTutorial,
   } = useGameContext();
-  const { steps, stepsInfo } = gameTutorialConfig;
+  const { steps, getNewLevelSteps, stepsInfo } = gameTutorialConfig;
 
   const [step, setStep] = useState(level === 1 ? 0 : stepsInfo.level1BeatStep);
   const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
@@ -215,7 +216,7 @@ export default function GameTutorialContextProvider({
         isVisible,
         isLoading: isPending,
         handleFinishTutorial,
-        steps,
+        steps: isTutorial ? steps : getNewLevelSteps(level),
       }}
     >
       {children}
