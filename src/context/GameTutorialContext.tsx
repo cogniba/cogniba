@@ -52,7 +52,6 @@ export default function GameTutorialContextProvider({
     setSelectedSquare,
     setIsButtonPressed,
     showTutorial: isVisible,
-    setShowTutorial: setIsVisible,
     isTutorial,
     setIsTutorial,
     setShowTutorial,
@@ -126,10 +125,10 @@ export default function GameTutorialContextProvider({
     };
 
     const startTutorialGame = async () => {
-      setIsVisible(false);
+      setShowTutorial(false);
       await startPlaying();
       setStep((step) => step + 1);
-      setIsVisible(true);
+      setShowTutorial(true);
     };
 
     const handleStartGameDelay = async () => {
@@ -192,7 +191,6 @@ export default function GameTutorialContextProvider({
     setOpen,
     setSelectedSquare,
     setIsButtonPressed,
-    setIsVisible,
     setIsTutorial,
     setShowTutorial,
     handleFinishTutorial,
