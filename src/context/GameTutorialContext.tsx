@@ -46,7 +46,6 @@ export default function GameTutorialContextProvider({
   children,
 }: GameTutorialContextProviderProps) {
   const {
-    isLoading,
     level,
     startPlaying,
     isPlaying,
@@ -62,7 +61,7 @@ export default function GameTutorialContextProvider({
 
   const [step, setStep] = useState(-1);
   const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
-  const [isLoadingGame, setIsLoadingGame] = useState(false);
+  // const [isLoadingGame, setIsLoadingGame] = useState(false);
 
   const stepRef = useRef(-1);
 
@@ -86,13 +85,6 @@ export default function GameTutorialContextProvider({
       }
     });
   }, [toast, setIsTutorial, setShowTutorial]);
-
-  useEffect(() => {
-    if (isLoading || step !== -1) return;
-
-    setStep(level === 1 ? 0 : stepsInfo.level1BeatStep);
-    stepRef.current = level === 1 ? 0 : stepsInfo.level1BeatStep;
-  }, [isLoading, level, step, stepsInfo.level1BeatStep]);
 
   useEffect(() => {
     stepRef.current = step;
@@ -139,9 +131,9 @@ export default function GameTutorialContextProvider({
     };
 
     const handleStartGameDelay = async () => {
-      setIsLoadingGame(true);
+      // setIsLoadingGame(true);
       await sleep(DELAY_BEFORE_START);
-      setIsLoadingGame(false);
+      // setIsLoadingGame(false);
     };
 
     const level2ExplanationAnimation = async () => {
@@ -216,7 +208,8 @@ export default function GameTutorialContextProvider({
   return (
     <GameTutorialContext.Provider
       value={{
-        step: step - Number(isLoadingGame),
+        // step: step - Number(isLoadingGame),
+        step,
         setStep,
         isVisible,
         isLoading: isPending,
