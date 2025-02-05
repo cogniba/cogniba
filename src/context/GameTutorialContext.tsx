@@ -47,6 +47,7 @@ export default function GameTutorialContextProvider({
   children,
 }: GameTutorialContextProviderProps) {
   const {
+    isLoading,
     level,
     startPlaying,
     isPlaying,
@@ -84,11 +85,17 @@ export default function GameTutorialContextProvider({
       } else {
         setIsTutorial(false);
         setShowTutorial(false);
-        setStep(0);
         router.refresh();
       }
     });
   }, [toast, setIsTutorial, setShowTutorial, router]);
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    setStep(level === 1 ? 0 : stepsInfo.level1BeatStep);
+    stepRef.current = level === 1 ? 0 : stepsInfo.level1BeatStep;
+  }, [isLoading, level, stepsInfo.level1BeatStep]);
 
   useEffect(() => {
     stepRef.current = step;
