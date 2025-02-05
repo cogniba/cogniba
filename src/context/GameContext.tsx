@@ -88,7 +88,7 @@ export default function GameContextProvider({
   showFeedbackEnabled,
 }: GameContextProviderProps) {
   const [level, setLevel] = useState(startingLevel);
-  const [previousLevel, setPreviousLevel] = useState(-1);
+  const [previousLevel, setPreviousLevel] = useState(startingLevel);
   const [hasReachedNewLevel, setHasReachedNewLevel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
