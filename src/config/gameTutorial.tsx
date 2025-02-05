@@ -206,7 +206,7 @@ const gameTutorialConfig = {
     level1PlayStep: 7,
     level1BeatStep: 8,
     level2ExplanationStep: 9,
-    lastStep: 1,
+    lastStep: 11,
   } satisfies StepsInfoType,
 };
 
