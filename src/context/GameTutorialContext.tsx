@@ -59,11 +59,11 @@ export default function GameTutorialContextProvider({
   } = useGameContext();
   const { tutorialSteps, getNewLevelSteps, stepsInfo } = gameTutorialConfig;
 
-  const [step, setStep] = useState(-1);
+  const [step, setStep] = useState(level === 1 ? 0 : stepsInfo.level1BeatStep);
   const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
   // const [isLoadingGame, setIsLoadingGame] = useState(false);
 
-  const stepRef = useRef(-1);
+  const stepRef = useRef(level === 1 ? 0 : stepsInfo.level1BeatStep);
 
   const [isPending, startTransition] = useTransition();
 
