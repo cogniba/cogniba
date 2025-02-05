@@ -18,7 +18,6 @@ import {
   HIDDEN_SQUARE_DURATION,
   VISIBLE_SQUARE_DURATION,
 } from "@/config/game";
-import { useRouter } from "next/navigation";
 import gameTutorialConfig, { StepType } from "@/config/gameTutorial";
 
 interface GameTutorialContextValue {
@@ -66,9 +65,9 @@ export default function GameTutorialContextProvider({
   const [isLoadingGame, setIsLoadingGame] = useState(false);
 
   const stepRef = useRef(level === 1 ? 0 : stepsInfo.level1BeatStep);
+  const hasFetchInitialData = useRef(false);
 
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
 
   const { toast } = useToast();
   const { setOpen } = useSidebar();
@@ -85,14 +84,14 @@ export default function GameTutorialContextProvider({
       } else {
         setIsTutorial(false);
         setShowTutorial(false);
-        router.refresh();
       }
     });
-  }, [toast, setIsTutorial, setShowTutorial, router]);
+  }, [toast, setIsTutorial, setShowTutorial]);
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading || hasFetchInitialData.current) return;
 
+    hasFetchInitialData.current = true;
     setStep(level === 1 ? 0 : stepsInfo.level1BeatStep);
     stepRef.current = level === 1 ? 0 : stepsInfo.level1BeatStep;
   }, [isLoading, level, stepsInfo.level1BeatStep]);
