@@ -70,10 +70,7 @@ export default function GameTutorialContextProvider({
   const { toast } = useToast();
   const { setOpen } = useSidebar();
 
-  console.log("Root");
-
   const handleFinishTutorial = useCallback(async () => {
-    console.log("handleFinishTutorial");
     startTransition(async () => {
       const response = await fetch("/api/user/update-user", {
         method: "POST",
@@ -85,18 +82,17 @@ export default function GameTutorialContextProvider({
       } else {
         setIsTutorial(false);
         setShowTutorial(false);
+        setStep(0);
         setOpen(true);
       }
     });
   }, [setIsTutorial, setOpen, setShowTutorial, toast]);
 
   useEffect(() => {
-    console.log("useEffect 1");
     stepRef.current = step;
   }, [step]);
 
   useEffect(() => {
-    console.log("useEffect 2");
     if (!isVisible) return;
 
     const boardStepAnimation = async () => {

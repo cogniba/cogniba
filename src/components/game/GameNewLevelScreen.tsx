@@ -10,6 +10,9 @@ export default function GameNewLevelScreen() {
   const { setHasReachedNewLevel } = useGameContext();
   const { step, steps } = useGameTutorialContext();
 
+  console.log(step);
+  console.log(steps);
+
   useEffect(() => {
     const handleHideScreen = async () => {
       await sleep(500);
