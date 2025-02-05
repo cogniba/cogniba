@@ -60,12 +60,11 @@ export default function GameTutorialContextProvider({
   } = useGameContext();
   const { tutorialSteps, getNewLevelSteps, stepsInfo } = gameTutorialConfig;
 
-  const [step, setStep] = useState(level === 1 ? 0 : stepsInfo.level1BeatStep);
+  const [step, setStep] = useState(-1);
   const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
   const [isLoadingGame, setIsLoadingGame] = useState(false);
 
-  const stepRef = useRef(level === 1 ? 0 : stepsInfo.level1BeatStep);
-  const hasFetchInitialData = useRef(false);
+  const stepRef = useRef(-1);
 
   const [isPending, startTransition] = useTransition();
 
@@ -89,12 +88,11 @@ export default function GameTutorialContextProvider({
   }, [toast, setIsTutorial, setShowTutorial]);
 
   useEffect(() => {
-    if (isLoading || hasFetchInitialData.current) return;
+    if (isLoading || step !== -1) return;
 
-    hasFetchInitialData.current = true;
     setStep(level === 1 ? 0 : stepsInfo.level1BeatStep);
     stepRef.current = level === 1 ? 0 : stepsInfo.level1BeatStep;
-  }, [isLoading, level, stepsInfo.level1BeatStep]);
+  }, [isLoading, level, step, stepsInfo.level1BeatStep]);
 
   useEffect(() => {
     stepRef.current = step;
