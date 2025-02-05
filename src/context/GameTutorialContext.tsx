@@ -80,12 +80,11 @@ export default function GameTutorialContextProvider({
         toast({ title: "Unexpected error occurred", variant: "destructive" });
       } else {
         setIsTutorial(false);
-        setShowTutorial(false);
         setStep(0);
         setOpen(true);
       }
     });
-  }, [setIsTutorial, setOpen, setShowTutorial, toast]);
+  }, [setIsTutorial, setOpen, toast]);
 
   useEffect(() => {
     stepRef.current = step;

@@ -33,7 +33,7 @@ export default function Game() {
       )}
     >
       <GameConfetti hasIncreasedLevel={hasIncreasedLevel} />
-      {hasReachedNewLevel && level < 5 ? (
+      {hasReachedNewLevel && level < 5 && level > 2 ? (
         <GameNewLevelScreen />
       ) : (
         <GameStartScreen />
