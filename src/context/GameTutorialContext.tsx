@@ -84,7 +84,7 @@ export default function GameTutorialContextProvider({
       } else {
         setIsTutorial(false);
         setShowTutorial(false);
-        setStep(1);
+        setStep(0);
         router.refresh();
       }
     });
