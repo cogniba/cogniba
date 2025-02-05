@@ -23,7 +23,7 @@ export type StepsInfoType = {
 };
 
 const gameTutorialConfig = {
-  steps: [
+  tutorialSteps: [
     {
       title: (
         <>
