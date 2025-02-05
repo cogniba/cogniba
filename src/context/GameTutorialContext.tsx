@@ -81,10 +81,12 @@ export default function GameTutorialContextProvider({
       if (!response.ok) {
         toast({ title: "Unexpected error occurred", variant: "destructive" });
       } else {
+        setIsTutorial(false);
+        setShowTutorial(false);
         router.refresh();
       }
     });
-  }, [toast, router]);
+  }, [toast, setIsTutorial, setShowTutorial, router]);
 
   useEffect(() => {
     stepRef.current = step;
