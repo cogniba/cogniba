@@ -12,6 +12,7 @@ export default function GameTutorialSteps({
   const { steps, step, isVisible } = useGameTutorialContext();
 
   const currentStep = steps[step - Number(step >= steps.length)];
+
   return (
     <HighlightDialog
       isOpen={step >= steps.length ? false : isVisible}
