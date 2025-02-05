@@ -61,7 +61,7 @@ export default function GameTutorialContextProvider({
 
   const [step, setStep] = useState(level === 1 ? 0 : stepsInfo.level1BeatStep);
   const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
-  // const [isLoadingGame, setIsLoadingGame] = useState(false);
+  const [isLoadingGame, setIsLoadingGame] = useState(false);
 
   const stepRef = useRef(level === 1 ? 0 : stepsInfo.level1BeatStep);
 
@@ -131,9 +131,9 @@ export default function GameTutorialContextProvider({
     };
 
     const handleStartGameDelay = async () => {
-      // setIsLoadingGame(true);
+      setIsLoadingGame(true);
       await sleep(DELAY_BEFORE_START);
-      // setIsLoadingGame(false);
+      setIsLoadingGame(false);
     };
 
     const level2ExplanationAnimation = async () => {
@@ -208,8 +208,7 @@ export default function GameTutorialContextProvider({
   return (
     <GameTutorialContext.Provider
       value={{
-        // step: step - Number(isLoadingGame),
-        step,
+        step: step - Number(isLoadingGame),
         setStep,
         isVisible,
         isLoading: isPending,
