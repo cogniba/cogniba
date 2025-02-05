@@ -199,8 +199,8 @@ const gameTutorialConfig = {
     },
   ] satisfies StepType[],
 
-  getNewLevelSteps: (level: number) =>
-    [
+  getNewLevelSteps: (level: number) => {
+    return [
       {
         title: (
           <>
@@ -238,7 +238,8 @@ const gameTutorialConfig = {
         hideBackButton: true,
         primaryButtonText: "Okay",
       },
-    ] satisfies StepType[],
+    ] satisfies StepType[];
+  },
 
   stepsInfo: {
     boardStep: 3,
