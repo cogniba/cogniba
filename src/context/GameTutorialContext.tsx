@@ -26,7 +26,7 @@ interface GameTutorialContextValue {
   setStep: React.Dispatch<React.SetStateAction<number>>;
   isVisible: boolean;
   isLoading: boolean;
-  handleFinishTutorial: () => void;
+  handleFinishTutorial: () => Promise<void>;
   steps: StepType[];
 }
 
@@ -35,7 +35,7 @@ export const GameTutorialContext = createContext<GameTutorialContextValue>({
   setStep: () => {},
   isVisible: false,
   isLoading: false,
-  handleFinishTutorial: () => {},
+  handleFinishTutorial: async () => {},
   steps: [],
 });
 

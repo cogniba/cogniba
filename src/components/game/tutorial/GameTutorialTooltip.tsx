@@ -68,9 +68,9 @@ export default function GameTutorialTooltip({
                   Cancel
                 </AlertDialogCancel>
                 <AlertDialogAction
-                  onClick={(e) => {
+                  onClick={async (e) => {
                     e.preventDefault();
-                    handleFinishTutorial();
+                    await handleFinishTutorial();
                   }}
                 >
                   <LoaderWrapper loading={isLoading}>Skip</LoaderWrapper>
