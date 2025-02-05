@@ -1,6 +1,5 @@
 "use client";
 
-import redirectToError from "@/actions/redirectToError";
 import { useSidebar } from "@/components/ui/sidebar";
 import {
   BASE_SEQUENCE_LENGTH,
@@ -10,7 +9,6 @@ import {
 } from "@/config/game";
 import { useToast } from "@/hooks/use-toast";
 import enterFullScreen from "@/lib/enterFullScreen";
-import fetchGameData from "@/lib/game/fetchGameData";
 import calculateNewLevel from "@/lib/game/game-logic/calculateNewLevel";
 import generateGameSequence from "@/lib/game/game-logic/generateGameSequence";
 import getCorrectHitSequence from "@/lib/game/game-logic/getCorrectHitSequence";
@@ -29,7 +27,6 @@ import {
 } from "react";
 
 interface GameContextValue {
-  isLoading: boolean;
   isTutorial: boolean;
   level: number;
   startPlaying: () => Promise<void>;
@@ -53,7 +50,6 @@ interface GameContextValue {
 }
 
 export const GameContext = createContext<GameContextValue>({
-  isLoading: true,
   isTutorial: false,
   level: -1,
   startPlaying: async () => {},
@@ -78,13 +74,20 @@ export const GameContext = createContext<GameContextValue>({
 
 interface GameContextProviderProps {
   children: React.ReactNode;
+  startingLevel: number;
+  hasFinishedTutorial: boolean;
+  showFeedbackEnabled: boolean;
+  maxLevel: number;
 }
 
 export default function GameContextProvider({
   children,
+  startingLevel,
+  maxLevel,
+  hasFinishedTutorial,
+  showFeedbackEnabled,
 }: GameContextProviderProps) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [level, setLevel] = useState(-1);
+  const [level, setLevel] = useState(startingLevel);
   const [previousLevel, setPreviousLevel] = useState(-1);
   const [hasReachedNewLevel, setHasReachedNewLevel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -96,9 +99,8 @@ export default function GameContextProvider({
   const [feedback, setFeedback] = useState<
     "correct" | "incorrect" | "missed" | null
   >(null);
-  const [isTutorial, setIsTutorial] = useState(false);
-  const [showFeedbackEnabled, setShowFeedbackEnabled] = useState(true);
-  const [showTutorial, setShowTutorial] = useState(false);
+  const [isTutorial, setIsTutorial] = useState(!hasFinishedTutorial);
+  const [showTutorial, setShowTutorial] = useState(!hasFinishedTutorial);
 
   const { setOpen } = useSidebar();
   const { toast } = useToast();
@@ -108,37 +110,9 @@ export default function GameContextProvider({
   const playerHitSequenceRef = useRef<boolean[]>([]);
   const hasPressedButtonRef = useRef(true);
   const shouldPressButtonRef = useRef(false);
-  const maxLevelRef = useRef(-1);
+  const maxLevelRef = useRef(maxLevel);
 
   const isStartScreenVisible = !isPlaying && !isTutorial;
-
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-
-      const { level, maxLevel, showFeedback, hasFinishedTutorial, error } =
-        await fetchGameData();
-      if (
-        error ||
-        !level ||
-        !maxLevel ||
-        showFeedback === undefined ||
-        hasFinishedTutorial === undefined
-      ) {
-        redirectToError("Error getting game data");
-        return;
-      }
-
-      setLevel(level);
-      setPreviousLevel(level);
-      setIsTutorial(!hasFinishedTutorial);
-      setShowTutorial(!hasFinishedTutorial);
-      setShowFeedbackEnabled(showFeedback);
-      maxLevelRef.current = maxLevel;
-
-      setIsLoading(false);
-    })();
-  }, []);
 
   const showFeedback = useCallback(
     async (feedback: "correct" | "incorrect" | "missed") => {
@@ -316,7 +290,6 @@ export default function GameContextProvider({
   return (
     <GameContext.Provider
       value={{
-        isLoading,
         isTutorial,
         level,
         startPlaying,
