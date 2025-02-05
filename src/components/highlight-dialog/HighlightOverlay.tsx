@@ -44,13 +44,11 @@ export default function HighlightOverlay({
 
     if (newElement instanceof HTMLElement && targetElement !== "body") {
       newElement.style.pointerEvents = "auto";
-      console.log("1: ", newElement);
     }
 
     return () => {
       if (newElement instanceof HTMLElement) {
         newElement.style.pointerEvents = "none";
-        console.log("2: ", newElement);
       }
     };
   }, [targetElement, elementClickable]);
