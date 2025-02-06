@@ -127,6 +127,7 @@ export default function GameTutorialContextProvider({
       setShowTutorial(false);
       await startPlaying();
       setStep((step) => step + 1);
+      await sleep(500);
       setShowTutorial(true);
     };
 
