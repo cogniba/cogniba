@@ -54,7 +54,7 @@ export default function HighlightDialog({
   };
 
   return (
-    <Dialog open={isOpen} defaultOpen aria-describedby="highlight-dialog">
+    <Dialog open={isOpen} defaultOpen>
       <HighlightOverlay
         targetElement={targetElement}
         isVisible={isOpen}
@@ -72,6 +72,7 @@ export default function HighlightDialog({
           placement === "center" && "top-1/2",
         )}
         style={styles[placement]}
+        aria-describedby={undefined}
       >
         {placement !== "center" && (
           <HighlightDialogArrow

@@ -22,16 +22,12 @@ export default function GameStartScreen() {
         data-state={isStartScreenVisible ? "open" : "closed"}
         className="pointer-events-auto absolute inset-0 z-40 bg-black/80 backdrop-blur-sm data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
       ></div>
-      <Dialog
-        defaultOpen
-        open={isStartScreenVisible}
-        modal={false}
-        aria-describedby="game-start-screen"
-      >
+      <Dialog defaultOpen open={isStartScreenVisible} modal={false}>
         <DialogContent
           className="absolute z-40 duration-500 data-[state=closed]:duration-500 data-[state=open]:duration-500 sm:max-w-lg"
           closeButton={false}
           hideOverlay
+          aria-describedby={undefined}
         >
           <div className="flex w-full max-w-lg flex-col justify-center">
             {!hasStatistics ? <GameWelcomeScreen /> : <GameStatsScreen />}
