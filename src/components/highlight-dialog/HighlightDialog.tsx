@@ -54,7 +54,7 @@ export default function HighlightDialog({
   };
 
   return (
-    <Dialog open={isOpen} defaultOpen>
+    <Dialog open={isOpen} defaultOpen aria-describedby="highlight-dialog">
       <HighlightOverlay
         targetElement={targetElement}
         isVisible={isOpen}
