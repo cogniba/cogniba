@@ -19,7 +19,6 @@ Lighthouse
 
 Change full screen
 
-Accessibility (aria-describedby)
 Playwright tests
 GitHub actions
 Upgrade to Next.js 15
