@@ -1,5 +1,3 @@
-Error in tutorial
-Warnings in tutorial
 Pointer events auto in button
 Check mobile
 Rename config
