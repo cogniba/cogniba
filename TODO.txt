@@ -1,15 +1,10 @@
 Error in tutorial
-Check mobile
 Rename config
 
 Customize stripe
  ⚠ Webpack is configured while Turbopack is not, which may cause problems.
  ⚠ See instructions if you need to configure Turbopack:
   https://nextjs.org/docs/app/api-reference/next-config-js/turbo
-
-Stripe
-Row level security on Drizzle ORM
-Triggers and functions on Drizzle ORM
 
 Remove useEffect when fetching quote
 
@@ -19,9 +14,15 @@ Lighthouse
 
 Change full screen
 
+Stripe
+Row level security on Drizzle ORM
+Triggers and functions on Drizzle ORM
+
 Playwright tests
 GitHub actions
 Upgrade to Next.js 15
+
+tRPC
 
 Track how much time has been spent with the tab open
 Streak system
