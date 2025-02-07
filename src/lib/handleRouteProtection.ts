@@ -1,5 +1,7 @@
 import { NextURL } from "next/dist/server/web/next-url";
-import { protectedRoutes, RouteMatch } from "@/config/routeProtectionConfig";
+import routeProtectionConfig, {
+  RouteMatch,
+} from "@/config/routeProtectionConfig";
 
 interface HandleAuthorizationParams {
   isSignedIn: boolean;
@@ -11,6 +13,7 @@ export default function handleRouteProtection({
   nextUrl,
 }: HandleAuthorizationParams): { redirectUrl: NextURL | null } {
   const pathname = nextUrl.pathname;
+  const { protectedRoutes } = routeProtectionConfig;
 
   const matchesRoute = (route: RouteMatch) =>
     route.type === "exact"
