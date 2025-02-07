@@ -1,5 +1,3 @@
-import { DeepReadonly } from "@/lib/typescript/DeepReadOnly";
-
 export type PlanType = {
   priceId: string;
   price: number;
@@ -11,10 +9,6 @@ export type PlanType = {
 };
 
 const isDevelopment = process.env.NODE_ENV === "development";
-
-interface StripeConfig {
-  plans: PlanType[];
-}
 
 const stripeConfig = {
   plans: [
@@ -37,6 +31,6 @@ const stripeConfig = {
       highlighted: true,
     },
   ] satisfies PlanType[],
-} as DeepReadonly<StripeConfig>;
+} as const;
 
 export default stripeConfig;
