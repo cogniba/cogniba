@@ -19,11 +19,12 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { navigationItems } from "@/config/landing-page/navigationConfig";
 import Link from "next/link";
+import navigationConfig from "@/config/landing-page/navigationConfig";
 
 export default function MobileHeader() {
   const { setOpenMobile } = useSidebar();
+  const { navigationItems } = navigationConfig;
 
   return (
     <>

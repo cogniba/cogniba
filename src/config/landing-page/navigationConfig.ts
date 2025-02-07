@@ -1,20 +1,28 @@
 import {
+  LucideIcon,
   BookOpenIcon,
   CreditCardIcon,
   HelpCircleIcon,
-  LucideIcon,
   NewspaperIcon,
 } from "lucide-react";
 
 type NavigationItemType = {
-  name: string;
-  href: string;
+  readonly name: string;
+  readonly href: string;
   Icon: LucideIcon;
 };
 
-export const navigationItems = [
-  { name: "Research", href: "/research", Icon: BookOpenIcon },
-  { name: "FAQs", href: "/faq", Icon: HelpCircleIcon },
-  { name: "Blog", href: "/blog", Icon: NewspaperIcon },
-  { name: "Pricing", href: "/pricing", Icon: CreditCardIcon },
-] satisfies NavigationItemType[];
+interface NavigationItems {
+  readonly navigationItems: ReadonlyArray<NavigationItemType>;
+}
+
+const navigationConfig: NavigationItems = {
+  navigationItems: [
+    { name: "Research", href: "/research", Icon: BookOpenIcon },
+    { name: "FAQs", href: "/faq", Icon: HelpCircleIcon },
+    { name: "Blog", href: "/blog", Icon: NewspaperIcon },
+    { name: "Pricing", href: "/pricing", Icon: CreditCardIcon },
+  ],
+};
+
+export default navigationConfig;
