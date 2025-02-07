@@ -1,5 +1,3 @@
-import { DeepReadonly } from "@/lib/typescript/DeepReadOnly";
-
 const isDevelopment = process.env.NODE_ENV === "development";
 
 type ParametersType = {
@@ -12,10 +10,6 @@ type ParametersType = {
   increaseLevelThreshold: number;
 };
 
-interface GameConfig {
-  parameters: ParametersType;
-}
-
 const gameConfig = {
   parameters: {
     baseSequenceLength: isDevelopment ? 3 : 20,
@@ -26,6 +20,6 @@ const gameConfig = {
     decreaseLevelThreshold: 0.45,
     increaseLevelThreshold: 0.8,
   } satisfies ParametersType,
-} as DeepReadonly<GameConfig>;
+} as const;
 
 export default gameConfig;
