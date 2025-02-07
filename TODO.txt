@@ -1,4 +1,5 @@
 Game limits
+  Fix mobile hover
 Analytics limits
 
 Remove useEffect when fetching quote
