@@ -24,12 +24,12 @@ export type StepsInfoType = {
 };
 
 interface GameTutorialConfig {
-  tutorialSteps: StepType[];
-  getNewLevelSteps: (level: number) => StepType[];
-  stepsInfo: StepsInfoType;
+  tutorialSteps: readonly StepType[];
+  getNewLevelSteps: (level: number) => readonly StepType[];
+  stepsInfo: DeepReadonly<StepsInfoType>;
 }
 
-const gameTutorialConfig = {
+const gameTutorialConfig: GameTutorialConfig = {
   tutorialSteps: [
     {
       title: (
@@ -206,7 +206,7 @@ const gameTutorialConfig = {
     },
   ] satisfies StepType[],
 
-  getNewLevelSteps: (level: number) => {
+  getNewLevelSteps(level: number) {
     return [
       {
         title: (
@@ -257,6 +257,6 @@ const gameTutorialConfig = {
     level2ExplanationStep: 9,
     lastStep: 11,
   } satisfies StepsInfoType,
-} as DeepReadonly<GameTutorialConfig>;
+};
 
 export default gameTutorialConfig;

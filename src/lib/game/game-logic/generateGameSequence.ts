@@ -1,27 +1,28 @@
-import { BASE_SEQUENCE_LENGTH, NUM_TARGETS } from "@/config/gameConfig";
+import gameConfig from "@/config/gameConfig";
 import getTargetsCount from "./getTargetsCount";
 
 export default function generateGameSequence(level: number): number[] {
   const gameSequence = [];
+  const { parameters } = gameConfig;
 
-  for (let i = 0; i < BASE_SEQUENCE_LENGTH + level; i++) {
+  for (let i = 0; i < parameters.baseSequenceLength + level; i++) {
     gameSequence.push(Math.trunc(Math.random() * 8));
   }
 
   let targetsCount = getTargetsCount(gameSequence, level);
 
-  while (targetsCount !== NUM_TARGETS) {
+  while (targetsCount !== parameters.numTargets) {
     const randomIndex = Math.trunc(
       Math.random() * (gameSequence.length - level) + level,
     );
 
     if (
-      targetsCount > NUM_TARGETS &&
+      targetsCount > parameters.numTargets &&
       gameSequence[randomIndex] === gameSequence[randomIndex - level]
     ) {
       gameSequence[randomIndex] = Math.trunc(Math.random() * 8);
     } else if (
-      targetsCount < NUM_TARGETS &&
+      targetsCount < parameters.numTargets &&
       gameSequence[randomIndex] !== gameSequence[randomIndex - level]
     ) {
       gameSequence[randomIndex] = gameSequence[randomIndex - level];

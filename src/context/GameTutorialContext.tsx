@@ -13,11 +13,7 @@ import { useGameContext } from "./GameContext";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useToast } from "@/hooks/use-toast";
 import sleep from "@/lib/sleep";
-import {
-  DELAY_BEFORE_START,
-  HIDDEN_SQUARE_DURATION,
-  VISIBLE_SQUARE_DURATION,
-} from "@/config/gameConfig";
+import gameConfig from "@/config/gameConfig";
 import gameTutorialConfig, { StepType } from "@/config/gameTutorialConfig";
 
 interface GameTutorialContextValue {
@@ -26,7 +22,7 @@ interface GameTutorialContextValue {
   isVisible: boolean;
   isLoading: boolean;
   handleFinishTutorial: () => Promise<void>;
-  steps: StepType[];
+  steps: readonly StepType[];
 }
 
 export const GameTutorialContext = createContext<GameTutorialContextValue>({
@@ -45,6 +41,7 @@ interface GameTutorialContextProviderProps {
 export default function GameTutorialContextProvider({
   children,
 }: GameTutorialContextProviderProps) {
+  const { parameters } = gameConfig;
   const {
     level,
     startPlaying,
@@ -96,9 +93,9 @@ export default function GameTutorialContextProvider({
     const boardStepAnimation = async () => {
       while (stepRef.current === stepsInfo.boardStep) {
         setSelectedSquare(Math.floor(Math.random() * 8));
-        await sleep(VISIBLE_SQUARE_DURATION);
+        await sleep(parameters.visibleSquareDuration);
         setSelectedSquare(null);
-        await sleep(HIDDEN_SQUARE_DURATION);
+        await sleep(parameters.hiddenSquareDuration);
       }
       setIsPlayingAnimation(false);
     };
@@ -115,9 +112,9 @@ export default function GameTutorialContextProvider({
     const level1ExplanationAnimation = async () => {
       while (stepRef.current === stepsInfo.level1ExplanationStep) {
         setSelectedSquare(6);
-        await sleep(VISIBLE_SQUARE_DURATION);
+        await sleep(parameters.visibleSquareDuration);
         setSelectedSquare(null);
-        await sleep(HIDDEN_SQUARE_DURATION);
+        await sleep(parameters.hiddenSquareDuration);
       }
 
       setIsPlayingAnimation(false);
@@ -133,7 +130,7 @@ export default function GameTutorialContextProvider({
 
     const handleStartGameDelay = async () => {
       setIsLoadingGame(true);
-      await sleep(DELAY_BEFORE_START);
+      await sleep(parameters.delayBeforeStart);
       setIsLoadingGame(false);
     };
 
@@ -142,9 +139,9 @@ export default function GameTutorialContextProvider({
 
       while (stepRef.current === stepsInfo.level2ExplanationStep) {
         setSelectedSquare(square);
-        await sleep(VISIBLE_SQUARE_DURATION);
+        await sleep(parameters.visibleSquareDuration);
         setSelectedSquare(null);
-        await sleep(HIDDEN_SQUARE_DURATION);
+        await sleep(parameters.hiddenSquareDuration);
         square = square === 5 ? 6 : 5;
       }
       setIsPlayingAnimation(false);
@@ -200,6 +197,9 @@ export default function GameTutorialContextProvider({
     stepsInfo.level1PlayStep,
     stepsInfo.level2ExplanationStep,
     stepsInfo.lastStep,
+    parameters.visibleSquareDuration,
+    parameters.hiddenSquareDuration,
+    parameters.delayBeforeStart,
   ]);
 
   return (

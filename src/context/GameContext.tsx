@@ -1,12 +1,7 @@
 "use client";
 
 import { useSidebar } from "@/components/ui/sidebar";
-import {
-  BASE_SEQUENCE_LENGTH,
-  DELAY_BEFORE_START,
-  HIDDEN_SQUARE_DURATION,
-  VISIBLE_SQUARE_DURATION,
-} from "@/config/gameConfig";
+import gameConfig from "@/config/gameConfig";
 import { useToast } from "@/hooks/use-toast";
 import enterFullScreen from "@/lib/enterFullScreen";
 import calculateNewLevel from "@/lib/game/game-logic/calculateNewLevel";
@@ -87,6 +82,8 @@ export default function GameContextProvider({
   hasFinishedTutorial,
   showFeedbackEnabled,
 }: GameContextProviderProps) {
+  const { parameters } = gameConfig;
+
   const [level, setLevel] = useState(startingLevel);
   const [previousLevel, setPreviousLevel] = useState(startingLevel);
   const [hasReachedNewLevel, setHasReachedNewLevel] = useState(false);
@@ -155,9 +152,9 @@ export default function GameContextProvider({
     }
 
     const timePlayed =
-      (BASE_SEQUENCE_LENGTH + level) *
-        (VISIBLE_SQUARE_DURATION + HIDDEN_SQUARE_DURATION) +
-      DELAY_BEFORE_START;
+      (parameters.baseSequenceLength + level) *
+        (parameters.visibleSquareDuration + parameters.hiddenSquareDuration) +
+      parameters.delayBeforeStart;
 
     const response = await fetch("/api/game/insert-game", {
       method: "POST",
@@ -174,7 +171,14 @@ export default function GameContextProvider({
     if (!response.ok) {
       toast({ title: "Unexpected error occurred", variant: "destructive" });
     }
-  }, [level, toast]);
+  }, [
+    level,
+    parameters.baseSequenceLength,
+    parameters.delayBeforeStart,
+    parameters.hiddenSquareDuration,
+    parameters.visibleSquareDuration,
+    toast,
+  ]);
 
   const playGame = useCallback(async () => {
     let step = 0;
@@ -184,7 +188,7 @@ export default function GameContextProvider({
       shouldPressButtonRef.current = correctHitSequenceRef.current[step];
 
       setSelectedSquare(position);
-      await sleep(VISIBLE_SQUARE_DURATION);
+      await sleep(parameters.visibleSquareDuration);
 
       if (
         isTutorial &&
@@ -197,7 +201,7 @@ export default function GameContextProvider({
       }
 
       setSelectedSquare(null);
-      await sleep(HIDDEN_SQUARE_DURATION);
+      await sleep(parameters.hiddenSquareDuration);
 
       if (hasPressedButtonRef.current) {
         playerHitSequenceRef.current.push(true);
@@ -218,7 +222,14 @@ export default function GameContextProvider({
     setOpen(true);
 
     await updateGameData();
-  }, [setOpen, updateGameData, isTutorial, setShowTutorial, showFeedback]);
+  }, [
+    setOpen,
+    updateGameData,
+    parameters.visibleSquareDuration,
+    parameters.hiddenSquareDuration,
+    isTutorial,
+    showFeedback,
+  ]);
 
   const startPlaying = useCallback(async () => {
     if (!level) return;
@@ -234,9 +245,9 @@ export default function GameContextProvider({
     );
     playerHitSequenceRef.current = [];
 
-    await sleep(DELAY_BEFORE_START);
+    await sleep(parameters.delayBeforeStart);
     await playGame();
-  }, [level, playGame, setOpen]);
+  }, [level, parameters.delayBeforeStart, playGame, setOpen]);
 
   const handleShowFeedback = useCallback(async () => {
     if (correctHitSequenceRef.current[playerHitSequenceRef.current.length]) {

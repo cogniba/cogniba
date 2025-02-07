@@ -1,16 +1,13 @@
 import getHitStatistics from "@/lib/game/game-logic/getHitStatistics";
 import calculateAccuracy from "@/lib/game/game-logic/calculateAccuracy";
-
-import {
-  DECREASE_LEVEL_THRESHOLD,
-  INCREASE_LEVEL_THRESHOLD,
-} from "@/config/gameConfig";
+import gameConfig from "@/config/gameConfig";
 
 export default function calculateNewLevel(
   correctHitSequence: boolean[],
   playerHitSequence: boolean[],
   level: number,
 ): number {
+  const { parameters } = gameConfig;
   const { correctHits, incorrectHits, missedHits } = getHitStatistics(
     correctHitSequence,
     playerHitSequence,
@@ -23,9 +20,9 @@ export default function calculateNewLevel(
   });
   let newLevel = level;
 
-  if (accuracy <= DECREASE_LEVEL_THRESHOLD) {
+  if (accuracy <= parameters.decreaseLevelThreshold) {
     newLevel = Math.max(1, level - 1);
-  } else if (accuracy >= INCREASE_LEVEL_THRESHOLD) {
+  } else if (accuracy >= parameters.increaseLevelThreshold) {
     newLevel = level + 1;
   }
 
