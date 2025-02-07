@@ -23,12 +23,12 @@ export default function GameStartScreen() {
     startPlaying,
     gamesPlayedToday,
   } = useGameContext();
-  const { subscriptionType } = useAuthContext();
+  const { subscriptionType, status } = useAuthContext();
   const {
     parameters: { dailyGamesLimit },
   } = gameConfig;
 
-  const isFreeUser = subscriptionType === "Free";
+  const isFreeUser = subscriptionType === "Free" || status === "loading";
   const hasReachedDailyLimit =
     gamesPlayedToday >= dailyGamesLimit && isFreeUser;
 
