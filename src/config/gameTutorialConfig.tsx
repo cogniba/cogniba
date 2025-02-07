@@ -1,6 +1,5 @@
 import { PlacementType } from "@/components/highlight-dialog/HighlightDialog";
 import { Strong } from "@/components/ui/Strong";
-import { DeepReadonly } from "@/lib/typescript/DeepReadOnly";
 
 export type StepType = {
   title: React.ReactNode;
@@ -23,13 +22,7 @@ export type StepsInfoType = {
   lastStep: number;
 };
 
-interface GameTutorialConfig {
-  tutorialSteps: readonly StepType[];
-  getNewLevelSteps: (level: number) => readonly StepType[];
-  stepsInfo: DeepReadonly<StepsInfoType>;
-}
-
-const gameTutorialConfig: GameTutorialConfig = {
+const gameTutorialConfig = {
   tutorialSteps: [
     {
       title: (
@@ -257,6 +250,6 @@ const gameTutorialConfig: GameTutorialConfig = {
     level2ExplanationStep: 9,
     lastStep: 11,
   } satisfies StepsInfoType,
-};
+} as const;
 
 export default gameTutorialConfig;
