@@ -7,22 +7,18 @@ import {
 } from "lucide-react";
 
 type NavigationItemType = {
-  readonly name: string;
-  readonly href: string;
+  name: string;
+  href: string;
   Icon: LucideIcon;
 };
 
-interface NavigationItems {
-  readonly navigationItems: ReadonlyArray<NavigationItemType>;
-}
-
-const navigationConfig: NavigationItems = {
+const navigationConfig = {
   navigationItems: [
     { name: "Research", href: "/research", Icon: BookOpenIcon },
     { name: "FAQs", href: "/faq", Icon: HelpCircleIcon },
     { name: "Blog", href: "/blog", Icon: NewspaperIcon },
     { name: "Pricing", href: "/pricing", Icon: CreditCardIcon },
-  ],
-};
+  ] satisfies NavigationItemType[],
+} as const;
 
 export default navigationConfig;
