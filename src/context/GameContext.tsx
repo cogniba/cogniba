@@ -6,7 +6,7 @@ import {
   DELAY_BEFORE_START,
   HIDDEN_SQUARE_DURATION,
   VISIBLE_SQUARE_DURATION,
-} from "@/config/game";
+} from "@/config/gameConfig";
 import { useToast } from "@/hooks/use-toast";
 import enterFullScreen from "@/lib/enterFullScreen";
 import calculateNewLevel from "@/lib/game/game-logic/calculateNewLevel";

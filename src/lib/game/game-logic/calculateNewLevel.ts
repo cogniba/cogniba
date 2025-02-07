@@ -4,7 +4,7 @@ import calculateAccuracy from "@/lib/game/game-logic/calculateAccuracy";
 import {
   DECREASE_LEVEL_THRESHOLD,
   INCREASE_LEVEL_THRESHOLD,
-} from "@/config/game";
+} from "@/config/gameConfig";
 
 export default function calculateNewLevel(
   correctHitSequence: boolean[],

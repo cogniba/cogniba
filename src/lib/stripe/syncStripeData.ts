@@ -3,7 +3,7 @@ import stripe from "./stripe";
 import { eq } from "drizzle-orm";
 import { customersTable } from "@/database/schemas/customersTable";
 import { stripeTable } from "@/database/schemas/stripeTable";
-import stripeConfig from "@/config/stripe";
+import stripeConfig from "@/config/stripeConfig";
 import getFreePlan from "./getFreePlan";
 
 export default async function syncStripeData(

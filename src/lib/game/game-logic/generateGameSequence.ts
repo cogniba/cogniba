@@ -1,4 +1,4 @@
-import { BASE_SEQUENCE_LENGTH, NUM_TARGETS } from "@/config/game";
+import { BASE_SEQUENCE_LENGTH, NUM_TARGETS } from "@/config/gameConfig";
 import getTargetsCount from "./getTargetsCount";
 
 export default function generateGameSequence(level: number): number[] {

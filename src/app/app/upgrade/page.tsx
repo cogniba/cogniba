@@ -2,7 +2,7 @@ import redirectToError from "@/actions/redirectToError";
 import CheckoutButton from "@/components/CheckoutButton";
 import CustomerPortalButton from "@/components/CustomerPortalButton";
 import { Button } from "@/components/ui/button";
-import stripeConfig from "@/config/stripe";
+import stripeConfig from "@/config/stripeConfig";
 import { db } from "@/database";
 import { customersTable } from "@/database/schemas/customersTable";
 import getFreePlan from "@/lib/stripe/getFreePlan";

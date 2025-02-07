@@ -17,8 +17,8 @@ import {
   DELAY_BEFORE_START,
   HIDDEN_SQUARE_DURATION,
   VISIBLE_SQUARE_DURATION,
-} from "@/config/game";
-import gameTutorialConfig, { StepType } from "@/config/gameTutorial";
+} from "@/config/gameConfig";
+import gameTutorialConfig, { StepType } from "@/config/gameTutorialConfig";
 
 interface GameTutorialContextValue {
   step: number;

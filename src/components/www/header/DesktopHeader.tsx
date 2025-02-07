@@ -6,7 +6,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { navigationItems } from "@/config/landing-page/navigation";
+import { navigationItems } from "@/config/landing-page/navigationConfig";
 import Link from "next/link";
 
 export default function DesktopHeader() {

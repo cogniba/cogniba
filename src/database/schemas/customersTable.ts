@@ -1,6 +1,6 @@
 import { timestamp, text, pgTable, uuid, pgEnum } from "drizzle-orm/pg-core";
 import { profilesTable } from "./profilesTable";
-import stripeConfig from "@/config/stripe";
+import stripeConfig from "@/config/stripeConfig";
 import { InferSelectModel } from "drizzle-orm";
 import getFreePlan from "@/lib/stripe/getFreePlan";
 

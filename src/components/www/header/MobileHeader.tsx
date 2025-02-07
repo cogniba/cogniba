@@ -19,7 +19,7 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { navigationItems } from "@/config/landing-page/navigation";
+import { navigationItems } from "@/config/landing-page/navigationConfig";
 import Link from "next/link";
 
 export default function MobileHeader() {
