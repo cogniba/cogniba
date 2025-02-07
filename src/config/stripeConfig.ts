@@ -10,11 +10,11 @@ export type PlanType = {
   highlighted?: boolean;
 };
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 interface StripeConfig {
   plans: PlanType[];
 }
-
-const isDevelopment = process.env.NODE_ENV === "development";
 
 const stripeConfig = {
   plans: [
