@@ -1,16 +1,7 @@
-import { DeepReadonly } from "@/lib/typescript/DeepReadOnly";
-
 export type RouteMatch = {
   path: string;
   type: "exact" | "startsWith";
 };
-
-interface RouteProtectionConfig {
-  protectedRoutes: {
-    authenticatedRedirects: RouteMatch[];
-    nonAuthenticatedRedirects: RouteMatch[];
-  };
-}
 
 const routeProtectionConfig = {
   protectedRoutes: {
@@ -25,6 +16,6 @@ const routeProtectionConfig = {
       { path: "/app", type: "startsWith" },
     ] satisfies RouteMatch[],
   },
-} as DeepReadonly<RouteProtectionConfig>;
+} as const;
 
 export default routeProtectionConfig;
