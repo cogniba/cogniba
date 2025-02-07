@@ -8,6 +8,7 @@ type ParametersType = {
   delayBeforeStart: number;
   decreaseLevelThreshold: number;
   increaseLevelThreshold: number;
+  dailyGamesLimit: number;
 };
 
 const gameConfig = {
@@ -19,6 +20,7 @@ const gameConfig = {
     delayBeforeStart: 1500,
     decreaseLevelThreshold: 0.45,
     increaseLevelThreshold: 0.8,
+    dailyGamesLimit: 10,
   } satisfies ParametersType,
 } as const;
 
