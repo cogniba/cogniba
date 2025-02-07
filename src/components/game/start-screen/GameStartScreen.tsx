@@ -6,6 +6,7 @@ import { useGameContext } from "@/context/GameContext";
 import { useAuthContext } from "@/context/AuthContext";
 import gameConfig from "@/config/gameConfig";
 import UpgradeDialog from "@/components/UpgradeDialog";
+import { LockIcon } from "lucide-react";
 
 export default function GameStartScreen() {
   const {
@@ -47,7 +48,7 @@ export default function GameStartScreen() {
 
             {!hasReachedDailyLimit ? (
               <Button
-                className="relative mt-10 w-full py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5"
+                className="mt-10 w-full py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5"
                 size="custom"
                 type="submit"
                 onClick={startPlaying}
@@ -61,11 +62,12 @@ export default function GameStartScreen() {
                 description={`You've played ${dailyGamesLimit} games today - you're doing great! Come back tomorrow to play more or upgrade to Pro to play unlimited games.`}
               >
                 <Button
-                  className="relative mt-10 w-full py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5"
+                  className="relative mt-10 w-full cursor-pointer py-4 text-3xl font-bold uppercase tracking-wide opacity-50 transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5 [&_svg]:size-7"
                   size="custom"
                   tabIndex={-1}
                 >
-                  Play
+                  <LockIcon className="absolute right-6" strokeWidth={2.4} />
+                  <span>Play</span>
                 </Button>
               </UpgradeDialog>
             )}
