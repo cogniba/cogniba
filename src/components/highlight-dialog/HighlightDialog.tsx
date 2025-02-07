@@ -63,6 +63,7 @@ export default function HighlightDialog({
       <DialogContent
         hideOverlay
         closeButton={false}
+        portal={false}
         className={cn(
           "absolute top-auto z-50 duration-500 data-[state=closed]:duration-500 data-[state=open]:duration-500",
           (placement === "top" || placement === "center-top") &&

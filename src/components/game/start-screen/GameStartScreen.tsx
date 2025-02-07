@@ -5,14 +5,7 @@ import GameStatsScreen from "./GameStatsScreen";
 import { useGameContext } from "@/context/GameContext";
 import { useAuthContext } from "@/context/AuthContext";
 import gameConfig from "@/config/gameConfig";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import Link from "next/link";
-import { SparklesIcon } from "lucide-react";
-import { cn } from "@/lib/cn";
+import UpgradeDialog from "@/components/UpgradeDialog";
 
 export default function GameStartScreen() {
   const {
@@ -47,46 +40,35 @@ export default function GameStartScreen() {
           closeButton={false}
           hideOverlay
           aria-describedby={undefined}
+          portal={false}
         >
           <div className="flex w-full max-w-lg flex-col justify-center">
             {!hasStatistics ? <GameWelcomeScreen /> : <GameStatsScreen />}
-            <HoverCard openDelay={50} closeDelay={50}>
-              <HoverCardTrigger className="group mt-10 xs:mt-14">
+
+            {!hasReachedDailyLimit ? (
+              <Button
+                className="relative mt-10 w-full py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5"
+                size="custom"
+                type="submit"
+                onClick={startPlaying}
+                tabIndex={-1}
+              >
+                Play
+              </Button>
+            ) : (
+              <UpgradeDialog
+                title="Daily games limit reached"
+                description={`You've played ${dailyGamesLimit} games today - you're doing great! Come back tomorrow to play more or upgrade to Pro to play unlimited games.`}
+              >
                 <Button
-                  className="relative w-full py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm disabled:pointer-events-auto disabled:hover:cursor-not-allowed xs:text-4xl xl:py-5"
+                  className="relative mt-10 w-full py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5"
                   size="custom"
-                  type="submit"
-                  onClick={startPlaying}
                   tabIndex={-1}
-                  disabled={hasReachedDailyLimit}
                 >
                   Play
                 </Button>
-              </HoverCardTrigger>
-              <HoverCardContent
-                side="top"
-                className={cn(
-                  "hidden w-full max-w-md",
-                  hasReachedDailyLimit && "block",
-                )}
-                sideOffset={10}
-              >
-                <div className="mb-2 text-xl font-semibold">
-                  Daily games limit reached
-                </div>
-                <div className="mb-6 text-sm text-foreground/85">
-                  You&apos;ve played {dailyGamesLimit} games today - you&apos;re
-                  doing great! Come back tomorrow to play more or upgrade to Pro
-                  to play unlimited games.
-                </div>
-                <Link href="/app/upgrade">
-                  <Button className="w-full">
-                    <SparklesIcon />
-                    <span>Upgrade to Pro</span>
-                  </Button>
-                </Link>
-              </HoverCardContent>
-            </HoverCard>
+              </UpgradeDialog>
+            )}
           </div>
         </DialogContent>
       </Dialog>
