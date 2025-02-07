@@ -8,14 +8,21 @@ interface GameLayoutProps {
 }
 
 export default async function GameLayout({ children }: GameLayoutProps) {
-  const { level, maxLevel, showFeedback, hasFinishedTutorial, error } =
-    await fetchGameData();
+  const {
+    level,
+    maxLevel,
+    showFeedback,
+    hasFinishedTutorial,
+    gamesPlayedToday,
+    error,
+  } = await fetchGameData();
   if (
     error ||
     !level ||
     !maxLevel ||
     showFeedback === undefined ||
-    hasFinishedTutorial === undefined
+    hasFinishedTutorial === undefined ||
+    gamesPlayedToday === undefined
   ) {
     redirectToError("Error getting game data");
     return;
@@ -27,6 +34,7 @@ export default async function GameLayout({ children }: GameLayoutProps) {
       maxLevel={maxLevel}
       hasFinishedTutorial={hasFinishedTutorial}
       showFeedbackEnabled={showFeedback}
+      startingGamesPlayedToday={gamesPlayedToday}
     >
       <GameTutorialContextProvider>{children}</GameTutorialContextProvider>
     </GameContextProvider>

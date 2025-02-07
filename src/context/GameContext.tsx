@@ -42,6 +42,7 @@ interface GameContextValue {
   showTutorial: boolean;
   setShowTutorial: Dispatch<SetStateAction<boolean>>;
   setIsTutorial: Dispatch<SetStateAction<boolean>>;
+  gamesPlayedToday: number;
 }
 
 export const GameContext = createContext<GameContextValue>({
@@ -65,6 +66,7 @@ export const GameContext = createContext<GameContextValue>({
   showTutorial: false,
   setShowTutorial: () => {},
   setIsTutorial: () => {},
+  gamesPlayedToday: 0,
 });
 
 interface GameContextProviderProps {
@@ -73,6 +75,7 @@ interface GameContextProviderProps {
   hasFinishedTutorial: boolean;
   showFeedbackEnabled: boolean;
   maxLevel: number;
+  startingGamesPlayedToday: number;
 }
 
 export default function GameContextProvider({
@@ -81,6 +84,7 @@ export default function GameContextProvider({
   maxLevel,
   hasFinishedTutorial,
   showFeedbackEnabled,
+  startingGamesPlayedToday,
 }: GameContextProviderProps) {
   const { parameters } = gameConfig;
 
@@ -98,6 +102,9 @@ export default function GameContextProvider({
   >(null);
   const [isTutorial, setIsTutorial] = useState(!hasFinishedTutorial);
   const [showTutorial, setShowTutorial] = useState(!hasFinishedTutorial);
+  const [gamesPlayedToday, setGamesPlayedToday] = useState(
+    startingGamesPlayedToday,
+  );
 
   const { setOpen } = useSidebar();
   const { toast } = useToast();
@@ -145,6 +152,7 @@ export default function GameContextProvider({
     );
     setPreviousLevel(currentLevel);
     setLevel(newLevel);
+    setGamesPlayedToday((prev) => prev + 1);
 
     if (newLevel > maxLevelRef.current) {
       setHasReachedNewLevel(true);
@@ -321,6 +329,7 @@ export default function GameContextProvider({
         showTutorial,
         setShowTutorial,
         setIsTutorial,
+        gamesPlayedToday,
       }}
     >
       {children}

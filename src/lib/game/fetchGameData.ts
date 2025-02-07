@@ -1,3 +1,4 @@
+import getGamesPlayedToday from "@/actions/game/getGamesPlayedToday";
 import getLevel from "@/actions/game/getLevel";
 import getMaxLevel from "@/actions/game/getMaxLevel";
 import getProfile from "@/actions/getProfile";
@@ -8,23 +9,27 @@ export default async function fetchGameData(): Promise<{
   maxLevel?: number;
   showFeedback?: boolean;
   hasFinishedTutorial?: boolean;
+  gamesPlayedToday?: number;
   error?: string;
 }> {
   const levelPromise = getLevel();
   const maxLevelPromise = getMaxLevel();
   const settingsPromise = getSettings();
   const profilePromise = getProfile();
+  const gamesPlayedTodayPromise = getGamesPlayedToday();
 
   const [
     { level, error: levelError },
     { maxLevel, error: maxLevelError },
     { settings, error: settingsError },
     { profile, error: profileError },
+    { gamesPlayedToday, error: gamesPlayedTodayError },
   ] = await Promise.all([
     levelPromise,
     maxLevelPromise,
     settingsPromise,
     profilePromise,
+    gamesPlayedTodayPromise,
   ]);
 
   if (
@@ -32,10 +37,12 @@ export default async function fetchGameData(): Promise<{
     maxLevelError ||
     settingsError ||
     profileError ||
+    gamesPlayedTodayError ||
     !level ||
     !maxLevel ||
     !settings ||
-    !profile
+    !profile ||
+    gamesPlayedToday === undefined
   ) {
     return { error: "Error getting game data" };
   }
@@ -45,5 +52,6 @@ export default async function fetchGameData(): Promise<{
     maxLevel,
     showFeedback: settings.showFeedback,
     hasFinishedTutorial: profile.hasFinishedTutorial,
+    gamesPlayedToday,
   };
 }
