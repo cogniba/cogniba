@@ -1,7 +1,4 @@
-Game limits
-  Fix mobile hover
 Analytics limits
-Flash when start playing
 
 Remove useEffect when fetching quote
 
