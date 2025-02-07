@@ -3,7 +3,6 @@ export type RouteMatch = {
   type: "exact" | "startsWith";
 };
 
-// TODO
 export const protectedRoutes = {
   authenticatedRedirects: [
     { path: "/", type: "exact" },
