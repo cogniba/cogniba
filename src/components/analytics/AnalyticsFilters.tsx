@@ -19,6 +19,7 @@ import { cn } from "@/lib/cn";
 
 import type { DateRange } from "react-day-picker";
 import type { Dispatch, SetStateAction } from "react";
+import AnalyticsRangePicker from "./AnalyticsRangePicker";
 
 interface AnalyticsFiltersProps {
   date: DateRange | undefined;
@@ -52,7 +53,8 @@ export default function AnalyticsFilters({
           </SelectContent>
         </Select>
       </div>
-      <Popover>
+      <AnalyticsRangePicker />
+      {/* <Popover>
         <PopoverTrigger asChild>
           <Button
             className={cn(
@@ -85,7 +87,7 @@ export default function AnalyticsFilters({
             disabled={(date) => date > new Date() || date < new Date(2020, 0)}
           />
         </PopoverContent>
-      </Popover>
+      </Popover> */}
     </div>
   );
 }
