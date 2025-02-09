@@ -45,7 +45,6 @@ export default function AnalyticsRangePicker() {
     if (separatedSearch.length > 3) {
       return currentOption ? [currentOption] : [];
     } else if (separatedSearch.length === 0) {
-      // Only add current option if it's not in defaultOptions
       if (
         currentOption &&
         !defaultOptions.some((opt) => opt.value === currentOption.value)
