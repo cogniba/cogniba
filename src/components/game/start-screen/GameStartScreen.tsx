@@ -7,6 +7,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import UpgradeDialog from "@/components/UpgradeDialog";
 import { LockIcon } from "lucide-react";
 import subscriptionConfig from "@/config/subscriptionConfig";
+import { cn } from "@/lib/cn";
 
 export default function GameStartScreen() {
   const {
@@ -46,31 +47,27 @@ export default function GameStartScreen() {
           <div className="flex w-full max-w-lg flex-col justify-center">
             {!hasStatistics ? <GameWelcomeScreen /> : <GameStatsScreen />}
 
-            {!hasReachedDailyLimit ? (
+            <UpgradeDialog
+              title="Daily games limit reached"
+              description={`You've played ${dailyGamesLimit} games today - you're doing great! Come back tomorrow to play more or upgrade to Pro to play unlimited games.`}
+              active={hasReachedDailyLimit}
+              asChild
+            >
               <Button
-                className="mt-10 w-full py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5"
+                className={cn(
+                  "relative mt-10 w-full cursor-pointer py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5 [&_svg]:size-7",
+                  hasReachedDailyLimit && "opacity-50",
+                )}
                 size="custom"
-                type="submit"
-                onClick={startPlaying}
+                onClick={() => !hasReachedDailyLimit && startPlaying()}
                 tabIndex={-1}
               >
-                Play
-              </Button>
-            ) : (
-              <UpgradeDialog
-                title="Daily games limit reached"
-                description={`You've played ${dailyGamesLimit} games today - you're doing great! Come back tomorrow to play more or upgrade to Pro to play unlimited games.`}
-              >
-                <Button
-                  className="relative mt-10 w-full cursor-pointer py-4 text-3xl font-bold uppercase tracking-wide opacity-50 transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5 [&_svg]:size-7"
-                  size="custom"
-                  tabIndex={-1}
-                >
+                {hasReachedDailyLimit && (
                   <LockIcon className="absolute right-6" strokeWidth={2.4} />
-                  <span>Play</span>
-                </Button>
-              </UpgradeDialog>
-            )}
+                )}
+                <span>Play</span>
+              </Button>
+            </UpgradeDialog>
           </div>
         </DialogContent>
       </Dialog>
