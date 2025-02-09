@@ -4,9 +4,9 @@ import GameWelcomeScreen from "./GameWelcomeScreen";
 import GameStatsScreen from "./GameStatsScreen";
 import { useGameContext } from "@/context/GameContext";
 import { useAuthContext } from "@/context/AuthContext";
-import gameConfig from "@/config/gameConfig";
 import UpgradeDialog from "@/components/UpgradeDialog";
 import { LockIcon } from "lucide-react";
+import subscriptionConfig from "@/config/subscriptionConfig";
 
 export default function GameStartScreen() {
   const {
@@ -19,8 +19,8 @@ export default function GameStartScreen() {
   } = useGameContext();
   const { subscriptionType, status } = useAuthContext();
   const {
-    parameters: { dailyGamesLimit },
-  } = gameConfig;
+    limits: { dailyGamesLimit },
+  } = subscriptionConfig;
 
   const isFreeUser = subscriptionType === "Free" || status === "loading";
   const hasReachedDailyLimit =
