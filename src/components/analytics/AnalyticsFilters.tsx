@@ -5,35 +5,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ChartMetrics } from "./Analytics";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
-import { cn } from "@/lib/cn";
-
-import type { DateRange } from "react-day-picker";
-import type { Dispatch, SetStateAction } from "react";
 import AnalyticsRangePicker from "./AnalyticsRangePicker";
+import { ChartMetrics, useAnalyticsContext } from "@/context/AnalyticsContext";
 
-interface AnalyticsFiltersProps {
-  date: DateRange | undefined;
-  setDate: Dispatch<SetStateAction<DateRange | undefined>>;
-  chartMetric: ChartMetrics;
-  setChartMetric: Dispatch<SetStateAction<ChartMetrics>>;
-}
+export default function AnalyticsFilters() {
+  const { chartMetric, setChartMetric } = useAnalyticsContext();
 
-export default function AnalyticsFilters({
-  date,
-  setDate,
-  chartMetric,
-  setChartMetric,
-}: AnalyticsFiltersProps) {
   return (
     <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
       <div className="flex w-full flex-col items-center justify-start gap-3 sm:w-fit lg:flex-row">
