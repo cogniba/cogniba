@@ -18,7 +18,7 @@ const stripeConfig = {
       isFreePlan: true,
       name: "Free",
       description: "Great for beginners exploring Cogniba.",
-      features: ["Feature 1", "Feature 2", "Feature 3"] as const,
+      features: ["10 games per day", "30-day analytics history"] as const,
     },
     {
       priceId: isDevelopment
@@ -27,7 +27,7 @@ const stripeConfig = {
       price: 20,
       name: "Pro",
       description: "For serious users aiming for top results.",
-      features: ["Feature 1", "Feature 2", "Feature 3"] as const,
+      features: ["Unlimited games", "Unlimited analytics history"] as const,
       highlighted: true,
     },
   ] satisfies PlanType[],
