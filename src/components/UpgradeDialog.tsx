@@ -17,16 +17,24 @@ interface UpgradeDialogProps {
   children: React.ReactNode;
   title: string;
   description: string;
+  asChild?: boolean;
+  active?: boolean;
 }
 
 export default function UpgradeDialog({
   children,
   title,
   description,
+  asChild,
+  active,
 }: UpgradeDialogProps) {
+  if (!active) {
+    return <>{children}</>;
+  }
+
   return (
     <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
       <DialogContent closeButton={true} backdrop>
         <DialogHeader>
           <DialogTitle className="mb-2 text-xl font-semibold">
