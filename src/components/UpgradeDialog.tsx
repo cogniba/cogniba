@@ -19,6 +19,7 @@ interface UpgradeDialogProps {
   description: string;
   asChild?: boolean;
   active?: boolean;
+  className?: string;
 }
 
 export default function UpgradeDialog({
@@ -27,6 +28,7 @@ export default function UpgradeDialog({
   description,
   asChild,
   active,
+  className,
 }: UpgradeDialogProps) {
   if (!active) {
     return <>{children}</>;
@@ -34,7 +36,9 @@ export default function UpgradeDialog({
 
   return (
     <Dialog>
-      <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
+      <DialogTrigger asChild={asChild} className={className}>
+        {children}
+      </DialogTrigger>
       <DialogContent closeButton={true} backdrop>
         <DialogHeader>
           <DialogTitle className="mb-2 text-xl font-semibold">

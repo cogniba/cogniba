@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, LockIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -16,6 +16,9 @@ import { subDays, subMonths, subWeeks, subYears } from "date-fns";
 import { useCallback, useState } from "react";
 import { cn } from "@/lib/cn";
 import { useAnalyticsContext } from "@/context/AnalyticsContext";
+import subscriptionConfig from "@/config/subscriptionConfig";
+import { useAuthContext } from "@/context/AuthContext";
+import UpgradeDialog from "../UpgradeDialog";
 
 const defaultOptions = [
   { label: "Last 7 days", value: "last 7 days" },
@@ -26,9 +29,27 @@ const defaultOptions = [
 
 export default function AnalyticsRangePicker() {
   const { setDate } = useAnalyticsContext();
+  const { subscriptionType, status } = useAuthContext();
+  const { limits } = subscriptionConfig;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("last 7 days");
   const [search, setSearch] = useState("");
+
+  const isFreeUser = subscriptionType === "Free" || status === "loading";
+
+  const calculateDays = (number: number, unit: string) => {
+    if (unit === "day" || unit === "days") {
+      return number;
+    } else if (unit === "week" || unit === "weeks") {
+      return number * 7;
+    } else if (unit === "month" || unit === "months") {
+      return number * 30;
+    } else if (unit === "year" || unit === "years") {
+      return number * 365;
+    }
+
+    return number;
+  };
 
   const getOptions = useCallback(() => {
     const currentOption = value
@@ -37,21 +58,15 @@ export default function AnalyticsRangePicker() {
           value,
         }
       : null;
+    let options = [...defaultOptions];
 
     const separatedSearch = search.trim().length
       ? search.trim().split(" ")
       : [];
 
     if (separatedSearch.length > 3) {
-      return currentOption ? [currentOption] : [];
+      options = [];
     } else if (separatedSearch.length === 0) {
-      if (
-        currentOption &&
-        !defaultOptions.some((opt) => opt.value === currentOption.value)
-      ) {
-        return [currentOption, ...defaultOptions];
-      }
-      return defaultOptions;
     } else {
       const numberTerms = separatedSearch.filter(
         (term) => !isNaN(parseInt(term)),
@@ -77,25 +92,32 @@ export default function AnalyticsRangePicker() {
             value: `last ${number} ${number === 1 ? "year" : "years"}`,
           },
         ];
-
-        if (
-          currentOption &&
-          !newOptions.some((opt) => opt.value === currentOption.value)
-        ) {
-          return [currentOption, ...newOptions];
-        }
-        return newOptions;
+        options = [...newOptions];
       }
-
-      if (
-        currentOption &&
-        !defaultOptions.some((opt) => opt.value === currentOption.value)
-      ) {
-        return [currentOption, ...defaultOptions];
-      }
-      return defaultOptions;
     }
-  }, [search, value]);
+
+    if (
+      currentOption &&
+      !options.some((opt) => opt.value === currentOption.value)
+    ) {
+      options = [currentOption, ...options];
+    }
+
+    const extendedOptions = options.map((option) => {
+      const parts = option.value.split(" ");
+      const number = parseInt(parts[1]);
+      const unit = parts[2];
+      const totalDays = calculateDays(number, unit);
+
+      if (totalDays > limits.analyticsDaysLimit && isFreeUser) {
+        return { ...option, isAllowed: false };
+      } else {
+        return { ...option, isAllowed: true };
+      }
+    });
+
+    return extendedOptions;
+  }, [isFreeUser, limits.analyticsDaysLimit, search, value]);
 
   const options = getOptions();
 
@@ -105,16 +127,7 @@ export default function AnalyticsRangePicker() {
     const unit = parts[2];
     const today = new Date();
 
-    let totalDays = 0;
-    if (unit === "day" || unit === "days") {
-      totalDays = number;
-    } else if (unit === "week" || unit === "weeks") {
-      totalDays = number * 7;
-    } else if (unit === "month" || unit === "months") {
-      totalDays = number * 30;
-    } else if (unit === "year" || unit === "years") {
-      totalDays = number * 365;
-    }
+    const totalDays = calculateDays(number, unit);
 
     if (totalDays > 365 * 5) {
       setDate({ from: subYears(today, 10), to: today });
@@ -161,24 +174,40 @@ export default function AnalyticsRangePicker() {
           <CommandEmpty>No range found.</CommandEmpty>
           <CommandGroup>
             {options.map((option) => (
-              <CommandItem
+              <UpgradeDialog
                 key={option.value}
-                value={option.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue);
-                  calculateDateRange(currentValue);
-                  setOpen(false);
-                }}
-                className="cursor-pointer"
+                title="Daily games limit reached"
+                description={`You've played 10 games today - you're doing great! Come back tomorrow to play more or upgrade to Pro to play unlimited games.`}
+                className="w-full"
+                active={!option.isAllowed}
               >
-                <Check
+                <CommandItem
+                  value={option.value}
+                  onSelect={(currentValue) => {
+                    if (!option.isAllowed) return;
+
+                    setValue(currentValue);
+                    calculateDateRange(currentValue);
+                    setOpen(false);
+                  }}
                   className={cn(
-                    "mr-2 h-4 w-4",
-                    value === option.value ? "opacity-100" : "opacity-0",
+                    "cursor-pointer",
+                    !option.isAllowed && "opacity-50",
                   )}
-                />
-                {option.label}
-              </CommandItem>
+                >
+                  {!option.isAllowed ? (
+                    <LockIcon className="mr-2 h-4 w-4" />
+                  ) : (
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        value === option.value ? "opacity-100" : "opacity-0",
+                      )}
+                    />
+                  )}
+                  {option.label}
+                </CommandItem>
+              </UpgradeDialog>
             ))}
           </CommandGroup>
         </Command>
