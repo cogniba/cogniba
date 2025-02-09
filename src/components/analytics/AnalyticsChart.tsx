@@ -1,48 +1,39 @@
-import { GamesData } from "@/app/api/analytics/get-data/route";
 import ChartNoData from "@/components/ChartNoData";
 
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useAnalyticsContext } from "@/context/AnalyticsContext";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { ChartConfiguration, ChartWithPostfix } from "@/types/analytics";
 
-interface AnalyticsChartProps {
-  data: GamesData | null;
-  chartConfig: ChartConfig;
-  title: string;
-  description: string;
-  names: string[];
-  postfix?: string;
-}
+export default function AnalyticsChart() {
+  const { cleanData, chartMetric, charts } = useAnalyticsContext();
+  const currentChart = charts[chartMetric];
 
-export default function AnalyticsChart({
-  data,
-  chartConfig,
-  title,
-  description,
-  names,
-  postfix,
-}: AnalyticsChartProps) {
+  const hasPostfix = (chart: ChartConfiguration): chart is ChartWithPostfix => {
+    return "postfix" in chart;
+  };
+
   return (
     <>
       <CardHeader className="mb-4 flex flex-col justify-center px-0 pt-0">
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardTitle>{currentChart.title}</CardTitle>
+        <CardDescription>{currentChart.description}</CardDescription>
       </CardHeader>
-      {data ? (
+      {cleanData ? (
         <ChartContainer
           className="aspect-auto h-full w-full"
-          config={chartConfig}
+          config={currentChart.chartConfig}
         >
-          <AreaChart data={data}>
+          <AreaChart data={cleanData}>
             <defs>
-              {names.map((name, index) => (
+              {currentChart.names.map((name, index) => (
                 <linearGradient
                   id={name}
                   x1="0"
@@ -94,11 +85,13 @@ export default function AnalyticsChart({
                     });
                   }}
                   indicator="dot"
-                  postfix={postfix}
+                  postfix={
+                    hasPostfix(currentChart) ? currentChart?.postfix : undefined
+                  }
                 />
               }
             />
-            {names.map((name, index) => (
+            {currentChart.names.map((name, index) => (
               <Area
                 dataKey={name}
                 type="monotone"
