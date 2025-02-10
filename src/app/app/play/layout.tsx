@@ -3,6 +3,8 @@ import GameContextProvider from "@/context/GameContext";
 import GameTutorialContextProvider from "@/context/GameTutorialContext";
 import fetchGameData from "@/lib/game/fetchGameData";
 
+export const dynamic = "force-dynamic";
+
 interface GameLayoutProps {
   children: React.ReactNode;
 }
