@@ -29,8 +29,7 @@ export default function CheckoutButton({
       });
 
       if (error || !url) {
-        redirectToError("Failed to create checkout session");
-        return;
+        return redirectToError("Failed to create checkout session");
       }
 
       window.location.href = url;
