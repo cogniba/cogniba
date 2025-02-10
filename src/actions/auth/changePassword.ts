@@ -22,23 +22,28 @@ function getErrorMessage(code: string): string {
 export default async function changePassword(
   data: ChangePasswordSchemaType,
 ): Promise<{ error?: string }> {
-  const supabase = await createClient();
+  try {
+    const supabase = await createClient();
 
-  const { error } = await supabase.auth.updateUser({
-    password: data.password,
-  });
+    const { error } = await supabase.auth.updateUser({
+      password: data.password,
+    });
 
-  if (error) {
-    if (error.code) {
-      return { error: getErrorMessage(error.code) };
-    } else {
-      const error = new Error(
-        "An unexpected error occurred while changing your password.",
-      );
-      console.error(error);
-      return { error: error.message };
+    if (error) {
+      if (error.code) {
+        return { error: getErrorMessage(error.code) };
+      } else {
+        const error = new Error(
+          "An unexpected error occurred while changing your password.",
+        );
+        console.error(error);
+        return { error: error.message };
+      }
     }
-  }
 
-  return {};
+    return {};
+  } catch (error) {
+    console.error(error);
+    return { error: "An unexpected error occurred" };
+  }
 }
