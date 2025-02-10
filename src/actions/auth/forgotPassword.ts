@@ -22,23 +22,28 @@ function getErrorMessage(code: string): string {
 export default async function forgotPassword(
   data: ForgotPasswordSchemaType,
 ): Promise<{ error?: string }> {
-  const supabase = await createClient();
+  try {
+    const supabase = await createClient();
 
-  const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/change-password`,
-  });
+    const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/change-password`,
+    });
 
-  if (error) {
-    if (error.code) {
-      return { error: getErrorMessage(error.code) };
-    } else {
-      const error = new Error(
-        "An unexpected error occurred while sending the reset email.",
-      );
-      console.error(error);
-      return { error: error.message };
+    if (error) {
+      if (error.code) {
+        return { error: getErrorMessage(error.code) };
+      } else {
+        const error = new Error(
+          "An unexpected error occurred while sending the reset email.",
+        );
+        console.error(error);
+        return { error: error.message };
+      }
     }
-  }
 
-  return {};
+    return {};
+  } catch (error) {
+    console.error(error);
+    return { error: "An unexpected error occurred" };
+  }
 }
