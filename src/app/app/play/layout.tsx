@@ -24,8 +24,7 @@ export default async function GameLayout({ children }: GameLayoutProps) {
     hasFinishedTutorial === undefined ||
     gamesPlayedToday === undefined
   ) {
-    redirectToError("Error getting game data");
-    return;
+    return redirectToError("Error getting game data");
   }
 
   return (
