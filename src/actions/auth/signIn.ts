@@ -60,13 +60,12 @@ export default async function signIn(
 
     revalidatePath("/", "layout");
     redirect("/app");
-  } catch (err) {
-    if (isRedirectError(err)) {
-      throw err;
+  } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
     }
 
-    const error = new Error("An unexpected error occurred");
     console.error(error);
-    return { error: error.message };
+    return { error: "An unexpected error occurred" };
   }
 }

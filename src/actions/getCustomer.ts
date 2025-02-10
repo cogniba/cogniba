@@ -31,14 +31,13 @@ export default async function getCustomer(): Promise<{
       .then((res) => (res.length === 1 ? res[0] : null));
     if (!customer) {
       const error = new Error("Customer not found");
-      // console.error(error);
+      console.error(error);
       return { error: error.message };
     }
 
     return { customer };
-  } catch {
-    const error = new Error("An unexpected error occurred");
+  } catch (error) {
     console.error(error);
-    return { error: error.message };
+    return { error: "An unexpected error occurred" };
   }
 }

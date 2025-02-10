@@ -8,8 +8,7 @@ export default async function BillingSetting() {
   });
 
   if (!customerPortalUrl) {
-    redirectToError("Failed to create customer portal");
-    return;
+    return redirectToError("Failed to create customer portal");
   }
 
   return (

@@ -24,8 +24,7 @@ export default function CustomerPortalButton({
       });
 
       if (error || !url) {
-        redirectToError("Failed to open customer portal");
-        return;
+        return redirectToError("Failed to open customer portal");
       }
 
       window.location.href = url;

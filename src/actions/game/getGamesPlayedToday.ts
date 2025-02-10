@@ -30,7 +30,8 @@ export default async function getGamesPlayedToday(): Promise<{
       );
 
     return { gamesPlayedToday: Number(result[0].count) };
-  } catch {
+  } catch (error) {
+    console.error(error);
     return { error: "An unexpected error occurred" };
   }
 }

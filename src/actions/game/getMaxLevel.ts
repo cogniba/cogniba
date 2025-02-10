@@ -28,7 +28,8 @@ export default async function getMaxLevel(): Promise<{
       .then((res) => (res.length === 1 ? res[0].newLevel : 1));
 
     return { maxLevel };
-  } catch {
+  } catch (error) {
+    console.error(error);
     return { error: "An unexpected error occurred" };
   }
 }

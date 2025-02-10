@@ -29,7 +29,8 @@ export default async function getSettings(): Promise<{
     }
 
     return { settings };
-  } catch {
+  } catch (error) {
+    console.error(error);
     return { error: "An unexpected error occurred" };
   }
 }

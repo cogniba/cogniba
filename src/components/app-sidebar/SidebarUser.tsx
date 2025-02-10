@@ -44,8 +44,7 @@ export default function SidebarUser() {
 
   const { freePlan, error } = getFreePlan();
   if (error || !freePlan) {
-    redirectToError("Failed to open customer portal");
-    return;
+    return redirectToError("Failed to open customer portal");
   }
 
   const isLoading = status === "loading" || !fullName || !email;
@@ -58,8 +57,7 @@ export default function SidebarUser() {
       });
 
       if (error || !url) {
-        redirectToError("Failed to open customer portal");
-        return;
+        return redirectToError("Failed to open customer portal");
       }
 
       window.location.href = url;

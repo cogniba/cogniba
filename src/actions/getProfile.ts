@@ -33,9 +33,8 @@ export default async function getProfile(): Promise<{
     }
 
     return { profile };
-  } catch {
-    const error = new Error("An unexpected error occurred");
+  } catch (error) {
     console.error(error);
-    return { error: error.message };
+    return { error: "An unexpected error occurred" };
   }
 }

@@ -79,9 +79,8 @@ export default async function createCheckout({
     return {
       url: checkoutSession.url ?? undefined,
     };
-  } catch {
-    const error = new Error("An unexpected error occurred");
+  } catch (error) {
     console.error(error);
-    return { error: error.message };
+    return { error: "An unexpected error occurred" };
   }
 }
