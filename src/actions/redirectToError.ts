@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 
-export default async function redirectToError(message: string) {
+export default async function redirectToError(message: string): Promise<never> {
   const error = new Error(message);
   console.error(error);
 
