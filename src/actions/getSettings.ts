@@ -10,8 +10,10 @@ export default async function getSettings(): Promise<{
   error?: string;
 }> {
   try {
+    console.log(2);
     const supabase = await createClient();
 
+    console.log(3);
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -19,6 +21,7 @@ export default async function getSettings(): Promise<{
       return { error: "Failed to get user" };
     }
 
+    console.log(4);
     const settings = await db
       .select()
       .from(settingsTable)
@@ -28,6 +31,7 @@ export default async function getSettings(): Promise<{
       return { error: "Failed to get settings" };
     }
 
+    console.log(5);
     return { settings };
   } catch {
     return { error: "An unexpected error occurred" };

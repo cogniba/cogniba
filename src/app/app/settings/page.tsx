@@ -9,7 +9,9 @@ import getSettings from "@/actions/getSettings";
 export const dynamic = "force-dynamic";
 
 export default async function SettingsPage() {
+  console.log(1);
   const { settings, error } = await getSettings();
+  console.log(6);
   if (error || !settings) {
     return (
       <SimpleMessageScreen
@@ -19,6 +21,7 @@ export default async function SettingsPage() {
       />
     );
   }
+  console.log(7);
 
   return (
     <div className="mx-6 my-10 flex flex-col items-center gap-6">
