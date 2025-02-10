@@ -12,27 +12,32 @@ export default async function getCustomer(): Promise<{
   customer?: CustomerType;
   error?: string;
 }> {
-  const supabase = await createClient();
+  try {
+    const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) {
-    const error = new Error("User not found");
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      const error = new Error("User not found");
+      console.error(error);
+      return { error: error.message };
+    }
+
+    const customer = await db
+      .select()
+      .from(customersTable)
+      .where(eq(customersTable.userId, user.id))
+      .then((res) => (res.length === 1 ? res[0] : null));
+    if (!customer) {
+      const error = new Error("Customer not found");
+      console.error(error);
+      return { error: error.message };
+    }
+
+    return { customer };
+  } catch (error) {
     console.error(error);
-    return { error: error.message };
+    return { error: "An unexpected error occurred" };
   }
-
-  const customer = await db
-    .select()
-    .from(customersTable)
-    .where(eq(customersTable.userId, user.id))
-    .then((res) => (res.length === 1 ? res[0] : null));
-  if (!customer) {
-    const error = new Error("Customer not found");
-    console.error(error);
-    return { error: error.message };
-  }
-
-  return { customer };
 }
