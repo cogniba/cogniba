@@ -20,14 +20,12 @@ export default async function PricingPage() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    redirectToError("Failed to get user");
-    return;
+    return redirectToError("Failed to get user");
   }
 
   const { freePlan, error } = getFreePlan();
   if (error || !freePlan) {
-    redirectToError("Failed to load free pricing plan");
-    return;
+    return redirectToError("Failed to load free pricing plan");
   }
 
   const currentPlanName = await db
@@ -40,8 +38,7 @@ export default async function PricingPage() {
 
   const currentPlan = plans.find((plan) => plan.name === currentPlanName);
   if (!currentPlan) {
-    redirectToError("Failed to load current plan");
-    return;
+    return redirectToError("Failed to load current plan");
   }
 
   return (
