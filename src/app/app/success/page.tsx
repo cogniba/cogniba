@@ -15,8 +15,7 @@ export default async function SuccessPage() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    redirectToError("Failed to load user data");
-    return;
+    return redirectToError("Failed to load user data");
   }
 
   const customer = await db
@@ -30,8 +29,7 @@ export default async function SuccessPage() {
 
   const { error } = await syncStripeData(customer.customerId);
   if (error) {
-    redirectToError("Failed to sync Stripe data");
-    return;
+    return redirectToError("Failed to sync Stripe data");
   }
 
   return (
