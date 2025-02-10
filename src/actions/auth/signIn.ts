@@ -4,6 +4,7 @@ import createClient from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { SignInSchemaType } from "@/zod/schemas/SignInSchema";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 function getErrorMessage(code: string): string {
   if (code === "invalid_credentials") {
@@ -42,20 +43,29 @@ function getErrorMessage(code: string): string {
 export default async function signIn(
   data: SignInSchemaType,
 ): Promise<{ error?: string }> {
-  const supabase = await createClient();
+  try {
+    const supabase = await createClient();
 
-  const { error } = await supabase.auth.signInWithPassword(data);
+    const { error } = await supabase.auth.signInWithPassword(data);
 
-  if (error) {
-    if (error.code) {
-      return { error: getErrorMessage(error.code) };
-    } else {
-      const error = new Error("An unexpected error occurred during sign in.");
-      console.error(error);
-      return { error: error.message };
+    if (error) {
+      if (error.code) {
+        return { error: getErrorMessage(error.code) };
+      } else {
+        const error = new Error("An unexpected error occurred during sign in.");
+        console.error(error);
+        return { error: error.message };
+      }
     }
-  }
 
-  revalidatePath("/", "layout");
-  redirect("/app");
+    revalidatePath("/", "layout");
+    redirect("/app");
+  } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
+
+    console.error(error);
+    return { error: "An unexpected error occurred" };
+  }
 }

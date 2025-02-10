@@ -18,47 +18,52 @@ export default async function createCustomerPortal({
   url?: string;
   error?: string;
 }> {
-  const supabase = await createClient();
+  try {
+    const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) {
-    const error = new Error("User not found");
-    console.error(error);
-    return { error: error.message };
-  }
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      const error = new Error("User not found");
+      console.error(error);
+      return { error: error.message };
+    }
 
-  const query = await db
-    .select()
-    .from(profilesTable)
-    .where(eq(profilesTable.userId, user.id))
-    .fullJoin(customersTable, eq(profilesTable.userId, customersTable.userId))
-    .then((rows) => (rows.length === 1 ? rows[0] : null));
+    const query = await db
+      .select()
+      .from(profilesTable)
+      .where(eq(profilesTable.userId, user.id))
+      .fullJoin(customersTable, eq(profilesTable.userId, customersTable.userId))
+      .then((rows) => (rows.length === 1 ? rows[0] : null));
 
-  if (!query || !query.profiles) {
-    const error = new Error("Profile not found");
-    console.error(error);
-    return { error: error.message };
-  }
+    if (!query || !query.profiles) {
+      const error = new Error("Profile not found");
+      console.error(error);
+      return { error: error.message };
+    }
 
-  const { profiles: profile, customers: customer } = query;
+    const { profiles: profile, customers: customer } = query;
 
-  let customerId = customer?.customerId;
+    let customerId = customer?.customerId;
 
-  if (!customerId) {
-    const { customerId: newCustomerId } = await createNewCustomer({
-      email: profile.email,
-      userId: user.id,
+    if (!customerId) {
+      const { customerId: newCustomerId } = await createNewCustomer({
+        email: profile.email,
+        userId: user.id,
+      });
+
+      customerId = newCustomerId;
+    }
+
+    const portalSession = await stripe.billingPortal.sessions.create({
+      customer: customerId,
+      return_url: return_url,
     });
 
-    customerId = newCustomerId;
+    return { url: portalSession.url };
+  } catch (error) {
+    console.error(error);
+    return { error: "An unexpected error occurred" };
   }
-
-  const portalSession = await stripe.billingPortal.sessions.create({
-    customer: customerId,
-    return_url: return_url,
-  });
-
-  return { url: portalSession.url };
 }

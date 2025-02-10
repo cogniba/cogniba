@@ -9,22 +9,27 @@ export default async function getLevel(): Promise<{
   level?: number;
   error?: string;
 }> {
-  const supabase = await createClient();
+  try {
+    const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) {
-    return { error: "Failed to get user" };
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      return { error: "Failed to get user" };
+    }
+
+    const level = await db
+      .select()
+      .from(gamesTable)
+      .where(eq(gamesTable.userId, user.id))
+      .orderBy(desc(gamesTable.createdAt))
+      .limit(1)
+      .then((res) => (res.length === 1 ? res[0].newLevel : 1));
+
+    return { level };
+  } catch (error) {
+    console.error(error);
+    return { error: "An unexpected error occurred" };
   }
-
-  const level = await db
-    .select()
-    .from(gamesTable)
-    .where(eq(gamesTable.userId, user.id))
-    .orderBy(desc(gamesTable.createdAt))
-    .limit(1)
-    .then((res) => (res.length === 1 ? res[0].newLevel : 1));
-
-  return { level };
 }

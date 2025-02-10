@@ -32,27 +32,32 @@ function getErrorMessage(code: string): string {
 export default async function signUp(
   data: SignUpSchemaType,
 ): Promise<{ error?: string }> {
-  const supabase = await createClient();
+  try {
+    const supabase = await createClient();
 
-  const { error } = await supabase.auth.signUp({
-    email: data.email,
-    password: data.password,
-    options: {
-      data: {
-        full_name: data.fullName,
+    const { error } = await supabase.auth.signUp({
+      email: data.email,
+      password: data.password,
+      options: {
+        data: {
+          full_name: data.fullName,
+        },
       },
-    },
-  });
+    });
 
-  if (error) {
-    if (error.code) {
-      return { error: getErrorMessage(error.code) };
-    } else {
-      const error = new Error("An unexpected error occurred during sign up.");
-      console.error(error);
-      return { error: error.message };
+    if (error) {
+      if (error.code) {
+        return { error: getErrorMessage(error.code) };
+      } else {
+        const error = new Error("An unexpected error occurred during sign up.");
+        console.error(error);
+        return { error: error.message };
+      }
     }
-  }
 
-  return {};
+    return {};
+  } catch (error) {
+    console.error(error);
+    return { error: "An unexpected error occurred" };
+  }
 }
