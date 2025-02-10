@@ -42,8 +42,7 @@ export default function AuthContextProvider({
     (async () => {
       const { freePlan, error } = getFreePlan();
       if (error || !freePlan) {
-        redirectToError("Failed to get free plan");
-        return;
+        return redirectToError("Failed to get free plan");
       }
 
       const profilePromise = getProfile();
@@ -53,8 +52,7 @@ export default function AuthContextProvider({
         await Promise.all([profilePromise, customerPromise]);
 
       if (profileError || !profile) {
-        redirectToError("Failed to get profile");
-        return;
+        return redirectToError("Failed to get profile");
       }
 
       setState({
