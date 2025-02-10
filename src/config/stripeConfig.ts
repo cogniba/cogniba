@@ -8,7 +8,9 @@ export type PlanType = {
   highlighted?: boolean;
 };
 
-const isDevelopment = process.env.NODE_ENV === "development";
+const isDevelopment =
+  process.env.NODE_ENV === "development" ||
+  process.env.VERCEL_ENV === "preview";
 
 const stripeConfig = {
   plans: [

@@ -1,4 +1,9 @@
-Analytics limits
+Settings error
+
+Google Analytics
+PostHog Analytics
+Add logo to Google OAuth
+Publish Google OAuth
 
 Remove useEffect when fetching quote
 
