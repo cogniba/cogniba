@@ -48,7 +48,7 @@ export default async function signIn(
     const { error } = await supabase.auth.signInWithPassword(data);
 
     if (error) {
-      console.error(error);
+      console.log(error);
       if (error.code) {
         return { error: getErrorMessage(error.code) };
       } else {
