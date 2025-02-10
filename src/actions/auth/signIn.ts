@@ -4,6 +4,7 @@ import createClient from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { SignInSchemaType } from "@/zod/schemas/SignInSchema";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 function getErrorMessage(code: string): string {
   if (code === "invalid_credentials") {
@@ -48,7 +49,6 @@ export default async function signIn(
     const { error } = await supabase.auth.signInWithPassword(data);
 
     if (error) {
-      console.log(error);
       if (error.code) {
         return { error: getErrorMessage(error.code) };
       } else {
@@ -60,7 +60,11 @@ export default async function signIn(
 
     revalidatePath("/", "layout");
     redirect("/app");
-  } catch {
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+
     const error = new Error("An unexpected error occurred");
     console.error(error);
     return { error: error.message };
