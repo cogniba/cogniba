@@ -1,4 +1,3 @@
-import FadeInOnScroll from "../FadeInOnScroll";
 import Glow from "../Glow";
 import BackgroundGlow from "../ui/BackgroundGlow";
 import LandingPageAnalytics from "./LandingPageAnalytics";
@@ -19,18 +18,14 @@ export default function HowItWorksSection() {
       <div className="flex w-full flex-col items-center justify-between gap-9 xs:flex-row xs:gap-12 sm:gap-16 md:gap-20 lg:gap-24 xl:gap-36">
         <Glow display="block" className="w-full" glowOpacity={25}>
           <div className="grid w-full gap-2 sm:gap-3 md:gap-4">
-            <FadeInOnScroll from="left">
-              <h2 className="text-2xl font-semibold sm:text-3xl md:text-4xl">
-                Train Your Brain
-              </h2>
-            </FadeInOnScroll>
-            <FadeInOnScroll from="left">
-              <p className="text-sm text-foreground/95 sm:text-base">
-                Play Cogniba consistently to unlock your mind&apos;s potential.
-                Each session helps you push your mental limits, working towards
-                a higher IQ.
-              </p>
-            </FadeInOnScroll>
+            <h2 className="text-2xl font-semibold sm:text-3xl md:text-4xl">
+              Train Your Brain
+            </h2>
+            <p className="text-sm text-foreground/95 sm:text-base">
+              Play Cogniba consistently to unlock your mind&apos;s potential.
+              Each session helps you push your mental limits, working towards a
+              higher IQ.
+            </p>
           </div>
         </Glow>
         <Glow
@@ -39,9 +34,7 @@ export default function HowItWorksSection() {
           glowSize="32px"
           glowOpacity={20}
         >
-          <FadeInOnScroll from="right">
-            <LandingPageBoard />
-          </FadeInOnScroll>
+          <LandingPageBoard />
         </Glow>
       </div>
       <div className="flex w-full flex-col-reverse items-center justify-between gap-9 xs:flex-row xs:gap-12 sm:gap-16 md:gap-20 lg:gap-24 xl:gap-36">
@@ -51,24 +44,18 @@ export default function HowItWorksSection() {
           glowSize="128px"
           glowOpacity={25}
         >
-          <FadeInOnScroll from="left">
-            <LandingPageAnalytics />
-          </FadeInOnScroll>
+          <LandingPageAnalytics />
         </Glow>
         <Glow display="block" className="w-full" glowOpacity={25}>
           <div className="grid w-full gap-2 sm:gap-3 md:gap-4">
-            <FadeInOnScroll from="right">
-              <h2 className="text-2xl font-semibold sm:text-3xl md:text-4xl">
-                See Your Improvement
-              </h2>
-            </FadeInOnScroll>
-            <FadeInOnScroll from="right">
-              <p className="text-sm text-foreground/95 sm:text-base">
-                Track detailed analytics on your performance over time. Check
-                your progress, view trends, and see exactly how much you&apos;ve
-                improved.
-              </p>
-            </FadeInOnScroll>
+            <h2 className="text-2xl font-semibold sm:text-3xl md:text-4xl">
+              See Your Improvement
+            </h2>
+            <p className="text-sm text-foreground/95 sm:text-base">
+              Track detailed analytics on your performance over time. Check your
+              progress, view trends, and see exactly how much you&apos;ve
+              improved.
+            </p>
           </div>
         </Glow>
       </div>
