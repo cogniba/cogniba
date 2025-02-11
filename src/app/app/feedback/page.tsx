@@ -49,6 +49,9 @@ export default function FeedbackPage() {
       const { error } = await sendFeedback(data);
       if (error) {
         setError(error);
+      } else {
+        setSuccess(true);
+        form.reset();
       }
     });
   }
@@ -69,7 +72,7 @@ export default function FeedbackPage() {
                   <FormItem>
                     <FormLabel>Feedback Type</FormLabel>
                     <Select
-                      disabled={isPending}
+                      disabled={isPending || success}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
@@ -97,7 +100,7 @@ export default function FeedbackPage() {
                     <FormLabel>Message</FormLabel>
                     <FormControl>
                       <Textarea
-                        disabled={isPending}
+                        disabled={isPending || success}
                         placeholder="Write your feedback here..."
                         rows={10}
                         {...field}
@@ -109,7 +112,11 @@ export default function FeedbackPage() {
               />
 
               <div className="space-y-4">
-                <Button disabled={isPending} type="submit" className="w-full">
+                <Button
+                  disabled={isPending || success}
+                  type="submit"
+                  className="w-full"
+                >
                   <LoaderWrapper loading={isPending}>
                     Submit Feedback
                   </LoaderWrapper>
