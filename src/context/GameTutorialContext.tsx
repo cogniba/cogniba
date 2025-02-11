@@ -74,11 +74,12 @@ export default function GameTutorialContextProvider({
         redirectToError(error);
       } else {
         setIsTutorial(false);
+        setShowTutorial(true);
         setStep(0);
         setOpen(true);
       }
     });
-  }, [setIsTutorial, setOpen]);
+  }, [setIsTutorial, setOpen, setShowTutorial]);
 
   useEffect(() => {
     stepRef.current = step;
