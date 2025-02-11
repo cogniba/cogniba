@@ -101,7 +101,7 @@ export default function GameContextProvider({
     "correct" | "incorrect" | "missed" | null
   >(null);
   const [isTutorial, setIsTutorial] = useState(!hasFinishedTutorial);
-  const [showTutorial, setShowTutorial] = useState(!hasFinishedTutorial);
+  const [showTutorial, setShowTutorial] = useState(true);
   const [gamesPlayedToday, setGamesPlayedToday] = useState(
     startingGamesPlayedToday,
   );
