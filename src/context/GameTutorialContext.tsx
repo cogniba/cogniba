@@ -11,10 +11,11 @@ import {
 } from "react";
 import { useGameContext } from "./GameContext";
 import { useSidebar } from "@/components/ui/sidebar";
-import { useToast } from "@/hooks/use-toast";
 import sleep from "@/lib/sleep";
 import gameConfig from "@/config/gameConfig";
 import gameTutorialConfig, { StepType } from "@/config/gameTutorialConfig";
+import updateProfile from "@/actions/updateProfile";
+import redirectToError from "@/actions/redirectToError";
 
 interface GameTutorialContextValue {
   step: number;
@@ -63,25 +64,21 @@ export default function GameTutorialContextProvider({
 
   const [isPending, startTransition] = useTransition();
 
-  const { toast } = useToast();
   const { setOpen } = useSidebar();
 
   const handleFinishTutorial = useCallback(async () => {
     startTransition(async () => {
-      const response = await fetch("/api/user/update-user", {
-        method: "POST",
-        body: JSON.stringify({ hasFinishedTutorial: true }),
-      });
+      const { error } = await updateProfile({ hasFinishedTutorial: true });
 
-      if (!response.ok) {
-        toast({ title: "Unexpected error occurred", variant: "destructive" });
+      if (error) {
+        redirectToError(error);
       } else {
         setIsTutorial(false);
         setStep(0);
         setOpen(true);
       }
     });
-  }, [setIsTutorial, setOpen, toast]);
+  }, [setIsTutorial, setOpen]);
 
   useEffect(() => {
     stepRef.current = step;
