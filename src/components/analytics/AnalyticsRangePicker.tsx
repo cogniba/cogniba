@@ -176,8 +176,8 @@ export default function AnalyticsRangePicker() {
             {options.map((option) => (
               <UpgradeDialog
                 key={option.value}
-                title="Daily games limit reached"
-                description={`You've played 10 games today - you're doing great! Come back tomorrow to play more or upgrade to Pro to play unlimited games.`}
+                title="Plan Limit Exceeded"
+                description="Your selected date range exceeds your current plan limit. Upgrade to Pro to unlock full analytics history and deeper insights."
                 className="w-full"
                 active={!option.isAllowed}
               >
