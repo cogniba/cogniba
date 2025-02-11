@@ -50,8 +50,8 @@ export default function GameTutorialTooltip({
                 Skip
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogOverlay className="z-[1000]" />
-            <AlertDialogContent className="z-[1000]">
+            <AlertDialogOverlay className="z-50" />
+            <AlertDialogContent className="z-50">
               <DialogHeader>
                 <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                 <AlertDialogDescription className="text-secondary-foreground">

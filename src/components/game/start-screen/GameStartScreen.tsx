@@ -55,7 +55,7 @@ export default function GameStartScreen() {
             >
               <Button
                 className={cn(
-                  "relative mt-10 w-full cursor-pointer py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5 [&_svg]:size-7",
+                  "pointer-events-auto relative mt-10 w-full cursor-pointer py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5 [&_svg]:size-7",
                   hasReachedDailyLimit && "opacity-50",
                 )}
                 size="custom"
