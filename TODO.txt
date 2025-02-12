@@ -1,4 +1,4 @@
-Settings error
+Reverse proxy for analytics
 
 Google Analytics
 PostHog Analytics
