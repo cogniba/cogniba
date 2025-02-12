@@ -52,9 +52,7 @@ export default function SignUpPage() {
 
   function onSubmit(formData: SignUpSchemaType) {
     setError(null);
-    posthog.capture("email_signup_initiated", {
-      email_domain: formData.email.split("@")[1],
-    });
+    posthog.capture("email_signup_initiated");
 
     startTransition(async () => {
       const { error } = await signUp(formData);
