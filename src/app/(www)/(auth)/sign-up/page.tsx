@@ -53,7 +53,7 @@ export default function SignUpPage() {
   function onSubmit(formData: SignUpSchemaType) {
     setError(null);
     posthog.capture("email_signup_initiated", {
-      email_domain: formData.email.split('@')[1],
+      email_domain: formData.email.split("@")[1],
     });
 
     startTransition(async () => {
@@ -102,7 +102,7 @@ export default function SignUpPage() {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
-          <CardHeader className="pb-9"></CardHeader>
+          <CardHeader className="pb-9">
             <CardTitle className="text-2xl">Sign Up</CardTitle>
             <CardDescription>Create a new account</CardDescription>
           </CardHeader>

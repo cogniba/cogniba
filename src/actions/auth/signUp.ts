@@ -2,7 +2,7 @@
 
 import createClient from "@/lib/supabase/server";
 import { SignUpSchemaType } from "@/zod/schemas/SignUpSchema";
-import posthogClient from "@/lib/PostHogClient";
+import posthogClient from "@/lib/posthogClient";
 
 function getErrorMessage(code: string): string {
   if (code === "user_already_exists") {
