@@ -23,6 +23,7 @@ import {
 import { FaGoogle } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
+import { posthog } from "posthog-js";
 import { SignUpSchema, SignUpSchemaType } from "@/zod/schemas/SignUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
@@ -68,15 +69,23 @@ export default function SignUpPage() {
     startTransition(async () => {
       const supabase = createClient();
 
+      posthog.capture("google_signup_initiated");
+
+      const redirectUrl = new URL(
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback`,
+      );
+      redirectUrl.searchParams.set("next", "/app");
+      redirectUrl.searchParams.set("provider", "google");
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback?next=/app`,
+          redirectTo: redirectUrl.toString(),
         },
       });
 
       if (error) {
         setError("An error occurred while signing in with Google.");
+        posthog.capture("google_signup_error", { error: error.message });
       }
     });
   };
