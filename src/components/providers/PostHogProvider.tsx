@@ -14,6 +14,7 @@ export default function PostHogProvider({ children }: PostHogProviderProps) {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST!,
       person_profiles: "always",
       capture_pageview: false,
+      capture_pageleave: true,
     });
   }, []);
 
