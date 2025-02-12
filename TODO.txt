@@ -1,4 +1,5 @@
-Settings error
+Reverse proxy for analytics
+Analytics events
 
 Google Analytics
 PostHog Analytics
