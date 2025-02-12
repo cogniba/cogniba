@@ -13,7 +13,7 @@ export default function PostHogProvider({ children }: PostHogProviderProps) {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
       api_host: "/ingest",
       ui_host: process.env.NEXT_PUBLIC_POSTHOG_HOST!,
-      person_profiles: "always",
+      person_profiles: "identified_only",
       capture_pageview: false,
       capture_pageleave: true,
     });
