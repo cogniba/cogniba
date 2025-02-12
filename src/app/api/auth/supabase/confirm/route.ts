@@ -1,8 +1,8 @@
 import { type EmailOtpType } from "@supabase/supabase-js";
 import { type NextRequest } from "next/server";
-
 import createClient from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import posthogClient from "@/lib/posthogClient";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -13,12 +13,26 @@ export async function GET(request: NextRequest) {
   if (token_hash && type) {
     const supabase = await createClient();
 
-    const { error } = await supabase.auth.verifyOtp({
+    const { data, error } = await supabase.auth.verifyOtp({
       type,
       token_hash,
     });
 
-    if (!error) {
+    if (!error && data.user) {
+      const posthog = posthogClient();
+      if (type === "signup") {
+        posthog.capture({
+          distinctId: data.user.id,
+          event: "email_confirmation_success",
+        });
+      } else if (type === "recovery") {
+        posthog.capture({
+          distinctId: data.user.id,
+          event: "email_recovery_success",
+        });
+      }
+      await posthog.shutdown();
+
       redirect(next);
     }
   }
