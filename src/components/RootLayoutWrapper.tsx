@@ -21,10 +21,10 @@ export default function RootLayoutWrapper({
         enableSystem
         disableTransitionOnChange
       >
-        {children}
         <Toaster />
         <Analytics />
         <SpeedInsights />
+        {children}
       </ThemeProvider>
     </PostHogProvider>
   );
