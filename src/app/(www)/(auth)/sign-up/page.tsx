@@ -23,7 +23,6 @@ import {
 import { FaGoogle } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { posthog } from "posthog-js";
 import { SignUpSchema, SignUpSchemaType } from "@/zod/schemas/SignUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
@@ -31,12 +30,14 @@ import { Separator } from "@/components/ui/separator";
 import LoaderWrapper from "@/components/LoaderWrapper";
 import signUp from "@/actions/auth/signUp";
 import createClient from "@/lib/supabase/client";
+import { usePostHog } from "posthog-js/react";
 
 export default function SignUpPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [hasSignedUp, setHasSignedUp] = useState(false);
   const [isSigningInWithGoogle, setIsSigningInWithGoogle] = useState(false);
+  const posthog = usePostHog();
 
   const disabled = isPending || isSigningInWithGoogle || hasSignedUp;
 
@@ -51,11 +52,15 @@ export default function SignUpPage() {
 
   function onSubmit(formData: SignUpSchemaType) {
     setError(null);
+    posthog.capture("email_signup_initiated", {
+      email_domain: formData.email.split('@')[1],
+    });
 
     startTransition(async () => {
       const { error } = await signUp(formData);
       if (error) {
         setError(error);
+        posthog.capture("email_signup_error", { error });
       } else {
         setHasSignedUp(true);
       }
@@ -97,7 +102,7 @@ export default function SignUpPage() {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
-          <CardHeader className="pb-9">
+          <CardHeader className="pb-9"></CardHeader>
             <CardTitle className="text-2xl">Sign Up</CardTitle>
             <CardDescription>Create a new account</CardDescription>
           </CardHeader>
