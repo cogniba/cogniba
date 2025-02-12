@@ -64,10 +64,15 @@ export default function SignInPage() {
     startTransition(async () => {
       const supabase = createClient();
 
+      const redirectUrl = new URL(
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback`,
+      );
+      redirectUrl.searchParams.set("next", "/app");
+      redirectUrl.searchParams.set("provider", "google");
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback?next=/app`,
+          redirectTo: redirectUrl.toString(),
         },
       });
 
