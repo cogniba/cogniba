@@ -33,8 +33,10 @@ import getFreePlan from "@/lib/stripe/getFreePlan";
 import redirectToError from "@/actions/redirectToError";
 import { cn } from "@/lib/cn";
 import { Badge } from "../ui/badge";
+import { usePostHog } from "posthog-js/react";
 
 export default function SidebarUser() {
+  const posthog = usePostHog();
   const { status, fullName, email, subscriptionType } = useAuthContext();
   const [isLoggingOut, startLoggingOut] = useTransition();
   const [isOpeningCustomerPortal, startOpeningCustomerPortal] = useTransition();
@@ -133,7 +135,14 @@ export default function SidebarUser() {
                     asChild
                     disabled={isDisabled}
                   >
-                    <Link href="/app/upgrade">
+                    <Link
+                      href="/app/upgrade"
+                      onClick={() =>
+                        posthog.capture("upgrade_link_click", {
+                          source: "sidebar_user",
+                        })
+                      }
+                    >
                       <SparklesIcon />
                       Upgrade to Pro
                     </Link>
@@ -157,6 +166,9 @@ export default function SidebarUser() {
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
+                  posthog.capture("billing_link_click", {
+                    source: "sidebar_user",
+                  });
                   setOpenMobile(false);
                   handleCustomerPortal();
                 }}

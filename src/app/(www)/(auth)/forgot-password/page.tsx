@@ -27,8 +27,10 @@ import Link from "next/link";
 import FormAlert from "@/components/FormAlert";
 import LoaderWrapper from "@/components/LoaderWrapper";
 import forgotPassword from "@/actions/auth/forgotPassword";
+import { usePostHog } from "posthog-js/react";
 
 export default function ForgotPasswordPage() {
+  const posthog = usePostHog();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [hasSentEmail, setHasSentEmail] = useState(false);
@@ -44,14 +46,17 @@ export default function ForgotPasswordPage() {
 
   function onSubmit(formData: z.infer<typeof ForgotPasswordSchema>) {
     setError(null);
+    posthog.capture("password_reset_initiated");
 
     startTransition(async () => {
       const { error } = await forgotPassword(formData);
 
       if (!error) {
         setHasSentEmail(true);
+        posthog.capture("password_reset_sent", { email: formData.email });
       } else {
         setError(error);
+        posthog.capture("password_reset_error", { error });
       }
     });
   }

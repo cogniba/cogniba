@@ -16,6 +16,7 @@ import gameConfig from "@/config/gameConfig";
 import gameTutorialConfig, { StepType } from "@/config/gameTutorialConfig";
 import updateProfile from "@/actions/updateProfile";
 import redirectToError from "@/actions/redirectToError";
+import { usePostHog } from "posthog-js/react";
 
 interface GameTutorialContextValue {
   step: number;
@@ -42,6 +43,7 @@ interface GameTutorialContextProviderProps {
 export default function GameTutorialContextProvider({
   children,
 }: GameTutorialContextProviderProps) {
+  const posthog = usePostHog();
   const { parameters } = gameConfig;
   const {
     level,
@@ -146,6 +148,7 @@ export default function GameTutorialContextProvider({
     };
 
     const handleLastStep = async () => {
+      posthog.capture("tutorial_finish");
       await handleFinishTutorial();
     };
 
@@ -198,6 +201,7 @@ export default function GameTutorialContextProvider({
     parameters.visibleSquareDuration,
     parameters.hiddenSquareDuration,
     parameters.delayBeforeStart,
+    posthog,
   ]);
 
   return (

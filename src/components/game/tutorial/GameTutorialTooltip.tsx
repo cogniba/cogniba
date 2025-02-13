@@ -18,6 +18,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useGameTutorialContext } from "@/context/GameTutorialContext";
+import { usePostHog } from "posthog-js/react";
 
 interface GameTutorialTooltipProps {
   showSkipButton: boolean;
@@ -26,6 +27,7 @@ interface GameTutorialTooltipProps {
 export default function GameTutorialTooltip({
   showSkipButton,
 }: GameTutorialTooltipProps) {
+  const posthog = usePostHog();
   const { steps, step, setStep, isLoading, handleFinishTutorial } =
     useGameTutorialContext();
 
@@ -69,6 +71,7 @@ export default function GameTutorialTooltip({
                 </AlertDialogCancel>
                 <AlertDialogAction
                   onClick={async (e) => {
+                    posthog.capture("tutorial_skip");
                     e.preventDefault();
                     await handleFinishTutorial();
                   }}

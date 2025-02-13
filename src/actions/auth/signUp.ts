@@ -2,6 +2,7 @@
 
 import createClient from "@/lib/supabase/server";
 import { SignUpSchemaType } from "@/zod/schemas/SignUpSchema";
+import posthogClient from "@/lib/posthogClient";
 
 function getErrorMessage(code: string): string {
   if (code === "user_already_exists") {
@@ -35,7 +36,7 @@ export default async function signUp(
   try {
     const supabase = await createClient();
 
-    const { error } = await supabase.auth.signUp({
+    const { data: authData, error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
       options: {
@@ -53,6 +54,18 @@ export default async function signUp(
         console.error(error);
         return { error: error.message };
       }
+    }
+
+    if (authData.user) {
+      const posthog = posthogClient();
+      posthog.capture({
+        distinctId: authData.user.id,
+        event: "email_signup_success",
+        properties: {
+          provider: "email",
+        },
+      });
+      await posthog.shutdown();
     }
 
     return {};

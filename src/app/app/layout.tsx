@@ -9,14 +9,14 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   return (
-    <SidebarProvider>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
           <AppHeader />
           {children}
         </SidebarInset>
-      </AuthContextProvider>
-    </SidebarProvider>
+      </SidebarProvider>
+    </AuthContextProvider>
   );
 }

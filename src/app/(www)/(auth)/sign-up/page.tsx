@@ -30,12 +30,14 @@ import { Separator } from "@/components/ui/separator";
 import LoaderWrapper from "@/components/LoaderWrapper";
 import signUp from "@/actions/auth/signUp";
 import createClient from "@/lib/supabase/client";
+import { usePostHog } from "posthog-js/react";
 
 export default function SignUpPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [hasSignedUp, setHasSignedUp] = useState(false);
   const [isSigningInWithGoogle, setIsSigningInWithGoogle] = useState(false);
+  const posthog = usePostHog();
 
   const disabled = isPending || isSigningInWithGoogle || hasSignedUp;
 
@@ -50,11 +52,13 @@ export default function SignUpPage() {
 
   function onSubmit(formData: SignUpSchemaType) {
     setError(null);
+    posthog.capture("email_signup_initiated");
 
     startTransition(async () => {
       const { error } = await signUp(formData);
       if (error) {
         setError(error);
+        posthog.capture("email_signup_error", { error });
       } else {
         setHasSignedUp(true);
       }
@@ -68,15 +72,23 @@ export default function SignUpPage() {
     startTransition(async () => {
       const supabase = createClient();
 
+      posthog.capture("google_signup_initiated");
+
+      const redirectUrl = new URL(
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback`,
+      );
+      redirectUrl.searchParams.set("next", "/app");
+      redirectUrl.searchParams.set("provider", "google");
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback?next=/app`,
+          redirectTo: redirectUrl.toString(),
         },
       });
 
       if (error) {
         setError("An error occurred while signing in with Google.");
+        posthog.capture("google_signup_error", { error: error.message });
       }
     });
   };

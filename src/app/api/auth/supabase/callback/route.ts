@@ -1,17 +1,33 @@
 import { NextResponse } from "next/server";
 import createClient from "@/lib/supabase/server";
+import posthogClient from "@/lib/posthogClient";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
 
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/";
+  const provider = searchParams.get("provider");
 
   if (code) {
     const supabase = await createClient();
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-    if (!error) {
+    if (!error && data?.user) {
+      if (provider === "google") {
+        const isNewUser = data.user.created_at === data.user.last_sign_in_at;
+
+        const posthog = posthogClient();
+        posthog.capture({
+          distinctId: data.user.id,
+          event: isNewUser ? "google_signup_success" : "google_login_success",
+          properties: {
+            provider: "google",
+          },
+        });
+        await posthog.shutdown();
+      }
+
       const forwardedHost = request.headers.get("x-forwarded-host");
       const isLocalEnv = process.env.NODE_ENV === "development";
 

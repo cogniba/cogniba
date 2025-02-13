@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { SignInSchemaType } from "@/zod/schemas/SignInSchema";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
+import posthogClient from "@/lib/posthogClient";
 
 function getErrorMessage(code: string): string {
   if (code === "invalid_credentials") {
@@ -46,7 +47,8 @@ export default async function signIn(
   try {
     const supabase = await createClient();
 
-    const { error } = await supabase.auth.signInWithPassword(data);
+    const { data: authData, error } =
+      await supabase.auth.signInWithPassword(data);
 
     if (error) {
       if (error.code) {
@@ -56,6 +58,18 @@ export default async function signIn(
         console.error(error);
         return { error: error.message };
       }
+    }
+
+    if (authData?.user) {
+      const posthog = posthogClient();
+      posthog.capture({
+        distinctId: authData.user.id,
+        event: "email_signin_success",
+        properties: {
+          provider: "email",
+        },
+      });
+      await posthog.shutdown();
     }
 
     revalidatePath("/", "layout");

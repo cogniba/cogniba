@@ -6,6 +6,7 @@ import { SubscriptionType } from "../database/schemas/customersTable";
 import getCustomer from "@/actions/getCustomer";
 import getFreePlan from "@/lib/stripe/getFreePlan";
 import redirectToError from "@/actions/redirectToError";
+import { usePostHog } from "posthog-js/react";
 
 interface AuthContextValue {
   status: "loading" | "authenticated";
@@ -30,6 +31,7 @@ interface AuthContextProviderProps {
 export default function AuthContextProvider({
   children,
 }: AuthContextProviderProps) {
+  const posthog = usePostHog();
   const [state, setState] = useState<AuthContextValue>({
     status: "loading",
     userId: undefined,
@@ -62,8 +64,16 @@ export default function AuthContextProvider({
         email: profile.email,
         subscriptionType: customer?.subscriptionType || freePlan.name,
       });
+
+      posthog.identify(profile.userId, {
+        email: profile.email,
+        full_name: profile.fullName,
+        hasFinishedTutorial: profile.hasFinishedTutorial,
+        createdAt: profile.createdAt,
+        subscription_type: customer?.subscriptionType || freePlan.name,
+      });
     })();
-  }, []);
+  }, [posthog]);
 
   return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
 }

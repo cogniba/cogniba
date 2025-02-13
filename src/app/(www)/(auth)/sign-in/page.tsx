@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import FormAlert from "@/components/FormAlert";
+import { usePostHog } from "posthog-js/react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -32,6 +33,7 @@ import signIn from "@/actions/auth/signIn";
 import createClient from "@/lib/supabase/client";
 
 export default function SignInPage() {
+  const posthog = usePostHog();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [isSigningInWithGoogle, setIsSigningInWithGoogle] = useState(false);
@@ -48,11 +50,13 @@ export default function SignInPage() {
 
   function onSubmit(formData: SignInSchemaType) {
     setError(null);
+    posthog.capture("email_signin_initiated");
 
     startTransition(async () => {
       const { error } = await signIn(formData);
       if (error) {
         setError(error);
+        posthog.capture("email_signin_error", { error });
       }
     });
   }
@@ -64,15 +68,23 @@ export default function SignInPage() {
     startTransition(async () => {
       const supabase = createClient();
 
+      posthog.capture("google_signin_initiated");
+
+      const redirectUrl = new URL(
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback`,
+      );
+      redirectUrl.searchParams.set("next", "/app");
+      redirectUrl.searchParams.set("provider", "google");
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback?next=/app`,
+          redirectTo: redirectUrl.toString(),
         },
       });
 
       if (error) {
         setError("An error occurred while signing in with Google.");
+        posthog.capture("google_signin_error", { error: error.message });
       }
     });
   };

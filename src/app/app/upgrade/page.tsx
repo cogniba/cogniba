@@ -73,7 +73,7 @@ export default async function PricingPage() {
                 Upgrade to {plan.name}
               </CheckoutButton>
             ) : (
-              <CustomerPortalButton className="w-full">
+              <CustomerPortalButton className="w-full" targetPlan={plan.name}>
                 Downgrade to {plan.name}
               </CustomerPortalButton>
             )}
