@@ -6,7 +6,6 @@ import { stripeTable } from "@/database/schemas/stripeTable";
 import stripeConfig from "@/config/stripeConfig";
 import getFreePlan from "./getFreePlan";
 import posthogClient from "../posthogClient";
-import getCustomer from "@/actions/getCustomer";
 
 export default async function syncStripeData(
   customerId: string,
