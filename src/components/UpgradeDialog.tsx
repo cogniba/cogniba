@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { SparklesIcon } from "lucide-react";
+import { usePostHog } from "posthog-js/react";
 
 interface UpgradeDialogProps {
   children: React.ReactNode;
@@ -30,6 +31,8 @@ export default function UpgradeDialog({
   active,
   className,
 }: UpgradeDialogProps) {
+  const posthog = usePostHog();
+
   if (!active) {
     return <>{children}</>;
   }
@@ -49,7 +52,16 @@ export default function UpgradeDialog({
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="mt-5">
-          <Link href="/app/upgrade" className="w-full">
+          <Link
+            href="/app/upgrade"
+            className="w-full"
+            onClick={() => {
+              posthog.capture("upgrade_link_clicked", {
+                source: "upgrade_dialog",
+                dialog_title: title,
+              });
+            }}
+          >
             <Button className="w-full">
               <SparklesIcon />
               <span>Upgrade to Pro</span>
