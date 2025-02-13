@@ -20,18 +20,18 @@ import { Strong } from "@/components/ui/Strong";
 // ] satisfies QuestionType[];
 
 export default function FAQ() {
-  return (
-    // <div className="h-full w-full px-4 py-10">
-    //   <Accordion type="multiple" className="mx-auto max-w-3xl">
-    //     {questions.map((question, index) => (
-    //       <AccordionItem key={index} value={`item-${index + 1}`}>
-    //         <AccordionTrigger>{question.question}</AccordionTrigger>
-    //         <AccordionContent>{question.answer}</AccordionContent>
-    //       </AccordionItem>
-    //     ))}
-    //   </Accordion>
-    // </div>
+  // <div className="h-full w-full px-4 py-10">
+  //   <Accordion type="multiple" className="mx-auto max-w-3xl">
+  //     {questions.map((question, index) => (
+  //       <AccordionItem key={index} value={`item-${index + 1}`}>
+  //         <AccordionTrigger>{question.question}</AccordionTrigger>
+  //         <AccordionContent>{question.answer}</AccordionContent>
+  //       </AccordionItem>
+  //     ))}
+  //   </Accordion>
+  // </div>
 
+  return (
     <div className="mx-auto w-full max-w-4xl px-6 py-10">
       <div>In progress...</div>
       <div>
