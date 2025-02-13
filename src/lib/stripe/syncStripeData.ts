@@ -5,6 +5,8 @@ import { customersTable } from "@/database/schemas/customersTable";
 import { stripeTable } from "@/database/schemas/stripeTable";
 import stripeConfig from "@/config/stripeConfig";
 import getFreePlan from "./getFreePlan";
+import posthogClient from "../posthogClient";
+import getCustomer from "@/actions/getCustomer";
 
 export default async function syncStripeData(
   customerId: string,
@@ -77,6 +79,40 @@ export default async function syncStripeData(
   if (subscription.status !== "active" && subscription.status !== "trialing") {
     subscriptionType = freePlan.name;
   }
+
+  const customer = await db
+    .select()
+    .from(customersTable)
+    .where(eq(customersTable.customerId, customerId))
+    .then((rows) => (rows.length === 1 ? rows[0] : null));
+  if (customer === null) {
+    const error = new Error("Customer not found");
+    console.error(error);
+    return { error: error.message };
+  }
+
+  const posthog = posthogClient();
+  if (customer.subscriptionType === "Free" && subscriptionType !== "Free") {
+    posthog.capture({
+      distinctId: customerId,
+      event: "subscription_started",
+      properties: {
+        subscription_type: subscriptionType,
+      },
+    });
+  } else if (
+    customer.subscriptionType !== "Free" &&
+    subscriptionType === "Free"
+  ) {
+    posthog.capture({
+      distinctId: customerId,
+      event: "subscription_cancelled",
+      properties: {
+        subscription_type: customer.subscriptionType,
+      },
+    });
+  }
+  await posthog.shutdown();
 
   const customersTablePromise = db
     .update(customersTable)
