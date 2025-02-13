@@ -33,7 +33,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    await syncStripeData(customerId);
+    const { error } = await syncStripeData(customerId);
+    if (error) {
+      return NextResponse.json({ error }, { status: 400 });
+    }
   } catch {
     return NextResponse.json(
       { error: "Error verifying stripe event" },
