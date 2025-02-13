@@ -67,7 +67,6 @@ export default async function signIn(
         event: "email_signin_success",
         properties: {
           provider: "email",
-          email_domain: data.email.split("@")[1],
         },
       });
       await posthog.shutdown();
