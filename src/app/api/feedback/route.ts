@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     // Send email notification
     await resend.emails.send({
       from: "feedback@cogniba.com",
-      to: process.env.FEEDBACK_EMAIL!,
+      to: process.env.NEXT_PUBLIC_FEEDBACK_EMAIL!,
       subject: `New Feedback: ${type}`,
       text: `New feedback received.\n\n\nType:\n${type}\n\nMessage:\n${message}\n\nUser ID:\n${userId}`,
     });
