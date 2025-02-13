@@ -1,6 +1,6 @@
 {
-  "name": "web-template",
-  "version": "0.1.0",
+  "name": "cogniba",
+  "version": "0.1.9",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
