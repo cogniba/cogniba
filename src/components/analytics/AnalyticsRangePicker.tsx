@@ -19,6 +19,7 @@ import { useAnalyticsContext } from "@/context/AnalyticsContext";
 import subscriptionConfig from "@/config/subscriptionConfig";
 import { useAuthContext } from "@/context/AuthContext";
 import UpgradeDialog from "../UpgradeDialog";
+import { usePostHog } from "posthog-js/react";
 
 const defaultOptions = [
   { label: "Last 7 days", value: "last 7 days" },
@@ -28,6 +29,7 @@ const defaultOptions = [
 ];
 
 export default function AnalyticsRangePicker() {
+  const posthog = usePostHog();
   const { setDate } = useAnalyticsContext();
   const { subscriptionType, status } = useAuthContext();
   const { limits } = subscriptionConfig;
@@ -184,7 +186,13 @@ export default function AnalyticsRangePicker() {
                 <CommandItem
                   value={option.value}
                   onSelect={(currentValue) => {
-                    if (!option.isAllowed) return;
+                    if (!option.isAllowed) {
+                      posthog.capture("upgrade_dialog_open", {
+                        source: "analytics_range_picker",
+                        option_value: option.value,
+                      });
+                      return;
+                    }
 
                     setValue(currentValue);
                     calculateDateRange(currentValue);
