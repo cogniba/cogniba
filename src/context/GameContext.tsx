@@ -168,12 +168,12 @@ export default function GameContextProvider({
 
     posthog.capture("game_end", {
       level,
-      newLevel,
-      correctHits,
-      incorrectHits,
-      missedHits,
-      timePlayed,
-      showFeedbackEnabled,
+      new_level: newLevel,
+      correct_hits: correctHits,
+      incorrect_hits: incorrectHits,
+      missed_hits: missedHits,
+      time_played: timePlayed,
+      show_feedback: showFeedbackEnabled,
     });
 
     const response = await fetch("/api/game/insert-game", {
@@ -267,7 +267,10 @@ export default function GameContextProvider({
     );
     playerHitSequenceRef.current = [];
 
-    posthog.capture("game_start", { level, showFeedbackEnabled });
+    posthog.capture("game_start", {
+      level,
+      show_feedback: showFeedbackEnabled,
+    });
 
     await sleep(parameters.delayBeforeStart);
     await playGame();
