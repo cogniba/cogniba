@@ -10,6 +10,7 @@ import getCorrectHitSequence from "@/lib/game/game-logic/getCorrectHitSequence";
 import getHitStatistics from "@/lib/game/game-logic/getHitStatistics";
 import sleep from "@/lib/sleep";
 import waitFor from "@/lib/waitFor";
+import { usePostHog } from "posthog-js/react";
 import {
   createContext,
   Dispatch,
@@ -88,6 +89,7 @@ export default function GameContextProvider({
 }: GameContextProviderProps) {
   const { parameters } = gameConfig;
 
+  const posthog = usePostHog();
   const [level, setLevel] = useState(startingLevel);
   const [previousLevel, setPreviousLevel] = useState(startingLevel);
   const [hasReachedNewLevel, setHasReachedNewLevel] = useState(false);
@@ -164,6 +166,16 @@ export default function GameContextProvider({
         (parameters.visibleSquareDuration + parameters.hiddenSquareDuration) +
       parameters.delayBeforeStart;
 
+    posthog.capture("game_end", {
+      level,
+      newLevel,
+      correctHits,
+      incorrectHits,
+      missedHits,
+      timePlayed,
+      showFeedbackEnabled,
+    });
+
     const response = await fetch("/api/game/insert-game", {
       method: "POST",
       body: JSON.stringify({
@@ -185,6 +197,8 @@ export default function GameContextProvider({
     parameters.delayBeforeStart,
     parameters.hiddenSquareDuration,
     parameters.visibleSquareDuration,
+    posthog,
+    showFeedbackEnabled,
     toast,
   ]);
 
@@ -253,9 +267,18 @@ export default function GameContextProvider({
     );
     playerHitSequenceRef.current = [];
 
+    posthog.capture("game_start", { level, showFeedbackEnabled });
+
     await sleep(parameters.delayBeforeStart);
     await playGame();
-  }, [level, parameters.delayBeforeStart, playGame, setOpen]);
+  }, [
+    level,
+    parameters.delayBeforeStart,
+    playGame,
+    posthog,
+    setOpen,
+    showFeedbackEnabled,
+  ]);
 
   const handleShowFeedback = useCallback(async () => {
     if (correctHitSequenceRef.current[playerHitSequenceRef.current.length]) {
