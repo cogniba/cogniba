@@ -8,8 +8,10 @@ import UpgradeDialog from "@/components/UpgradeDialog";
 import { LockIcon } from "lucide-react";
 import subscriptionConfig from "@/config/subscriptionConfig";
 import { cn } from "@/lib/cn";
+import { usePostHog } from "posthog-js/react";
 
 export default function GameStartScreen() {
+  const posthog = usePostHog();
   const {
     isStartScreenVisible,
     correctHits,
@@ -59,7 +61,15 @@ export default function GameStartScreen() {
                   hasReachedDailyLimit && "opacity-50",
                 )}
                 size="custom"
-                onClick={() => !hasReachedDailyLimit && startPlaying()}
+                onClick={() => {
+                  if (hasReachedDailyLimit) {
+                    posthog.capture("upgrade_dialog_open", {
+                      source: "game_start_screen",
+                    });
+                    return;
+                  }
+                  startPlaying();
+                }}
                 tabIndex={-1}
               >
                 {hasReachedDailyLimit && (
