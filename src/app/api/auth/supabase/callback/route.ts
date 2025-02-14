@@ -7,6 +7,7 @@ export async function GET(request: Request) {
 
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/";
+  const type = searchParams.get("type");
   const provider = searchParams.get("provider");
 
   if (code) {
@@ -14,13 +15,12 @@ export async function GET(request: Request) {
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error && data?.user) {
-      if (provider === "google") {
-        const isNewUser = data.user.created_at === data.user.last_sign_in_at;
-
+      if (provider === "google" && type) {
         const posthog = posthogClient();
         posthog.capture({
           distinctId: data.user.id,
-          event: isNewUser ? "user_signup_success" : "user_signin_success",
+          event:
+            type === "signup" ? "user_signup_success" : "user_signin_success",
           properties: {
             provider: "google",
           },
