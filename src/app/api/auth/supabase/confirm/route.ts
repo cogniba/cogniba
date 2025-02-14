@@ -24,6 +24,9 @@ export async function GET(request: NextRequest) {
         posthog.capture({
           distinctId: data.user.id,
           event: "user_signup_success",
+          properties: {
+            provider: "email",
+          },
         });
       } else if (type === "recovery") {
         posthog.capture({
