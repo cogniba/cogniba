@@ -148,7 +148,9 @@ export default function GameTutorialContextProvider({
     };
 
     const handleLastStep = async () => {
-      posthog.capture("tutorial_finish");
+      posthog.capture("tutorial_complete", {
+        has_skipped: false,
+      });
       await handleFinishTutorial();
     };
 
