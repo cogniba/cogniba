@@ -64,7 +64,7 @@ export default async function signIn(
       const posthog = posthogClient();
       posthog.capture({
         distinctId: authData.user.id,
-        event: "signin_success",
+        event: "user_signin_success",
         properties: {
           provider: "email",
         },
