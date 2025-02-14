@@ -20,7 +20,7 @@ export async function GET(request: Request) {
         const posthog = posthogClient();
         posthog.capture({
           distinctId: data.user.id,
-          event: isNewUser ? "google_signup_success" : "google_login_success",
+          event: isNewUser ? "signup_success" : "signin_success",
           properties: {
             provider: "google",
           },
