@@ -52,13 +52,13 @@ export default function SignUpPage() {
 
   function onSubmit(formData: SignUpSchemaType) {
     setError(null);
-    posthog.capture("email_signup_initiated");
+    posthog.capture("user_signup_initiated", { provider: "email" });
 
     startTransition(async () => {
       const { error } = await signUp(formData);
       if (error) {
         setError(error);
-        posthog.capture("email_signup_error", { error });
+        posthog.capture("user_signup_error", { error, provider: "email" });
       } else {
         setHasSignedUp(true);
       }
@@ -72,12 +72,13 @@ export default function SignUpPage() {
     startTransition(async () => {
       const supabase = createClient();
 
-      posthog.capture("google_signup_initiated");
+      posthog.capture("user_signup_initiated", { provider: "google" });
 
       const redirectUrl = new URL(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback`,
       );
       redirectUrl.searchParams.set("next", "/app");
+      redirectUrl.searchParams.set("type", "signup");
       redirectUrl.searchParams.set("provider", "google");
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
@@ -88,7 +89,10 @@ export default function SignUpPage() {
 
       if (error) {
         setError("An error occurred while signing in with Google.");
-        posthog.capture("google_signup_error", { error: error.message });
+        posthog.capture("user_signup_error", {
+          error: error.message,
+          provider: "google",
+        });
       }
     });
   };

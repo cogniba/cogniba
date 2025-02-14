@@ -71,7 +71,9 @@ export default function GameTutorialTooltip({
                 </AlertDialogCancel>
                 <AlertDialogAction
                   onClick={async (e) => {
-                    posthog.capture("tutorial_skip");
+                    posthog.capture("tutorial_complete", {
+                      has_skipped: true,
+                    });
                     e.preventDefault();
                     await handleFinishTutorial();
                   }}
