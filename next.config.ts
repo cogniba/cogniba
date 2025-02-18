@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
+import { withContentlayer } from "next-contentlayer";
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -30,4 +34,4 @@ const nextConfig: NextConfig = {
   skipTrailingSlashRedirect: true,
 };
 
-export default nextConfig;
+export default withContentlayer(nextConfig);
