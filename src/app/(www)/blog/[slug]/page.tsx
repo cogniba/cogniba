@@ -1,9 +1,7 @@
 import { allPosts } from "contentlayer/generated";
-import { getMDXComponent } from "next-contentlayer/hooks";
 import { notFound } from "next/navigation";
-import { format } from "date-fns";
 import { Metadata } from "next";
-import MDXComponents from "@/components/blog/MDXComponents";
+import BlogPost from "@/components/blog/BlogPost";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -47,19 +45,5 @@ export default async function PostPage({ params }: Props) {
   const post = allPosts.find((post) => post.slug === awaitedParams.slug);
   if (!post) notFound();
 
-  const Content = getMDXComponent(post.body.code);
-
-  return (
-    <article className="mx-auto max-w-4xl px-6 py-10">
-      <div className="mb-8">
-        <h1 className="mb-2 text-3xl font-bold">{post.title}</h1>
-        <time className="text-sm text-muted-foreground">
-          {format(new Date(post.date), "MMMM dd, yyyy")}
-        </time>
-      </div>
-      <div className="prose dark:prose-invert max-w-none">
-        <Content components={MDXComponents} />
-      </div>
-    </article>
-  );
+  return <BlogPost post={post} />;
 }
