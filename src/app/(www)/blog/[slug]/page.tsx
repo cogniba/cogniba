@@ -6,9 +6,7 @@ import { Metadata } from "next";
 import MDXComponents from "@/components/blog/MDXComponents";
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -18,7 +16,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = allPosts.find((post) => post.slug === params.slug);
+  const awaitedParams = await params;
+
+  const post = allPosts.find((post) => post.slug === awaitedParams.slug);
   if (!post) return {};
 
   return {
@@ -41,8 +41,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function PostPage({ params }: Props) {
-  const post = allPosts.find((post) => post.slug === params.slug);
+export default async function PostPage({ params }: Props) {
+  const awaitedParams = await params;
+
+  const post = allPosts.find((post) => post.slug === awaitedParams.slug);
   if (!post) notFound();
 
   const Content = getMDXComponent(post.body.code);
