@@ -3,7 +3,7 @@
 import { format } from "date-fns";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ClockIcon } from "lucide-react";
-import calculateReadingTime from "@/lib/calculateReadingTime";
+import calculateReadingTime from "@/lib/blog/calculateReadingTime";
 import { Post } from "contentlayer/generated";
 
 interface BlogPostHeaderProps {
