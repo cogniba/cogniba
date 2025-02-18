@@ -14,13 +14,15 @@ interface BlogPostProps {
 
 export default function BlogPost({ post }: BlogPostProps) {
   const Content = getMDXComponent(post.body.code);
-  const [headings, setHeadings] = useState<{ text: string; level: number }[]>([]);
+  const [headings, setHeadings] = useState<{ text: string; level: number }[]>(
+    [],
+  );
 
   useEffect(() => {
     const extractHeadings = () => {
-      const headingElements = document.querySelectorAll('h2, h3');
+      const headingElements = document.querySelectorAll("h2, h3");
       const headingsData = Array.from(headingElements).map((heading) => ({
-        text: heading.textContent || '',
+        text: heading.textContent || "",
         level: parseInt(heading.tagName[1]),
       }));
       setHeadings(headingsData);
@@ -38,7 +40,7 @@ export default function BlogPost({ post }: BlogPostProps) {
           <Content components={MDXComponents} />
         </article>
         <div className="lg:w-72 lg:flex-shrink-0">
-          <div className="sticky top-8">
+          <div className="sticky top-20">
             <BlogPostSidebar
               title={post.title}
               slug={post.slug}
