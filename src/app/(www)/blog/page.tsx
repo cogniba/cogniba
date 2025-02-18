@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Blog | Cogniba",
     description:
       "Latest articles about cognitive training and brain development",
-    url: "https://cogniba.com/blog",
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
     siteName: "Cogniba",
     type: "website",
   },
