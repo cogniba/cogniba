@@ -15,7 +15,7 @@ export default function BlogPost({ post }: BlogPostProps) {
   const Content = getMDXComponent(post.body.code);
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10">
+    <div className="mx-auto max-w-7xl px-6 py-10">
       <article className="prose prose-gray dark:prose-invert mx-auto">
         <BlogPostHeader post={post} />
         <BlogPostImage src={post.image} alt={post.title} />
