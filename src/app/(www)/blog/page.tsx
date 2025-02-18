@@ -22,7 +22,7 @@ export default function BlogPage() {
   );
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10">
+    <div className="mx-auto max-w-5xl px-6 py-10">
       <h1 className="mb-8 text-3xl font-bold">Blog</h1>
       <div className="grid gap-8 md:grid-cols-2">
         {posts.map((post) => (
