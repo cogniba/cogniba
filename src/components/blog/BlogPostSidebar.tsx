@@ -38,12 +38,11 @@ export default function BlogPostSidebar({
   };
 
   const scrollToHeading = (text: string) => {
-    const element = document.getElementById(
-      text
-        .toLowerCase()
-        .replace(/[^\w\s]/g, "")
-        .replace(/\s+/g, "-"),
-    );
+    const id = text
+      .toLowerCase()
+      .replace(/[^\w\s]/g, "")
+      .replace(/\s+/g, "-");
+    const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -69,13 +68,20 @@ export default function BlogPostSidebar({
           <h3 className="mb-4 text-lg font-semibold">Table of Contents</h3>
           <nav className="space-y-2">
             {headings.map((heading) => (
-              <button
+              <a
                 key={heading.text}
-                onClick={() => scrollToHeading(heading.text)}
+                href={`#${heading.text
+                  .toLowerCase()
+                  .replace(/[^\w\s]/g, "")
+                  .replace(/\s+/g, "-")}`}
                 className={`block w-full text-left text-sm hover:text-primary ${heading.level === 2 ? "font-medium" : "pl-4 text-muted-foreground"}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToHeading(heading.text);
+                }}
               >
                 {heading.text}
-              </button>
+              </a>
             ))}
           </nav>
         </div>
