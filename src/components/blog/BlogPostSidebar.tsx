@@ -37,11 +37,17 @@ export default function BlogPostSidebar({
     );
   };
 
-  const scrollToHeading = (text: string) => {
-    const id = text
+  const getHeadingId = (text: string) => {
+    return text
       .toLowerCase()
-      .replace(/[^\w\s]/g, "")
-      .replace(/\s+/g, "-");
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+  };
+
+  const scrollToHeading = (text: string) => {
+    const id = getHeadingId(text);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -70,13 +76,12 @@ export default function BlogPostSidebar({
             {headings.map((heading) => (
               <a
                 key={heading.text}
-                href={`#${heading.text
-                  .toLowerCase()
-                  .replace(/[^\w\s]/g, "")
-                  .replace(/\s+/g, "-")}`}
+                href={`#${getHeadingId(heading.text)}`}
                 className={`block w-full text-left text-sm hover:text-primary ${heading.level === 2 ? "font-medium" : "pl-4 text-muted-foreground"}`}
                 onClick={(e) => {
                   e.preventDefault();
+                  const id = getHeadingId(heading.text);
+                  window.history.pushState(null, "", `#${id}`);
                   scrollToHeading(heading.text);
                 }}
               >
