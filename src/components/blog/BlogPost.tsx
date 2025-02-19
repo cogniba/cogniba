@@ -20,11 +20,22 @@ export default function BlogPost({ post }: BlogPostProps) {
 
   useEffect(() => {
     const extractHeadings = () => {
-      const headingElements = document.querySelectorAll("h2, h3");
-      const headingsData = Array.from(headingElements).map((heading) => ({
-        text: heading.textContent || "",
-        level: parseInt(heading.tagName[1]),
-      }));
+      const articleElement = document.querySelector("article");
+      if (!articleElement) return;
+
+      const headingElements = articleElement.querySelectorAll("h2, h3");
+      const headingsData = Array.from(headingElements).map((heading) => {
+        const text = heading.textContent || "";
+        const id = text
+          .toLowerCase()
+          .replace(/[^\w\s]/g, "")
+          .replace(/\s+/g, "-");
+        heading.id = id;
+        return {
+          text,
+          level: parseInt(heading.tagName[1]),
+        };
+      });
       setHeadings(headingsData);
     };
 
@@ -32,7 +43,7 @@ export default function BlogPost({ post }: BlogPostProps) {
   }, []);
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-10">
+    <div className="mx-auto max-w-5xl px-6 py-10">
       <div className="flex flex-col gap-8 lg:flex-row lg:gap-16">
         <article className="prose prose-gray dark:prose-invert lg:max-w-3xl">
           <BlogPostHeader post={post} />
