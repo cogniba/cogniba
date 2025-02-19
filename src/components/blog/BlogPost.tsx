@@ -23,19 +23,23 @@ export default function BlogPost({ post }: BlogPostProps) {
       const articleElement = document.querySelector("article");
       if (!articleElement) return;
 
-      const headingElements = articleElement.querySelectorAll("h2, h3");
+      const headingElements = articleElement.querySelectorAll(".blog-heading");
       const headingsData = Array.from(headingElements).map((heading) => {
-        const text = heading.textContent || "";
+        const text = (heading.textContent?.trim() || "").replace(/#$/, "");
         const id = text
           .toLowerCase()
-          .replace(/[^\w\s]/g, "")
-          .replace(/\s+/g, "-");
+          .replace(/[^\w\s-]/g, "")
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/-+/g, "-");
+
         heading.id = id;
         return {
           text,
-          level: parseInt(heading.tagName[1]),
+          level: parseInt(heading.tagName.slice(1)),
         };
       });
+      console.log(headingsData);
       setHeadings(headingsData);
     };
 
