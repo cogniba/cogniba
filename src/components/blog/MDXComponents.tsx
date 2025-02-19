@@ -22,13 +22,14 @@ const createHeadingComponent = (
         className: `group mb-4 mt-8 text-${level === 1 ? "3xl" : level === 2 ? "2xl" : level === 3 ? "xl" : "lg"} font-bold`,
       },
       [
-        props.children,
+        createElement("span", { key: "text" }, props.children),
         createElement(
           "a",
           {
+            key: "anchor",
             href: `#${id}`,
             className:
-              "ml-2 opacity-0 hover:opacity-100 group-hover:opacity-100 text-primary",
+              "ml-2 opacity-0 hover:opacity-100 hover:underline group-hover:opacity-100 text-primary",
             "aria-label": `Link to ${props.children}`,
           },
           "#",
