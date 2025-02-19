@@ -2,7 +2,7 @@
 
 import { Post } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
-import MDXComponents from "@/components/blog/MDXComponents";
+import MDXComponents from "@/components/blog/mdx/MDXComponents";
 import BlogPostHeader from "./BlogPostHeader";
 import BlogPostImage from "./BlogPostImage";
 import BlogPostSidebar from "./BlogPostSidebar";
