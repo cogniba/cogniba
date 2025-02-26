@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import { withContentlayer } from "next-contentlayer";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -33,4 +32,4 @@ const nextConfig: NextConfig = {
   skipTrailingSlashRedirect: true,
 };
 
-export default withContentlayer(nextConfig);
+export default nextConfig;

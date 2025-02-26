@@ -1,14 +1,18 @@
-import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import BlogPost from "@/components/blog/BlogPost";
+import getAllPosts from "@/lib/blog/getAllPosts";
+import getPostBySlug from "@/lib/blog/getPostBySlug";
+import mdxToHtml from "@/lib/markdown/mdxToHtml";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return allPosts.map((post) => ({
+  const posts = getAllPosts();
+
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -16,23 +20,24 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const awaitedParams = await params;
 
-  const post = allPosts.find((post) => post.slug === awaitedParams.slug);
+  const post = getPostBySlug(awaitedParams.slug);
+
   if (!post) return {};
 
   return {
-    title: `${post.title} | Cogniba Blog`,
-    description: post.description,
+    title: `${post.frontmatter.title} | Cogniba Blog`,
+    description: post.frontmatter.description,
     openGraph: {
-      title: post.title,
-      description: post.description,
+      title: post.frontmatter.title,
+      description: post.frontmatter.description,
       type: "article",
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug}`,
       images: [
         {
-          url: post.image,
+          url: post.frontmatter.image,
           width: 1200,
           height: 630,
-          alt: post.title,
+          alt: post.frontmatter.title,
         },
       ],
     },
@@ -42,8 +47,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PostPage({ params }: Props) {
   const awaitedParams = await params;
 
-  const post = allPosts.find((post) => post.slug === awaitedParams.slug);
+  const post = getPostBySlug(awaitedParams.slug);
+
   if (!post) notFound();
 
-  return <BlogPost post={post} />;
+  const content = await mdxToHtml(post.content);
+
+  return <BlogPost post={post} content={content} />;
 }

@@ -1,67 +1,53 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { TwitterIcon, LinkedinIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface BlogPostSidebarProps {
   title: string;
   slug: string;
-  tags?: string[];
-  headings?: { text: string; level: number }[];
+  tags: string[];
+  headings: { text: string; level: number }[];
 }
 
 export default function BlogPostSidebar({
   title,
   slug,
-  tags = [],
-  headings = [],
+  tags,
+  headings,
 }: BlogPostSidebarProps) {
-  const shareOnTwitter = () => {
-    window.open(
-      `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-        title,
-      )}&url=${encodeURIComponent(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
-      )}`,
-      "_blank",
-    );
-  };
-
-  const shareOnLinkedIn = () => {
-    window.open(
-      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
-      )}`,
-      "_blank",
-    );
-  };
-
-  const getHeadingId = (text: string) => {
-    return text
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .replace(/-+/g, "-");
-  };
-
-  const scrollToHeading = (text: string) => {
-    const id = getHeadingId(text);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <aside className="space-y-8">
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <h3 className="font-semibold">Share this article</h3>
+        <div className="flex gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => {
+              if (navigator.share) {
+                navigator.share({
+                  title: title,
+                  url: `${window.location.origin}/blog/${slug}`,
+                });
+              } else {
+                navigator.clipboard.writeText(
+                  `${window.location.origin}/blog/${slug}`,
+                );
+              }
+            }}
+          >
+            Share
+          </Button>
+        </div>
+      </div>
+
       {tags.length > 0 && (
-        <div>
-          <h3 className="mb-4 text-lg font-semibold">Tags</h3>
+        <div className="space-y-4">
+          <h3 className="font-semibold">Tags</h3>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
-              <Badge key={tag} variant="secondary">
+              <Badge variant="secondary" key={tag}>
                 {tag}
               </Badge>
             ))}
@@ -70,20 +56,23 @@ export default function BlogPostSidebar({
       )}
 
       {headings.length > 0 && (
-        <div>
-          <h3 className="mb-4 text-lg font-semibold">Table of Contents</h3>
-          <nav className="space-y-2">
-            {headings.map((heading) => (
+        <div className="space-y-4">
+          <h3 className="font-semibold">Table of Contents</h3>
+          <nav className="space-y-1 text-sm">
+            {headings.map((heading, index) => (
               <a
-                key={heading.text}
-                href={`#${getHeadingId(heading.text)}`}
-                className={`block w-full text-left text-sm hover:text-primary ${heading.level === 2 ? "font-medium" : "pl-4 text-muted-foreground"}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const id = getHeadingId(heading.text);
-                  window.history.pushState(null, "", `#${id}`);
-                  scrollToHeading(heading.text);
-                }}
+                key={index}
+                href={`#${heading.text
+                  .toLowerCase()
+                  .replace(/[^\w\s-]/g, "")
+                  .trim()
+                  .replace(/\s+/g, "-")
+                  .replace(/-+/g, "-")}`}
+                className={`block transition-colors hover:text-foreground ${
+                  heading.level === 2
+                    ? "text-foreground"
+                    : "pl-4 text-muted-foreground"
+                }`}
               >
                 {heading.text}
               </a>
@@ -91,30 +80,6 @@ export default function BlogPostSidebar({
           </nav>
         </div>
       )}
-
-      <div>
-        <h3 className="mb-4 text-lg font-semibold">Share</h3>
-        <div className="flex flex-col gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center justify-center gap-2"
-            onClick={shareOnTwitter}
-          >
-            <TwitterIcon className="h-4 w-4" />
-            Share on Twitter
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center justify-center gap-2"
-            onClick={shareOnLinkedIn}
-          >
-            <LinkedinIcon className="h-4 w-4" />
-            Share on LinkedIn
-          </Button>
-        </div>
-      </div>
-    </aside>
+    </div>
   );
 }

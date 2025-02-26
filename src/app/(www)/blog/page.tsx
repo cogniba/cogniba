@@ -1,7 +1,6 @@
-import { allPosts } from "contentlayer/generated";
-import { compareDesc } from "date-fns";
 import { Metadata } from "next";
 import BlogCard from "@/components/blog/BlogCard";
+import getAllPosts from "@/lib/blog/getAllPosts";
 
 export const metadata: Metadata = {
   title: "Blog | Cogniba",
@@ -17,9 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = allPosts.sort((a, b) =>
-    compareDesc(new Date(a.date), new Date(b.date)),
-  );
+  const posts = getAllPosts();
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-10">

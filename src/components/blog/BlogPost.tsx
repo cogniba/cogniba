@@ -1,19 +1,17 @@
 "use client";
 
-import { Post } from "contentlayer/generated";
-import { getMDXComponent } from "next-contentlayer/hooks";
-import MDXComponents from "@/components/blog/mdx/MDXComponents";
+import { useEffect, useState } from "react";
 import BlogPostHeader from "./BlogPostHeader";
 import BlogPostImage from "./BlogPostImage";
 import BlogPostSidebar from "./BlogPostSidebar";
-import { useEffect, useState } from "react";
+import { PostType } from "@/types/blog";
 
 interface BlogPostProps {
-  post: Post;
+  post: PostType;
+  content: React.ReactNode;
 }
 
-export default function BlogPost({ post }: BlogPostProps) {
-  const Content = getMDXComponent(post.body.code);
+export default function BlogPost({ post, content }: BlogPostProps) {
   const [headings, setHeadings] = useState<{ text: string; level: number }[]>(
     [],
   );
@@ -39,7 +37,7 @@ export default function BlogPost({ post }: BlogPostProps) {
           level: parseInt(heading.tagName.slice(1)),
         };
       });
-      console.log(headingsData);
+
       setHeadings(headingsData);
     };
 
@@ -51,15 +49,18 @@ export default function BlogPost({ post }: BlogPostProps) {
       <div className="flex flex-col gap-8 lg:flex-row lg:gap-16">
         <article className="prose prose-gray dark:prose-invert lg:max-w-3xl">
           <BlogPostHeader post={post} />
-          <BlogPostImage src={post.image} alt={post.title} />
-          <Content components={MDXComponents} />
+          <BlogPostImage
+            src={post.frontmatter.image}
+            alt={post.frontmatter.title}
+          />
+          {content}
         </article>
         <div className="lg:w-72 lg:flex-shrink-0">
           <div className="sticky top-20">
             <BlogPostSidebar
-              title={post.title}
+              title={post.frontmatter.title}
               slug={post.slug}
-              tags={post.tags}
+              tags={post.frontmatter.tags}
               headings={headings}
             />
           </div>
