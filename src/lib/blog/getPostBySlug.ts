@@ -2,10 +2,11 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { PostType } from "@/types/blog";
-
-const postsDirectory = path.join(process.cwd(), "content", "blog");
+import blogConfig from "@/config/blogConfig";
 
 export default function getPostBySlug(slug: string): PostType | null {
+  const { postsDirectory } = blogConfig;
+
   try {
     const fullPath = path.join(postsDirectory, `${slug}.mdx`);
 

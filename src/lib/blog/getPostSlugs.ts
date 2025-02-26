@@ -1,7 +1,7 @@
+import blogConfig from "@/config/blogConfig";
 import fs from "fs";
-import { join } from "path";
 
 export default function getPostSlugs() {
-  const postsDirectory = join(process.cwd(), "src/content/blog");
+  const { postsDirectory } = blogConfig;
   return fs.readdirSync(postsDirectory);
 }

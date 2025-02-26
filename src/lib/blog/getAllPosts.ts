@@ -2,10 +2,12 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { PostType } from "@/types/blog";
-
-const postsDirectory = path.join(process.cwd(), "content", "blog");
+import blogConfig from "@/config/blogConfig";
 
 export default function getAllPosts(): PostType[] {
+  const { postsDirectory } = blogConfig;
+
+  console.log(postsDirectory);
   if (!fs.existsSync(postsDirectory)) {
     return [];
   }
