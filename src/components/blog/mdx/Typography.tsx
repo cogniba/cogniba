@@ -1,19 +1,20 @@
-import { ComponentProps } from "react";
+import { HTMLAttributes } from "react";
 
-export const Paragraph = ({ ...props }: ComponentProps<"p">) => (
-  <p className="mb-4 leading-relaxed" {...props} />
-);
-Paragraph.displayName = "Paragraph";
+type TypographyProps = HTMLAttributes<HTMLElement>;
 
-export const Blockquote = ({ ...props }: ComponentProps<"blockquote">) => (
-  <blockquote
-    className="my-4 border-l-4 border-gray-300 pl-4 dark:border-gray-700"
-    {...props}
-  />
-);
-Blockquote.displayName = "Blockquote";
+export function Paragraph(props: TypographyProps) {
+  return <p {...props} className="mb-4 leading-relaxed" />;
+}
 
-export const HorizontalRule = () => (
-  <hr className="my-8 border-gray-200 dark:border-gray-800" />
-);
-HorizontalRule.displayName = "HorizontalRule";
+export function Blockquote(props: TypographyProps) {
+  return (
+    <blockquote
+      {...props}
+      className="mb-4 border-l-4 border-primary/30 pl-4 italic text-muted-foreground"
+    />
+  );
+}
+
+export function HorizontalRule(props: HTMLAttributes<HTMLHRElement>) {
+  return <hr {...props} className="my-8 border-muted" />;
+}

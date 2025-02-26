@@ -11,7 +11,7 @@ interface BlogCardProps {
 export default function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`}>
-      <Card className="group overflow-hidden transition-all hover:shadow-md">
+      <Card className="group h-full overflow-hidden transition-all hover:shadow-md">
         {post.frontmatter.image && (
           <div className="relative aspect-[16/9] w-full overflow-hidden">
             <Image

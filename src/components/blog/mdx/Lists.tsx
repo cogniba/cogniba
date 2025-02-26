@@ -1,16 +1,17 @@
-import { ComponentProps } from "react";
+import { HTMLAttributes } from "react";
 
-export const UnorderedList = ({ ...props }: ComponentProps<"ul">) => (
-  <ul className="mb-4 list-inside list-disc space-y-2" {...props} />
-);
-UnorderedList.displayName = "UnorderedList";
+type ListProps = HTMLAttributes<
+  HTMLUListElement | HTMLOListElement | HTMLLIElement
+>;
 
-export const OrderedList = ({ ...props }: ComponentProps<"ol">) => (
-  <ol className="mb-4 list-inside list-decimal space-y-2" {...props} />
-);
-OrderedList.displayName = "OrderedList";
+export function UnorderedList(props: ListProps) {
+  return <ul {...props} className="mb-4 ml-6 list-disc" />;
+}
 
-export const ListItem = ({ ...props }: ComponentProps<"li">) => (
-  <li className="leading-relaxed" {...props} />
-);
-ListItem.displayName = "ListItem";
+export function OrderedList(props: ListProps) {
+  return <ol {...props} className="mb-4 ml-6 list-decimal" />;
+}
+
+export function ListItem(props: ListProps) {
+  return <li {...props} className="mb-1" />;
+}

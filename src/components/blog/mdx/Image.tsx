@@ -1,23 +1,19 @@
 import Image from "next/image";
-import { ComponentProps } from "react";
+import { ImgHTMLAttributes } from "react";
 
-type ImageComponentProps = ComponentProps<typeof Image> & {
-  alt?: string;
-  src?: string;
-};
+type ImageProps = ImgHTMLAttributes<HTMLImageElement>;
 
-export const ImageComponent = ({
-  alt,
-  src,
-  ...props
-}: ImageComponentProps) => (
-  <Image
-    alt={alt || "Blog image"}
-    src={src || ""}
-    className="rounded-lg"
-    width={800}
-    height={400}
-    {...props}
-  />
-);
+export function ImageComponent(props: ImageProps) {
+  return (
+    <div className="my-8 overflow-hidden rounded-md">
+      <Image
+        src={props.src || ""}
+        alt={props.alt || ""}
+        width={1200}
+        height={630}
+        className="object-cover"
+      />
+    </div>
+  );
+}
 ImageComponent.displayName = "ImageComponent";
