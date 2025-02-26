@@ -9,7 +9,7 @@
     "lint": "next lint",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:types": "npx supabase gen types typescript --project-id <PROJECT_ID> --schema public > database.types.ts"
+    "contentlayer:build": "contentlayer build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
