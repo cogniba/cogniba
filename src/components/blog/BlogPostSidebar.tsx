@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useEffect } from "react";
 
 interface BlogPostSidebarProps {
   title: string;
@@ -16,6 +17,38 @@ export default function BlogPostSidebar({
   tags,
   headings,
 }: BlogPostSidebarProps) {
+  // Add effect to set scroll-behavior to smooth
+  useEffect(() => {
+    // Add smooth scrolling to html element
+    document.documentElement.style.scrollBehavior = "smooth";
+
+    // Clean up when component unmounts
+    return () => {
+      document.documentElement.style.scrollBehavior = "";
+    };
+  }, []);
+
+  // Function to handle smooth scroll with header offset
+  const handleHeadingClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    headingId: string,
+  ) => {
+    e.preventDefault();
+
+    const element = document.getElementById(headingId);
+    if (element) {
+      const headerHeight = 80;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - headerHeight,
+        behavior: "smooth",
+      });
+
+      history.pushState(null, "", `#${headingId}`);
+    }
+  };
+
   return (
     <div className="space-y-8">
       <div className="space-y-4">
@@ -59,24 +92,29 @@ export default function BlogPostSidebar({
         <div className="space-y-4">
           <h3 className="font-semibold">Table of Contents</h3>
           <nav className="space-y-1 text-sm">
-            {headings.map((heading, index) => (
-              <a
-                key={index}
-                href={`#${heading.text
-                  .toLowerCase()
-                  .replace(/[^\w\s-]/g, "")
-                  .trim()
-                  .replace(/\s+/g, "-")
-                  .replace(/-+/g, "-")}`}
-                className={`block transition-colors hover:text-foreground ${
-                  heading.level === 2
-                    ? "text-foreground"
-                    : "pl-4 text-muted-foreground"
-                }`}
-              >
-                {heading.text}
-              </a>
-            ))}
+            {headings.map((heading, index) => {
+              const headingId = heading.text
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, "")
+                .trim()
+                .replace(/\s+/g, "-")
+                .replace(/-+/g, "-");
+
+              return (
+                <a
+                  key={index}
+                  href={`#${headingId}`}
+                  onClick={(e) => handleHeadingClick(e, headingId)}
+                  className={`block transition-colors hover:text-foreground ${
+                    heading.level === 2
+                      ? "text-foreground"
+                      : "pl-4 text-muted-foreground"
+                  }`}
+                >
+                  {heading.text}
+                </a>
+              );
+            })}
           </nav>
         </div>
       )}
