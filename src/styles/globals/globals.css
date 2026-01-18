@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../../../tailwind.config.ts";
+@import "tailwindcss";
 
 @layer base {
   :root {
@@ -143,10 +142,14 @@
 }
 
 @layer base {
-  * {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
     @apply border-border;
   }
   body {
-    @apply min-w-full bg-background text-foreground;
+    @apply bg-background text-foreground min-w-full;
   }
 }
