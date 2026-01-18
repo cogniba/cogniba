@@ -13,12 +13,13 @@ import { useGameContext } from "./GameContext";
 import { useSidebar } from "@/components/ui/sidebar";
 import sleep from "@/lib/sleep";
 import gameConfig from "@/config/gameConfig";
-import gameTutorialConfig, { StepType } from "@/config/gameTutorialConfig";
+import type { StepType } from "@/config/gameTutorialConfig";
+import gameTutorialConfig from "@/config/gameTutorialConfig";
 import updateProfile from "@/actions/updateProfile";
 import redirectToError from "@/actions/redirectToError";
 import { usePostHog } from "posthog-js/react";
 
-interface GameTutorialContextValue {
+type GameTutorialContextValue = {
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   isVisible: boolean;
@@ -36,7 +37,7 @@ export const GameTutorialContext = createContext<GameTutorialContextValue>({
   steps: [],
 });
 
-interface GameTutorialContextProviderProps {
+type GameTutorialContextProviderProps = {
   children: React.ReactNode;
 }
 

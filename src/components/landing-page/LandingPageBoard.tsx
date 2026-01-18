@@ -16,7 +16,7 @@ export default function LandingPageBoard() {
       }, 500);
     }, 1500);
 
-    return () => clearInterval(intervalId);
+    return () => { clearInterval(intervalId); };
   }, []);
 
   return (

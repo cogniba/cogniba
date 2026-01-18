@@ -14,7 +14,7 @@ export type PlacementType =
   | "center-bottom"
   | "center";
 
-interface HighlightDialogProps {
+type HighlightDialogProps = {
   targetElement?: string;
   placement: PlacementType;
   elementClickable?: boolean;

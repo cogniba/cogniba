@@ -1,7 +1,8 @@
 "use server";
 
 import createClient from "@/lib/supabase/server";
-import { ForgotPasswordSchemaType } from "@/zod/schemas/ForgotPasswordSchema";
+import getEnv from "@/lib/env";
+import type { ForgotPasswordSchemaType } from "@/zod/schemas/ForgotPasswordSchema";
 
 function getErrorMessage(code: string): string {
   if (code === "user_not_found") {
@@ -26,7 +27,7 @@ export default async function forgotPassword(
     const supabase = await createClient();
 
     const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/change-password`,
+      redirectTo: `${getEnv("NEXT_PUBLIC_SITE_URL")}/app/settings/change-password`,
     });
 
     if (error) {

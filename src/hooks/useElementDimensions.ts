@@ -49,7 +49,7 @@ export default function useElementDimensions(
     };
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => { window.removeEventListener("resize", handleResize); };
   }, [element, targetElement, updateDimensions]);
 
   return dimensions;

@@ -14,7 +14,7 @@ export default function SidebarLogo() {
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton
-          onClick={() => setOpenMobile(false)}
+          onClick={() => { setOpenMobile(false); }}
           asChild
           size="lg"
           className="bg-primary/[0.075] text-base font-medium text-primary hover:bg-primary/15 hover:text-primary active:bg-primary/20 active:text-primary [&>svg]:size-6"

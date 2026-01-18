@@ -1,6 +1,6 @@
 import { cn } from "@/lib/cn";
 
-interface SimpleMessageScreenProps {
+type SimpleMessageScreenProps = {
   mainMessage: React.ReactNode;
   secondaryMessage?: React.ReactNode;
   variant?: "normal" | "error";

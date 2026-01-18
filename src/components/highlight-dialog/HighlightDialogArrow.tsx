@@ -1,7 +1,7 @@
 import { cn } from "@/lib/cn";
 import { forwardRef } from "react";
 
-interface HighlightDialogArrowProps {
+type HighlightDialogArrowProps = {
   className?: string;
   style?: React.CSSProperties;
   type: "top" | "bottom" | "left" | "right";

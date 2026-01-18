@@ -1,9 +1,9 @@
 "use client";
 
 import { format } from "date-fns";
-import { PostType } from "@/types/blog";
+import type { PostType } from "@/types/blog";
 
-interface BlogPostHeaderProps {
+type BlogPostHeaderProps = {
   post: PostType;
 }
 

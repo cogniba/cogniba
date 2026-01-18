@@ -18,7 +18,7 @@ export default function AppearanceSetting() {
         { value: "system", label: "System default" },
       ]}
       value={theme || "system"}
-      onValueChange={(value) => setTheme(value)}
+      onValueChange={(value) => { setTheme(value); }}
     />
   );
 }

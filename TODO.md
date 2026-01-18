@@ -5,3 +5,4 @@
 - [ ] Typed eslint config
 - [ ] Aggressive typescript config
 - [ ] Aggressive esconfig
+- [ ] Middleware

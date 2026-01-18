@@ -25,8 +25,9 @@ import { useState, useTransition } from "react";
 import LoaderWrapper from "@/components/LoaderWrapper";
 import FormAlert from "@/components/FormAlert";
 import { FeedbackSchema } from "@/zod/schemas/FeedbackSchema";
-import { z } from "zod";
+import type { z } from "zod";
 import sendFeedback from "@/actions/sendFeedback";
+import getEnv from "@/lib/env";
 
 export default function FeedbackPage() {
   const [isPending, startTransition] = useTransition();
@@ -36,7 +37,6 @@ export default function FeedbackPage() {
   const form = useForm<z.infer<typeof FeedbackSchema>>({
     resolver: zodResolver(FeedbackSchema),
     defaultValues: {
-      type: undefined,
       message: "",
     },
   });
@@ -57,14 +57,19 @@ export default function FeedbackPage() {
   }
 
   return (
-    <div className="mb-10 flex flex-1 items-center justify-center bg-card py-5 xs:bg-background">
-      <Card className="w-full max-w-lg border-transparent px-2 shadow-none xs:mx-6 xs:border-border xs:shadow-sm">
+    <div className="bg-card xs:bg-background mb-10 flex flex-1 items-center justify-center py-5">
+      <Card className="xs:mx-6 xs:border-border xs:shadow-sm w-full max-w-lg border-transparent px-2 shadow-none">
         <CardHeader>
           <CardTitle>Send Feedback</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form
+              onSubmit={(event) => {
+                void form.handleSubmit(onSubmit)(event);
+              }}
+              className="space-y-6"
+            >
               <FormField
                 control={form.control}
                 name="type"
@@ -134,13 +139,13 @@ export default function FeedbackPage() {
           </Form>
         </CardContent>
       </Card>
-      <div className="absolute bottom-2 px-4 text-center text-sm text-muted-foreground">
+      <div className="text-muted-foreground absolute bottom-2 px-4 text-center text-sm">
         Need a quick response? Email me at{" "}
         <a
-          href={`mailto:${process.env.NEXT_PUBLIC_FEEDBACK_EMAIL}`}
+          href={`mailto:${getEnv("NEXT_PUBLIC_FEEDBACK_EMAIL")}`}
           className="underline-offset-4 hover:underline"
         >
-          {process.env.NEXT_PUBLIC_FEEDBACK_EMAIL}
+          {getEnv("NEXT_PUBLIC_FEEDBACK_EMAIL")}
         </a>
       </div>
     </div>

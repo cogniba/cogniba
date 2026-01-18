@@ -9,18 +9,19 @@ import {
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 
-interface ErrorPageProps {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
+type ErrorPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
 
 export default async function ErrorPage({ searchParams }: ErrorPageProps) {
-  const errorMessage = (await searchParams).message || "Something went wrong";
+  const errorMessage =
+    (await searchParams)["message"] || "Something went wrong";
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
+    <div className="bg-background flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-destructive">
+          <CardTitle className="text-destructive flex items-center gap-2">
             <AlertCircle className="h-6 w-6" />
             Error
           </CardTitle>

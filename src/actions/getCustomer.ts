@@ -1,9 +1,10 @@
 "use server";
 
 import { db } from "@/database";
+import type {
+  CustomerType} from "@/database/schemas/customersTable";
 import {
-  customersTable,
-  CustomerType,
+  customersTable
 } from "@/database/schemas/customersTable";
 import createClient from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";

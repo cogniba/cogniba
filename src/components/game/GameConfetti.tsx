@@ -4,7 +4,7 @@ import useWindowSize from "@/hooks/useWindowSize";
 import { useCallback, useEffect, useState } from "react";
 import Confetti from "react-confetti";
 
-interface GameConfettiProps {
+type GameConfettiProps = {
   hasIncreasedLevel: boolean;
 }
 

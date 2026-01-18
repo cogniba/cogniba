@@ -1,6 +1,6 @@
 import { cn } from "@/lib/cn";
 
-interface GlowProps {
+type GlowProps = {
   children: React.ReactNode;
   display?: string;
   className?: string;

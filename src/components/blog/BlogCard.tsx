@@ -2,9 +2,9 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { PostType } from "@/types/blog";
+import type { PostType } from "@/types/blog";
 
-interface BlogCardProps {
+type BlogCardProps = {
   post: PostType;
 }
 

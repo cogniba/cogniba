@@ -1,4 +1,4 @@
-interface LevelDisplayProps {
+type LevelDisplayProps = {
   level: number;
 }
 export default function LevelDisplay({ level }: LevelDisplayProps) {

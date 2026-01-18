@@ -2,7 +2,9 @@ import stripe from "@/lib/stripe/stripe";
 import { stripeHandledEvents } from "@/lib/stripe/stripeHandledEvents";
 import syncStripeData from "@/lib/stripe/syncStripeData";
 import { headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import getEnv from "@/lib/env";
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -12,7 +14,7 @@ export async function POST(request: NextRequest) {
     const event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
+      getEnv("STRIPE_WEBHOOK_SECRET"),
     );
 
     if (!stripeHandledEvents.includes(event.type)) {

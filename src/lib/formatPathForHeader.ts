@@ -1,4 +1,4 @@
-interface PathSegment {
+type PathSegment = {
   formatted: string;
   raw: string;
 }

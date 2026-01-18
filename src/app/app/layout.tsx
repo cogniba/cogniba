@@ -3,7 +3,7 @@ import AppSidebar from "@/components/app-sidebar/AppSidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import AuthContextProvider from "@/context/AuthContext";
 
-interface AppLayoutProps {
+type AppLayoutProps = {
   children: React.ReactNode;
 }
 

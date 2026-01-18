@@ -131,7 +131,7 @@ export default function SidebarUser() {
               <>
                 <DropdownMenuGroup>
                   <DropdownMenuItem
-                    onClick={() => setOpenMobile(false)}
+                    onClick={() => { setOpenMobile(false); }}
                     asChild
                     disabled={isDisabled}
                   >
@@ -155,7 +155,7 @@ export default function SidebarUser() {
 
             <DropdownMenuGroup>
               <DropdownMenuItem
-                onClick={() => setOpenMobile(false)}
+                onClick={() => { setOpenMobile(false); }}
                 asChild
                 disabled={isDisabled}
               >

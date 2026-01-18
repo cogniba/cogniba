@@ -4,10 +4,11 @@ import createClient from "@/lib/supabase/server";
 import { ForgotPasswordSchema } from "@/zod/schemas/ForgotPasswordSchema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
+import getEnv from "@/lib/env";
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const data: unknown = await request.json();
     const parsedData = ForgotPasswordSchema.safeParse(data);
 
     if (!parsedData.success) {
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
     const supabase = await createClient();
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/change-password`,
+      redirectTo: `${getEnv("NEXT_PUBLIC_SITE_URL")}/change-password`,
     });
 
     if (error) {

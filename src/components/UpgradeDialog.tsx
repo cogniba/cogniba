@@ -14,14 +14,14 @@ import {
 import { SparklesIcon } from "lucide-react";
 import { usePostHog } from "posthog-js/react";
 
-interface UpgradeDialogProps {
+type UpgradeDialogProps = {
   children: React.ReactNode;
   title: string;
   description: string;
   asChild?: boolean;
   active?: boolean;
   className?: string;
-}
+};
 
 export default function UpgradeDialog({
   children,
@@ -39,7 +39,10 @@ export default function UpgradeDialog({
 
   return (
     <Dialog>
-      <DialogTrigger asChild={asChild} className={className}>
+      <DialogTrigger
+        {...(asChild !== undefined ? { asChild } : {})}
+        className={className}
+      >
         {children}
       </DialogTrigger>
       <DialogContent closeButton={true} backdrop>
@@ -47,7 +50,7 @@ export default function UpgradeDialog({
           <DialogTitle className="mb-2 text-xl font-semibold">
             {title}
           </DialogTitle>
-          <DialogDescription className="text-sm text-foreground/80">
+          <DialogDescription className="text-foreground/80 text-sm">
             {description}
           </DialogDescription>
         </DialogHeader>

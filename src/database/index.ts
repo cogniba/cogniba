@@ -1,11 +1,12 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
+import getEnv from "@/lib/env";
 
 function singleton<Value>(name: string, value: () => Value): Value {
   const globalAny = global as typeof global & {
     __singletons?: Record<string, unknown>;
   };
-  globalAny.__singletons = globalAny.__singletons || {};
+  globalAny.__singletons ??= {};
 
   if (!globalAny.__singletons[name]) {
     globalAny.__singletons[name] = value();
@@ -15,7 +16,7 @@ function singleton<Value>(name: string, value: () => Value): Value {
 }
 
 function createDatabaseConnection() {
-  const client = postgres(process.env.DATABASE_URL!, { prepare: false });
+  const client = postgres(getEnv("DATABASE_URL"), { prepare: false });
   return drizzle(client);
 }
 

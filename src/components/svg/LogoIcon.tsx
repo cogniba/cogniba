@@ -1,6 +1,6 @@
 "use client";
 
-interface LogoIconProps {
+type LogoIconProps = {
   className?: string;
 }
 

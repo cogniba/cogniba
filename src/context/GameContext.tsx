@@ -11,10 +11,9 @@ import getHitStatistics from "@/lib/game/game-logic/getHitStatistics";
 import sleep from "@/lib/sleep";
 import waitFor from "@/lib/waitFor";
 import { usePostHog } from "posthog-js/react";
+import type { Dispatch, SetStateAction } from "react";
 import {
   createContext,
-  Dispatch,
-  SetStateAction,
   useCallback,
   useContext,
   useEffect,
@@ -22,7 +21,7 @@ import {
   useState,
 } from "react";
 
-interface GameContextValue {
+type GameContextValue = {
   isTutorial: boolean;
   level: number;
   startPlaying: () => Promise<void>;
@@ -44,7 +43,7 @@ interface GameContextValue {
   setShowTutorial: Dispatch<SetStateAction<boolean>>;
   setIsTutorial: Dispatch<SetStateAction<boolean>>;
   gamesPlayedToday: number;
-}
+};
 
 export const GameContext = createContext<GameContextValue>({
   isTutorial: false,
@@ -70,14 +69,14 @@ export const GameContext = createContext<GameContextValue>({
   gamesPlayedToday: 0,
 });
 
-interface GameContextProviderProps {
+type GameContextProviderProps = {
   children: React.ReactNode;
   startingLevel: number;
   hasFinishedTutorial: boolean;
   showFeedbackEnabled: boolean;
   maxLevel: number;
   startingGamesPlayedToday: number;
-}
+};
 
 export default function GameContextProvider({
   children,
@@ -207,7 +206,8 @@ export default function GameContextProvider({
 
     hasPressedButtonRef.current = false;
     for (const position of gameSequenceRef.current) {
-      shouldPressButtonRef.current = correctHitSequenceRef.current[step];
+      shouldPressButtonRef.current =
+        correctHitSequenceRef.current[step] ?? false;
 
       setSelectedSquare(position);
       await sleep(parameters.visibleSquareDuration);
@@ -311,7 +311,9 @@ export default function GameContextProvider({
     };
     addEventListener("keydown", handleKeyDown);
 
-    return () => removeEventListener("keydown", handleKeyDown);
+    return () => {
+      removeEventListener("keydown", handleKeyDown);
+    };
   }, [handleButtonPress]);
 
   useEffect(() => {

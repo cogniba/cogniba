@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const data: unknown = await request.json();
     const parsedData = ChangePasswordSchema.safeParse(data);
 
     if (!parsedData.success) {

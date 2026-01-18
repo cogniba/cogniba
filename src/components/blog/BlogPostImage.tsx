@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-interface BlogPostImageProps {
+type BlogPostImageProps = {
   src: string;
   alt: string;
 }

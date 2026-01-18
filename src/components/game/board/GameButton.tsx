@@ -1,6 +1,6 @@
 import { cn } from "@/lib/cn";
 
-interface GameButtonProps {
+type GameButtonProps = {
   isButtonPressed: boolean;
   handleButtonPress: () => void;
 }

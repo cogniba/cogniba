@@ -1,6 +1,6 @@
 import { Loader2Icon } from "lucide-react";
 
-interface LoaderWrapperProps {
+type LoaderWrapperProps = {
   loading: boolean;
   children: React.ReactNode;
 }

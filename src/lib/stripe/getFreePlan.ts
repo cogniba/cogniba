@@ -1,4 +1,5 @@
-import stripeConfig, { PlanType } from "@/config/stripeConfig";
+import type { PlanType } from "@/config/stripeConfig";
+import stripeConfig from "@/config/stripeConfig";
 
 export default function getFreePlan(): { freePlan?: PlanType; error?: string } {
   const freePlan = stripeConfig.plans.find((plan) => plan.isFreePlan);

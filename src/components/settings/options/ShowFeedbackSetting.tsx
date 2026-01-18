@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 
 import { useState } from "react";
 
-interface ShowFeedbackSettingProps {
+type ShowFeedbackSettingProps = {
   startingShowFeedback: boolean;
 }
 

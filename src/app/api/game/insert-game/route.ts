@@ -6,33 +6,42 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    if (typeof body.level !== "number") {
+    const body: unknown = await request.json();
+    if (!body || typeof body !== "object") {
+      return NextResponse.json(
+        { error: "Invalid request body" },
+        { status: 400 },
+      );
+    }
+
+    const payload = body as Record<string, unknown>;
+
+    if (typeof payload["level"] !== "number") {
       return NextResponse.json(
         { error: "Invalid level value" },
         { status: 400 },
       );
-    } else if (typeof body.newLevel !== "number") {
+    } else if (typeof payload["newLevel"] !== "number") {
       return NextResponse.json(
         { error: "Invalid newLevel value" },
         { status: 400 },
       );
-    } else if (typeof body.correctHits !== "number") {
+    } else if (typeof payload["correctHits"] !== "number") {
       return NextResponse.json(
         { error: "Invalid correctHits value" },
         { status: 400 },
       );
-    } else if (typeof body.incorrectHits !== "number") {
+    } else if (typeof payload["incorrectHits"] !== "number") {
       return NextResponse.json(
         { error: "Invalid missedHits value" },
         { status: 400 },
       );
-    } else if (typeof body.missedHits !== "number") {
+    } else if (typeof payload["missedHits"] !== "number") {
       return NextResponse.json(
         { error: "Invalid missedHits value" },
         { status: 400 },
       );
-    } else if (typeof body.timePlayed !== "number") {
+    } else if (typeof payload["timePlayed"] !== "number") {
       return NextResponse.json(
         { error: "Invalid timePlayed value" },
         { status: 400 },
@@ -46,7 +55,14 @@ export async function POST(request: Request) {
       incorrectHits,
       missedHits,
       timePlayed,
-    } = body;
+    } = payload as {
+      level: number;
+      newLevel: number;
+      correctHits: number;
+      incorrectHits: number;
+      missedHits: number;
+      timePlayed: number;
+    };
 
     const supabase = await createClient();
 

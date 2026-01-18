@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import { cn } from "@/lib/cn";
-import { cva, VariantProps } from "class-variance-authority";
+import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 
 const strongVariants = cva("font-semibold", {
   variants: {
@@ -21,11 +22,9 @@ const strongVariants = cva("font-semibold", {
   },
 });
 
-export interface StrongProps
-  extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof strongVariants> {
+export type StrongProps = {
   asChild?: boolean;
-}
+} & React.HTMLAttributes<HTMLElement> & VariantProps<typeof strongVariants>
 
 const Strong = React.forwardRef<HTMLElement, StrongProps>(
   ({ className, variant, ...props }, ref) => {

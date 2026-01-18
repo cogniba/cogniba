@@ -1,6 +1,6 @@
 import { FileSearchIcon } from "lucide-react";
 
-interface ChartNoDataProps {
+type ChartNoDataProps = {
   text: string;
 }
 

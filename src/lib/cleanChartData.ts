@@ -1,4 +1,4 @@
-import { GamesData } from "@/app/api/analytics/get-data/route";
+import type { GamesData } from "@/app/api/analytics/get-data/route";
 import { format, isEqual, startOfDay } from "date-fns";
 
 export default function cleanChartData(
@@ -16,15 +16,23 @@ export default function cleanChartData(
     timePlayed: Math.round(item.timePlayed / 1000 / 60),
   }));
 
+  if (data.length === 0) {
+    return [];
+  }
+
   const filledData = [];
+  const firstEntry = data[0];
+  if (!firstEntry) {
+    return [];
+  }
 
   for (
     let date = new Date(startDate);
-    date < new Date(data[0].date);
+    date < new Date(firstEntry.date);
     date.setDate(date.getDate() + 1)
   ) {
     filledData.push({
-      userId: data[0].userId,
+      userId: firstEntry.userId,
       level: 0,
       correctHits: 0,
       incorrectHits: 0,
@@ -38,22 +46,45 @@ export default function cleanChartData(
 
   let i = 0;
   for (
-    let date = new Date(data[0].date);
+    let date = new Date(firstEntry.date);
     startOfDay(date) <= startOfDay(endDate);
     date.setDate(date.getDate() + 1)
   ) {
-    if (isEqual(startOfDay(new Date(data[i].date)), startOfDay(date))) {
-      filledData.push(formattedData[i]);
+    const currentData = data[i];
+
+    if (
+      currentData &&
+      isEqual(startOfDay(new Date(currentData.date)), startOfDay(date))
+    ) {
+      const formattedItem = formattedData[i];
+      if (formattedItem) {
+        filledData.push(formattedItem);
+      }
       if (i + 1 < data.length) {
         i++;
       }
-    } else {
+    } else if (!currentData) {
       filledData.push({
-        ...formattedData[i],
-        date: format(date, "yyyy-MM-dd"),
+        userId: firstEntry.userId,
+        level: 0,
+        correctHits: 0,
+        incorrectHits: 0,
+        missedHits: 0,
+        accuracy: 0,
         timePlayed: 0,
         gamesPlayed: 0,
+        date: format(date, "yyyy-MM-dd"),
       });
+    } else {
+      const formattedItem = formattedData[i];
+      if (formattedItem) {
+        filledData.push({
+          ...formattedItem,
+          date: format(date, "yyyy-MM-dd"),
+          timePlayed: 0,
+          gamesPlayed: 0,
+        });
+      }
     }
   }
 

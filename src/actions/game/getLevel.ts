@@ -25,7 +25,7 @@ export default async function getLevel(): Promise<{
       .where(eq(gamesTable.userId, user.id))
       .orderBy(desc(gamesTable.createdAt))
       .limit(1)
-      .then((res) => (res.length === 1 ? res[0].newLevel : 1));
+      .then((res) => res[0]?.newLevel ?? 1);
 
     return { level };
   } catch (error) {

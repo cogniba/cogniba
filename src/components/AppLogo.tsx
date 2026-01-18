@@ -1,7 +1,7 @@
 import LogoIcon from "./svg/LogoIcon";
 import { cn } from "@/lib/cn";
 
-interface AppLogoProps {
+type AppLogoProps = {
   className?: string;
 }
 

@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes } from "react";
 
 type AnchorProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 

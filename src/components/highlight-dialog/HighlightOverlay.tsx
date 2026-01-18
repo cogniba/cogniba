@@ -4,7 +4,7 @@ import useElementDimensions from "@/hooks/useElementDimensions";
 import { cn } from "@/lib/cn";
 import { useEffect, useRef, useState } from "react";
 
-interface HighlightOverlayProps {
+type HighlightOverlayProps = {
   targetElement: string;
   isVisible: boolean;
   elementClickable: boolean;

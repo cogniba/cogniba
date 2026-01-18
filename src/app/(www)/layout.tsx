@@ -1,6 +1,6 @@
 import Header from "@/components/www/header/Header";
 
-interface AuthLayoutProps {
+type AuthLayoutProps = {
   children: React.ReactNode;
 }
 

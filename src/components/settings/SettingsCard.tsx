@@ -1,4 +1,4 @@
-interface SettingsCardProps {
+type SettingsCardProps = {
   children: React.ReactNode;
 }
 

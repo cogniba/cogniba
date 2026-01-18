@@ -1,7 +1,7 @@
 import GameCrosshair from "./GameCrosshair";
 import GameSquare from "./GameSquare";
 
-interface GameBoardProps {
+type GameBoardProps = {
   selectedSquare: number | null;
 }
 

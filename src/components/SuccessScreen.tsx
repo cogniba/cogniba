@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-interface SuccessScreenProps {
+type SuccessScreenProps = {
   redirect?: boolean;
 }
 
@@ -19,7 +19,7 @@ export function SuccessScreen({ redirect = false }: SuccessScreenProps) {
       router.replace("/app");
     }, 3000);
 
-    return () => clearTimeout(timeout);
+    return () => { clearTimeout(timeout); };
   }, [router, redirect]);
 
   return (

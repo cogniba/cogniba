@@ -1,9 +1,10 @@
 import "server-only";
 
 import Stripe from "stripe";
+import getEnv from "@/lib/env";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-12-18.acacia",
+const stripe = new Stripe(getEnv("STRIPE_SECRET_KEY"), {
+  apiVersion: "2025-12-15.clover",
   typescript: true,
 });
 

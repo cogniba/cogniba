@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import PostHogProvider from "./providers/PostHogProvider";
 
-interface RootLayoutWrapperProps {
+type RootLayoutWrapperProps = {
   readonly children: React.ReactNode;
 }
 

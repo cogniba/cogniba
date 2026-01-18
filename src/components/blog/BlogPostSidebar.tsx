@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useEffect } from "react";
 
-interface BlogPostSidebarProps {
+type BlogPostSidebarProps = {
   title: string;
   slug: string;
   tags: string[];
@@ -104,7 +104,7 @@ export default function BlogPostSidebar({
                 <a
                   key={index}
                   href={`#${headingId}`}
-                  onClick={(e) => handleHeadingClick(e, headingId)}
+                  onClick={(e) => { handleHeadingClick(e, headingId); }}
                   className={`block transition-colors hover:text-foreground ${
                     heading.level === 2
                       ? "text-foreground"

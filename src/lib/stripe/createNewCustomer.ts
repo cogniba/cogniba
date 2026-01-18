@@ -4,7 +4,7 @@ import { stripeTable } from "@/database/schemas/stripeTable";
 import { db } from "@/database";
 import { customersTable } from "@/database/schemas/customersTable";
 
-interface CreateNewCustomerParams {
+type CreateNewCustomerParams = {
   email: string;
   userId: string;
 }

@@ -60,8 +60,8 @@ export default function FeaturesSection() {
         <div
           key={index}
           className={cn(
-            "relative size-full rounded-lg border bg-background px-8 py-7 lg:py-10",
-            styles.animatedBorder,
+            "bg-background relative size-full rounded-lg border px-8 py-7 lg:py-10",
+            styles["animatedBorder"],
           )}
           style={
             {
@@ -97,15 +97,15 @@ export default function FeaturesSection() {
             ]}
           />
           <Glow display="block" glowSize="32px" glowOpacity={75}>
-            <feature.Icon className="size-8 text-primary xs:size-10" />
+            <feature.Icon className="text-primary xs:size-10 size-8" />
           </Glow>
           <Glow display="block" glowOpacity={25}>
-            <h2 className="pb-1.5 pt-3 text-xl font-semibold xs:pb-2 xs:text-2xl lg:pt-5">
+            <h2 className="xs:pb-2 xs:text-2xl pt-3 pb-1.5 text-xl font-semibold lg:pt-5">
               {feature.title}
             </h2>
           </Glow>
           <Glow display="block" glowOpacity={25}>
-            <p className="text-sm text-foreground/90 xs:text-base">
+            <p className="text-foreground/90 xs:text-base text-sm">
               {feature.description}
             </p>
           </Glow>

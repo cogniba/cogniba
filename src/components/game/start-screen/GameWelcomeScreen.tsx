@@ -6,7 +6,12 @@ import quotes from "@/content/quotes.json";
 
 export default function GameWelcomeScreen() {
   const { quote, author } = useMemo(() => {
-    return quotes[Math.floor(Math.random() * quotes.length)];
+    return (
+      quotes[Math.floor(Math.random() * quotes.length)] ?? {
+        quote: "Keep going.",
+        author: "Cogniba",
+      }
+    );
   }, []);
 
   return (

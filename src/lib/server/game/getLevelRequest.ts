@@ -24,7 +24,7 @@ export default async function getLevelRequest(): Promise<NextResponse> {
       .where(eq(gamesTable.userId, userId))
       .orderBy(desc(gamesTable.createdAt))
       .limit(1)
-      .then((res) => (res.length === 1 ? res[0].newLevel : 1));
+      .then((res) => res[0]?.newLevel ?? 1);
 
     return NextResponse.json({ level }, { status: 200 });
   } catch (error) {

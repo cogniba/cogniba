@@ -1,7 +1,7 @@
 import { AlertCircle, CheckCircle } from "lucide-react";
 import { Alert, AlertTitle } from "./ui/alert";
 
-interface FormAlertProps {
+type FormAlertProps = {
   variant: "destructive" | "success";
   message: string;
 }

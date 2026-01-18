@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: "The only proven way to increase your intelligence.",
 };
 
-interface RootLayoutProps {
+type RootLayoutProps = {
   readonly children: React.ReactNode;
 }
 

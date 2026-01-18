@@ -6,12 +6,13 @@ import { useTransition } from "react";
 import LoaderWrapper from "./LoaderWrapper";
 import redirectToError from "@/actions/redirectToError";
 import { usePostHog } from "posthog-js/react";
+import getEnv from "@/lib/env";
 
-interface CheckoutButtonProps {
+type CheckoutButtonProps = {
   children?: React.ReactNode;
   priceId: string;
   className?: string;
-}
+};
 
 export default function CheckoutButton({
   children,
@@ -28,7 +29,7 @@ export default function CheckoutButton({
       const { url, error } = await createCheckout({
         mode: "subscription",
         priceId,
-        successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/app/success`,
+        successUrl: `${getEnv("NEXT_PUBLIC_SITE_URL")}/app/success`,
         cancelUrl: window.location.href,
       });
 

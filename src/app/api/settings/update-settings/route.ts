@@ -7,9 +7,18 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body: unknown = await request.json();
 
-    if (typeof body.showFeedback !== "boolean") {
+    if (!body || typeof body !== "object") {
+      return NextResponse.json(
+        { error: "Invalid request body" },
+        { status: 400 },
+      );
+    }
+
+    const payload = body as Record<string, unknown>;
+
+    if (typeof payload["showFeedback"] !== "boolean") {
       return NextResponse.json(
         { error: "Invalid showFeedback value" },
         { status: 400 },
@@ -30,7 +39,7 @@ export async function POST(request: Request) {
 
     await db
       .update(settingsTable)
-      .set({ showFeedback: body.showFeedback })
+      .set({ showFeedback: payload["showFeedback"] })
       .where(eq(settingsTable.userId, userId));
 
     revalidatePath("/app/settings");

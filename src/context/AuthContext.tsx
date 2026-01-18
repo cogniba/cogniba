@@ -2,31 +2,27 @@
 
 import getProfile from "@/actions/getProfile";
 import { createContext, useContext, useEffect, useState } from "react";
-import { SubscriptionType } from "../database/schemas/customersTable";
+import type { SubscriptionType } from "../database/schemas/customersTable";
 import getCustomer from "@/actions/getCustomer";
 import getFreePlan from "@/lib/stripe/getFreePlan";
 import redirectToError from "@/actions/redirectToError";
 import { usePostHog } from "posthog-js/react";
 
-interface AuthContextValue {
+type AuthContextValue = {
   status: "loading" | "authenticated";
   userId?: string;
   fullName?: string;
   email?: string;
   subscriptionType?: SubscriptionType;
-}
+};
 
 export const AuthContext = createContext<AuthContextValue>({
   status: "loading",
-  userId: undefined,
-  fullName: undefined,
-  email: undefined,
-  subscriptionType: undefined,
 });
 
-interface AuthContextProviderProps {
+type AuthContextProviderProps = {
   children: React.ReactNode;
-}
+};
 
 export default function AuthContextProvider({
   children,
@@ -34,10 +30,6 @@ export default function AuthContextProvider({
   const posthog = usePostHog();
   const [state, setState] = useState<AuthContextValue>({
     status: "loading",
-    userId: undefined,
-    fullName: undefined,
-    email: undefined,
-    subscriptionType: undefined,
   });
 
   useEffect(() => {

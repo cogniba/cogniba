@@ -5,7 +5,7 @@ import fetchGameData from "@/lib/game/fetchGameData";
 
 export const dynamic = "force-dynamic";
 
-interface GameLayoutProps {
+type GameLayoutProps = {
   children: React.ReactNode;
 }
 

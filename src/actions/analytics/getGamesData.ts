@@ -1,15 +1,16 @@
 "use server";
 
-import { GamesData } from "@/app/api/analytics/get-data/route";
+import type { GamesData } from "@/app/api/analytics/get-data/route";
 import { db } from "@/database";
 import { gamesTable } from "@/database/schemas/gamesTable";
 import calculateAccuracy from "@/lib/game/game-logic/calculateAccuracy";
 import createClient from "@/lib/supabase/server";
-import { avg, count, eq, sql, SQL, sum } from "drizzle-orm";
+import type { SQL } from "drizzle-orm";
+import { avg, count, eq, sql, sum } from "drizzle-orm";
 
-interface GetDataParams {
+type GetDataParams = {
   frequency: "daily" | "weekly" | "monthly";
-}
+};
 
 export default async function getGamesData({
   frequency,
@@ -27,15 +28,13 @@ export default async function getGamesData({
       return { error: "User not found" };
     }
 
-    let dateGroupingFunction: SQL<unknown>;
+    let dateGroupingFunction: SQL;
     if (frequency === "daily") {
       dateGroupingFunction = sql`DATE(${gamesTable.createdAt})`;
     } else if (frequency === "weekly") {
       dateGroupingFunction = sql`EXTRACT(WEEK FROM ${gamesTable.createdAt})`;
-    } else if (frequency === "monthly") {
-      dateGroupingFunction = sql`EXTRACT(MONTH FROM ${gamesTable.createdAt})`;
     } else {
-      throw new Error("Invalid frequency value");
+      dateGroupingFunction = sql`EXTRACT(MONTH FROM ${gamesTable.createdAt})`;
     }
 
     const rawData = await db

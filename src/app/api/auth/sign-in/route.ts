@@ -2,10 +2,11 @@ import createClient from "@/lib/supabase/server";
 import { SignInSchema } from "@/zod/schemas/SignInSchema";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import getEnv from "@/lib/env";
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const data: unknown = await request.json();
     const parsedData = SignInSchema.safeParse(data);
 
     if (!parsedData.success) {
@@ -35,7 +36,7 @@ export async function POST(request: Request) {
           type: "signup",
           email,
           options: {
-            emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/app/play`,
+            emailRedirectTo: `${getEnv("NEXT_PUBLIC_SITE_URL")}/app/play`,
           },
         });
         return NextResponse.json(

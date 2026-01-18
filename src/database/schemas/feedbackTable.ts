@@ -1,4 +1,4 @@
-import { InferSelectModel } from "drizzle-orm";
+import type { InferSelectModel } from "drizzle-orm";
 import { pgTable, timestamp, uuid, text, pgEnum } from "drizzle-orm/pg-core";
 import { profilesTable } from "./profilesTable";
 

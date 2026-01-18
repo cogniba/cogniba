@@ -25,7 +25,7 @@ import { ChangePasswordSchema } from "@/zod/schemas/ChangePasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
 
 export default function ChangePasswordPage() {
   const [isPending, startTransition] = useTransition();
