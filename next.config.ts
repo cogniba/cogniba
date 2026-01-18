@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
     },
   },
 
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: "/ingest/static/:path*",
