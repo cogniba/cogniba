@@ -12,8 +12,22 @@ type EnvKey =
 
 type Env = Record<EnvKey, string>;
 
+type PublicEnvKey = Extract<EnvKey, `NEXT_PUBLIC_${string}`>;
+
+const publicEnv: Record<PublicEnvKey, string | undefined> = {
+  NEXT_PUBLIC_SITE_URL: process.env["NEXT_PUBLIC_SITE_URL"],
+  NEXT_PUBLIC_FEEDBACK_EMAIL: process.env["NEXT_PUBLIC_FEEDBACK_EMAIL"],
+  NEXT_PUBLIC_SUPABASE_URL: process.env["NEXT_PUBLIC_SUPABASE_URL"],
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"],
+  NEXT_PUBLIC_POSTHOG_KEY: process.env["NEXT_PUBLIC_POSTHOG_KEY"],
+  NEXT_PUBLIC_POSTHOG_HOST: process.env["NEXT_PUBLIC_POSTHOG_HOST"],
+};
+
+const isPublicEnvKey = (key: EnvKey): key is PublicEnvKey =>
+  Object.prototype.hasOwnProperty.call(publicEnv, key);
+
 export default function getEnv(key: EnvKey): string {
-  const value = process.env[key];
+  const value = isPublicEnvKey(key) ? publicEnv[key] : process.env[key];
   if (!value) {
     throw new Error(`Missing environment variable: ${key}`);
   }
