@@ -59,7 +59,7 @@ export default function GameTutorialContextProvider({
   const { tutorialSteps, getNewLevelSteps, stepsInfo } = gameTutorialConfig;
 
   const [step, setStep] = useState(level === 1 ? 0 : stepsInfo.level1BeatStep);
-  const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
+  const isPlayingAnimationRef = useRef(false);
   const [isLoadingGame, setIsLoadingGame] = useState(false);
 
   const stepRef = useRef(level === 1 ? 0 : stepsInfo.level1BeatStep);
@@ -97,7 +97,7 @@ export default function GameTutorialContextProvider({
         setSelectedSquare(null);
         await sleep(parameters.hiddenSquareDuration);
       }
-      setIsPlayingAnimation(false);
+      isPlayingAnimationRef.current = false;
     };
 
     const buttonStepAnimation = async () => {
@@ -107,7 +107,7 @@ export default function GameTutorialContextProvider({
         setIsButtonPressed(false);
         await sleep(2000);
       }
-      setIsPlayingAnimation(false);
+      isPlayingAnimationRef.current = false;
     };
     const level1ExplanationAnimation = async () => {
       while (stepRef.current === stepsInfo.level1ExplanationStep) {
@@ -117,7 +117,7 @@ export default function GameTutorialContextProvider({
         await sleep(parameters.hiddenSquareDuration);
       }
 
-      setIsPlayingAnimation(false);
+      isPlayingAnimationRef.current = false;
     };
 
     const startTutorialGame = async () => {
@@ -144,7 +144,7 @@ export default function GameTutorialContextProvider({
         await sleep(parameters.hiddenSquareDuration);
         square = square === 5 ? 6 : 5;
       }
-      setIsPlayingAnimation(false);
+      isPlayingAnimationRef.current = false;
     };
 
     const handleLastStep = async () => {
@@ -155,18 +155,18 @@ export default function GameTutorialContextProvider({
     };
 
     if (stepRef.current === stepsInfo.boardStep) {
-      if (!isPlayingAnimation) {
-        setIsPlayingAnimation(true);
+      if (!isPlayingAnimationRef.current) {
+        isPlayingAnimationRef.current = true;
         boardStepAnimation();
       }
     } else if (stepRef.current === stepsInfo.buttonStep) {
-      if (!isPlayingAnimation) {
-        setIsPlayingAnimation(true);
+      if (!isPlayingAnimationRef.current) {
+        isPlayingAnimationRef.current = true;
         buttonStepAnimation();
       }
     } else if (stepRef.current === stepsInfo.level1ExplanationStep) {
-      if (!isPlayingAnimation) {
-        setIsPlayingAnimation(true);
+      if (!isPlayingAnimationRef.current) {
+        isPlayingAnimationRef.current = true;
         level1ExplanationAnimation();
       }
     } else if (stepRef.current === stepsInfo.level1PlayStep) {
@@ -175,8 +175,8 @@ export default function GameTutorialContextProvider({
         startTutorialGame();
       }
     } else if (stepRef.current === stepsInfo.level2ExplanationStep) {
-      if (!isPlayingAnimation) {
-        setIsPlayingAnimation(true);
+      if (!isPlayingAnimationRef.current) {
+        isPlayingAnimationRef.current = true;
         level2ExplanationAnimation();
       }
     } else if (stepRef.current === stepsInfo.lastStep) {
@@ -187,7 +187,6 @@ export default function GameTutorialContextProvider({
     step,
     startPlaying,
     isPlaying,
-    isPlayingAnimation,
     setOpen,
     setSelectedSquare,
     setIsButtonPressed,

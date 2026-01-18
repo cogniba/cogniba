@@ -2,7 +2,7 @@
 
 import useElementDimensions from "@/hooks/useElementDimensions";
 import { cn } from "@/lib/cn";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface HighlightOverlayProps {
   targetElement: string;
@@ -19,9 +19,12 @@ export default function HighlightOverlay({
 }: HighlightOverlayProps) {
   const currentTargetElementRef = useRef(targetElement);
   const previousTargetElementRef = useRef(targetElement);
+  const [measuredTarget, setMeasuredTarget] = useState(targetElement);
 
   const elementDimensions = useElementDimensions(
-    targetElement === "body" ? previousTargetElementRef.current : targetElement,
+    measuredTarget === "body"
+      ? previousTargetElementRef.current
+      : measuredTarget,
     padding,
   );
   const { height, width, top, left } = elementDimensions ?? {
@@ -32,10 +35,13 @@ export default function HighlightOverlay({
     element: null,
   };
 
-  if (currentTargetElementRef.current !== targetElement) {
-    previousTargetElementRef.current = currentTargetElementRef.current;
-    currentTargetElementRef.current = targetElement;
-  }
+  useEffect(() => {
+    if (currentTargetElementRef.current !== targetElement) {
+      previousTargetElementRef.current = currentTargetElementRef.current;
+      currentTargetElementRef.current = targetElement;
+    }
+    setMeasuredTarget(targetElement);
+  }, [targetElement]);
 
   useEffect(() => {
     if (!elementClickable) return;
@@ -56,7 +62,7 @@ export default function HighlightOverlay({
   return (
     <div
       data-state={isVisible ? "open" : "closed"}
-      className="absolute inset-0 z-50 bg-black/50 mix-blend-hard-light data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+      className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 absolute inset-0 z-50 bg-black/50 mix-blend-hard-light data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500"
     >
       <div
         className={cn(

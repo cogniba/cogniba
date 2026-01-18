@@ -2,15 +2,16 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
 function singleton<Value>(name: string, value: () => Value): Value {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const globalAny: any = global;
+  const globalAny = global as typeof global & {
+    __singletons?: Record<string, unknown>;
+  };
   globalAny.__singletons = globalAny.__singletons || {};
 
   if (!globalAny.__singletons[name]) {
     globalAny.__singletons[name] = value();
   }
 
-  return globalAny.__singletons[name];
+  return globalAny.__singletons[name] as Value;
 }
 
 function createDatabaseConnection() {
