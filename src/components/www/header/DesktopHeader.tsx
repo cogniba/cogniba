@@ -17,9 +17,11 @@ export default function DesktopHeader() {
       <NavigationMenu className="border-muted bg-muted/70 flex h-full w-full max-w-full items-center justify-between rounded-2xl border px-6 shadow-xl backdrop-blur">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/">
-              <AppLogo />
-            </Link>
+            <NavigationMenuLink asChild>
+              <Link href="/">
+                <AppLogo />
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
 
