@@ -1,15 +1,12 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import DesktopHeader from "./DesktopHeader";
-import MobileHeader, { TestType } from "./MobileHeader";
+import MobileHeader from "./MobileHeader";
 
 type HeaderProps = {
   children: React.ReactNode;
 };
 
 export default function Header({ children }: HeaderProps) {
-  const x: TestType = {};
-  console.log(x);
-
   return (
     <div className="flex h-svh flex-col items-center">
       <SidebarProvider className="flex flex-col items-center">

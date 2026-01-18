@@ -22,8 +22,6 @@ import {
 import Link from "next/link";
 import navigationConfig from "@/config/landing-page/navigationConfig";
 
-export type TestType = {};
-
 export default function MobileHeader() {
   const { setOpenMobile } = useSidebar();
   const { navigationItems } = navigationConfig;
