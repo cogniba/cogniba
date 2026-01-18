@@ -1,10 +1,9 @@
 import defaultTheme from "tailwindcss/defaultTheme";
-import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 
 export default {
-  darkMode: "class",
+  darkMode: ["class", ".dark"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -17,7 +16,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
       },
       transitionProperty: {
         width: "width",
