@@ -3,32 +3,31 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useEffect } from "react";
+import { cn } from "@/lib/cn";
 
 type BlogPostSidebarProps = {
   title: string;
   slug: string;
+  description: string;
   tags: string[];
-  headings: { text: string; level: number }[];
+  headings: { id: string; text: string; level: number }[];
 };
 
 export default function BlogPostSidebar({
   title,
   slug,
+  description,
   tags,
   headings,
 }: BlogPostSidebarProps) {
-  // Add effect to set scroll-behavior to smooth
   useEffect(() => {
-    // Add smooth scrolling to html element
     document.documentElement.style.scrollBehavior = "smooth";
 
-    // Clean up when component unmounts
     return () => {
       document.documentElement.style.scrollBehavior = "";
     };
   }, []);
 
-  // Function to handle smooth scroll with header offset
   const handleHeadingClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     headingId: string,
@@ -58,15 +57,15 @@ export default function BlogPostSidebar({
             size="sm"
             variant="outline"
             onClick={() => {
+              const url = `${window.location.origin}/blog/${slug}`;
               if (typeof navigator.share === "function") {
                 void navigator.share({
                   title: title,
-                  url: `${window.location.origin}/blog/${slug}`,
+                  text: description,
+                  url,
                 });
               } else {
-                void navigator.clipboard.writeText(
-                  `${window.location.origin}/blog/${slug}`,
-                );
+                void navigator.clipboard.writeText(url);
               }
             }}
           >
@@ -92,31 +91,23 @@ export default function BlogPostSidebar({
         <div className="space-y-4">
           <h3 className="font-semibold">Table of Contents</h3>
           <nav className="space-y-1 text-sm">
-            {headings.map((heading, index) => {
-              const headingId = heading.text
-                .toLowerCase()
-                .replace(/[^\w\s-]/g, "")
-                .trim()
-                .replace(/\s+/g, "-")
-                .replace(/-+/g, "-");
-
-              return (
-                <a
-                  key={index}
-                  href={`#${headingId}`}
-                  onClick={(e) => {
-                    handleHeadingClick(e, headingId);
-                  }}
-                  className={`hover:text-foreground block transition-colors ${
-                    heading.level === 2
-                      ? "text-foreground"
-                      : "text-muted-foreground pl-4"
-                  }`}
-                >
-                  {heading.text}
-                </a>
-              );
-            })}
+            {headings.map((heading) => (
+              <a
+                key={heading.id}
+                href={`#${heading.id}`}
+                onClick={(e) => {
+                  handleHeadingClick(e, heading.id);
+                }}
+                className={cn(
+                  "hover:text-foreground block transition-colors",
+                  heading.level === 2
+                    ? "text-foreground"
+                    : "text-muted-foreground pl-4",
+                )}
+              >
+                {heading.text}
+              </a>
+            ))}
           </nav>
         </div>
       )}

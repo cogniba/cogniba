@@ -19,6 +19,7 @@ export default function BlogCard({ post }: BlogCardProps) {
               alt={post.frontmatter.title}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(min-width: 768px) 420px, 100vw"
             />
           </div>
         )}
@@ -29,9 +30,12 @@ export default function BlogCard({ post }: BlogCardProps) {
           <p className="text-muted-foreground mb-4 line-clamp-2 text-sm">
             {post.frontmatter.description}
           </p>
-          <time className="text-muted-foreground text-sm">
-            {format(new Date(post.frontmatter.date), "MMMM dd, yyyy")}
-          </time>
+          <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
+            <time dateTime={post.frontmatter.date}>
+              {format(new Date(post.frontmatter.date), "MMMM dd, yyyy")}
+            </time>
+            <span>· {post.frontmatter.readingTime} min read</span>
+          </div>
         </CardContent>
       </Card>
     </Link>
