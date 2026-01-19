@@ -4,10 +4,12 @@ import { DialogTitle } from "@/components/ui/dialog";
 import { useMemo } from "react";
 import quotes from "@/content/quotes.json";
 
+const randomIndex = Math.floor(Math.random() * quotes.length);
+
 export default function GameWelcomeScreen() {
   const { quote, author } = useMemo(() => {
     return (
-      quotes[Math.floor(Math.random() * quotes.length)] ?? {
+      quotes[randomIndex] ?? {
         quote: "Keep going.",
         author: "Cogniba",
       }

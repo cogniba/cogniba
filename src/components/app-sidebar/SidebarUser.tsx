@@ -53,24 +53,28 @@ export default function SidebarUser() {
   const isDisabled = isLoading || isLoggingOut || isOpeningCustomerPortal;
 
   const handleCustomerPortal = () => {
-    startOpeningCustomerPortal(async () => {
-      const { url, error } = await createCustomerPortal({
-        return_url: window.location.href,
-      });
+    startOpeningCustomerPortal(() => {
+      void (async () => {
+        const { url, error } = await createCustomerPortal({
+          return_url: window.location.href,
+        });
 
-      if (error || !url) {
-        return redirectToError("Failed to open customer portal");
-      }
+        if (error || !url) {
+          return redirectToError("Failed to open customer portal");
+        }
 
-      window.location.href = url;
+        window.location.href = url;
+      })();
     });
   };
 
-  const handleLogOut = async () => {
-    startLoggingOut(async () => {
-      const supabase = createClient();
-      await supabase.auth.signOut();
-      router.replace("/sign-in");
+  const handleLogOut = () => {
+    startLoggingOut(() => {
+      void (async () => {
+        const supabase = createClient();
+        await supabase.auth.signOut();
+        router.replace("/sign-in");
+      })();
     });
   };
 
@@ -81,13 +85,13 @@ export default function SidebarUser() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className={cn(isLoading && "animate-pulse bg-foreground/10")}
+              className={cn(isLoading && "bg-foreground/10 animate-pulse")}
             >
               {!isLoading && (
                 <>
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarFallback className="rounded-lg">
-                      {fullName.substring(0, 2) ?? "U"}
+                      {fullName.substring(0, 2)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
@@ -109,7 +113,7 @@ export default function SidebarUser() {
             <DropdownMenuLabel className={cn("p-0 font-normal")}>
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 {subscriptionType !== freePlan.name && (
-                  <Badge className="absolute right-0 top-0 m-1.5 px-1.5 py-0">
+                  <Badge className="absolute top-0 right-0 m-1.5 px-1.5 py-0">
                     Pro
                   </Badge>
                 )}
@@ -131,18 +135,16 @@ export default function SidebarUser() {
               <>
                 <DropdownMenuGroup>
                   <DropdownMenuItem
-                    onClick={() => { setOpenMobile(false); }}
+                    onClick={() => {
+                      setOpenMobile(false);
+                      void posthog.capture("upgrade_link_click", {
+                        source: "sidebar_user",
+                      });
+                    }}
                     asChild
                     disabled={isDisabled}
                   >
-                    <Link
-                      href="/app/upgrade"
-                      onClick={() =>
-                        posthog.capture("upgrade_link_click", {
-                          source: "sidebar_user",
-                        })
-                      }
-                    >
+                    <Link href="/app/upgrade">
                       <SparklesIcon />
                       Upgrade to Pro
                     </Link>
@@ -155,7 +157,9 @@ export default function SidebarUser() {
 
             <DropdownMenuGroup>
               <DropdownMenuItem
-                onClick={() => { setOpenMobile(false); }}
+                onClick={() => {
+                  setOpenMobile(false);
+                }}
                 asChild
                 disabled={isDisabled}
               >
@@ -166,7 +170,7 @@ export default function SidebarUser() {
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
-                  posthog.capture("billing_link_click", {
+                  void posthog.capture("billing_link_click", {
                     source: "sidebar_user",
                   });
                   setOpenMobile(false);

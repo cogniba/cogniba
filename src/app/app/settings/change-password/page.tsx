@@ -45,24 +45,28 @@ export default function ChangePasswordPage() {
   function onSubmit(formData: z.infer<typeof ChangePasswordSchema>) {
     setError(null);
 
-    startTransition(async () => {
-      const { error } = await changePassword(formData);
+    startTransition(() => {
+      void (async () => {
+        const { error } = await changePassword(formData);
 
-      if (!error) {
-        setHasChangedPassword(true);
-      } else {
-        setError(error);
-      }
+        if (!error) {
+          setHasChangedPassword(true);
+        } else {
+          setError(error);
+        }
+      })();
     });
   }
 
   return (
     <Form {...form}>
       <form
-        className="flex flex-1 items-center justify-center bg-card py-5 xs:bg-background"
-        onSubmit={form.handleSubmit(onSubmit)}
+        className="bg-card xs:bg-background flex flex-1 items-center justify-center py-5"
+        onSubmit={(event) => {
+          void form.handleSubmit(onSubmit)(event);
+        }}
       >
-        <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
+        <Card className="xs:border-border xs:shadow-sm w-full max-w-sm border-transparent px-2 shadow-none">
           <CardHeader className="pb-9">
             <CardTitle className="text-2xl">Change password</CardTitle>
             <CardDescription>

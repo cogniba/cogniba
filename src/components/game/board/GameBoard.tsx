@@ -3,11 +3,11 @@ import GameSquare from "./GameSquare";
 
 type GameBoardProps = {
   selectedSquare: number | null;
-}
+};
 
 export default function GameBoard({ selectedSquare }: GameBoardProps) {
   return (
-    <div className="flex h-full w-full items-center justify-center [container-type:size]">
+    <div className="[container-type:size] flex h-full w-full items-center justify-center">
       <div
         className="grid h-[100cqmin] w-[100cqmin] grid-cols-3 grid-rows-3 gap-[2cqmin]"
         id="game-board"

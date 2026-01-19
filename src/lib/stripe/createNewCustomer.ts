@@ -7,7 +7,7 @@ import { customersTable } from "@/database/schemas/customersTable";
 type CreateNewCustomerParams = {
   email: string;
   userId: string;
-}
+};
 
 export default async function createNewCustomer({
   email,

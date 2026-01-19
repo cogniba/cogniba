@@ -33,7 +33,7 @@ export default function AuthContextProvider({
   });
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const { freePlan, error } = getFreePlan();
       if (error || !freePlan) {
         return redirectToError("Failed to get free plan");
@@ -49,12 +49,14 @@ export default function AuthContextProvider({
         return redirectToError("Failed to get profile");
       }
 
+      const subscriptionType = customer?.subscriptionType ?? freePlan.name;
+
       setState({
         status: "authenticated",
         userId: profile.userId,
         fullName: profile.fullName,
         email: profile.email,
-        subscriptionType: customer?.subscriptionType || freePlan.name,
+        subscriptionType,
       });
 
       posthog.identify(profile.userId, {
@@ -62,7 +64,7 @@ export default function AuthContextProvider({
         full_name: profile.fullName,
         hasFinishedTutorial: profile.hasFinishedTutorial,
         createdAt: profile.createdAt,
-        subscription_type: customer?.subscriptionType || freePlan.name,
+        subscription_type: subscriptionType,
       });
     })();
   }, [posthog]);

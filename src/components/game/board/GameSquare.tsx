@@ -2,7 +2,7 @@ import { cn } from "@/lib/cn";
 
 type SquareProps = {
   selected: boolean;
-}
+};
 
 export default function Square({ selected }: SquareProps) {
   return (

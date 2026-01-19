@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type ElementDimensions = {
   height: number;
@@ -12,8 +12,8 @@ export default function useElementDimensions(
   targetElement: string,
   padding = 8,
 ): ElementDimensions | null {
-  const [element, setElement] = useState<Element | null>(null);
   const [dimensions, setDimensions] = useState<ElementDimensions | null>(null);
+  const dimensionsRef = useRef<ElementDimensions | null>(null);
 
   const updateDimensions = useCallback(
     (nextElement: Element | null) => {
@@ -24,33 +24,39 @@ export default function useElementDimensions(
 
       const { height, width, top, left } = nextElement.getBoundingClientRect();
 
-      setDimensions({
+      const nextDimensions = {
         height: height + padding * 2,
         width: width + padding * 2,
         top: top - padding,
         left: left - padding,
         element: nextElement,
-      });
+      };
+
+      dimensionsRef.current = nextDimensions;
+      setDimensions(nextDimensions);
     },
     [padding],
   );
 
   useEffect(() => {
     const newElement = document.querySelector(targetElement);
-    if (newElement !== element) {
-      setElement(newElement);
-    }
-    updateDimensions(newElement);
 
-    if (!newElement) return;
+    if (!newElement) {
+      dimensionsRef.current = null;
+      return;
+    }
 
     const handleResize = () => {
       updateDimensions(newElement);
     };
 
     window.addEventListener("resize", handleResize);
-    return () => { window.removeEventListener("resize", handleResize); };
-  }, [element, targetElement, updateDimensions]);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [padding, targetElement, updateDimensions]);
 
   return dimensions;
 }

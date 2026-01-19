@@ -15,7 +15,7 @@ type ErrorPageProps = {
 
 export default async function ErrorPage({ searchParams }: ErrorPageProps) {
   const errorMessage =
-    (await searchParams)["message"] || "Something went wrong";
+    (await searchParams)["message"] ?? "Something went wrong";
 
   return (
     <div className="bg-background flex min-h-screen items-center justify-center p-4">

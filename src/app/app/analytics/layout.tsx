@@ -4,7 +4,7 @@ import AnalyticsContextProvider from "@/context/AnalyticsContext";
 
 type AnalyticsLayoutProps = {
   children: React.ReactNode;
-}
+};
 
 export default async function AnalyticsLayout({
   children,

@@ -14,7 +14,7 @@ export function ImageComponent(props: ImageProps) {
     <div className="my-8 overflow-hidden rounded-md">
       <Image
         src={src}
-        alt={alt || ""}
+        alt={alt ?? ""}
         width={1200}
         height={630}
         className="object-cover"

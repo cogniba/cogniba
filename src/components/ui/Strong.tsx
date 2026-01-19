@@ -24,7 +24,8 @@ const strongVariants = cva("font-semibold", {
 
 export type StrongProps = {
   asChild?: boolean;
-} & React.HTMLAttributes<HTMLElement> & VariantProps<typeof strongVariants>
+} & React.HTMLAttributes<HTMLElement> &
+  VariantProps<typeof strongVariants>;
 
 const Strong = React.forwardRef<HTMLElement, StrongProps>(
   ({ className, variant, ...props }, ref) => {

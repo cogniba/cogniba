@@ -16,7 +16,9 @@ export default function LandingPageBoard() {
       }, 500);
     }, 1500);
 
-    return () => { clearInterval(intervalId); };
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (
@@ -25,10 +27,10 @@ export default function LandingPageBoard() {
         i === 4 ? (
           <div key={i} className="size-full bg-transparent"></div>
         ) : (
-          <div key={i} className="size-full bg-background">
+          <div key={i} className="bg-background size-full">
             <div
               className={cn(
-                "size-full rounded-md border border-primary/70 bg-primary/50 shadow-sm transition duration-500",
+                "border-primary/70 bg-primary/50 size-full rounded-md border shadow-sm transition duration-500",
                 i - Number(i > 4) === selectedSquare && "bg-primary shadow-md",
               )}
             ></div>

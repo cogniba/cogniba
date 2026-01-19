@@ -42,12 +42,8 @@
           "name": "customers_id_profiles_user_id_fk",
           "tableFrom": "customers",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -57,9 +53,7 @@
         "customers_customer_id_unique": {
           "name": "customers_customer_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "customer_id"
-          ]
+          "columns": ["customer_id"]
         }
       },
       "policies": {},
@@ -109,12 +103,8 @@
           "name": "feedback_user_id_profiles_user_id_fk",
           "tableFrom": "feedback",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -191,12 +181,8 @@
           "name": "games_user_id_profiles_user_id_fk",
           "tableFrom": "games",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -251,12 +237,8 @@
           "tableFrom": "profiles",
           "tableTo": "users",
           "schemaTo": "auth",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -266,9 +248,7 @@
         "profiles_email_unique": {
           "name": "profiles_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "policies": {},
@@ -299,12 +279,8 @@
           "name": "settings_user_id_profiles_user_id_fk",
           "tableFrom": "settings",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -394,12 +370,8 @@
           "name": "stripe_id_profiles_user_id_fk",
           "tableFrom": "stripe",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -409,9 +381,7 @@
         "stripe_customer_id_unique": {
           "name": "stripe_customer_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "customer_id"
-          ]
+          "columns": ["customer_id"]
         }
       },
       "policies": {},
@@ -423,19 +393,12 @@
     "public.subscription_type": {
       "name": "subscription_type",
       "schema": "public",
-      "values": [
-        "Free",
-        "Pro"
-      ]
+      "values": ["Free", "Pro"]
     },
     "public.feedback_type": {
       "name": "feedback_type",
       "schema": "public",
-      "values": [
-        "bug",
-        "feature",
-        "other"
-      ]
+      "values": ["bug", "feature", "other"]
     },
     "public.subscription_status": {
       "name": "subscription_status",

@@ -5,11 +5,11 @@ export type BaseChartConfig = {
   description: string;
   names: string[];
   chartConfig: ChartConfig;
-}
+};
 
 export type ChartWithPostfix = {
   postfix: string;
-} & BaseChartConfig
+} & BaseChartConfig;
 
 export type ChartConfiguration = BaseChartConfig | ChartWithPostfix;
 

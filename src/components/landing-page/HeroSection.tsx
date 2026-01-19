@@ -17,18 +17,18 @@ export default function HeroSection() {
           "rgb(var(--blue) / 0.05)",
         ]}
       />
-      <div className="space-y-1 pb-2 text-4xl xs:pb-4 xs:text-5xl sm:pb-8 sm:text-7xl">
+      <div className="xs:pb-4 xs:text-5xl space-y-1 pb-2 text-4xl sm:pb-8 sm:text-7xl">
         <Glow glowOpacity={25} display="block">
           <h1 className="relative font-medium">Train Your Mind</h1>
         </Glow>
         <Glow display="block">
-          <h1 className="glow inline-block animate-gradient-x bg-gradient-to-r from-orange to-pink bg-[length:400%_100%] bg-clip-text pb-4 font-semibold text-transparent">
+          <h1 className="glow animate-gradient-x from-orange to-pink inline-block bg-gradient-to-r bg-[length:400%_100%] bg-clip-text pb-4 font-semibold text-transparent">
             Boost your IQ
           </h1>
         </Glow>
       </div>
       <Glow glowOpacity={25}>
-        <h2 className="relative max-w-2xl text-balance pb-10 text-sm text-foreground/90 xs:pb-12 xs:text-base sm:pb-16 sm:text-xl">
+        <h2 className="text-foreground/90 xs:pb-12 xs:text-base relative max-w-2xl pb-10 text-sm text-balance sm:pb-16 sm:text-xl">
           <Glow glowSize="24px" glowOpacity={75}>
             <Strong variant="primary">Cogniba</Strong>
           </Glow>{" "}
@@ -51,7 +51,7 @@ export default function HeroSection() {
       <div className="z-10 mx-auto flex gap-4">
         <Link href="sign-up">
           <FancyButton
-            className="h-10 rounded-md px-6 xs:h-11 xs:px-8"
+            className="xs:h-11 xs:px-8 h-10 rounded-md px-6"
             borderColors={[
               "rgb(var(--cyan))",
               "rgb(var(--fuchsia))",
@@ -66,7 +66,7 @@ export default function HeroSection() {
         </Link>
         <Link href="research">
           <Button
-            className="h-10 rounded-md px-6 xs:h-11 xs:px-8"
+            className="xs:h-11 xs:px-8 h-10 rounded-md px-6"
             variant="secondary"
           >
             Learn More

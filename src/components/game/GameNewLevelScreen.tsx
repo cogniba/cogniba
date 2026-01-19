@@ -18,7 +18,7 @@ export default function GameNewLevelScreen() {
     };
 
     if (step === steps.length) {
-      handleHideScreen();
+      void handleHideScreen();
     }
   }, [step, setHasReachedNewLevel, steps.length, setStep]);
 

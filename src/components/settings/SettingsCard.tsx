@@ -1,6 +1,6 @@
 type SettingsCardProps = {
   children: React.ReactNode;
-}
+};
 
 export default function SettingsCard({ children }: SettingsCardProps) {
   return (

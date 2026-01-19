@@ -24,22 +24,26 @@ type GameTutorialContextValue = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
   isVisible: boolean;
   isLoading: boolean;
-  handleFinishTutorial: () => Promise<void>;
+  handleFinishTutorial: () => void;
   steps: readonly StepType[];
-}
+};
+
+const noop = () => {
+  return;
+};
 
 export const GameTutorialContext = createContext<GameTutorialContextValue>({
   step: 0,
-  setStep: () => {},
+  setStep: noop,
   isVisible: false,
   isLoading: false,
-  handleFinishTutorial: async () => {},
+  handleFinishTutorial: noop,
   steps: [],
 });
 
 type GameTutorialContextProviderProps = {
   children: React.ReactNode;
-}
+};
 
 export default function GameTutorialContextProvider({
   children,
@@ -57,7 +61,13 @@ export default function GameTutorialContextProvider({
     setIsTutorial,
     setShowTutorial,
   } = useGameContext();
-  const { tutorialSteps, getNewLevelSteps, stepsInfo } = gameTutorialConfig;
+  const { tutorialSteps, stepsInfo } = gameTutorialConfig;
+
+  const getSteps = useCallback(
+    () =>
+      isTutorial ? tutorialSteps : gameTutorialConfig.getNewLevelSteps(level),
+    [isTutorial, level, tutorialSteps],
+  );
 
   const [step, setStep] = useState(level === 1 ? 0 : stepsInfo.level1BeatStep);
   const isPlayingAnimationRef = useRef(false);
@@ -69,18 +79,21 @@ export default function GameTutorialContextProvider({
 
   const { setOpen } = useSidebar();
 
-  const handleFinishTutorial = useCallback(async () => {
-    startTransition(async () => {
-      const { error } = await updateProfile({ hasFinishedTutorial: true });
+  const handleFinishTutorial = useCallback(() => {
+    startTransition(() => {
+      void (async () => {
+        const { error } = await updateProfile({ hasFinishedTutorial: true });
 
-      if (error) {
-        redirectToError(error);
-      } else {
+        if (error) {
+          void redirectToError(error);
+          return;
+        }
+
         setIsTutorial(false);
         setShowTutorial(true);
         setStep(0);
         setOpen(true);
-      }
+      })();
     });
   }, [setIsTutorial, setOpen, setShowTutorial]);
 
@@ -148,37 +161,37 @@ export default function GameTutorialContextProvider({
       isPlayingAnimationRef.current = false;
     };
 
-    const handleLastStep = async () => {
-      posthog.capture("tutorial_complete", {
+    const handleLastStep = () => {
+      void posthog.capture("tutorial_complete", {
         has_skipped: false,
       });
-      await handleFinishTutorial();
+      handleFinishTutorial();
     };
 
     if (stepRef.current === stepsInfo.boardStep) {
       if (!isPlayingAnimationRef.current) {
         isPlayingAnimationRef.current = true;
-        boardStepAnimation();
+        void boardStepAnimation();
       }
     } else if (stepRef.current === stepsInfo.buttonStep) {
       if (!isPlayingAnimationRef.current) {
         isPlayingAnimationRef.current = true;
-        buttonStepAnimation();
+        void buttonStepAnimation();
       }
     } else if (stepRef.current === stepsInfo.level1ExplanationStep) {
       if (!isPlayingAnimationRef.current) {
         isPlayingAnimationRef.current = true;
-        level1ExplanationAnimation();
+        void level1ExplanationAnimation();
       }
     } else if (stepRef.current === stepsInfo.level1PlayStep) {
       if (!isPlaying) {
-        handleStartGameDelay();
-        startTutorialGame();
+        void handleStartGameDelay();
+        void startTutorialGame();
       }
     } else if (stepRef.current === stepsInfo.level2ExplanationStep) {
       if (!isPlayingAnimationRef.current) {
         isPlayingAnimationRef.current = true;
-        level2ExplanationAnimation();
+        void level2ExplanationAnimation();
       }
     } else if (stepRef.current === stepsInfo.lastStep) {
       handleLastStep();
@@ -214,7 +227,7 @@ export default function GameTutorialContextProvider({
         isVisible,
         isLoading: isPending,
         handleFinishTutorial,
-        steps: isTutorial ? tutorialSteps : getNewLevelSteps(level),
+        steps: getSteps(),
       }}
     >
       {children}

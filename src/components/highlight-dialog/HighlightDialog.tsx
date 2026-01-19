@@ -20,7 +20,7 @@ type HighlightDialogProps = {
   elementClickable?: boolean;
   isOpen: boolean;
   children: React.ReactNode;
-}
+};
 
 export default function HighlightDialog({
   targetElement = "body",
@@ -31,10 +31,12 @@ export default function HighlightDialog({
 }: HighlightDialogProps) {
   const [arrowHeight, setArrowHeight] = useState<number>(0);
 
-  const arrowRef = useCallback((node: HTMLDivElement) => {
-    if (node) {
-      setArrowHeight(node.getBoundingClientRect().height);
+  const arrowRef = useCallback((node: HTMLDivElement | null) => {
+    if (!node) {
+      return;
     }
+
+    setArrowHeight(node.getBoundingClientRect().height);
   }, []);
 
   const elementDimensions = useElementDimensions(targetElement);
@@ -84,7 +86,7 @@ export default function HighlightDialog({
                 : "top"
             }
             className={cn(
-              "absolute left-1/2 top-0 -z-10 -translate-x-1/2",
+              "absolute top-0 left-1/2 -z-10 -translate-x-1/2",
               (placement === "top" || placement === "center-top") && "top-full",
               (placement === "bottom" || placement === "center-bottom") &&
                 "-translate-y-full",

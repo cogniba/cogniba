@@ -9,7 +9,7 @@ type BlogPostSidebarProps = {
   slug: string;
   tags: string[];
   headings: { text: string; level: number }[];
-}
+};
 
 export default function BlogPostSidebar({
   title,
@@ -58,13 +58,13 @@ export default function BlogPostSidebar({
             size="sm"
             variant="outline"
             onClick={() => {
-              if (navigator.share) {
-                navigator.share({
+              if (typeof navigator.share === "function") {
+                void navigator.share({
                   title: title,
                   url: `${window.location.origin}/blog/${slug}`,
                 });
               } else {
-                navigator.clipboard.writeText(
+                void navigator.clipboard.writeText(
                   `${window.location.origin}/blog/${slug}`,
                 );
               }
@@ -104,11 +104,13 @@ export default function BlogPostSidebar({
                 <a
                   key={index}
                   href={`#${headingId}`}
-                  onClick={(e) => { handleHeadingClick(e, headingId); }}
-                  className={`block transition-colors hover:text-foreground ${
+                  onClick={(e) => {
+                    handleHeadingClick(e, headingId);
+                  }}
+                  className={`hover:text-foreground block transition-colors ${
                     heading.level === 2
                       ? "text-foreground"
-                      : "pl-4 text-muted-foreground"
+                      : "text-muted-foreground pl-4"
                   }`}
                 >
                   {heading.text}

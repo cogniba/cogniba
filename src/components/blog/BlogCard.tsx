@@ -6,7 +6,7 @@ import type { PostType } from "@/types/blog";
 
 type BlogCardProps = {
   post: PostType;
-}
+};
 
 export default function BlogCard({ post }: BlogCardProps) {
   return (
@@ -23,13 +23,13 @@ export default function BlogCard({ post }: BlogCardProps) {
           </div>
         )}
         <CardContent className="p-4">
-          <h2 className="mb-2 text-xl font-bold transition-colors group-hover:text-primary">
+          <h2 className="group-hover:text-primary mb-2 text-xl font-bold transition-colors">
             {post.frontmatter.title}
           </h2>
-          <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
+          <p className="text-muted-foreground mb-4 line-clamp-2 text-sm">
             {post.frontmatter.description}
           </p>
-          <time className="text-sm text-muted-foreground">
+          <time className="text-muted-foreground text-sm">
             {format(new Date(post.frontmatter.date), "MMMM dd, yyyy")}
           </time>
         </CardContent>

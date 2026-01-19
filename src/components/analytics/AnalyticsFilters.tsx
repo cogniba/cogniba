@@ -6,7 +6,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import AnalyticsRangePicker from "./AnalyticsRangePicker";
-import type { ChartMetrics} from "@/context/AnalyticsContext";
+import type { ChartMetrics } from "@/context/AnalyticsContext";
 import { useAnalyticsContext } from "@/context/AnalyticsContext";
 
 export default function AnalyticsFilters() {
@@ -16,8 +16,10 @@ export default function AnalyticsFilters() {
     <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
       <div className="flex w-full flex-col items-center justify-start gap-3 sm:w-fit lg:flex-row">
         <Select
-          value={chartMetric ?? undefined}
-          onValueChange={(value) => { setChartMetric(value as ChartMetrics); }}
+          value={chartMetric}
+          onValueChange={(value) => {
+            setChartMetric(value as ChartMetrics);
+          }}
         >
           <SelectTrigger className="w-full sm:w-52 md:w-64">
             <SelectValue placeholder="Select a metric" />

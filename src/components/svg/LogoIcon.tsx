@@ -2,7 +2,7 @@
 
 type LogoIconProps = {
   className?: string;
-}
+};
 
 export default function LogoIcon({ className }: LogoIconProps) {
   return (

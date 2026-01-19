@@ -68,8 +68,7 @@ export default function AnalyticsRangePicker() {
 
     if (separatedSearch.length > 3) {
       options = [];
-    } else if (separatedSearch.length === 0) {
-    } else {
+    } else if (separatedSearch.length !== 0) {
       const numberTerms = separatedSearch.filter(
         (term) => !isNaN(parseInt(term)),
       );
@@ -78,20 +77,20 @@ export default function AnalyticsRangePicker() {
         const number = parseInt(numberTerms[0] ?? "0");
         const newOptions = [
           {
-            label: `Last ${number} ${number === 1 ? "day" : "days"}`,
-            value: `last ${number} ${number === 1 ? "day" : "days"}`,
+            label: `Last ${String(number)} ${number === 1 ? "day" : "days"}`,
+            value: `last ${String(number)} ${number === 1 ? "day" : "days"}`,
           },
           {
-            label: `Last ${number} ${number === 1 ? "week" : "weeks"}`,
-            value: `last ${number} ${number === 1 ? "week" : "weeks"}`,
+            label: `Last ${String(number)} ${number === 1 ? "week" : "weeks"}`,
+            value: `last ${String(number)} ${number === 1 ? "week" : "weeks"}`,
           },
           {
-            label: `Last ${number} ${number === 1 ? "month" : "months"}`,
-            value: `last ${number} ${number === 1 ? "month" : "months"}`,
+            label: `Last ${String(number)} ${number === 1 ? "month" : "months"}`,
+            value: `last ${String(number)} ${number === 1 ? "month" : "months"}`,
           },
           {
-            label: `Last ${number} ${number === 1 ? "year" : "years"}`,
-            value: `last ${number} ${number === 1 ? "year" : "years"}`,
+            label: `Last ${String(number)} ${number === 1 ? "year" : "years"}`,
+            value: `last ${String(number)} ${number === 1 ? "year" : "years"}`,
           },
         ];
         options = [...newOptions];

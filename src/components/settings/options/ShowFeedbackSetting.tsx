@@ -7,7 +7,7 @@ import { useState } from "react";
 
 type ShowFeedbackSettingProps = {
   startingShowFeedback: boolean;
-}
+};
 
 export default function ShowFeedbackSetting({
   startingShowFeedback,
@@ -40,7 +40,9 @@ export default function ShowFeedbackSetting({
         { value: "disabled", label: "Disabled" },
       ]}
       value={showFeedback ? "enabled" : "disabled"}
-      onValueChange={(value) => updateShowFeedback(value)}
+      onValueChange={(value) => {
+        void updateShowFeedback(value);
+      }}
     />
   );
 }

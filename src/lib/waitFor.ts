@@ -6,7 +6,9 @@ export default function waitFor(
     if (conditionFunction()) {
       resolve();
     } else {
-      setTimeout(() => { poll(resolve); }, interval);
+      setTimeout(() => {
+        poll(resolve);
+      }, interval);
     }
   };
 

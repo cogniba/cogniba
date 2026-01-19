@@ -2,14 +2,14 @@
 
 import useElementDimensions from "@/hooks/useElementDimensions";
 import { cn } from "@/lib/cn";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 
 type HighlightOverlayProps = {
   targetElement: string;
   isVisible: boolean;
   elementClickable: boolean;
   padding?: number;
-}
+};
 
 export default function HighlightOverlay({
   targetElement,
@@ -17,16 +17,9 @@ export default function HighlightOverlay({
   elementClickable,
   padding = 8,
 }: HighlightOverlayProps) {
-  const currentTargetElementRef = useRef(targetElement);
-  const previousTargetElementRef = useRef(targetElement);
-  const [measuredTarget, setMeasuredTarget] = useState(targetElement);
+  const overlayTarget = targetElement;
 
-  const elementDimensions = useElementDimensions(
-    measuredTarget === "body"
-      ? previousTargetElementRef.current
-      : measuredTarget,
-    padding,
-  );
+  const elementDimensions = useElementDimensions(overlayTarget, padding);
   const { height, width, top, left } = elementDimensions ?? {
     height: 0,
     width: 0,
@@ -34,14 +27,6 @@ export default function HighlightOverlay({
     left: 0,
     element: null,
   };
-
-  useEffect(() => {
-    if (currentTargetElementRef.current !== targetElement) {
-      previousTargetElementRef.current = currentTargetElementRef.current;
-      currentTargetElementRef.current = targetElement;
-    }
-    setMeasuredTarget(targetElement);
-  }, [targetElement]);
 
   useEffect(() => {
     if (!elementClickable) return;
@@ -67,8 +52,7 @@ export default function HighlightOverlay({
       <div
         className={cn(
           "fixed rounded-lg bg-[#808080] opacity-100",
-          targetElement === "body" ||
-            previousTargetElementRef.current === "body"
+          targetElement === "body"
             ? "transition-opacity duration-500"
             : "transition-bounding-box duration-500",
           (!elementDimensions || targetElement === "body") && "opacity-0",

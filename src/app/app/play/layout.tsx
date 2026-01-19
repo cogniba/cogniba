@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 type GameLayoutProps = {
   children: React.ReactNode;
-}
+};
 
 export default async function GameLayout({ children }: GameLayoutProps) {
   const {

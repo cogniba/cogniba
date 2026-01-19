@@ -1,17 +1,17 @@
 export default function GameLoading() {
   return (
     <div className="lg:can-hover:-ml-16 flex h-full animate-pulse items-center justify-center">
-      <div className="flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] [container-type:size] md:px-2">
-        <div className="my-[1.5cqh] flex-shrink-0 sm:mb-[2.5cqh] sm:mt-[1.5cqh]">
+      <div className="[container-type:size] flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] md:px-2">
+        <div className="my-[1.5cqh] flex-shrink-0 sm:mt-[1.5cqh] sm:mb-[2.5cqh]">
           <div
-            className="relative rounded-[0.75cqmin] border bg-secondary/30 px-[5cqmin] py-[1cqmin] text-[9cqmin] font-semibold shadow-sm xs:text-[8cqmin] sm:text-[7cqmin] md:text-[6cqmin]"
+            className="bg-secondary/30 xs:text-[8cqmin] relative rounded-[0.75cqmin] border px-[5cqmin] py-[1cqmin] text-[9cqmin] font-semibold shadow-sm sm:text-[7cqmin] md:text-[6cqmin]"
             id="game-level-display"
           >
             <h1 className="text-transparent">Level 5</h1>
           </div>
         </div>
         <div className="h-[100cqmin] w-[100cqmin]">
-          <div className="flex h-full w-full items-center justify-center [container-type:size]">
+          <div className="[container-type:size] flex h-full w-full items-center justify-center">
             <div
               className="grid h-[100cqmin] w-[100cqmin] grid-cols-3 grid-rows-3 gap-[2cqmin]"
               id="game-board"
@@ -27,19 +27,19 @@ export default function GameLoading() {
                   </div>
                 ) : (
                   <div key={i} className="h-full w-full">
-                    <div className="h-full w-full rounded-[2cqmin] border bg-secondary/50"></div>
+                    <div className="bg-secondary/50 h-full w-full rounded-[2cqmin] border"></div>
                   </div>
                 ),
               )}
             </div>
           </div>
         </div>
-        <div className="mb-[2.5cqh] mt-[3cqh] h-[11cqh] w-[100cqmin] max-w-5xl flex-shrink-0 2xl:w-[max(100cqmin,90vh)]">
+        <div className="mt-[3cqh] mb-[2.5cqh] h-[11cqh] w-[100cqmin] max-w-5xl flex-shrink-0 2xl:w-[max(100cqmin,90vh)]">
           <div
             className="flex h-full w-full items-center justify-center"
             id="game-button"
           >
-            <div className="h-full w-full -translate-y-0.5 rounded-md border bg-secondary/40 outline-none"></div>
+            <div className="bg-secondary/40 h-full w-full -translate-y-0.5 rounded-md border outline-none"></div>
           </div>
         </div>
       </div>

@@ -30,7 +30,9 @@ export default function SidebarTopGroup() {
 
         <SidebarMenuItem>
           <SidebarMenuButton
-            onClick={() => { setOpenMobile(false); }}
+            onClick={() => {
+              setOpenMobile(false);
+            }}
             asChild
             size="lg"
             className="text-base [&>svg]:size-5"
@@ -44,7 +46,9 @@ export default function SidebarTopGroup() {
 
         <SidebarMenuItem>
           <SidebarMenuButton
-            onClick={() => { setOpenMobile(false); }}
+            onClick={() => {
+              setOpenMobile(false);
+            }}
             asChild
             size="lg"
             className="text-base [&>svg]:size-5"

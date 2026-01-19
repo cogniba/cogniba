@@ -7,12 +7,11 @@ function singleton<Value>(name: string, value: () => Value): Value {
     __singletons?: Record<string, unknown>;
   };
   globalAny.__singletons ??= {};
+  const store = globalAny.__singletons;
 
-  if (!globalAny.__singletons[name]) {
-    globalAny.__singletons[name] = value();
-  }
+  store[name] ??= value();
 
-  return globalAny.__singletons[name] as Value;
+  return store[name] as Value;
 }
 
 function createDatabaseConnection() {

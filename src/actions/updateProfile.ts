@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 
 type UpdateProfileParams = {
   hasFinishedTutorial: boolean;
-}
+};
 
 export default async function updateProfile({
   hasFinishedTutorial,

@@ -8,7 +8,7 @@ import PostHogProvider from "./providers/PostHogProvider";
 
 type RootLayoutWrapperProps = {
   readonly children: React.ReactNode;
-}
+};
 
 export default function RootLayoutWrapper({
   children,

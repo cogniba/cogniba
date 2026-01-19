@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { customer: customerId } = event?.data?.object as {
+    const { customer: customerId } = event.data.object as {
       customer: string;
     };
 

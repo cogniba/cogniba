@@ -10,4 +10,4 @@ export type PostType = {
     tags: string[];
   };
   content: string;
-}
+};

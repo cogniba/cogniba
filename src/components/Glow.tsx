@@ -6,7 +6,7 @@ type GlowProps = {
   className?: string;
   glowSize?: string;
   glowOpacity?: number;
-}
+};
 
 export default function Glow({
   children,

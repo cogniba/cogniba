@@ -1,13 +1,7 @@
 "use client";
 
-import type {
-  Dispatch,
-  SetStateAction} from "react";
-import {
-  createContext,
-  useContext,
-  useState,
-} from "react";
+import type { Dispatch, SetStateAction } from "react";
+import { createContext, useContext, useState } from "react";
 import { subDays } from "date-fns";
 import type { DateRange } from "react-day-picker";
 import cleanChartData from "@/lib/cleanChartData";
@@ -101,13 +95,17 @@ type AnalyticsContextValue = {
   setChartMetric: Dispatch<SetStateAction<ChartMetrics>>;
   cleanData: GamesData | null;
   charts: ChartsConfig;
-}
+};
+
+const noop = () => {
+  return;
+};
 
 export const AnalyticsContext = createContext<AnalyticsContextValue>({
   date: undefined,
-  setDate: () => {},
+  setDate: noop,
   chartMetric: "level",
-  setChartMetric: () => {},
+  setChartMetric: noop,
   cleanData: null,
   charts,
 });
@@ -115,7 +113,7 @@ export const AnalyticsContext = createContext<AnalyticsContextValue>({
 type AnalyticsContextProviderProps = {
   children: React.ReactNode;
   data: GamesData;
-}
+};
 
 export default function AnalyticsContextProvider({
   children,
@@ -128,7 +126,7 @@ export default function AnalyticsContextProvider({
   const [chartMetric, setChartMetric] = useState<ChartMetrics>("level");
 
   const cleanData =
-    date?.from && date.to && data && data.length > 0
+    date?.from && date.to && data.length > 0
       ? cleanChartData(data, date.from, date.to)
       : null;
 

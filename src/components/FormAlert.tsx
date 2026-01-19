@@ -4,7 +4,7 @@ import { Alert, AlertTitle } from "./ui/alert";
 type FormAlertProps = {
   variant: "destructive" | "success";
   message: string;
-}
+};
 
 export default function FormAlert({ variant, message }: FormAlertProps) {
   return (

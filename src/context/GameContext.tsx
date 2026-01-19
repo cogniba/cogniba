@@ -48,24 +48,34 @@ type GameContextValue = {
 export const GameContext = createContext<GameContextValue>({
   isTutorial: false,
   level: -1,
-  startPlaying: async () => {},
+  startPlaying: async () => Promise.resolve(),
   isPlaying: false,
   previousLevel: -1,
   feedback: null,
   hasReachedNewLevel: false,
-  setHasReachedNewLevel: () => {},
+  setHasReachedNewLevel: () => {
+    return;
+  },
   isStartScreenVisible: false,
   correctHits: null,
   incorrectHits: null,
   missedHits: null,
   selectedSquare: null,
   isButtonPressed: false,
-  handleButtonPress: async () => {},
-  setSelectedSquare: () => {},
-  setIsButtonPressed: () => {},
+  handleButtonPress: async () => Promise.resolve(),
+  setSelectedSquare: () => {
+    return;
+  },
+  setIsButtonPressed: () => {
+    return;
+  },
   showTutorial: false,
-  setShowTutorial: () => {},
-  setIsTutorial: () => {},
+  setShowTutorial: () => {
+    return;
+  },
+  setIsTutorial: () => {
+    return;
+  },
   gamesPlayedToday: 0,
 });
 
@@ -134,7 +144,7 @@ export default function GameContextProvider({
   );
 
   const updateGameData = useCallback(async () => {
-    if (!level || !maxLevelRef.current) return;
+    if (!maxLevelRef.current) return;
 
     const currentLevel = level;
 
@@ -212,28 +222,16 @@ export default function GameContextProvider({
       setSelectedSquare(position);
       await sleep(parameters.visibleSquareDuration);
 
-      if (
-        isTutorial &&
-        correctHitSequenceRef.current[step] &&
-        !hasPressedButtonRef.current
-      ) {
-        setShowTutorial(true);
+      if (isTutorial) {
         await waitFor(() => hasPressedButtonRef.current);
-        setShowTutorial(false);
       }
 
       setSelectedSquare(null);
       await sleep(parameters.hiddenSquareDuration);
 
-      if (hasPressedButtonRef.current) {
-        playerHitSequenceRef.current.push(true);
-      } else {
-        playerHitSequenceRef.current.push(false);
-      }
+      playerHitSequenceRef.current.push(hasPressedButtonRef.current);
 
-      if (correctHitSequenceRef.current[step] && !hasPressedButtonRef.current) {
-        showFeedback("missed");
-      }
+      void showFeedback("missed");
 
       hasPressedButtonRef.current = false;
       shouldPressButtonRef.current = false;
@@ -254,8 +252,6 @@ export default function GameContextProvider({
   ]);
 
   const startPlaying = useCallback(async () => {
-    if (!level) return;
-
     setIsPlaying(true);
     setOpen(false);
     setHasReachedNewLevel(false);
@@ -267,7 +263,7 @@ export default function GameContextProvider({
     );
     playerHitSequenceRef.current = [];
 
-    posthog.capture("game_start", {
+    void posthog.capture("game_start", {
       level,
       show_feedback: showFeedbackEnabled,
     });
@@ -292,21 +288,25 @@ export default function GameContextProvider({
   }, [showFeedback]);
 
   const handleButtonPress = useCallback(async () => {
-    if (!hasPressedButtonRef.current) {
-      if (isTutorial && !shouldPressButtonRef.current) return;
-
-      hasPressedButtonRef.current = true;
-      setIsButtonPressed(true);
-      handleShowFeedback();
-      await sleep(400);
-      setIsButtonPressed(false);
+    if (hasPressedButtonRef.current) {
+      return;
     }
+
+    if (isTutorial && !shouldPressButtonRef.current) {
+      return;
+    }
+
+    hasPressedButtonRef.current = true;
+    setIsButtonPressed(true);
+    void handleShowFeedback();
+    await sleep(400);
+    setIsButtonPressed(false);
   }, [handleShowFeedback, isTutorial]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === "Space") {
-        handleButtonPress();
+        void handleButtonPress();
       }
     };
     addEventListener("keydown", handleKeyDown);

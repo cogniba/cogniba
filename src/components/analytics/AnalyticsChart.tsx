@@ -69,7 +69,7 @@ export default function AnalyticsChart() {
               interval="preserveStartEnd"
               // padding={{ left: 16, right: 16 }}
               tickFormatter={(value) => {
-                const date = new Date(value);
+                const date = new Date(value as string | number | Date);
                 return date.toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
@@ -81,7 +81,7 @@ export default function AnalyticsChart() {
               content={
                 <ChartTooltipContent
                   labelFormatter={(value) => {
-                    const date = new Date(String(value));
+                    const date = new Date(value as string | number | Date);
                     return date.toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",

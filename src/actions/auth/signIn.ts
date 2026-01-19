@@ -60,17 +60,15 @@ export default async function signIn(
       }
     }
 
-    if (authData.user) {
-      const posthog = posthogClient();
-      posthog.capture({
-        distinctId: authData.user.id,
-        event: "user_signin_success",
-        properties: {
-          provider: "email",
-        },
-      });
-      await posthog.shutdown();
-    }
+    const posthog = posthogClient();
+    posthog.capture({
+      distinctId: authData.user.id,
+      event: "user_signin_success",
+      properties: {
+        provider: "email",
+      },
+    });
+    await posthog.shutdown();
 
     revalidatePath("/", "layout");
     redirect("/app");

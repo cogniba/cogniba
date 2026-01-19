@@ -11,7 +11,7 @@ type CustomerPortalButtonProps = {
   children?: React.ReactNode;
   className?: string;
   targetPlan?: string;
-}
+};
 
 export default function CustomerPortalButton({
   children,

@@ -5,7 +5,7 @@ type HighlightDialogArrowProps = {
   className?: string;
   style?: React.CSSProperties;
   type: "top" | "bottom" | "left" | "right";
-}
+};
 
 const HighlightDialogArrow = forwardRef<
   HTMLDivElement,
@@ -16,10 +16,10 @@ const HighlightDialogArrow = forwardRef<
       <div
         className={cn(
           "h-0 w-0 border-[1rem] border-transparent",
-          type === "top" && "border-t-0 border-b-background",
-          type === "bottom" && "border-b-0 border-t-background",
-          type === "left" && "border-l-0 border-r-background",
-          type === "right" && "border-r-0 border-l-background",
+          type === "top" && "border-b-background border-t-0",
+          type === "bottom" && "border-t-background border-b-0",
+          type === "left" && "border-r-background border-l-0",
+          type === "right" && "border-l-background border-r-0",
         )}
       ></div>
     </div>

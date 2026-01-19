@@ -7,7 +7,6 @@ export const SignUpSchema = z.object({
     .max(64, "Full name is too long"),
 
   email: z
-    .string()
     .email("Invalid email address")
     .min(1, "Email is required")
     .max(64, "Email is too long"),
