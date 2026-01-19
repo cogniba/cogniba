@@ -4,20 +4,47 @@
 //   AccordionItem,
 //   AccordionTrigger,
 // } from "@/components/ui/accordion";
+import type { Metadata } from "next";
 import { Strong } from "@/components/ui/Strong";
+import { getCanonicalUrl } from "@/lib/seo";
 
-// type QuestionType = {
-//   question: string;
-//   answer: string;
-// };
+export function generateMetadata(): Metadata {
+  const canonicalUrl = getCanonicalUrl();
+  const pageUrl = new URL("/faq", canonicalUrl).toString();
 
-// TODO
-// const questions = [
-//   { question: "Question 1", answer: "Answer to question 1" },
-//   { question: "Question 2", answer: "Answer to question 2" },
-//   { question: "Question 3", answer: "Answer to question 3" },
-//   { question: "Question 4", answer: "Answer to question 4" },
-// ] satisfies QuestionType[];
+  return {
+    title: "FAQ",
+    description:
+      "Answers to the most common questions about Cogniba, working memory training, and n-back exercises.",
+    keywords: ["cognitive training FAQ", "n-back questions", "working memory"],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: "Cogniba FAQ",
+      description:
+        "Answers to the most common questions about Cogniba, working memory training, and n-back exercises.",
+      url: pageUrl,
+      siteName: "Cogniba",
+      type: "website",
+      images: [
+        {
+          url: "/images/blog/cogniba-launch.png",
+          width: 1200,
+          height: 630,
+          alt: "Cogniba FAQ",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Cogniba FAQ",
+      description:
+        "Answers to the most common questions about Cogniba, working memory training, and n-back exercises.",
+      images: ["/images/blog/cogniba-launch.png"],
+    },
+  };
+}
 
 export default function FAQ() {
   // <div className="h-full w-full px-4 py-10">
