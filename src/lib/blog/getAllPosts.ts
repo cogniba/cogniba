@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import type { PostType } from "@/types/blog";
 import blogConfig from "@/config/blogConfig";
+import calculateReadingTime from "@/lib/blog/calculateReadingTime";
 
 export default function getAllPosts(): PostType[] {
   const { postsDirectory } = blogConfig;
@@ -41,22 +42,45 @@ export default function getAllPosts(): PostType[] {
       const image =
         typeof rawFrontmatter["image"] === "string"
           ? rawFrontmatter["image"]
-          : "/images/blog/default.jpg";
+          : blogConfig.defaultImage;
+      const ogImage =
+        typeof rawFrontmatter["ogImage"] === "string"
+          ? rawFrontmatter["ogImage"]
+          : blogConfig.defaultOgImage;
       const author =
         typeof rawFrontmatter["author"] === "string"
           ? rawFrontmatter["author"]
-          : "Cogniba Team";
+          : blogConfig.defaultAuthor;
       const role =
         typeof rawFrontmatter["role"] === "string"
           ? rawFrontmatter["role"]
-          : "";
+          : blogConfig.defaultRole;
       const tags = Array.isArray(rawFrontmatter["tags"])
         ? rawFrontmatter["tags"].filter(
             (tag): tag is string => typeof tag === "string",
           )
         : [];
+      const updatedAtValue =
+        rawFrontmatter["updatedAt"] instanceof Date ||
+        typeof rawFrontmatter["updatedAt"] === "string"
+          ? rawFrontmatter["updatedAt"]
+          : undefined;
+      const canonicalUrl =
+        typeof rawFrontmatter["canonicalUrl"] === "string"
+          ? rawFrontmatter["canonicalUrl"]
+          : undefined;
+      const noindex =
+        typeof rawFrontmatter["noindex"] === "boolean"
+          ? rawFrontmatter["noindex"]
+          : undefined;
+      const draft =
+        typeof rawFrontmatter["draft"] === "boolean"
+          ? rawFrontmatter["draft"]
+          : undefined;
+      const wordCount = content.trim().split(/\s+/).filter(Boolean).length;
+      const readingTime = calculateReadingTime(content);
 
-      const frontmatter = {
+      const frontmatter: PostType["frontmatter"] = {
         title,
         description,
         date: dateValue
@@ -66,7 +90,29 @@ export default function getAllPosts(): PostType[] {
         author,
         role,
         tags,
+        readingTime,
+        wordCount,
       };
+
+      if (updatedAtValue) {
+        frontmatter.updatedAt = new Date(updatedAtValue).toISOString();
+      }
+
+      if (ogImage) {
+        frontmatter.ogImage = ogImage;
+      }
+
+      if (canonicalUrl) {
+        frontmatter.canonicalUrl = canonicalUrl;
+      }
+
+      if (typeof noindex === "boolean") {
+        frontmatter.noindex = noindex;
+      }
+
+      if (typeof draft === "boolean") {
+        frontmatter.draft = draft;
+      }
 
       return {
         slug,
@@ -77,8 +123,8 @@ export default function getAllPosts(): PostType[] {
 
     .sort(
       (a, b) =>
-        new Date(b.frontmatter.date).getTime() -
-        new Date(a.frontmatter.date).getTime(),
+        new Date(b.frontmatter.updatedAt ?? b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.updatedAt ?? a.frontmatter.date).getTime(),
     );
 
   return posts;
