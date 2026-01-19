@@ -1,8 +1,48 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import stripeConfig from "@/config/stripeConfig";
 import { cn } from "@/lib/cn";
+import { getCanonicalUrl } from "@/lib/seo";
 import { CheckIcon } from "lucide-react";
 import Link from "next/link";
+
+export function generateMetadata(): Metadata {
+  const canonicalUrl = getCanonicalUrl();
+  const pageUrl = new URL("/pricing", canonicalUrl).toString();
+
+  return {
+    title: "Pricing",
+    description:
+      "See Cogniba pricing and choose a plan to start training your working memory with science-backed n-back exercises.",
+    keywords: ["cognitive training pricing", "brain training plans", "n-back"],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: "Cogniba Pricing",
+      description:
+        "See Cogniba pricing and choose a plan to start training your working memory with science-backed n-back exercises.",
+      url: pageUrl,
+      siteName: "Cogniba",
+      type: "website",
+      images: [
+        {
+          url: "/images/blog/cogniba-launch.png",
+          width: 1200,
+          height: 630,
+          alt: "Cogniba Pricing",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Cogniba Pricing",
+      description:
+        "See Cogniba pricing and choose a plan to start training your working memory with science-backed n-back exercises.",
+      images: ["/images/blog/cogniba-launch.png"],
+    },
+  };
+}
 
 export default function PricingPage() {
   const pricingPlans = stripeConfig.plans;
