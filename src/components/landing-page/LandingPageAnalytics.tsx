@@ -64,11 +64,8 @@ export default function LandingPageAnalytics() {
   }, [chartData]);
 
   return (
-    <div className="aspect-square h-full w-full">
-      <ChartContainer
-        className="aspect-auto h-full w-full"
-        config={chartConfig}
-      >
+    <div className="w-full">
+      <ChartContainer className="aspect-[4/3] w-full" config={chartConfig}>
         <AreaChart data={chartData}>
           <defs>
             <linearGradient id="level" x1="0" y1="0" x2="0" y2="1">

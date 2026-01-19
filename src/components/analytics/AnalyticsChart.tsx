@@ -32,7 +32,7 @@ export default function AnalyticsChart() {
       </CardHeader>
       {cleanData ? (
         <ChartContainer
-          className="aspect-auto h-full w-full"
+          className="aspect-[4/3] w-full"
           config={currentChart.chartConfig}
         >
           <AreaChart data={cleanData}>
