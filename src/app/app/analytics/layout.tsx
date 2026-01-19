@@ -9,12 +9,14 @@ type AnalyticsLayoutProps = {
 export default async function AnalyticsLayout({
   children,
 }: AnalyticsLayoutProps) {
-  const { data, error } = await getGamesData({ frequency: "daily" });
-  if (error || !data) {
+  const dataResult = await getGamesData({ frequency: "daily" });
+  if (dataResult.error || !dataResult.data) {
     return <SimpleMessageScreen mainMessage="Failed to load data" />;
   }
 
   return (
-    <AnalyticsContextProvider data={data}>{children}</AnalyticsContextProvider>
+    <AnalyticsContextProvider data={dataResult.data}>
+      {children}
+    </AnalyticsContextProvider>
   );
 }

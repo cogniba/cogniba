@@ -2,7 +2,8 @@
 
 import { db } from "@/database";
 import { profilesTable } from "@/database/schemas/profilesTable";
-import createClient from "@/lib/supabase/server";
+import getUserOrError from "@/lib/auth/getUserOrError";
+import { err, ok, type Result } from "@/lib/result";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -12,26 +13,27 @@ type UpdateProfileParams = {
 
 export default async function updateProfile({
   hasFinishedTutorial,
-}: UpdateProfileParams): Promise<{ error?: string }> {
+}: UpdateProfileParams): Promise<Result<{ success: true }>> {
+  const userResult = await getUserOrError();
+  if (userResult.error) {
+    return err(userResult.error);
+  }
+
+  const { data: user } = userResult;
+  if (!user) {
+    return err("Failed to get user");
+  }
+
   try {
-    const supabase = await createClient();
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      return { error: "Failed to get user" };
-    }
-
     await db
       .update(profilesTable)
       .set({ hasFinishedTutorial })
       .where(eq(profilesTable.userId, user.id));
 
     revalidatePath("/", "layout");
-    return {};
+    return ok({ success: true });
   } catch (error) {
     console.error("Error updating user:", error);
-    return { error: "An unexpected error occurred" };
+    return err("An unexpected error occurred");
   }
 }

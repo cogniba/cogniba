@@ -2,6 +2,7 @@
 
 import createClient from "@/lib/supabase/server";
 import type { ChangePasswordSchemaType } from "@/zod/schemas/ChangePasswordSchema";
+import { err, ok, type Result } from "@/lib/result";
 
 function getErrorMessage(code: string): string {
   if (code === "weak_password") {
@@ -21,7 +22,7 @@ function getErrorMessage(code: string): string {
 
 export default async function changePassword(
   data: ChangePasswordSchemaType,
-): Promise<{ error?: string }> {
+): Promise<Result<{ success: true }>> {
   try {
     const supabase = await createClient();
 
@@ -31,19 +32,19 @@ export default async function changePassword(
 
     if (error) {
       if (error.code) {
-        return { error: getErrorMessage(error.code) };
-      } else {
-        const error = new Error(
-          "An unexpected error occurred while changing your password.",
-        );
-        console.error(error);
-        return { error: error.message };
+        return err(getErrorMessage(error.code));
       }
+
+      const changeError = new Error(
+        "An unexpected error occurred while changing your password.",
+      );
+      console.error(changeError);
+      return err(changeError.message);
     }
 
-    return {};
+    return ok({ success: true });
   } catch (error) {
     console.error(error);
-    return { error: "An unexpected error occurred" };
+    return err("An unexpected error occurred");
   }
 }

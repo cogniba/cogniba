@@ -49,14 +49,14 @@ export default function ForgotPasswordPage() {
     posthog.capture("password_reset_initiated");
 
     startTransition(async () => {
-      const { error } = await forgotPassword(formData);
+      const result = await forgotPassword(formData);
 
-      if (!error) {
+      if (!result.error) {
         setHasSentEmail(true);
         posthog.capture("password_reset_sent", { email: formData.email });
       } else {
-        setError(error);
-        posthog.capture("password_reset_error", { error });
+        setError(result.error);
+        posthog.capture("password_reset_error", { error: result.error });
       }
     });
   }

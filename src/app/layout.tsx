@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import RootLayoutWrapper from "@/components/RootLayoutWrapper";
 import { Inter, Playfair_Display } from "next/font/google";
 import { cn } from "@/lib/cn";
+import getEnv from "@/lib/env";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -18,6 +19,7 @@ const fontSerif = Playfair_Display({
 export const metadata: Metadata = {
   title: "Cogniba",
   description: "The only proven way to increase your intelligence.",
+  metadataBase: new URL(getEnv("NEXT_PUBLIC_SITE_URL")),
 };
 
 type RootLayoutProps = {

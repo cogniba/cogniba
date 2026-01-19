@@ -9,8 +9,8 @@ import getSettings from "@/actions/getSettings";
 export const dynamic = "force-dynamic";
 
 export default async function SettingsPage() {
-  const { settings, error } = await getSettings();
-  if (error || !settings) {
+  const settingsResult = await getSettings();
+  if (settingsResult.error || !settingsResult.data) {
     return (
       <SimpleMessageScreen
         mainMessage="Error getting settings"
@@ -26,7 +26,9 @@ export default async function SettingsPage() {
         <AppearanceSetting />
       </SettingsCard>
       <SettingsCard>
-        <ShowFeedbackSettings startingShowFeedback={settings.showFeedback} />
+        <ShowFeedbackSettings
+          startingShowFeedback={settingsResult.data.showFeedback}
+        />
       </SettingsCard>
       <SettingsCard>
         <ChangePasswordSettings />

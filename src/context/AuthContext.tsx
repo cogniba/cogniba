@@ -42,14 +42,19 @@ export default function AuthContextProvider({
       const profilePromise = getProfile();
       const customerPromise = getCustomer();
 
-      const [{ profile, error: profileError }, { customer }] =
-        await Promise.all([profilePromise, customerPromise]);
+      const [profileResult, customerResult] = await Promise.all([
+        profilePromise,
+        customerPromise,
+      ]);
 
-      if (profileError || !profile) {
+      if (profileResult.error || !profileResult.data) {
         return redirectToError("Failed to get profile");
       }
 
-      const subscriptionType = customer?.subscriptionType ?? freePlan.name;
+      const subscriptionType =
+        customerResult.data?.subscriptionType ?? freePlan.name;
+
+      const profile = profileResult.data;
 
       setState({
         status: "authenticated",

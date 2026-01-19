@@ -57,10 +57,13 @@ export default function SignUpPage() {
     posthog.capture("user_signup_initiated", { provider: "email" });
 
     startTransition(async () => {
-      const { error } = await signUp(formData);
-      if (error) {
-        setError(error);
-        posthog.capture("user_signup_error", { error, provider: "email" });
+      const result = await signUp(formData);
+      if (result.error) {
+        setError(result.error);
+        posthog.capture("user_signup_error", {
+          error: result.error,
+          provider: "email",
+        });
       } else {
         setHasSignedUp(true);
       }

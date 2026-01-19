@@ -2,23 +2,22 @@
 
 import { db } from "@/database";
 import { gamesTable } from "@/database/schemas/gamesTable";
-import createClient from "@/lib/supabase/server";
+import getUserOrError from "@/lib/auth/getUserOrError";
+import { err, ok, type Result } from "@/lib/result";
 import { desc, eq } from "drizzle-orm";
 
-export default async function getLevel(): Promise<{
-  level?: number;
-  error?: string;
-}> {
+export default async function getLevel(): Promise<Result<number>> {
+  const userResult = await getUserOrError();
+  if (userResult.error) {
+    return err(userResult.error);
+  }
+
+  const { data: user } = userResult;
+  if (!user) {
+    return err("Failed to get user");
+  }
+
   try {
-    const supabase = await createClient();
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      return { error: "Failed to get user" };
-    }
-
     const level = await db
       .select()
       .from(gamesTable)
@@ -27,9 +26,9 @@ export default async function getLevel(): Promise<{
       .limit(1)
       .then((res) => res[0]?.newLevel ?? 1);
 
-    return { level };
+    return ok(level);
   } catch (error) {
     console.error(error);
-    return { error: "An unexpected error occurred" };
+    return err("An unexpected error occurred");
   }
 }

@@ -2,6 +2,7 @@
   "name": "cogniba",
   "version": "0.1.9",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

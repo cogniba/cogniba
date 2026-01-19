@@ -3,6 +3,7 @@
 import createClient from "@/lib/supabase/server";
 import getEnv from "@/lib/env";
 import type { ForgotPasswordSchemaType } from "@/zod/schemas/ForgotPasswordSchema";
+import { err, ok, type Result } from "@/lib/result";
 
 function getErrorMessage(code: string): string {
   if (code === "user_not_found") {
@@ -22,7 +23,7 @@ function getErrorMessage(code: string): string {
 
 export default async function forgotPassword(
   data: ForgotPasswordSchemaType,
-): Promise<{ error?: string }> {
+): Promise<Result<{ success: true }>> {
   try {
     const supabase = await createClient();
 
@@ -32,19 +33,19 @@ export default async function forgotPassword(
 
     if (error) {
       if (error.code) {
-        return { error: getErrorMessage(error.code) };
-      } else {
-        const error = new Error(
-          "An unexpected error occurred while sending the reset email.",
-        );
-        console.error(error);
-        return { error: error.message };
+        return err(getErrorMessage(error.code));
       }
+
+      const resetError = new Error(
+        "An unexpected error occurred while sending the reset email.",
+      );
+      console.error(resetError);
+      return err(resetError.message);
     }
 
-    return {};
+    return ok({ success: true });
   } catch (error) {
     console.error(error);
-    return { error: "An unexpected error occurred" };
+    return err("An unexpected error occurred");
   }
 }

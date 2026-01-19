@@ -3,35 +3,34 @@
 import { db } from "@/database";
 import type { SettingsType } from "@/database/schemas/settingsTable";
 import { settingsTable } from "@/database/schemas/settingsTable";
-import createClient from "@/lib/supabase/server";
+import getUserOrError from "@/lib/auth/getUserOrError";
+import { err, ok, type Result } from "@/lib/result";
 import { eq } from "drizzle-orm";
 
-export default async function getSettings(): Promise<{
-  settings?: SettingsType;
-  error?: string;
-}> {
+export default async function getSettings(): Promise<Result<SettingsType>> {
+  const userResult = await getUserOrError();
+  if (userResult.error) {
+    return err(userResult.error);
+  }
+
+  const { data: user } = userResult;
+  if (!user) {
+    return err("Failed to get user");
+  }
+
   try {
-    const supabase = await createClient();
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      return { error: "Failed to get user" };
-    }
-
     const settings = await db
       .select()
       .from(settingsTable)
       .where(eq(settingsTable.userId, user.id))
       .then((res) => res[0]);
     if (!settings) {
-      return { error: "Failed to get settings" };
+      return err("Failed to get settings");
     }
 
-    return { settings };
+    return ok(settings);
   } catch (error) {
     console.error(error);
-    return { error: "An unexpected error occurred" };
+    return err("An unexpected error occurred");
   }
 }

@@ -59,9 +59,13 @@ npm run db:migrate
 ## Repository Structure
 
 - src/app: Next.js routes (App Router).
-- src/components: shared components; UI primitives in src/components/ui.
 - src/actions: server actions.
+- src/components: shared components; UI primitives in src/components/ui.
+- src/context: client state providers.
 - src/lib: helpers and utilities.
+- src/services: server-side data access helpers.
+- src/types: shared type aliases.
+- src/zod: Zod schemas.
 - src/database: Drizzle schemas/config.
 - src/hooks: custom hooks.
 
@@ -124,14 +128,17 @@ npm run db:migrate
 ## Server Actions
 
 - Include "use server" directive at top.
-- Return { data?, error? } objects; do not throw to client.
+- Return Result<T> from src/lib/result.ts instead of throwing.
+- Prefer shared auth helper getUserOrError from src/lib/auth/getUserOrError.ts.
+- Validate inputs with Zod schemas in src/zod/schemas.
 - Log errors with console.error for debugging.
 
 ## API Routes
 
-- Parse request.json() as unknown; validate with Zod or type guards.
-- Return NextResponse with status codes.
-- Avoid implicit any; keep response shapes explicit.
+- Prefer server actions over API routes for app logic.
+- API routes are reserved for external callbacks/webhooks (Supabase auth, Stripe).
+- For routes that remain, parse request.json() as unknown and validate with Zod.
+- Return NextResponse with explicit status codes.
 
 ## Database (Drizzle)
 
