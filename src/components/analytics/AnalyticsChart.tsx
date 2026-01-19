@@ -10,11 +10,15 @@ import {
 } from "@/components/ui/chart";
 import { useAnalyticsContext } from "@/context/AnalyticsContext";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import { ChartConfiguration, ChartWithPostfix } from "@/types/analytics";
+import type { ChartConfiguration, ChartWithPostfix } from "@/types/analytics";
 
 export default function AnalyticsChart() {
   const { cleanData, chartMetric, charts } = useAnalyticsContext();
   const currentChart = charts[chartMetric];
+
+  if (!currentChart) {
+    return <ChartNoData text="No chart data available" />;
+  }
 
   const hasPostfix = (chart: ChartConfiguration): chart is ChartWithPostfix => {
     return "postfix" in chart;
@@ -65,7 +69,7 @@ export default function AnalyticsChart() {
               interval="preserveStartEnd"
               // padding={{ left: 16, right: 16 }}
               tickFormatter={(value) => {
-                const date = new Date(value);
+                const date = new Date(value as string | number | Date);
                 return date.toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
@@ -77,7 +81,7 @@ export default function AnalyticsChart() {
               content={
                 <ChartTooltipContent
                   labelFormatter={(value) => {
-                    const date = new Date(value);
+                    const date = new Date(value as string | number | Date);
                     return date.toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
@@ -85,9 +89,9 @@ export default function AnalyticsChart() {
                     });
                   }}
                   indicator="dot"
-                  postfix={
-                    hasPostfix(currentChart) ? currentChart?.postfix : undefined
-                  }
+                  {...(hasPostfix(currentChart)
+                    ? { postfix: currentChart.postfix }
+                    : {})}
                 />
               }
             />
@@ -100,7 +104,7 @@ export default function AnalyticsChart() {
                 key={index}
               />
             ))}
-            <ChartLegend content={<ChartLegendContent />} />
+            <ChartLegend content={<ChartLegendContent payload={[]} />} />
           </AreaChart>
         </ChartContainer>
       ) : (

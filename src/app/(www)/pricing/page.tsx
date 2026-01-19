@@ -10,9 +10,9 @@ export default function PricingPage() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-12 px-4 py-10">
       <div className="grid gap-2 text-center">
-        <h1 className="text-4xl font-semibold xs:text-5xl">Choose Your Plan</h1>
+        <h1 className="xs:text-5xl text-4xl font-semibold">Choose Your Plan</h1>
         {/* TODO */}
-        <p className="text-base text-foreground/80 xs:text-lg">
+        <p className="text-foreground/80 xs:text-lg text-base">
           Start for free or go unlimited for the best results!
         </p>
       </div>
@@ -21,12 +21,12 @@ export default function PricingPage() {
           <div
             key={index}
             className={cn(
-              "relative h-full w-full max-w-96 rounded-lg border bg-background px-6 py-6 shadow-sm md:max-w-80",
+              "bg-background relative h-full w-full max-w-96 rounded-lg border px-6 py-6 shadow-sm md:max-w-80",
               plan.highlighted && "border-primary",
             )}
           >
             <h2 className="pb-0.5 text-2xl font-semibold">{plan.name}</h2>
-            <p className="pb-8 text-foreground/90">{plan.description}</p>
+            <p className="text-foreground/90 pb-8">{plan.description}</p>
             <p className="flex items-end gap-1 pb-8 font-light">
               <span className="text-5xl font-medium">${plan.price}</span>
               <span className="text-foreground/80">/ month</span>

@@ -8,12 +8,12 @@ import stripe from "@/lib/stripe/stripe";
 import createClient from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 
-interface CreateCheckoutSessionParams {
+type CreateCheckoutSessionParams = {
   mode: "payment" | "subscription";
   priceId: string;
   successUrl: string;
   cancelUrl: string;
-}
+};
 
 export default async function createCheckout({
   mode,
@@ -43,7 +43,7 @@ export default async function createCheckout({
       .fullJoin(customersTable, eq(profilesTable.userId, customersTable.userId))
       .then((rows) => (rows.length === 1 ? rows[0] : null));
 
-    if (!query || !query.profiles) {
+    if (!query?.profiles) {
       const error = new Error("Profile not found");
       console.error(error);
       return { error: error.message };
@@ -76,9 +76,7 @@ export default async function createCheckout({
       cancel_url: cancelUrl,
     });
 
-    return {
-      url: checkoutSession.url ?? undefined,
-    };
+    return checkoutSession.url ? { url: checkoutSession.url } : {};
   } catch (error) {
     console.error(error);
     return { error: "An unexpected error occurred" };

@@ -14,11 +14,13 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-    if (!error && data?.user) {
+    if (!error) {
+      const user = data.user;
+
       if (provider === "google" && type) {
         const posthog = posthogClient();
         posthog.capture({
-          distinctId: data.user.id,
+          distinctId: user.id,
           event:
             type === "signup" ? "user_signup_success" : "user_signin_success",
           properties: {

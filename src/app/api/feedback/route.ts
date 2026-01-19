@@ -4,12 +4,13 @@ import { NextResponse } from "next/server";
 import { feedbackTable } from "@/database/schemas/feedbackTable";
 import { db } from "@/database";
 import { Resend } from "resend";
+import getEnv from "@/lib/env";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(getEnv("RESEND_API_KEY"));
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body: unknown = await request.json();
     const parsedData = FeedbackSchema.safeParse(body);
 
     if (!parsedData.success) {
@@ -42,7 +43,7 @@ export async function POST(request: Request) {
     // Send email notification
     await resend.emails.send({
       from: "feedback@cogniba.com",
-      to: process.env.NEXT_PUBLIC_FEEDBACK_EMAIL!,
+      to: getEnv("NEXT_PUBLIC_FEEDBACK_EMAIL"),
       subject: `New Feedback: ${type}`,
       text: `New feedback received.\n\n\nType:\n${type}\n\nMessage:\n${message}\n\nUser ID:\n${userId}`,
     });

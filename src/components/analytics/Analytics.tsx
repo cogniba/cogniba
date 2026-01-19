@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default function Analytics() {
   return (
-    <Card className="flex h-full w-full flex-col pb-4 pt-8 xs:py-0">
+    <Card className="xs:py-0 flex h-full w-full flex-col pt-8 pb-4">
       <CardHeader className="border-b p-5 sm:p-8">
         <AnalyticsFilters />
       </CardHeader>

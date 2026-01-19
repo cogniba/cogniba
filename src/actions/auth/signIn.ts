@@ -3,7 +3,7 @@
 import createClient from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { SignInSchemaType } from "@/zod/schemas/SignInSchema";
+import type { SignInSchemaType } from "@/zod/schemas/SignInSchema";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import posthogClient from "@/lib/posthogClient";
 
@@ -60,17 +60,15 @@ export default async function signIn(
       }
     }
 
-    if (authData?.user) {
-      const posthog = posthogClient();
-      posthog.capture({
-        distinctId: authData.user.id,
-        event: "user_signin_success",
-        properties: {
-          provider: "email",
-        },
-      });
-      await posthog.shutdown();
-    }
+    const posthog = posthogClient();
+    posthog.capture({
+      distinctId: authData.user.id,
+      event: "user_signin_success",
+      properties: {
+        provider: "email",
+      },
+    });
+    await posthog.shutdown();
 
     revalidatePath("/", "layout");
     redirect("/app");

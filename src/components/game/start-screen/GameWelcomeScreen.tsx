@@ -1,28 +1,29 @@
 "use client";
 
 import { DialogTitle } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import quotes from "@/content/quotes.json";
 
-export default function GameWelcomeScreen() {
-  const [quote, setQuote] = useState("");
-  const [author, setAuthor] = useState("");
+const randomIndex = Math.floor(Math.random() * quotes.length);
 
-  useEffect(() => {
-    const { quote: fetchedQuote, author: fetchedAuthor } =
-      quotes[Math.floor(Math.random() * quotes.length)];
-    setQuote(fetchedQuote);
-    setAuthor(fetchedAuthor);
+export default function GameWelcomeScreen() {
+  const { quote, author } = useMemo(() => {
+    return (
+      quotes[randomIndex] ?? {
+        quote: "Keep going.",
+        author: "Cogniba",
+      }
+    );
   }, []);
 
   return (
     <>
-      <DialogTitle className="mb-5 text-2xl xs:mb-8 xs:text-3xl">
+      <DialogTitle className="xs:mb-8 xs:text-3xl mb-5 text-2xl">
         Welcome back!
       </DialogTitle>
-      <blockquote className="font-serif text-base font-normal italic text-muted-foreground xs:text-lg">
+      <blockquote className="text-muted-foreground xs:text-lg font-serif text-base font-normal italic">
         <div className="xs:mb-1">&ldquo;{quote}&rdquo;</div>
-        <div className="text-right text-lg text-muted-foreground xs:text-xl">
+        <div className="text-muted-foreground xs:text-xl text-right text-lg">
           &mdash; {author}
         </div>
       </blockquote>

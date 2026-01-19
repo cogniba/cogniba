@@ -39,17 +39,19 @@ export default function Game() {
         <GameStartScreen />
       )}
 
-      <div className="relative z-20 flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] [container-type:size] md:px-2">
-        <div className="my-[1.5cqh] flex-shrink-0 sm:mb-[2.5cqh] sm:mt-[1.5cqh]">
+      <div className="[container-type:size] relative z-20 flex h-full w-full max-w-3xl flex-col items-center justify-center px-[4cqw] md:px-2">
+        <div className="my-[1.5cqh] flex-shrink-0 sm:mt-[1.5cqh] sm:mb-[2.5cqh]">
           <GameLevelDisplay level={level} />
         </div>
         <div className="h-[100cqmin] w-[100cqmin]">
           <GameBoard selectedSquare={selectedSquare} />
         </div>
-        <div className="mb-[2.5cqh] mt-[3cqh] h-[11cqh] w-[100cqmin] max-w-5xl flex-shrink-0 2xl:w-[max(100cqmin,90vh)]">
+        <div className="mt-[3cqh] mb-[2.5cqh] h-[11cqh] w-[100cqmin] max-w-5xl flex-shrink-0 2xl:w-[max(100cqmin,90vh)]">
           <GameButton
             isButtonPressed={isButtonPressed}
-            handleButtonPress={handleButtonPress}
+            handleButtonPress={() => {
+              void handleButtonPress();
+            }}
           />
         </div>
       </div>

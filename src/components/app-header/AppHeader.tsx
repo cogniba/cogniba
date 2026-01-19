@@ -17,8 +17,8 @@ import { cn } from "@/lib/cn";
 
 export default function AppHeader() {
   const pathname = usePathname();
-  const segments = pathname ? formatPathForHeader(pathname) : [];
-  const pathParts = pathname?.split("/").filter(Boolean) || [];
+  const segments = formatPathForHeader(pathname);
+  const pathParts = pathname.split("/").filter(Boolean);
 
   const isPlayScreen = pathname === "/app/play";
   const { open } = useSidebar();
@@ -27,7 +27,7 @@ export default function AppHeader() {
     return (
       <div
         className={cn(
-          "pointer-events-auto fixed right-0 top-0 z-[60] m-1 rounded border border-border bg-background transition duration-500 md:hidden",
+          "border-border bg-background pointer-events-auto fixed top-0 right-0 z-[60] m-1 rounded border transition duration-500 md:hidden",
           !open && "-translate-y-full",
         )}
       >
@@ -43,7 +43,7 @@ export default function AppHeader() {
         <Separator orientation="vertical" className="mr-2 h-4" />
         <Breadcrumb>
           <BreadcrumbList>
-            {segments?.map((segment, index) => (
+            {segments.map((segment, index) => (
               <Fragment key={index}>
                 <BreadcrumbItem>
                   {index === segments.length - 1 ? (

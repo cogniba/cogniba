@@ -29,7 +29,7 @@ export default function MobileHeader() {
   return (
     <>
       <div className="fixed top-0 z-50 h-16 w-full max-w-6xl px-4 pt-2">
-        <NavigationMenu className="flex h-full w-full max-w-full items-center justify-between rounded-2xl border border-muted bg-muted/70 px-6 shadow-xl backdrop-blur">
+        <NavigationMenu className="border-muted bg-muted/70 flex h-full w-full max-w-full items-center justify-between rounded-2xl border px-6 shadow-xl backdrop-blur">
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="/">
@@ -51,7 +51,9 @@ export default function MobileHeader() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  onClick={() => setOpenMobile(false)}
+                  onClick={() => {
+                    setOpenMobile(false);
+                  }}
                   asChild
                   size="lg"
                 >
@@ -70,7 +72,9 @@ export default function MobileHeader() {
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.name}>
                   <SidebarMenuButton
-                    onClick={() => setOpenMobile(false)}
+                    onClick={() => {
+                      setOpenMobile(false);
+                    }}
                     asChild
                     size="lg"
                     className="text-base [&>svg]:size-5"
@@ -90,14 +94,24 @@ export default function MobileHeader() {
           <SidebarGroup>
             <SidebarMenu className="gap-2">
               <SidebarMenuItem>
-                <Link href="/sign-in" onClick={() => setOpenMobile(false)}>
+                <Link
+                  href="/sign-in"
+                  onClick={() => {
+                    setOpenMobile(false);
+                  }}
+                >
                   <Button variant="secondary" className="w-full">
                     Sign In
                   </Button>
                 </Link>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <Link href="/sign-up" onClick={() => setOpenMobile(false)}>
+                <Link
+                  href="/sign-up"
+                  onClick={() => {
+                    setOpenMobile(false);
+                  }}
+                >
                   <Button className="w-full">Get Started</Button>
                 </Link>
               </SidebarMenuItem>

@@ -68,30 +68,29 @@ export default function AnalyticsRangePicker() {
 
     if (separatedSearch.length > 3) {
       options = [];
-    } else if (separatedSearch.length === 0) {
-    } else {
+    } else if (separatedSearch.length !== 0) {
       const numberTerms = separatedSearch.filter(
         (term) => !isNaN(parseInt(term)),
       );
 
       if (numberTerms.length === 1) {
-        const number = parseInt(numberTerms[0]);
+        const number = parseInt(numberTerms[0] ?? "0");
         const newOptions = [
           {
-            label: `Last ${number} ${number === 1 ? "day" : "days"}`,
-            value: `last ${number} ${number === 1 ? "day" : "days"}`,
+            label: `Last ${String(number)} ${number === 1 ? "day" : "days"}`,
+            value: `last ${String(number)} ${number === 1 ? "day" : "days"}`,
           },
           {
-            label: `Last ${number} ${number === 1 ? "week" : "weeks"}`,
-            value: `last ${number} ${number === 1 ? "week" : "weeks"}`,
+            label: `Last ${String(number)} ${number === 1 ? "week" : "weeks"}`,
+            value: `last ${String(number)} ${number === 1 ? "week" : "weeks"}`,
           },
           {
-            label: `Last ${number} ${number === 1 ? "month" : "months"}`,
-            value: `last ${number} ${number === 1 ? "month" : "months"}`,
+            label: `Last ${String(number)} ${number === 1 ? "month" : "months"}`,
+            value: `last ${String(number)} ${number === 1 ? "month" : "months"}`,
           },
           {
-            label: `Last ${number} ${number === 1 ? "year" : "years"}`,
-            value: `last ${number} ${number === 1 ? "year" : "years"}`,
+            label: `Last ${String(number)} ${number === 1 ? "year" : "years"}`,
+            value: `last ${String(number)} ${number === 1 ? "year" : "years"}`,
           },
         ];
         options = [...newOptions];
@@ -107,8 +106,8 @@ export default function AnalyticsRangePicker() {
 
     const extendedOptions = options.map((option) => {
       const parts = option.value.split(" ");
-      const number = parseInt(parts[1]);
-      const unit = parts[2];
+      const number = parseInt(parts[1] ?? "0");
+      const unit = parts[2] ?? "days";
       const totalDays = calculateDays(number, unit);
 
       if (totalDays > limits.analyticsDaysLimit && isFreeUser) {
@@ -125,8 +124,8 @@ export default function AnalyticsRangePicker() {
 
   const calculateDateRange = (value: string) => {
     const parts = value.split(" ");
-    const number = parseInt(parts[1]);
-    const unit = parts[2];
+    const number = parseInt(parts[1] ?? "0");
+    const unit = parts[2] ?? "days";
     const today = new Date();
 
     const totalDays = calculateDays(number, unit);
@@ -137,7 +136,8 @@ export default function AnalyticsRangePicker() {
       return;
     }
 
-    let startDate;
+    let startDate = today;
+
     if (unit === "day" || unit === "days") {
       startDate = subDays(today, number);
     } else if (unit === "week" || unit === "weeks") {

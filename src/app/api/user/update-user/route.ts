@@ -7,15 +7,26 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    if (typeof body.hasFinishedTutorial !== "boolean") {
+    const body: unknown = await request.json();
+    if (!body || typeof body !== "object") {
+      return NextResponse.json(
+        { error: "Invalid request body" },
+        { status: 400 },
+      );
+    }
+
+    const payload = body as Record<string, unknown>;
+
+    if (typeof payload["hasFinishedTutorial"] !== "boolean") {
       return NextResponse.json(
         { error: "Invalid hasFinishedTutorial value" },
         { status: 400 },
       );
     }
 
-    const { hasFinishedTutorial } = body;
+    const { hasFinishedTutorial } = payload as {
+      hasFinishedTutorial: boolean;
+    };
 
     const supabase = await createClient();
 

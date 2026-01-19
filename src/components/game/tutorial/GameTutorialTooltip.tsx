@@ -20,9 +20,9 @@ import {
 import { useGameTutorialContext } from "@/context/GameTutorialContext";
 import { usePostHog } from "posthog-js/react";
 
-interface GameTutorialTooltipProps {
+type GameTutorialTooltipProps = {
   showSkipButton: boolean;
-}
+};
 
 export default function GameTutorialTooltip({
   showSkipButton,
@@ -34,6 +34,10 @@ export default function GameTutorialTooltip({
   const currentStep = steps[step - Number(step >= steps.length)];
   const skipButton = showSkipButton && step === 0;
 
+  if (!currentStep) {
+    return null;
+  }
+
   return (
     <>
       <DialogHeader className="pb-1">
@@ -41,7 +45,7 @@ export default function GameTutorialTooltip({
           {currentStep.title}
         </DialogTitle>
       </DialogHeader>
-      <div className="pb-2.5 text-secondary-foreground">
+      <div className="text-secondary-foreground pb-2.5">
         {currentStep.content}
       </div>
       <DialogFooter className="flex flex-row items-center justify-between sm:justify-between">
@@ -70,12 +74,12 @@ export default function GameTutorialTooltip({
                   Cancel
                 </AlertDialogCancel>
                 <AlertDialogAction
-                  onClick={async (e) => {
+                  onClick={(e) => {
                     posthog.capture("tutorial_complete", {
                       has_skipped: true,
                     });
                     e.preventDefault();
-                    await handleFinishTutorial();
+                    handleFinishTutorial();
                   }}
                 >
                   <LoaderWrapper loading={isLoading}>Skip</LoaderWrapper>
@@ -90,7 +94,9 @@ export default function GameTutorialTooltip({
           {!currentStep.hideBackButton && (
             <Button
               variant="secondary"
-              onClick={() => setStep((prevStep) => prevStep - 1)}
+              onClick={() => {
+                setStep((prevStep) => prevStep - 1);
+              }}
               disabled={isLoading}
             >
               Back
@@ -98,7 +104,9 @@ export default function GameTutorialTooltip({
           )}
           {!currentStep.hidePrimaryButton && (
             <Button
-              onClick={() => setStep((prevStep) => prevStep + 1)}
+              onClick={() => {
+                setStep((prevStep) => prevStep + 1);
+              }}
               disabled={isLoading}
             >
               <LoaderWrapper loading={isLoading}>

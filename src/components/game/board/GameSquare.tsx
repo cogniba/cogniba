@@ -1,8 +1,8 @@
 import { cn } from "@/lib/cn";
 
-interface SquareProps {
+type SquareProps = {
   selected: boolean;
-}
+};
 
 export default function Square({ selected }: SquareProps) {
   return (

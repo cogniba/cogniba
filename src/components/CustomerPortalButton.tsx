@@ -7,11 +7,11 @@ import LoaderWrapper from "./LoaderWrapper";
 import redirectToError from "@/actions/redirectToError";
 import { usePostHog } from "posthog-js/react";
 
-interface CustomerPortalButtonProps {
+type CustomerPortalButtonProps = {
   children?: React.ReactNode;
   className?: string;
   targetPlan?: string;
-}
+};
 
 export default function CustomerPortalButton({
   children,

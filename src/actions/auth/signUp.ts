@@ -1,7 +1,7 @@
 "use server";
 
 import createClient from "@/lib/supabase/server";
-import { SignUpSchemaType } from "@/zod/schemas/SignUpSchema";
+import type { SignUpSchemaType } from "@/zod/schemas/SignUpSchema";
 import posthogClient from "@/lib/posthogClient";
 
 function getErrorMessage(code: string): string {

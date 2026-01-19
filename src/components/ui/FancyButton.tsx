@@ -3,12 +3,12 @@ import { Button, type ButtonProps } from "./button";
 
 import styles from "@/styles/modules/AnimatedBorder.module.css";
 
-interface FancyButtonProps extends ButtonProps {
+type FancyButtonProps = {
   children: React.ReactNode;
   borderColors: string[];
   borderWidth?: string;
   animationDuration?: string;
-}
+} & ButtonProps;
 
 export default function FancyButton({
   children,
@@ -25,7 +25,7 @@ export default function FancyButton({
       <Button
         variant={variant}
         size={size}
-        className={cn("relative", className, styles.animatedBorder)}
+        className={cn("relative", className, styles["animatedBorder"])}
         style={
           {
             "--border-width": borderWidth,

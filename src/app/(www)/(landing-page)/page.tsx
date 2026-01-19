@@ -6,12 +6,12 @@ import Link from "next/link";
 
 export default function LandingPagePage() {
   return (
-    <main className="mx-auto grid gap-40 px-6 py-28 xs:gap-48 xs:py-32 md:gap-56 md:py-32">
+    <main className="xs:gap-48 xs:py-32 mx-auto grid gap-40 px-6 py-28 md:gap-56 md:py-32">
       <HeroSection />
       <HowItWorksSection />
       <FeaturesSection />
 
-      <div className="mx-auto -mt-12 xs:-mt-16 md:-mt-16">
+      <div className="xs:-mt-16 mx-auto -mt-12 md:-mt-16">
         <Link href="sign-up">
           <FancyButton
             size="lg"

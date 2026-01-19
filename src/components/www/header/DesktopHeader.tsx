@@ -14,41 +14,43 @@ export default function DesktopHeader() {
 
   return (
     <div className="fixed top-0 z-50 h-16 w-full max-w-6xl px-4 pt-2">
-      <NavigationMenu className="flex h-full w-full max-w-full items-center justify-between rounded-2xl border border-muted bg-muted/70 px-6 shadow-xl backdrop-blur">
+      <NavigationMenu className="border-muted bg-muted/70 flex h-full w-full max-w-full items-center justify-between rounded-2xl border px-6 shadow-xl backdrop-blur">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/">
-              <AppLogo />
-            </Link>
+            <NavigationMenuLink asChild>
+              <Link href="/">
+                <AppLogo />
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
 
         <NavigationMenuList>
           {navigationItems.map((item) => (
             <NavigationMenuItem key={item.name}>
-              <Link href={item.href} legacyBehavior passHref>
-                <NavigationMenuLink asChild>
+              <NavigationMenuLink asChild>
+                <Link href={item.href}>
                   <Button variant="ghost">{item.name}</Button>
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>
 
         <NavigationMenuList className="gap-1">
           <NavigationMenuItem>
-            <Link href="/sign-in" legacyBehavior passHref>
-              <NavigationMenuLink asChild>
+            <NavigationMenuLink asChild>
+              <Link href="/sign-in">
                 <Button variant="secondary">Sign In</Button>
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/sign-up" legacyBehavior passHref>
-              <NavigationMenuLink asChild>
+            <NavigationMenuLink asChild>
+              <Link href="/sign-up">
                 <Button>Get Started</Button>
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

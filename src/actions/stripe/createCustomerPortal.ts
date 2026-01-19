@@ -8,9 +8,9 @@ import stripe from "@/lib/stripe/stripe";
 import createClient from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 
-interface CreateCustomerPortalParams {
+type CreateCustomerPortalParams = {
   return_url: string;
-}
+};
 
 export default async function createCustomerPortal({
   return_url,
@@ -37,7 +37,7 @@ export default async function createCustomerPortal({
       .fullJoin(customersTable, eq(profilesTable.userId, customersTable.userId))
       .then((rows) => (rows.length === 1 ? rows[0] : null));
 
-    if (!query || !query.profiles) {
+    if (!query?.profiles) {
       const error = new Error("Profile not found");
       console.error(error);
       return { error: error.message };
@@ -58,10 +58,10 @@ export default async function createCustomerPortal({
 
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: return_url,
+      return_url,
     });
 
-    return { url: portalSession.url };
+    return portalSession.url ? { url: portalSession.url } : {};
   } catch (error) {
     console.error(error);
     return { error: "An unexpected error occurred" };

@@ -2,9 +2,9 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import DesktopHeader from "./DesktopHeader";
 import MobileHeader from "./MobileHeader";
 
-interface HeaderProps {
+type HeaderProps = {
   children: React.ReactNode;
-}
+};
 
 export default function Header({ children }: HeaderProps) {
   return (

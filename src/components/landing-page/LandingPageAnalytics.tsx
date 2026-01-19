@@ -123,7 +123,7 @@ export default function LandingPageAnalytics() {
             fill={`url(#level)`}
             stroke={`var(--color-level)`}
           />
-          <ChartLegend content={<ChartLegendContent />} />
+          <ChartLegend content={<ChartLegendContent payload={[]} />} />
         </AreaChart>
       </ChartContainer>
     </div>

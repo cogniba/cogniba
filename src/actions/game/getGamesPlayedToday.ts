@@ -29,7 +29,12 @@ export default async function getGamesPlayedToday(): Promise<{
         and(eq(gamesTable.userId, user.id), gte(gamesTable.createdAt, today)),
       );
 
-    return { gamesPlayedToday: Number(result[0].count) };
+    const [row] = result;
+    if (!row) {
+      return { gamesPlayedToday: 0 };
+    }
+
+    return { gamesPlayedToday: row.count };
   } catch (error) {
     console.error(error);
     return { error: "An unexpected error occurred" };

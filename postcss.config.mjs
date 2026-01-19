@@ -1,7 +1,8 @@
-/** @type {import('postcss-load-config').Config} */
+// @ts-check
+
 const config = {
   plugins: {
-    tailwindcss: {},
+    "@tailwindcss/postcss": {},
   },
 };
 

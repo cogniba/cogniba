@@ -2,9 +2,9 @@ import getGamesData from "@/actions/analytics/getGamesData";
 import SimpleMessageScreen from "@/components/SimpleMessageScreen";
 import AnalyticsContextProvider from "@/context/AnalyticsContext";
 
-interface AnalyticsLayoutProps {
+type AnalyticsLayoutProps = {
   children: React.ReactNode;
-}
+};
 
 export default async function AnalyticsLayout({
   children,

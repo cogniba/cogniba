@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 type TypographyProps = HTMLAttributes<HTMLElement>;
 
@@ -10,11 +10,11 @@ export function Blockquote(props: TypographyProps) {
   return (
     <blockquote
       {...props}
-      className="mb-4 border-l-4 border-primary/30 pl-4 italic text-muted-foreground"
+      className="border-primary/30 text-muted-foreground mb-4 border-l-4 pl-4 italic"
     />
   );
 }
 
 export function HorizontalRule(props: HTMLAttributes<HTMLHRElement>) {
-  return <hr {...props} className="my-8 border-muted" />;
+  return <hr {...props} className="border-muted my-8" />;
 }

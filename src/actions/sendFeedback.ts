@@ -4,9 +4,10 @@ import createClient from "@/lib/supabase/server";
 import { feedbackTable } from "@/database/schemas/feedbackTable";
 import { Resend } from "resend";
 import { db } from "@/database";
-import { FeedbackSchemaType } from "@/zod/schemas/FeedbackSchema";
+import type { FeedbackSchemaType } from "@/zod/schemas/FeedbackSchema";
+import getEnv from "@/lib/env";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(getEnv("RESEND_API_KEY"));
 
 export default async function sendFeedback(
   formData: FeedbackSchemaType,
@@ -34,7 +35,7 @@ export default async function sendFeedback(
 
     await resend.emails.send({
       from: "feedback@cogniba.com",
-      to: process.env.NEXT_PUBLIC_FEEDBACK_EMAIL!,
+      to: getEnv("NEXT_PUBLIC_FEEDBACK_EMAIL"),
       subject: `New Feedback: ${type}`,
       text: `New feedback received.\n\n\nType:\n${type}\n\nMessage:\n${message}\n\nUser ID:\n${userId}`,
     });

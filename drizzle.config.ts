@@ -1,5 +1,6 @@
 import { defineConfig } from "drizzle-kit";
 import { loadEnvConfig } from "@next/env";
+import getEnv from "@/lib/env";
 
 const projectDir = process.cwd();
 loadEnvConfig(projectDir);
@@ -10,6 +11,6 @@ export default defineConfig({
   schema: "./src/database/schemas/*",
   out: "./supabase/migrations",
   dbCredentials: {
-    url: process.env.DATABASE_URL!,
+    url: getEnv("DATABASE_URL"),
   },
 });

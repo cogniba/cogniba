@@ -1,7 +1,8 @@
 "use server";
 
 import { db } from "@/database";
-import { settingsTable, SettingsType } from "@/database/schemas/settingsTable";
+import type { SettingsType } from "@/database/schemas/settingsTable";
+import { settingsTable } from "@/database/schemas/settingsTable";
 import createClient from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 
@@ -23,8 +24,8 @@ export default async function getSettings(): Promise<{
       .select()
       .from(settingsTable)
       .where(eq(settingsTable.userId, user.id))
-      .then((res) => (res.length === 1 ? res[0] : null));
-    if (settings === null) {
+      .then((res) => res[0]);
+    if (!settings) {
       return { error: "Failed to get settings" };
     }
 

@@ -1,7 +1,7 @@
-interface PathSegment {
+type PathSegment = {
   formatted: string;
   raw: string;
-}
+};
 
 export default function formatPathForHeader(pathname: string): PathSegment[] {
   return pathname

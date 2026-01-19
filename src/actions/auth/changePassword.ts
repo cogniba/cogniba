@@ -1,7 +1,7 @@
 "use server";
 
 import createClient from "@/lib/supabase/server";
-import { ChangePasswordSchemaType } from "@/zod/schemas/ChangePasswordSchema";
+import type { ChangePasswordSchemaType } from "@/zod/schemas/ChangePasswordSchema";
 
 function getErrorMessage(code: string): string {
   if (code === "weak_password") {

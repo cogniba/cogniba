@@ -5,11 +5,13 @@ import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import getEnv from "@/lib/env";
 
 export async function POST(request: NextRequest) {
   try {
-    const data = await request.json();
+    const data: unknown = await request.json();
     const parsedData = SignUpSchema.safeParse(data);
 
     if (!parsedData.success) {
@@ -43,7 +45,7 @@ export async function POST(request: NextRequest) {
         data: {
           full_name: fullName,
         },
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/app/play`,
+        emailRedirectTo: `${getEnv("NEXT_PUBLIC_SITE_URL")}/app/play`,
       },
     });
 

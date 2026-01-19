@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import BlogPostHeader from "./BlogPostHeader";
 import BlogPostImage from "./BlogPostImage";
 import BlogPostSidebar from "./BlogPostSidebar";
-import { PostType } from "@/types/blog";
+import type { PostType } from "@/types/blog";
 
-interface BlogPostProps {
+type BlogPostProps = {
   post: PostType;
   content: React.ReactNode;
-}
+};
 
 export default function BlogPost({ post, content }: BlogPostProps) {
   const [headings, setHeadings] = useState<{ text: string; level: number }[]>(
@@ -23,7 +23,7 @@ export default function BlogPost({ post, content }: BlogPostProps) {
 
       const headingElements = articleElement.querySelectorAll(".blog-heading");
       const headingsData = Array.from(headingElements).map((heading) => {
-        const text = (heading.textContent?.trim() || "").replace(/#$/, "");
+        const text = heading.textContent.trim().replace(/#$/, "");
         const id = text
           .toLowerCase()
           .replace(/[^\w\s-]/g, "")

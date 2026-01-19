@@ -1,0 +1,8 @@
+- [ ] GitHub Button in landing page
+- [ ] Fix next.js errors
+- [ ] turbopack svgr
+- [ ] Use turbopack
+- [ ] Typed eslint config
+- [ ] Aggressive typescript config
+- [ ] Aggressive esconfig
+- [ ] Middleware

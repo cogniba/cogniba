@@ -1,9 +1,9 @@
 import { Loader2Icon } from "lucide-react";
 
-interface LoaderWrapperProps {
+type LoaderWrapperProps = {
   loading: boolean;
   children: React.ReactNode;
-}
+};
 
 export default function LoaderWrapper({
   loading: isLoading,
@@ -12,8 +12,8 @@ export default function LoaderWrapper({
   if (isLoading) {
     return (
       <>
-        <div className="relative w-full [display:inherit]">
-          <div className="opacity-0 [display:inherit]">{children}</div>
+        <div className="relative [display:inherit] w-full">
+          <div className="[display:inherit] opacity-0">{children}</div>
           <div className="absolute inset-0 flex h-full w-full items-center justify-center">
             <Loader2Icon className="z-50 animate-spin opacity-100" />
           </div>

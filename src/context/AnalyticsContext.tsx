@@ -1,18 +1,13 @@
 "use client";
 
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
+import type { Dispatch, SetStateAction } from "react";
+import { createContext, useContext, useState } from "react";
 import { subDays } from "date-fns";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 import cleanChartData from "@/lib/cleanChartData";
-import { GamesData } from "@/app/api/analytics/get-data/route";
-import { ChartConfig } from "@/components/ui/chart";
-import { ChartsConfig } from "@/types/analytics";
+import type { GamesData } from "@/app/api/analytics/get-data/route";
+import type { ChartConfig } from "@/components/ui/chart";
+import type { ChartsConfig } from "@/types/analytics";
 
 const charts = {
   level: {
@@ -93,28 +88,32 @@ export type ChartMetrics =
   | "gamesPlayed"
   | "timePlayed";
 
-interface AnalyticsContextValue {
+type AnalyticsContextValue = {
   date: DateRange | undefined;
   setDate: Dispatch<SetStateAction<DateRange | undefined>>;
   chartMetric: ChartMetrics;
   setChartMetric: Dispatch<SetStateAction<ChartMetrics>>;
   cleanData: GamesData | null;
   charts: ChartsConfig;
-}
+};
+
+const noop = () => {
+  return;
+};
 
 export const AnalyticsContext = createContext<AnalyticsContextValue>({
   date: undefined,
-  setDate: () => {},
+  setDate: noop,
   chartMetric: "level",
-  setChartMetric: () => {},
+  setChartMetric: noop,
   cleanData: null,
   charts,
 });
 
-interface AnalyticsContextProviderProps {
+type AnalyticsContextProviderProps = {
   children: React.ReactNode;
   data: GamesData;
-}
+};
 
 export default function AnalyticsContextProvider({
   children,
@@ -127,7 +126,7 @@ export default function AnalyticsContextProvider({
   const [chartMetric, setChartMetric] = useState<ChartMetrics>("level");
 
   const cleanData =
-    date && date.from && date.to && data && data.length > 0
+    date?.from && date.to && data.length > 0
       ? cleanChartData(data, date.from, date.to)
       : null;
 

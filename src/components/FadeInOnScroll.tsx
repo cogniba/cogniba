@@ -2,13 +2,13 @@ import * as motion from "motion/react-client";
 // TODO
 // import { motion } from "motion/react";
 
-interface FadeInOnScrollProps {
+type FadeInOnScrollProps = {
   children: React.ReactNode;
   delay?: number;
   duration?: number;
   from?: "top" | "bottom" | "left" | "right";
   className?: string;
-}
+};
 
 export default function FadeInOnScroll({
   children,
@@ -24,9 +24,9 @@ export default function FadeInOnScroll({
       return { y: 25 };
     } else if (from === "left") {
       return { x: -25 };
-    } else if (from === "right") {
-      return { x: 25 };
     }
+
+    return { x: 25 };
   })();
 
   return (

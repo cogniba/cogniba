@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ForgotPasswordSchema } from "@/zod/schemas/ForgotPasswordSchema";
 import {
@@ -64,10 +64,12 @@ export default function ForgotPasswordPage() {
   return (
     <Form {...form}>
       <form
-        className="flex h-full w-full items-center justify-center bg-card py-5 xs:bg-background"
-        onSubmit={form.handleSubmit(onSubmit)}
+        className="bg-card xs:bg-background flex h-full w-full items-center justify-center py-5"
+        onSubmit={(event) => {
+          void form.handleSubmit(onSubmit)(event);
+        }}
       >
-        <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
+        <Card className="xs:border-border xs:shadow-sm w-full max-w-sm border-transparent px-2 shadow-none">
           <CardHeader className="pb-9">
             <CardTitle className="text-2xl">Reset password</CardTitle>
             <CardDescription>

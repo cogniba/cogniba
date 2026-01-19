@@ -17,8 +17,10 @@ export default function AppearanceSetting() {
         { value: "dark", label: "Dark" },
         { value: "system", label: "System default" },
       ]}
-      value={theme || "system"}
-      onValueChange={(value) => setTheme(value)}
+      value={theme ?? "system"}
+      onValueChange={(value) => {
+        setTheme(value);
+      }}
     />
   );
 }

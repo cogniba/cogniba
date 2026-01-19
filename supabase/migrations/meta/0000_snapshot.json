@@ -48,12 +48,8 @@
           "tableFrom": "subscriptions",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -66,26 +62,20 @@
           "name": "Enable insert for users based on user_id",
           "as": "PERMISSIVE",
           "for": "INSERT",
-          "to": [
-            "public"
-          ],
+          "to": ["public"],
           "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
         },
         "Enable update for users based on user_id": {
           "name": "Enable update for users based on user_id",
           "as": "PERMISSIVE",
           "for": "UPDATE",
-          "to": [
-            "public"
-          ]
+          "to": ["public"]
         },
         "Enable users to view their own data only": {
           "name": "Enable users to view their own data only",
           "as": "PERMISSIVE",
           "for": "SELECT",
-          "to": [
-            "authenticated"
-          ]
+          "to": ["authenticated"]
         }
       },
       "isRLSEnabled": true
@@ -127,12 +117,8 @@
           "tableFrom": "feedback",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -145,9 +131,7 @@
           "name": "Enable insert for users based on user_id",
           "as": "PERMISSIVE",
           "for": "INSERT",
-          "to": [
-            "public"
-          ],
+          "to": ["public"],
           "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
         }
       },
@@ -220,12 +204,8 @@
           "tableFrom": "games",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -238,18 +218,14 @@
           "name": "Enable insert for users based on user_id",
           "as": "PERMISSIVE",
           "for": "INSERT",
-          "to": [
-            "public"
-          ],
+          "to": ["public"],
           "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
         },
         "Enable users to view their own data only": {
           "name": "Enable users to view their own data only",
           "as": "PERMISSIVE",
           "for": "SELECT",
-          "to": [
-            "authenticated"
-          ]
+          "to": ["authenticated"]
         }
       },
       "isRLSEnabled": true
@@ -298,12 +274,8 @@
           "tableFrom": "profiles",
           "tableTo": "users",
           "schemaTo": "auth",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -311,9 +283,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "profiles_email_unique": {
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "nullsNotDistinct": false,
           "name": "profiles_email_unique"
         }
@@ -324,26 +294,20 @@
           "name": "Enable insert for users based on user_id",
           "as": "PERMISSIVE",
           "for": "INSERT",
-          "to": [
-            "public"
-          ],
+          "to": ["public"],
           "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
         },
         "Enable update for users based on email": {
           "name": "Enable update for users based on email",
           "as": "PERMISSIVE",
           "for": "UPDATE",
-          "to": [
-            "public"
-          ]
+          "to": ["public"]
         },
         "Enable users to view their own data only": {
           "name": "Enable users to view their own data only",
           "as": "PERMISSIVE",
           "for": "SELECT",
-          "to": [
-            "authenticated"
-          ]
+          "to": ["authenticated"]
         }
       },
       "isRLSEnabled": true
@@ -373,12 +337,8 @@
           "tableFrom": "settings",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -391,26 +351,20 @@
           "name": "Enable insert for users based on user_id",
           "as": "PERMISSIVE",
           "for": "INSERT",
-          "to": [
-            "public"
-          ],
+          "to": ["public"],
           "withCheck": "(( SELECT auth.uid() AS uid) = user_id)"
         },
         "Enable update for users based on user_id": {
           "name": "Enable update for users based on user_id",
           "as": "PERMISSIVE",
           "for": "UPDATE",
-          "to": [
-            "public"
-          ]
+          "to": ["public"]
         },
         "Enable users to view their own data only": {
           "name": "Enable users to view their own data only",
           "as": "PERMISSIVE",
           "for": "SELECT",
-          "to": [
-            "authenticated"
-          ]
+          "to": ["authenticated"]
         }
       },
       "isRLSEnabled": true
@@ -419,10 +373,7 @@
   "enums": {
     "public.status": {
       "name": "status",
-      "values": [
-        "active",
-        "inactive"
-      ],
+      "values": ["active", "inactive"],
       "schema": "public"
     }
   },

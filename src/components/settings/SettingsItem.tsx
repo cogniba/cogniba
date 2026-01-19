@@ -70,7 +70,7 @@ export default function SettingsItem({
     <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center md:gap-8">
       <div className="flex flex-col gap-0.5">
         <span className="text-lg font-semibold md:text-xl">{title}</span>
-        <span className="text-sm text-muted-foreground">{description}</span>
+        <span className="text-muted-foreground text-sm">{description}</span>
       </div>
       <div className="w-full flex-shrink-0 md:w-60 lg:w-80">
         {type === "select" && (
@@ -98,7 +98,9 @@ export default function SettingsItem({
             variant="outline"
             className="w-full"
           >
-            <OptionalLink href={href}>{buttonText}</OptionalLink>
+            <OptionalLink {...(href ? { href } : {})}>
+              {buttonText}
+            </OptionalLink>
           </Button>
         )}
       </div>

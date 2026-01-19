@@ -4,30 +4,33 @@ import useWindowSize from "@/hooks/useWindowSize";
 import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 
-interface GameConfettiProps {
+type GameConfettiProps = {
   hasIncreasedLevel: boolean;
-}
+};
 
 export default function GameConfetti({ hasIncreasedLevel }: GameConfettiProps) {
   const [showConfetti, setShowConfetti] = useState(false);
-  const [hideConfetti, setHideConfetti] = useState(true);
 
   const { height, width } = useWindowSize();
 
   useEffect(() => {
-    if (hasIncreasedLevel) {
+    if (!hasIncreasedLevel) return;
+
+    const startTimeout = window.setTimeout(() => {
       setShowConfetti(true);
-      setHideConfetti(false);
-      setTimeout(() => {
-        setShowConfetti(false);
-        setTimeout(() => {
-          setHideConfetti(true);
-        }, 10000);
-      }, 3000);
-    }
+    }, 0);
+
+    const stopTimeout = window.setTimeout(() => {
+      setShowConfetti(false);
+    }, 3000);
+
+    return () => {
+      window.clearTimeout(startTimeout);
+      window.clearTimeout(stopTimeout);
+    };
   }, [hasIncreasedLevel]);
 
-  if (hideConfetti) {
+  if (!showConfetti) {
     return null;
   }
 

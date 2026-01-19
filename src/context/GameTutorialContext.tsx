@@ -13,32 +13,37 @@ import { useGameContext } from "./GameContext";
 import { useSidebar } from "@/components/ui/sidebar";
 import sleep from "@/lib/sleep";
 import gameConfig from "@/config/gameConfig";
-import gameTutorialConfig, { StepType } from "@/config/gameTutorialConfig";
+import type { StepType } from "@/config/gameTutorialConfig";
+import gameTutorialConfig from "@/config/gameTutorialConfig";
 import updateProfile from "@/actions/updateProfile";
 import redirectToError from "@/actions/redirectToError";
 import { usePostHog } from "posthog-js/react";
 
-interface GameTutorialContextValue {
+type GameTutorialContextValue = {
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   isVisible: boolean;
   isLoading: boolean;
-  handleFinishTutorial: () => Promise<void>;
+  handleFinishTutorial: () => void;
   steps: readonly StepType[];
-}
+};
+
+const noop = () => {
+  return;
+};
 
 export const GameTutorialContext = createContext<GameTutorialContextValue>({
   step: 0,
-  setStep: () => {},
+  setStep: noop,
   isVisible: false,
   isLoading: false,
-  handleFinishTutorial: async () => {},
+  handleFinishTutorial: noop,
   steps: [],
 });
 
-interface GameTutorialContextProviderProps {
+type GameTutorialContextProviderProps = {
   children: React.ReactNode;
-}
+};
 
 export default function GameTutorialContextProvider({
   children,
@@ -56,10 +61,16 @@ export default function GameTutorialContextProvider({
     setIsTutorial,
     setShowTutorial,
   } = useGameContext();
-  const { tutorialSteps, getNewLevelSteps, stepsInfo } = gameTutorialConfig;
+  const { tutorialSteps, stepsInfo } = gameTutorialConfig;
+
+  const getSteps = useCallback(
+    () =>
+      isTutorial ? tutorialSteps : gameTutorialConfig.getNewLevelSteps(level),
+    [isTutorial, level, tutorialSteps],
+  );
 
   const [step, setStep] = useState(level === 1 ? 0 : stepsInfo.level1BeatStep);
-  const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
+  const isPlayingAnimationRef = useRef(false);
   const [isLoadingGame, setIsLoadingGame] = useState(false);
 
   const stepRef = useRef(level === 1 ? 0 : stepsInfo.level1BeatStep);
@@ -68,18 +79,21 @@ export default function GameTutorialContextProvider({
 
   const { setOpen } = useSidebar();
 
-  const handleFinishTutorial = useCallback(async () => {
-    startTransition(async () => {
-      const { error } = await updateProfile({ hasFinishedTutorial: true });
+  const handleFinishTutorial = useCallback(() => {
+    startTransition(() => {
+      void (async () => {
+        const { error } = await updateProfile({ hasFinishedTutorial: true });
 
-      if (error) {
-        redirectToError(error);
-      } else {
+        if (error) {
+          void redirectToError(error);
+          return;
+        }
+
         setIsTutorial(false);
         setShowTutorial(true);
         setStep(0);
         setOpen(true);
-      }
+      })();
     });
   }, [setIsTutorial, setOpen, setShowTutorial]);
 
@@ -97,7 +111,7 @@ export default function GameTutorialContextProvider({
         setSelectedSquare(null);
         await sleep(parameters.hiddenSquareDuration);
       }
-      setIsPlayingAnimation(false);
+      isPlayingAnimationRef.current = false;
     };
 
     const buttonStepAnimation = async () => {
@@ -107,7 +121,7 @@ export default function GameTutorialContextProvider({
         setIsButtonPressed(false);
         await sleep(2000);
       }
-      setIsPlayingAnimation(false);
+      isPlayingAnimationRef.current = false;
     };
     const level1ExplanationAnimation = async () => {
       while (stepRef.current === stepsInfo.level1ExplanationStep) {
@@ -117,7 +131,7 @@ export default function GameTutorialContextProvider({
         await sleep(parameters.hiddenSquareDuration);
       }
 
-      setIsPlayingAnimation(false);
+      isPlayingAnimationRef.current = false;
     };
 
     const startTutorialGame = async () => {
@@ -144,40 +158,40 @@ export default function GameTutorialContextProvider({
         await sleep(parameters.hiddenSquareDuration);
         square = square === 5 ? 6 : 5;
       }
-      setIsPlayingAnimation(false);
+      isPlayingAnimationRef.current = false;
     };
 
-    const handleLastStep = async () => {
-      posthog.capture("tutorial_complete", {
+    const handleLastStep = () => {
+      void posthog.capture("tutorial_complete", {
         has_skipped: false,
       });
-      await handleFinishTutorial();
+      handleFinishTutorial();
     };
 
     if (stepRef.current === stepsInfo.boardStep) {
-      if (!isPlayingAnimation) {
-        setIsPlayingAnimation(true);
-        boardStepAnimation();
+      if (!isPlayingAnimationRef.current) {
+        isPlayingAnimationRef.current = true;
+        void boardStepAnimation();
       }
     } else if (stepRef.current === stepsInfo.buttonStep) {
-      if (!isPlayingAnimation) {
-        setIsPlayingAnimation(true);
-        buttonStepAnimation();
+      if (!isPlayingAnimationRef.current) {
+        isPlayingAnimationRef.current = true;
+        void buttonStepAnimation();
       }
     } else if (stepRef.current === stepsInfo.level1ExplanationStep) {
-      if (!isPlayingAnimation) {
-        setIsPlayingAnimation(true);
-        level1ExplanationAnimation();
+      if (!isPlayingAnimationRef.current) {
+        isPlayingAnimationRef.current = true;
+        void level1ExplanationAnimation();
       }
     } else if (stepRef.current === stepsInfo.level1PlayStep) {
       if (!isPlaying) {
-        handleStartGameDelay();
-        startTutorialGame();
+        void handleStartGameDelay();
+        void startTutorialGame();
       }
     } else if (stepRef.current === stepsInfo.level2ExplanationStep) {
-      if (!isPlayingAnimation) {
-        setIsPlayingAnimation(true);
-        level2ExplanationAnimation();
+      if (!isPlayingAnimationRef.current) {
+        isPlayingAnimationRef.current = true;
+        void level2ExplanationAnimation();
       }
     } else if (stepRef.current === stepsInfo.lastStep) {
       handleLastStep();
@@ -187,7 +201,6 @@ export default function GameTutorialContextProvider({
     step,
     startPlaying,
     isPlaying,
-    isPlayingAnimation,
     setOpen,
     setSelectedSquare,
     setIsButtonPressed,
@@ -214,7 +227,7 @@ export default function GameTutorialContextProvider({
         isVisible,
         isLoading: isPending,
         handleFinishTutorial,
-        steps: isTutorial ? tutorialSteps : getNewLevelSteps(level),
+        steps: getSteps(),
       }}
     >
       {children}

@@ -12,7 +12,7 @@ export default async function syncStripeData(
 ): Promise<{ error?: string }> {
   const { freePlan, error } = getFreePlan();
   if (error || !freePlan) {
-    return { error };
+    return error ? { error } : {};
   }
 
   const subscriptions = await stripe.subscriptions.list({
@@ -50,15 +50,25 @@ export default async function syncStripeData(
   }
 
   const subscription = subscriptions.data[0];
+  if (!subscription) {
+    return { error: "Subscription not found" };
+  }
+
+  const subscriptionItem = subscription.items.data[0];
+  if (!subscriptionItem) {
+    return { error: "Subscription item not found" };
+  }
 
   const stripeTablePromise = db
     .update(stripeTable)
     .set({
       subscriptionId: subscription.id,
       status: subscription.status,
-      priceId: subscription.items.data[0].price.id,
-      currentPeriodStart: new Date(subscription.current_period_start * 1000),
-      currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      priceId: subscriptionItem.price.id,
+      currentPeriodStart: new Date(
+        subscriptionItem.current_period_start * 1000,
+      ),
+      currentPeriodEnd: new Date(subscriptionItem.current_period_end * 1000),
       cancelAtPeriodEnd: subscription.cancel_at_period_end,
       paymentMethodBrand:
         typeof subscription.default_payment_method !== "string"
@@ -73,7 +83,7 @@ export default async function syncStripeData(
 
   let subscriptionType =
     stripeConfig.plans.find(
-      (plan) => plan.priceId === subscription.items.data[0].price.id,
+      (plan) => plan.priceId === subscriptionItem.price.id,
     )?.name ?? freePlan.name;
   if (subscription.status !== "active" && subscription.status !== "trialing") {
     subscriptionType = freePlan.name;
@@ -83,8 +93,8 @@ export default async function syncStripeData(
     .select()
     .from(customersTable)
     .where(eq(customersTable.customerId, customerId))
-    .then((rows) => (rows.length === 1 ? rows[0] : null));
-  if (customer === null) {
+    .then((rows) => rows[0]);
+  if (!customer) {
     const error = new Error("Customer not found");
     console.error(error);
     return { error: error.message };

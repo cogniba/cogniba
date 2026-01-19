@@ -23,7 +23,8 @@ import {
 import { FaGoogle } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { SignUpSchema, SignUpSchemaType } from "@/zod/schemas/SignUpSchema";
+import type { SignUpSchemaType } from "@/zod/schemas/SignUpSchema";
+import { SignUpSchema } from "@/zod/schemas/SignUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { Separator } from "@/components/ui/separator";
@@ -31,6 +32,7 @@ import LoaderWrapper from "@/components/LoaderWrapper";
 import signUp from "@/actions/auth/signUp";
 import createClient from "@/lib/supabase/client";
 import { usePostHog } from "posthog-js/react";
+import getEnv from "@/lib/env";
 
 export default function SignUpPage() {
   const [isPending, startTransition] = useTransition();
@@ -65,7 +67,7 @@ export default function SignUpPage() {
     });
   }
 
-  const handleSignInWithGoogle = async () => {
+  const handleSignInWithGoogle = () => {
     setError(null);
     setIsSigningInWithGoogle(true);
 
@@ -75,7 +77,7 @@ export default function SignUpPage() {
       posthog.capture("user_signup_initiated", { provider: "google" });
 
       const redirectUrl = new URL(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/supabase/callback`,
+        `${getEnv("NEXT_PUBLIC_SITE_URL")}/api/auth/supabase/callback`,
       );
       redirectUrl.searchParams.set("next", "/app");
       redirectUrl.searchParams.set("type", "signup");
@@ -100,10 +102,12 @@ export default function SignUpPage() {
   return (
     <Form {...form}>
       <form
-        className="flex h-full w-full items-center justify-center bg-card py-5 xs:bg-background"
-        onSubmit={form.handleSubmit(onSubmit)}
+        className="bg-card xs:bg-background flex h-full w-full items-center justify-center py-5"
+        onSubmit={(event) => {
+          void form.handleSubmit(onSubmit)(event);
+        }}
       >
-        <Card className="w-full max-w-sm border-transparent px-2 shadow-none xs:border-border xs:shadow-sm">
+        <Card className="xs:border-border xs:shadow-sm w-full max-w-sm border-transparent px-2 shadow-none">
           <CardHeader className="pb-9">
             <CardTitle className="text-2xl">Sign Up</CardTitle>
             <CardDescription>Create a new account</CardDescription>

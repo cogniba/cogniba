@@ -1,7 +1,8 @@
 "use server";
 
 import { db } from "@/database";
-import { profilesTable, ProfileType } from "@/database/schemas/profilesTable";
+import type { ProfileType } from "@/database/schemas/profilesTable";
+import { profilesTable } from "@/database/schemas/profilesTable";
 import createClient from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 

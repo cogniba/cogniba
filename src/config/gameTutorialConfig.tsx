@@ -1,4 +1,4 @@
-import { PlacementType } from "@/components/highlight-dialog/HighlightDialog";
+import type { PlacementType } from "@/components/highlight-dialog/HighlightDialog";
 import { Strong } from "@/components/ui/Strong";
 
 export type StepType = {

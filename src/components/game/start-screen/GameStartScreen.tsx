@@ -36,7 +36,7 @@ export default function GameStartScreen() {
     <>
       <div
         data-state={isStartScreenVisible ? "open" : "closed"}
-        className="pointer-events-auto absolute inset-0 z-40 bg-black/80 backdrop-blur-sm data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+        className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 pointer-events-auto absolute inset-0 z-40 bg-black/80 backdrop-blur-sm data-[state=closed]:invisible data-[state=closed]:duration-500 data-[state=open]:duration-500"
       ></div>
       <Dialog defaultOpen open={isStartScreenVisible} modal={false}>
         <DialogContent
@@ -51,24 +51,24 @@ export default function GameStartScreen() {
 
             <UpgradeDialog
               title="Daily games limit reached"
-              description={`You've played ${dailyGamesLimit} games today - you're doing great! Come back tomorrow to play more or upgrade to Pro to play unlimited games.`}
+              description={`You've played ${String(dailyGamesLimit)} games today - you're doing great! Come back tomorrow to play more or upgrade to Pro to play unlimited games.`}
               active={hasReachedDailyLimit}
               asChild
             >
               <Button
                 className={cn(
-                  "pointer-events-auto relative mt-10 w-full cursor-pointer py-4 text-3xl font-bold uppercase tracking-wide transition duration-200 hover:shadow-lg active:shadow-sm xs:mt-14 xs:text-4xl xl:py-5 [&_svg]:size-7",
+                  "xs:mt-14 xs:text-4xl pointer-events-auto relative mt-10 w-full cursor-pointer py-4 text-3xl font-bold tracking-wide uppercase transition duration-200 hover:shadow-lg active:shadow-sm xl:py-5 [&_svg]:size-7",
                   hasReachedDailyLimit && "opacity-50",
                 )}
                 size="custom"
                 onClick={() => {
                   if (hasReachedDailyLimit) {
-                    posthog.capture("upgrade_dialog_open", {
+                    void posthog.capture("upgrade_dialog_open", {
                       source: "game_start_screen",
                     });
                     return;
                   }
-                  startPlaying();
+                  void startPlaying();
                 }}
                 tabIndex={-1}
               >

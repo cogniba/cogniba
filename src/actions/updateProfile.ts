@@ -6,9 +6,9 @@ import createClient from "@/lib/supabase/server";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-interface UpdateProfileParams {
+type UpdateProfileParams = {
   hasFinishedTutorial: boolean;
-}
+};
 
 export default async function updateProfile({
   hasFinishedTutorial,

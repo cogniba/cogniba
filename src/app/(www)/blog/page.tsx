@@ -1,6 +1,7 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import BlogCard from "@/components/blog/BlogCard";
 import getAllPosts from "@/lib/blog/getAllPosts";
+import getEnv from "@/lib/env";
 
 export const metadata: Metadata = {
   title: "Blog | Cogniba",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     title: "Blog | Cogniba",
     description:
       "Latest articles about cognitive training and brain development",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
+    url: `${getEnv("NEXT_PUBLIC_SITE_URL")}/blog`,
     siteName: "Cogniba",
     type: "website",
   },

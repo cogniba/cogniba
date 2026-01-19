@@ -1,14 +1,15 @@
-import { GamesData } from "@/app/api/analytics/get-data/route";
+import type { GamesData } from "@/app/api/analytics/get-data/route";
 import { db } from "@/database";
 import { gamesTable } from "@/database/schemas/gamesTable";
 import calculateAccuracy from "@/lib/game/game-logic/calculateAccuracy";
 import createClient from "@/lib/supabase/server";
-import { avg, count, eq, sql, SQL, sum } from "drizzle-orm";
+import type { SQL } from "drizzle-orm";
+import { avg, count, eq, sql, sum } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-interface GetDataParams {
+type GetDataParams = {
   frequency: "daily" | "weekly" | "monthly";
-}
+};
 
 export default async function getDataRequest({
   frequency,
@@ -26,15 +27,17 @@ export default async function getDataRequest({
 
     const userId = data.user.id;
 
-    let dateGroupingFunction: SQL<unknown>;
-    if (frequency === "daily") {
-      dateGroupingFunction = sql`DATE(${gamesTable.createdAt})`;
-    } else if (frequency === "weekly") {
-      dateGroupingFunction = sql`EXTRACT(WEEK FROM ${gamesTable.createdAt})`;
-    } else if (frequency === "monthly") {
-      dateGroupingFunction = sql`EXTRACT(MONTH FROM ${gamesTable.createdAt})`;
-    } else {
-      throw new Error("Invalid frequency value");
+    let dateGroupingFunction: SQL;
+    switch (frequency) {
+      case "daily":
+        dateGroupingFunction = sql`DATE(${gamesTable.createdAt})`;
+        break;
+      case "weekly":
+        dateGroupingFunction = sql`EXTRACT(WEEK FROM ${gamesTable.createdAt})`;
+        break;
+      case "monthly":
+        dateGroupingFunction = sql`EXTRACT(MONTH FROM ${gamesTable.createdAt})`;
+        break;
     }
 
     const rawData = await db

@@ -1,10 +1,10 @@
 import { cn } from "@/lib/cn";
 
-interface SimpleMessageScreenProps {
+type SimpleMessageScreenProps = {
   mainMessage: React.ReactNode;
   secondaryMessage?: React.ReactNode;
   variant?: "normal" | "error";
-}
+};
 
 export default function SimpleMessageScreen({
   mainMessage,
@@ -23,7 +23,7 @@ export default function SimpleMessageScreen({
         {secondaryMessage && (
           <div
             className={cn(
-              "text-xl text-muted-foreground sm:text-2xl",
+              "text-muted-foreground text-xl sm:text-2xl",
               variant === "error" && "text-destructive-foreground/85",
             )}
           >

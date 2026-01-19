@@ -1,15 +1,16 @@
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import BlogPost from "@/components/blog/BlogPost";
 import getAllPosts from "@/lib/blog/getAllPosts";
 import getPostBySlug from "@/lib/blog/getPostBySlug";
 import mdxToHtml from "@/lib/markdown/mdxToHtml";
+import getEnv from "@/lib/env";
 
-interface Props {
+type Props = {
   params: Promise<{ slug: string }>;
-}
+};
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const posts = getAllPosts();
 
   return posts.map((post) => ({
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.frontmatter.title,
       description: post.frontmatter.description,
       type: "article",
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug}`,
+      url: `${getEnv("NEXT_PUBLIC_SITE_URL")}/blog/${post.slug}`,
       images: [
         {
           url: post.frontmatter.image,

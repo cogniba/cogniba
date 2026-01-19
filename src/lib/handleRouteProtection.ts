@@ -1,12 +1,11 @@
 import { NextURL } from "next/dist/server/web/next-url";
-import routeProtectionConfig, {
-  RouteMatch,
-} from "@/config/routeProtectionConfig";
+import type { RouteMatch } from "@/config/routeProtectionConfig";
+import routeProtectionConfig from "@/config/routeProtectionConfig";
 
-interface HandleAuthorizationParams {
+type HandleAuthorizationParams = {
   isSignedIn: boolean;
   nextUrl: NextURL;
-}
+};
 
 export default function handleRouteProtection({
   isSignedIn,

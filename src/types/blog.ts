@@ -1,4 +1,4 @@
-export interface PostType {
+export type PostType = {
   slug: string;
   frontmatter: {
     title: string;
@@ -10,4 +10,4 @@ export interface PostType {
     tags: string[];
   };
   content: string;
-}
+};

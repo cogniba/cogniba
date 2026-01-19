@@ -1,5 +1,5 @@
 export default function exitFullScreen() {
   if (document.fullscreenElement) {
-    document.exitFullscreen();
+    void document.exitFullscreen();
   }
 }
