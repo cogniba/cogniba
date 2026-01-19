@@ -1,9 +1,9 @@
 import Header from "@/components/www/header/Header";
 
-type AuthLayoutProps = {
+type WwwLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function WwwLayout({ children }: WwwLayoutProps) {
   return <Header>{children}</Header>;
 }
