@@ -10,7 +10,14 @@ type BlogPostImageProps = {
 export default function BlogPostImage({ src, alt }: BlogPostImageProps) {
   return (
     <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-md">
-      <Image src={src} alt={alt} fill className="object-cover" priority />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+        priority
+        sizes="(min-width: 1024px) 768px, 100vw"
+      />
     </div>
   );
 }

@@ -4,14 +4,14 @@ import BlogPost from "@/components/blog/BlogPost";
 import getAllPosts from "@/lib/blog/getAllPosts";
 import getPostBySlug from "@/lib/blog/getPostBySlug";
 import mdxToHtml from "@/lib/markdown/mdxToHtml";
-import getEnv from "@/lib/env";
+import { getCanonicalUrl } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = getAllPosts().filter((post) => !post.frontmatter.draft);
 
   return posts.map((post) => ({
     slug: post.slug,
@@ -25,22 +25,46 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return {};
 
+  const canonicalUrl = getCanonicalUrl();
+  const absoluteUrl = new URL(`/blog/${post.slug}`, canonicalUrl).toString();
+  const ogImage = post.frontmatter.ogImage ?? post.frontmatter.image;
+  const isIndexable = !post.frontmatter.noindex && !post.frontmatter.draft;
+
   return {
-    title: `${post.frontmatter.title} | Cogniba Blog`,
+    title: post.frontmatter.title,
     description: post.frontmatter.description,
+    keywords: post.frontmatter.tags,
+    authors: [{ name: post.frontmatter.author }],
+    alternates: {
+      canonical: post.frontmatter.canonicalUrl ?? absoluteUrl,
+    },
+    robots: {
+      index: isIndexable,
+      follow: isIndexable,
+    },
     openGraph: {
       title: post.frontmatter.title,
       description: post.frontmatter.description,
       type: "article",
-      url: `${getEnv("NEXT_PUBLIC_SITE_URL")}/blog/${post.slug}`,
+      url: absoluteUrl,
+      publishedTime: post.frontmatter.date,
+      modifiedTime: post.frontmatter.updatedAt ?? post.frontmatter.date,
+      authors: [post.frontmatter.author],
+      tags: post.frontmatter.tags,
       images: [
         {
-          url: post.frontmatter.image,
+          url: ogImage,
           width: 1200,
           height: 630,
           alt: post.frontmatter.title,
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.frontmatter.title,
+      description: post.frontmatter.description,
+      images: [ogImage],
     },
   };
 }
@@ -53,6 +77,49 @@ export default async function PostPage({ params }: Props) {
   if (!post) notFound();
 
   const content = await mdxToHtml(post.content);
+  const canonicalUrl = getCanonicalUrl();
+  const absoluteUrl = new URL(`/blog/${post.slug}`, canonicalUrl).toString();
+  const ogImage = post.frontmatter.ogImage ?? post.frontmatter.image;
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.frontmatter.title,
+    description: post.frontmatter.description,
+    image: [ogImage],
+    datePublished: post.frontmatter.date,
+    dateModified: post.frontmatter.updatedAt ?? post.frontmatter.date,
+    author: {
+      "@type": "Person",
+      name: post.frontmatter.author,
+      jobTitle: post.frontmatter.role || undefined,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Cogniba",
+      logo: {
+        "@type": "ImageObject",
+        url: `${canonicalUrl.toString()}/logo.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": post.frontmatter.canonicalUrl ?? absoluteUrl,
+    },
+    keywords: post.frontmatter.tags.join(", "),
+    wordCount: post.frontmatter.wordCount,
+  };
 
-  return <BlogPost post={post} content={content} />;
+  return (
+    <>
+      <BlogPost post={post} content={content} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema),
+        }}
+      />
+    </>
+  );
 }
+
+export const revalidate = 86400;

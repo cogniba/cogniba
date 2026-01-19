@@ -18,6 +18,7 @@ export function ImageComponent(props: ImageProps) {
         width={1200}
         height={630}
         className="object-cover"
+        sizes="(min-width: 1024px) 768px, 100vw"
       />
     </div>
   );
