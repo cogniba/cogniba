@@ -1,27 +1,68 @@
 import type { Metadata } from "next";
 import BlogCard from "@/components/blog/BlogCard";
 import getAllPosts from "@/lib/blog/getAllPosts";
-import getEnv from "@/lib/env";
+import { getCanonicalUrl } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Blog | Cogniba",
-  description: "Latest articles about cognitive training and brain development",
-  openGraph: {
-    title: "Blog | Cogniba",
+export function generateMetadata(): Metadata {
+  const canonicalUrl = getCanonicalUrl();
+
+  return {
+    title: "Cogniba Blog",
     description:
-      "Latest articles about cognitive training and brain development",
-    url: `${getEnv("NEXT_PUBLIC_SITE_URL")}/blog`,
-    siteName: "Cogniba",
-    type: "website",
-  },
-};
+      "Evidence-based articles on working memory, n-back training, and brain fitness to help you build cognitive endurance and focus.",
+    keywords: [
+      "working memory",
+      "n-back",
+      "brain training",
+      "cognitive fitness",
+      "neuroplasticity",
+    ],
+    alternates: {
+      canonical: new URL("/blog", canonicalUrl).toString(),
+    },
+    openGraph: {
+      title: "Cogniba Blog",
+      description:
+        "Evidence-based articles on working memory, n-back training, and brain fitness to help you build cognitive endurance and focus.",
+      url: new URL("/blog", canonicalUrl).toString(),
+      siteName: "Cogniba",
+      type: "website",
+      images: [
+        {
+          url: "/images/blog/cogniba-launch.png",
+          width: 1200,
+          height: 630,
+          alt: "Cogniba Blog",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Cogniba Blog",
+      description:
+        "Evidence-based articles on working memory, n-back training, and brain fitness to help you build cognitive endurance and focus.",
+      images: ["/images/blog/cogniba-launch.png"],
+    },
+  };
+}
 
 export default function BlogPage() {
-  const posts = getAllPosts();
+  const posts = getAllPosts().filter(
+    (post) => !post.frontmatter.noindex && !post.frontmatter.draft,
+  );
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-10">
-      <h1 className="mb-8 text-3xl font-bold">Blog</h1>
+      <div className="mb-10 space-y-3">
+        <p className="text-muted-foreground text-sm tracking-[0.2em] uppercase">
+          Cognitive Training Insights
+        </p>
+        <h1 className="text-3xl font-bold">Cogniba Blog</h1>
+        <p className="text-muted-foreground text-lg">
+          Evidence-based guides on working memory, n-back training, and brain
+          fitness so you can build a sharper, more focused mind.
+        </p>
+      </div>
       <div className="grid gap-8 md:grid-cols-2">
         {posts.map((post) => (
           <BlogCard key={post.slug} post={post} />
@@ -30,3 +71,5 @@ export default function BlogPage() {
     </div>
   );
 }
+
+export const revalidate = 86400;
