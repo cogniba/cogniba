@@ -5,9 +5,8 @@ import { createContext, useContext, useState } from "react";
 import { subDays } from "date-fns";
 import type { DateRange } from "react-day-picker";
 import cleanChartData from "@/lib/cleanChartData";
-import type { GamesData } from "@/app/api/analytics/get-data/route";
 import type { ChartConfig } from "@/components/ui/chart";
-import type { ChartsConfig } from "@/types/analytics";
+import type { ChartsConfig, GamesData } from "@/types/analytics";
 
 const charts = {
   level: {
@@ -79,14 +78,17 @@ const charts = {
       },
     } satisfies ChartConfig,
   },
-};
+} satisfies ChartsConfig;
 
-export type ChartMetrics =
-  | "level"
-  | "accuracy"
-  | "stats"
-  | "gamesPlayed"
-  | "timePlayed";
+export const chartMetrics = [
+  "level",
+  "accuracy",
+  "stats",
+  "gamesPlayed",
+  "timePlayed",
+] as const;
+
+export type ChartMetrics = (typeof chartMetrics)[number];
 
 type AnalyticsContextValue = {
   date: DateRange | undefined;

@@ -55,10 +55,13 @@ export default function SignInPage() {
     posthog.capture("user_signin_initiated", { provider: "email" });
 
     startTransition(async () => {
-      const { error } = await signIn(formData);
-      if (error) {
-        setError(error);
-        posthog.capture("user_signin_error", { error, provider: "email" });
+      const result = await signIn(formData);
+      if (result.error) {
+        setError(result.error);
+        posthog.capture("user_signin_error", {
+          error: result.error,
+          provider: "email",
+        });
       }
     });
   }

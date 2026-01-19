@@ -46,9 +46,9 @@ export default function FeedbackPage() {
     setSuccess(false);
 
     startTransition(async () => {
-      const { error } = await sendFeedback(data);
-      if (error) {
-        setError(error);
+      const result = await sendFeedback(data);
+      if (result.error) {
+        setError(result.error);
       } else {
         setSuccess(true);
         form.reset();

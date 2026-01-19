@@ -2,23 +2,22 @@
 
 import { db } from "@/database";
 import { gamesTable } from "@/database/schemas/gamesTable";
-import createClient from "@/lib/supabase/server";
+import getUserOrError from "@/lib/auth/getUserOrError";
+import { err, ok, type Result } from "@/lib/result";
 import { and, eq, gte, sql } from "drizzle-orm";
 
-export default async function getGamesPlayedToday(): Promise<{
-  gamesPlayedToday?: number;
-  error?: string;
-}> {
+export default async function getGamesPlayedToday(): Promise<Result<number>> {
+  const userResult = await getUserOrError();
+  if (userResult.error) {
+    return err(userResult.error);
+  }
+
+  const { data: user } = userResult;
+  if (!user) {
+    return err("Failed to get user");
+  }
+
   try {
-    const supabase = await createClient();
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      return { error: "Failed to get user" };
-    }
-
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -30,13 +29,9 @@ export default async function getGamesPlayedToday(): Promise<{
       );
 
     const [row] = result;
-    if (!row) {
-      return { gamesPlayedToday: 0 };
-    }
-
-    return { gamesPlayedToday: row.count };
+    return ok(row?.count ?? 0);
   } catch (error) {
     console.error(error);
-    return { error: "An unexpected error occurred" };
+    return err("An unexpected error occurred");
   }
 }

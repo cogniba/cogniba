@@ -2,7 +2,7 @@
 
 import SettingsItem from "@/components/settings/SettingsItem";
 import { useToast } from "@/hooks/use-toast";
-
+import updateSettings from "@/actions/settings/updateSettings";
 import { useState } from "react";
 
 type ShowFeedbackSettingProps = {
@@ -18,15 +18,14 @@ export default function ShowFeedbackSetting({
   const { toast } = useToast();
 
   const updateShowFeedback = async (value: string) => {
-    setShowFeedback(value === "enabled");
+    const nextValue = value === "enabled";
+    setShowFeedback(nextValue);
 
-    const response = await fetch("/api/settings/update-settings", {
-      method: "POST",
-      body: JSON.stringify({ showFeedback: value === "enabled" }),
-    });
+    const result = await updateSettings({ showFeedback: nextValue });
 
-    if (!response.ok) {
-      toast({ title: "Unexpected error occurred", variant: "destructive" });
+    if (result.error) {
+      toast({ title: result.error, variant: "destructive" });
+      setShowFeedback((prev) => !prev);
     }
   };
 

@@ -19,11 +19,11 @@ export default async function fetchGameData(): Promise<{
   const gamesPlayedTodayPromise = getGamesPlayedToday();
 
   const [
-    { level, error: levelError },
-    { maxLevel, error: maxLevelError },
-    { settings, error: settingsError },
-    { profile, error: profileError },
-    { gamesPlayedToday, error: gamesPlayedTodayError },
+    levelResult,
+    maxLevelResult,
+    settingsResult,
+    profileResult,
+    gamesResult,
   ] = await Promise.all([
     levelPromise,
     maxLevelPromise,
@@ -33,25 +33,25 @@ export default async function fetchGameData(): Promise<{
   ]);
 
   if (
-    levelError ||
-    maxLevelError ||
-    settingsError ||
-    profileError ||
-    gamesPlayedTodayError ||
-    !level ||
-    !maxLevel ||
-    !settings ||
-    !profile ||
-    gamesPlayedToday === undefined
+    levelResult.error ||
+    maxLevelResult.error ||
+    settingsResult.error ||
+    profileResult.error ||
+    gamesResult.error ||
+    levelResult.data === undefined ||
+    maxLevelResult.data === undefined ||
+    !settingsResult.data ||
+    !profileResult.data ||
+    gamesResult.data === undefined
   ) {
     return { error: "Error getting game data" };
   }
 
   return {
-    level,
-    maxLevel,
-    showFeedback: settings.showFeedback,
-    hasFinishedTutorial: profile.hasFinishedTutorial,
-    gamesPlayedToday,
+    level: levelResult.data,
+    maxLevel: maxLevelResult.data,
+    showFeedback: settingsResult.data.showFeedback,
+    hasFinishedTutorial: profileResult.data.hasFinishedTutorial,
+    gamesPlayedToday: gamesResult.data,
   };
 }

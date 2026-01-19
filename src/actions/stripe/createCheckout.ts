@@ -1,12 +1,9 @@
 "use server";
 
-import { db } from "@/database";
-import { customersTable } from "@/database/schemas/customersTable";
-import { profilesTable } from "@/database/schemas/profilesTable";
 import createNewCustomer from "@/lib/stripe/createNewCustomer";
 import stripe from "@/lib/stripe/stripe";
-import createClient from "@/lib/supabase/server";
-import { eq } from "drizzle-orm";
+import getUserOrError from "@/lib/auth/getUserOrError";
+import { getCustomerProfile } from "@/services/customerService";
 
 type CreateCheckoutSessionParams = {
   mode: "payment" | "subscription";
@@ -25,33 +22,23 @@ export default async function createCheckout({
   error?: string;
 }> {
   try {
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
+    const userResult = await getUserOrError();
+    if (userResult.error || !userResult.data) {
       const error = new Error("You must be signed in to create a checkout.");
       console.error(error);
       return { error: error.message };
     }
 
-    const query = await db
-      .select()
-      .from(profilesTable)
-      .where(eq(profilesTable.userId, user.id))
-      .fullJoin(customersTable, eq(profilesTable.userId, customersTable.userId))
-      .then((rows) => (rows.length === 1 ? rows[0] : null));
+    const user = userResult.data;
 
-    if (!query?.profiles) {
+    const profile = await getCustomerProfile(user.id);
+    if (!profile) {
       const error = new Error("Profile not found");
       console.error(error);
       return { error: error.message };
     }
 
-    const { profiles: profile, customers: customer } = query;
-
-    let customerId = customer?.customerId;
+    let customerId = profile.customerId;
 
     if (!customerId) {
       const { customerId: newCustomerId } = await createNewCustomer({

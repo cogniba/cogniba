@@ -3,6 +3,7 @@
 import createClient from "@/lib/supabase/server";
 import type { SignUpSchemaType } from "@/zod/schemas/SignUpSchema";
 import posthogClient from "@/lib/posthogClient";
+import { err, ok, type Result } from "@/lib/result";
 
 function getErrorMessage(code: string): string {
   if (code === "user_already_exists") {
@@ -32,7 +33,7 @@ function getErrorMessage(code: string): string {
 
 export default async function signUp(
   data: SignUpSchemaType,
-): Promise<{ error?: string }> {
+): Promise<Result<{ success: true }>> {
   try {
     const supabase = await createClient();
 
@@ -48,12 +49,14 @@ export default async function signUp(
 
     if (error) {
       if (error.code) {
-        return { error: getErrorMessage(error.code) };
-      } else {
-        const error = new Error("An unexpected error occurred during sign up.");
-        console.error(error);
-        return { error: error.message };
+        return err(getErrorMessage(error.code));
       }
+
+      const signUpError = new Error(
+        "An unexpected error occurred during sign up.",
+      );
+      console.error(signUpError);
+      return err(signUpError.message);
     }
 
     if (authData.user) {
@@ -68,9 +71,9 @@ export default async function signUp(
       await posthog.shutdown();
     }
 
-    return {};
+    return ok({ success: true });
   } catch (error) {
     console.error(error);
-    return { error: "An unexpected error occurred" };
+    return err("An unexpected error occurred");
   }
 }

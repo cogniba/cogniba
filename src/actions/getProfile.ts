@@ -3,39 +3,34 @@
 import { db } from "@/database";
 import type { ProfileType } from "@/database/schemas/profilesTable";
 import { profilesTable } from "@/database/schemas/profilesTable";
-import createClient from "@/lib/supabase/server";
+import getUserOrError from "@/lib/auth/getUserOrError";
+import { err, ok, type Result } from "@/lib/result";
 import { eq } from "drizzle-orm";
 
-export default async function getProfile(): Promise<{
-  profile?: ProfileType;
-  error?: string;
-}> {
+export default async function getProfile(): Promise<Result<ProfileType>> {
+  const userResult = await getUserOrError();
+  if (userResult.error) {
+    return err(userResult.error);
+  }
+
+  const { data: user } = userResult;
+  if (!user) {
+    return err("Failed to get user");
+  }
+
   try {
-    const supabase = await createClient();
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      const error = new Error("User not found");
-      console.error(error);
-      return { error: error.message };
-    }
-
     const profile = await db
       .select()
       .from(profilesTable)
       .where(eq(profilesTable.userId, user.id))
       .then((res) => (res.length === 1 ? res[0] : null));
     if (!profile) {
-      const error = new Error("Profile not found");
-      console.error(error);
-      return { error: error.message };
+      return err("Profile not found");
     }
 
-    return { profile };
+    return ok(profile);
   } catch (error) {
     console.error(error);
-    return { error: "An unexpected error occurred" };
+    return err("An unexpected error occurred");
   }
 }

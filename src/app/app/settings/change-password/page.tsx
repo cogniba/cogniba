@@ -47,12 +47,12 @@ export default function ChangePasswordPage() {
 
     startTransition(() => {
       void (async () => {
-        const { error } = await changePassword(formData);
+        const result = await changePassword(formData);
 
-        if (!error) {
+        if (!result.error) {
           setHasChangedPassword(true);
         } else {
-          setError(error);
+          setError(result.error);
         }
       })();
     });

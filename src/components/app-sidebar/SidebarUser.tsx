@@ -24,10 +24,10 @@ import {
   useSidebar,
 } from "../ui/sidebar";
 import { useTransition } from "react";
-import createClient from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import createCustomerPortal from "@/actions/stripe/createCustomerPortal";
+import signOut from "@/actions/auth/signOut";
 import { useAuthContext } from "@/context/AuthContext";
 import getFreePlan from "@/lib/stripe/getFreePlan";
 import redirectToError from "@/actions/redirectToError";
@@ -71,8 +71,7 @@ export default function SidebarUser() {
   const handleLogOut = () => {
     startLoggingOut(() => {
       void (async () => {
-        const supabase = createClient();
-        await supabase.auth.signOut();
+        await signOut();
         router.replace("/sign-in");
       })();
     });

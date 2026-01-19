@@ -82,10 +82,10 @@ export default function GameTutorialContextProvider({
   const handleFinishTutorial = useCallback(() => {
     startTransition(() => {
       void (async () => {
-        const { error } = await updateProfile({ hasFinishedTutorial: true });
+        const result = await updateProfile({ hasFinishedTutorial: true });
 
-        if (error) {
-          void redirectToError(error);
+        if (result.error) {
+          void redirectToError(result.error);
           return;
         }
 

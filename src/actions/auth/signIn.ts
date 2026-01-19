@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import type { SignInSchemaType } from "@/zod/schemas/SignInSchema";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import posthogClient from "@/lib/posthogClient";
+import { err, type Result } from "@/lib/result";
 
 function getErrorMessage(code: string): string {
   if (code === "invalid_credentials") {
@@ -43,7 +44,7 @@ function getErrorMessage(code: string): string {
 
 export default async function signIn(
   data: SignInSchemaType,
-): Promise<{ error?: string }> {
+): Promise<Result<{ success: true }>> {
   try {
     const supabase = await createClient();
 
@@ -52,12 +53,14 @@ export default async function signIn(
 
     if (error) {
       if (error.code) {
-        return { error: getErrorMessage(error.code) };
-      } else {
-        const error = new Error("An unexpected error occurred during sign in.");
-        console.error(error);
-        return { error: error.message };
+        return err(getErrorMessage(error.code));
       }
+
+      const signInError = new Error(
+        "An unexpected error occurred during sign in.",
+      );
+      console.error(signInError);
+      return err(signInError.message);
     }
 
     const posthog = posthogClient();
@@ -78,6 +81,6 @@ export default async function signIn(
     }
 
     console.error(error);
-    return { error: "An unexpected error occurred" };
+    return err("An unexpected error occurred");
   }
 }
