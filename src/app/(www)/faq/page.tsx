@@ -52,7 +52,7 @@ export default function FAQ() {
               </p>
               <p>
                 The reason? The &quot;active ingredient&quot; in cognitive
-                training is <Strong>Updating</Strong> - the ability to
+                training is <Strong>Updating</Strong>, which is the ability to
                 continuously refresh your mental workspace. Single N-Back
                 isolates this mechanism perfectly. Dual N-Back often introduces
                 &quot;task switching&quot; difficulty that can overwhelm the
@@ -106,8 +106,8 @@ export default function FAQ() {
                 </li>
                 <li>
                   <Strong>Interference Control:</Strong> You must ignore
-                  &quot;lures&quot; - items that match the position n-1 or n+1
-                  but not the target n. Resisting the urge to press the button
+                  &quot;lures&quot; (items that match the position n-1 or n+1
+                  but not the target n). Resisting the urge to press the button
                   strengthens your Prefrontal Cortex, the CEO of your brain.
                   This specific mechanism is why N-Back helps with focus and
                   impulse control.
@@ -129,7 +129,7 @@ export default function FAQ() {
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-base leading-relaxed">
               <p>
-                Neuroplasticity - the physical restructuring of the brain -
+                Neuroplasticity, the physical restructuring of the brain,
                 requires consistency and intensity, similar to building muscle
                 at the gym. Research suggests the &quot;sweet spot&quot; is{" "}
                 <Strong>3 to 5 sessions per week</Strong>, with each session
@@ -238,8 +238,8 @@ export default function FAQ() {
               <p>
                 Yes. ADHD is fundamentally a challenge of Executive Function.
                 Recent studies have shown that adaptive N-Back training can
-                significantly improve inhibitory control - the ability to stop
-                yourself from getting distracted.
+                significantly improve inhibitory control, which is the ability
+                to stop yourself from getting distracted.
               </p>
               <p>
                 For &quot;ADHD Paralysis&quot; (the inability to start tasks),
@@ -261,14 +261,14 @@ export default function FAQ() {
               <p>
                 Emerging research suggests a strong link between Working Memory
                 training and anxiety reduction. Anxiety often involves
-                &quot;rumination&quot; - the inability to disengage from a
-                negative thought.
+                &quot;rumination,&quot; defined as the inability to disengage
+                from a negative thought.
               </p>
               <p>
                 The Single N-Back task trains the <Strong>Disengagement</Strong>{" "}
                 mechanism. Every time the target changes, you must let go of the
-                old information. This neural pathway - the ability to &quot;let
-                go&quot; and &quot;update&quot; - transfers to emotional
+                old information. This neural pathway (the ability to &quot;let
+                go&quot; and &quot;update&quot;) transfers to emotional
                 regulation, helping you disengage from intrusive thoughts and
                 return to the present moment.
               </p>
