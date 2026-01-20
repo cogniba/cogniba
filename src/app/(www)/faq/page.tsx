@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function FAQ() {
   return (
     <div className="mx-auto w-full max-w-4xl px-6 py-10 md:py-20">
-      <h1 className="mb-8 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+      <h1 className="mb-8 text-4xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-5xl sm:leading-[1.15]">
         Frequently Asked Questions
       </h1>
       <p className="mb-12 text-lg text-muted-foreground">
