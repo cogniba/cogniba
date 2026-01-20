@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "contentlayer:build": "contentlayer build"
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
