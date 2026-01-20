@@ -39,27 +39,28 @@ export default function ResearchPage() {
             control attention has emerged as the defining currency of success.
             We inhabit an environment characterized by an unprecedented deluge
             of information, where the average individual is bombarded by
-            thousands of data points daily—from digital notifications and
-            algorithmic feeds to the complex demands of the modern workplace. In
-            this &quot;attention economy,&quot; the cognitive bottleneck is no
-            longer access to information, but the mental bandwidth required to
-            process, filter, and utilize it. This bottleneck is governed by a
-            specific neurological system: <Strong>Working Memory (WM)</Strong>.
+            thousands of data points daily, ranging from digital notifications
+            and algorithmic feeds to the complex demands of the modern
+            workplace. In this &quot;attention economy,&quot; the cognitive
+            bottleneck is no longer access to information, but the mental
+            bandwidth required to process, filter, and utilize it. This
+            bottleneck is governed by a specific neurological system:{" "}
+            <Strong>Working Memory (WM)</Strong>.
           </p>
           <p className="mb-4">
             For decades, the prevailing consensus in cognitive psychology was
-            that adult intelligence—specifically{" "}
-            <Strong>Fluid Intelligence (Gf)</Strong>, the ability to solve novel
-            problems and identify patterns independent of prior knowledge—was a
-            static trait, genetically determined and immutable after
-            adolescence. This deterministic view resigned individuals to their
-            &quot;cognitive lot&quot; in life. However, the last fifteen years
-            have witnessed a paradigm shift of seismic proportions. Triggered by
-            seminal research in 2008 and refined through thousands of subsequent
-            trials, neuroscience has established that the adult brain retains a
-            remarkable capacity for neuroplasticity—the ability to reorganize
-            itself structurally and functionally in response to targeted
-            training.
+            that adult intelligence, specifically{" "}
+            <Strong>Fluid Intelligence (Gf)</Strong> (the ability to solve novel
+            problems and identify patterns independent of prior knowledge), was
+            a static trait. It was viewed as genetically determined and
+            immutable after adolescence. This deterministic view resigned
+            individuals to their &quot;cognitive lot&quot; in life. However, the
+            last fifteen years have witnessed a paradigm shift of seismic
+            proportions. Triggered by seminal research in 2008 and refined
+            through thousands of subsequent trials, neuroscience has established
+            that the adult brain retains a remarkable capacity for
+            neuroplasticity. This is the ability to reorganize itself
+            structurally and functionally in response to targeted training.
           </p>
           <p className="mb-4">
             At the center of this revolution lies a specific, deceptively simple
@@ -80,8 +81,8 @@ export default function ResearchPage() {
             This report provides an exhaustive analysis of the scientific
             literature surrounding n-back training. Synthesizing data from over
             a decade of neuroimaging studies, randomized controlled trials
-            (RCTs), and meta-analyses, we argue that the Single N-Back
-            paradigm—as implemented by platforms like Cogniba—offers the most
+            (RCTs), and meta-analyses, we argue that the Single N-Back paradigm,
+            as implemented by platforms like Cogniba, offers the most
             scientifically grounded, sustainable, and mechanism-specific pathway
             to cognitive optimization. By isolating the core executive functions
             of <Strong>Updating</Strong> and{" "}
@@ -103,7 +104,7 @@ export default function ResearchPage() {
             first deconstruct the cognitive machinery it is designed to upgrade.
             Working Memory is frequently conflated with &quot;short-term
             memory&quot; in lay conversation, but the distinction is critical.
-            Short-term memory is a passive storage bin—a place to hold a phone
+            Short-term memory is a passive storage bin, a place to hold a phone
             number just long enough to dial it. Working Memory, by contrast, is
             an active workspace. It is the &quot;engine&quot; of the mind where
             information is held, manipulated, prioritized, and updated in
@@ -128,10 +129,10 @@ export default function ResearchPage() {
             The relationship between Working Memory and Fluid Intelligence (Gf)
             is so strong that some researchers have argued they are nearly
             isomorphic. Fluid intelligence is the raw processing power of the
-            brain—the ability to reason through complex, novel problems without
-            relying on rote memorization. Studies have consistently shown that
-            individual differences in WMC account for a massive proportion of
-            the variance in Gf scores.
+            brain, or the ability to reason through complex, novel problems
+            without relying on rote memorization. Studies have consistently
+            shown that individual differences in WMC account for a massive
+            proportion of the variance in Gf scores.
           </p>
           <p className="mb-6">
             The implication of this correlation is profound: If Working Memory
@@ -141,8 +142,8 @@ export default function ResearchPage() {
             that drives the entire field of cognitive training. The goal is not
             merely to get better at the n-back game (practice effect), but to
             induce neuroplastic changes that transfer to &quot;untrained&quot;
-            tasks—improving one&apos;s ability to reason, focus, and learn in
-            the real world.
+            tasks. This improves one&apos;s ability to reason, focus, and learn
+            in the real world.
           </p>
 
           <h3 className="mb-3 text-2xl font-medium tracking-tight">
@@ -211,10 +212,10 @@ export default function ResearchPage() {
           </h3>
           <p className="mb-4">
             In a standard Single N-Back task (as found on Cogniba), the user is
-            presented with a continuous stream of stimuli—for example, a
-            sequence of positions on a grid or a series of letters. The user
-            must indicate when the current stimulus matches the stimulus
-            presented n steps back in the sequence.
+            presented with a continuous stream of stimuli, such as a sequence of
+            positions on a grid or a series of letters. The user must indicate
+            when the current stimulus matches the stimulus presented n steps
+            back in the sequence.
           </p>
           <ul className="mb-4 list-disc space-y-2 pl-6">
             <li>
@@ -234,9 +235,9 @@ export default function ResearchPage() {
           <p className="mb-6">
             The difficulty scales adaptively. As the user&apos;s accuracy
             improves, n increases, pushing the brain constantly into its
-            &quot;Zone of Proximal Development&quot;—the sweet spot where the
-            task is difficult enough to trigger adaptation but achievable enough
-            to maintain engagement.
+            &quot;Zone of Proximal Development.&quot; This is the sweet spot
+            where the task is difficult enough to trigger adaptation but
+            achievable enough to maintain engagement.
           </p>
 
           <h3 className="mb-3 text-2xl font-medium tracking-tight">
@@ -247,8 +248,8 @@ export default function ResearchPage() {
             audio and visual streams) held the spotlight, largely due to the
             famous 2008 study by Jaeggi et al. which used this variant to
             demonstrate IQ gains. A popular mythology emerged in the biohacking
-            community that the &quot;dual&quot; aspect—the splitting of
-            attention—was the secret sauce.
+            community that the &quot;dual&quot; aspect, the splitting of
+            attention, was the secret sauce.
           </p>
           <p className="mb-4">
             However, modern research has dismantled this myth.
@@ -277,11 +278,11 @@ export default function ResearchPage() {
                 The &quot;Active Ingredient&quot; is Updating, Not Multitasking:
               </Strong>{" "}
               The study concluded that the core mechanism driving cognitive gain
-              is the Updating process—the act of continuously modifying the
-              contents of memory. Single N-Back isolates and trains this
-              mechanism with laser focus, whereas Dual N-Back introduces
-              &quot;dual-task costs&quot; that can actually impede the efficient
-              training of the core updating faculty.
+              is the Updating process, which is the act of continuously
+              modifying the contents of memory. Single N-Back isolates and
+              trains this mechanism with laser focus, whereas Dual N-Back
+              introduces &quot;dual-task costs&quot; that can actually impede
+              the efficient training of the core updating faculty.
             </li>
           </ul>
           <div className="rounded-lg border bg-muted/30 p-4">
@@ -324,8 +325,8 @@ export default function ResearchPage() {
             <li className="flex flex-col gap-1 rounded border p-4">
               <span className="font-semibold">The Scenario:</span>
               <span>
-                Imagine you are playing a 2-Back level. The sequence is: A — B —
-                C — B.
+                Imagine you are playing a 2-Back level. The sequence is: A → B →
+                C → B.
               </span>
             </li>
             <li className="flex flex-col gap-1 rounded border border-green-200 bg-green-500/5 p-4 dark:border-green-900 dark:bg-green-500/10">
@@ -342,9 +343,9 @@ export default function ResearchPage() {
                 The Lure (Conflict):
               </span>
               <span>
-                Now imagine this sequence: A — B — B — C. When the second
+                Now imagine this sequence: A → B → B → C. When the second
                 &apos;B&apos; appears (at position 3), it is a 1-Back match.
-                Your brain recognizes it immediately—&quot;I just saw
+                Your brain recognizes it immediately: &quot;I just saw
                 this!&quot; Familiarity signals are firing. But the rule is
                 2-Back. The item is familiar, but it is irrelevant.
               </span>
@@ -388,7 +389,7 @@ export default function ResearchPage() {
           </h3>
           <p>
             This mechanism explains why n-back training feels
-            &quot;frustrating&quot;—that frustration is the sensation of the
+            &quot;frustrating.&quot; That frustration is the sensation of the
             interference control network engaging. In the Single N-Back task,
             because the user is not distracted by a secondary audio task, the
             interference becomes the primary challenge. The user can focus
@@ -409,8 +410,8 @@ export default function ResearchPage() {
             One of the most significant yet under-discussed variables in
             cognitive training literature is user adherence. The biological
             reality of neuroplasticity is that it is dose-dependent. Structural
-            changes in the brain—such as the strengthening of white matter
-            tracts or the increase in synaptic density—require sustained
+            changes in the brain, such as the strengthening of white matter
+            tracts or the increase in synaptic density, require sustained
             metabolic pressure over time. The typical threshold for significant
             structural change is approximately 20 sessions of 15-20 minutes.
           </p>
@@ -441,7 +442,7 @@ export default function ResearchPage() {
           <p className="mb-4">
             Single N-Back, while rigorously challenging, operates within a more
             manageable cognitive bandwidth. It allows the user to enter a state
-            of Flow—a psychological state of optimal experience where the
+            of Flow, a psychological state of optimal experience where the
             challenge of the task matches the skill of the user.
           </p>
           <ul className="mb-4 list-disc space-y-2 pl-6">
@@ -521,7 +522,7 @@ export default function ResearchPage() {
             <li>
               <Strong>White Matter:</Strong> Diffusion Tensor Imaging (DTI)
               studies have shown that working memory training can increase the
-              integrity of white matter tracts—specifically the Superior
+              integrity of white matter tracts, specifically the Superior
               Longitudinal Fasciculus (SLF), the highway that connects the
               frontal execution centers with the parietal storage centers.
               Increased integrity means faster signal transmission.
@@ -556,8 +557,8 @@ export default function ResearchPage() {
             7.1 Near Transfer: The Foundation
           </h3>
           <p className="mb-4">
-            The evidence for Near Transfer—improvement in untrained working
-            memory tasks—is robust and uncontroversial.
+            The evidence for Near Transfer, meaning improvement in untrained
+            working memory tasks, is robust and uncontroversial.
           </p>
           <ul className="mb-4 list-disc space-y-2 pl-6">
             <li>
@@ -588,8 +589,8 @@ export default function ResearchPage() {
             </li>
             <li>
               <Strong>The Interpretation:</Strong> While 0.24 is considered a
-              &quot;small&quot; effect size in statistics, in the context of
-              IQ—a metric historically viewed as unchangeable—it is substantial.
+              &quot;small&quot; effect size in statistics, in the context of IQ
+              (a metric historically viewed as unchangeable), it is substantial.
               It represents a potential shift of 3-4 IQ points. For an
               individual on the cusp of understanding a complex concept, this
               margin can be the difference between confusion and clarity.
@@ -620,8 +621,8 @@ export default function ResearchPage() {
             <li>
               <Strong>Mechanism:</Strong> By repeatedly training the inhibition
               of &quot;Lures,&quot; the n-back task directly strengthens the
-              neurological &quot;brakes&quot; of the brain—the exact system that
-              is often underactive in ADHD populations.
+              neurological &quot;brakes&quot; of the brain. This is the exact
+              system that is often underactive in ADHD populations.
             </li>
           </ul>
 
@@ -665,9 +666,8 @@ export default function ResearchPage() {
             8.1 The &quot;Arcade&quot; Problem (Lumosity, etc.)
           </h3>
           <p className="mb-4">
-            Apps like Lumosity offer a &quot;gym&quot; of various
-            mini-games—matching colors, simple arithmetic, serving coffee to
-            customers.
+            Apps like Lumosity offer a &quot;gym&quot; of various mini-games,
+            matching colors, simple arithmetic, or serving coffee to customers.
           </p>
           <p className="mb-4">
             <Strong>The Critique:</Strong> Large-scale reviews, such as those by
