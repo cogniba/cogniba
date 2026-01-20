@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 export default function FAQ() {
   return (
     <div className="mx-auto w-full max-w-4xl px-6 py-10 md:py-20">
-      <h1 className="text-foreground mb-8 text-4xl font-bold tracking-tight sm:text-5xl">
+      <h1 className="mb-8 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
         Frequently Asked Questions
       </h1>
-      <p className="text-muted-foreground mb-12 text-lg">
+      <p className="mb-12 text-lg text-muted-foreground">
         Everything you need to know about the science of N-Back, our training
         protocols, and how to get the most out of Cogniba.
       </p>
@@ -31,7 +31,7 @@ export default function FAQ() {
         <Accordion type="multiple" className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-left">
-              I've heard Dual N-Back is better. Why does Cogniba use Single
+              I&apos;ve heard Dual N-Back is better. Why does Cogniba use Single
               N-Back?
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-base leading-relaxed">
@@ -51,15 +51,15 @@ export default function FAQ() {
                 skills to untrained working memory tasks.
               </p>
               <p>
-                The reason? The "active ingredient" in cognitive training is{" "}
-                <Strong>Updating</Strong>—the ability to continuously refresh
-                your mental workspace. Single N-Back isolates this mechanism
-                perfectly. Dual N-Back often introduces "task switching"
-                difficulty that can overwhelm the brain without providing a
-                better memory workout. Cogniba focuses on Single N-Back to give
-                you the maximum cognitive benefit with lower frustration,
-                ensuring you stick with the training long enough to see
-                neuroplastic changes.
+                The reason? The &quot;active ingredient&quot; in cognitive
+                training is <Strong>Updating</Strong> - the ability to
+                continuously refresh your mental workspace. Single N-Back
+                isolates this mechanism perfectly. Dual N-Back often introduces
+                &quot;task switching&quot; difficulty that can overwhelm the
+                brain without providing a better memory workout. Cogniba focuses
+                on Single N-Back to give you the maximum cognitive benefit with
+                lower frustration, ensuring you stick with the training long
+                enough to see neuroplastic changes.
               </p>
             </AccordionContent>
           </AccordionItem>
@@ -80,23 +80,23 @@ export default function FAQ() {
               <p>
                 The mechanism is clear: Fluid Intelligence relies heavily on
                 Working Memory Capacity. By expanding this capacity through
-                adaptive training, you provide your brain with more "RAM" to
-                process complex problems. While results vary by individual, the
-                consensus is that <Strong>adaptive training</Strong> (where the
-                difficulty increases as you improve) is the key to unlocking
-                these gains.
+                adaptive training, you provide your brain with more
+                &quot;RAM&quot; to process complex problems. While results vary
+                by individual, the consensus is that{" "}
+                <Strong>adaptive training</Strong> (where the difficulty
+                increases as you improve) is the key to unlocking these gains.
               </p>
             </AccordionContent>
           </AccordionItem>
 
           <AccordionItem value="item-3">
             <AccordionTrigger className="text-left">
-              What is the "active ingredient" of the training?
+              What is the &quot;active ingredient&quot; of the training?
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-base leading-relaxed">
               <p>
-                The magic of N-Back isn't just "remembering." It's Interference
-                Control and Updating.
+                The magic of N-Back isn&apos;t just &quot;remembering.&quot;
+                It&apos;s Interference Control and Updating.
               </p>
               <ul className="list-disc space-y-2 pl-5">
                 <li>
@@ -106,10 +106,11 @@ export default function FAQ() {
                 </li>
                 <li>
                   <Strong>Interference Control:</Strong> You must ignore
-                  "lures"—items that match the position n-1 or n+1 but not the
-                  target n. Resisting the urge to press the button strengthens
-                  your Prefrontal Cortex, the CEO of your brain. This specific
-                  mechanism is why N-Back helps with focus and impulse control.
+                  &quot;lures&quot; - items that match the position n-1 or n+1
+                  but not the target n. Resisting the urge to press the button
+                  strengthens your Prefrontal Cortex, the CEO of your brain.
+                  This specific mechanism is why N-Back helps with focus and
+                  impulse control.
                 </li>
               </ul>
             </AccordionContent>
@@ -128,9 +129,9 @@ export default function FAQ() {
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-base leading-relaxed">
               <p>
-                Neuroplasticity—the physical restructuring of the brain—requires
-                consistency and intensity, similar to building muscle at the
-                gym. Research suggests the "sweet spot" is{" "}
+                Neuroplasticity - the physical restructuring of the brain -
+                requires consistency and intensity, similar to building muscle
+                at the gym. Research suggests the &quot;sweet spot&quot; is{" "}
                 <Strong>3 to 5 sessions per week</Strong>, with each session
                 lasting 15 to 20 minutes.
               </p>
@@ -143,8 +144,8 @@ export default function FAQ() {
                 <li>
                   <Strong>Rest is Vital:</Strong> Your brain rewires itself
                   during sleep after the training. Training every single day
-                  without rest can lead to burnout. We recommend a "3 days on, 1
-                  day off" schedule.
+                  without rest can lead to burnout. We recommend a &quot;3 days
+                  on, 1 day off&quot; schedule.
                 </li>
               </ul>
             </AccordionContent>
@@ -157,45 +158,46 @@ export default function FAQ() {
             <AccordionContent className="space-y-4 text-base leading-relaxed">
               <p>
                 <Strong variant="red">Absolutely not.</Strong> This is the
-                "Chunking Trap." If you use strategies like repeating "A, B, C"
-                in a loop (rehearsal) or grouping items (chunking), you are
-                shifting the load from your Working Memory to your Short-Term
-                Memory or Phonological Loop.
+                &quot;Chunking Trap.&quot; If you use strategies like repeating
+                &quot;A, B, C&quot; in a loop (rehearsal) or grouping items
+                (chunking), you are shifting the load from your Working Memory
+                to your Short-Term Memory or Phonological Loop.
               </p>
               <p>
                 While this might get you a higher score in the game, it kills
                 the real-world benefits. To get the IQ and Focus gains, you must
                 perform the task using <Strong>Intuition</Strong>. It should
-                feel like you are just "focusing" and reacting, rather than
-                actively memorizing a list. If you find yourself chunking, try
-                increasing the speed of the game to break the habit.
+                feel like you are just &quot;focusing&quot; and reacting, rather
+                than actively memorizing a list. If you find yourself chunking,
+                try increasing the speed of the game to break the habit.
               </p>
             </AccordionContent>
           </AccordionItem>
 
           <AccordionItem value="item-6">
             <AccordionTrigger className="text-left">
-              I'm stuck at 3-Back. Have I reached my limit?
+              I&apos;m stuck at 3-Back. Have I reached my limit?
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-base leading-relaxed">
               <p>
                 Plateaus are a natural part of the training process. They often
                 occur when your brain is consolidating new connections. The jump
                 from 2-Back to 3-Back is particularly hard because it exceeds
-                the typical "buffer" size for untrained individuals.
+                the typical &quot;buffer&quot; size for untrained individuals.
               </p>
               <ul className="list-disc space-y-2 pl-5">
                 <li>
                   <Strong>The Dip:</Strong> You might even see your score get
-                  worse before it gets better. This is known as "The Dip" and
-                  signals that your brain is reorganizing its strategy.
+                  worse before it gets better. This is known as &quot;The
+                  Dip&quot; and signals that your brain is reorganizing its
+                  strategy.
                 </li>
                 <li>
                   <Strong>Breakthrough:</Strong> To break a plateau, focus on
                   accuracy over speed. Ensure you are getting 90%+ correct
-                  before trying to move up. Alternatively, try "overtraining" on
-                  the previous level (2-Back) at a higher speed to build
-                  processing efficiency.
+                  before trying to move up. Alternatively, try
+                  &quot;overtraining&quot; on the previous level (2-Back) at a
+                  higher speed to build processing efficiency.
                 </li>
               </ul>
             </AccordionContent>
@@ -236,16 +238,17 @@ export default function FAQ() {
               <p>
                 Yes. ADHD is fundamentally a challenge of Executive Function.
                 Recent studies have shown that adaptive N-Back training can
-                significantly improve inhibitory control—the ability to stop
+                significantly improve inhibitory control - the ability to stop
                 yourself from getting distracted.
               </p>
               <p>
-                For "ADHD Paralysis" (the inability to start tasks), N-Back
-                helps by expanding your "mental workspace," allowing you to hold
-                the multiple steps of a task in your head simultaneously,
-                reducing the feeling of being overwhelmed. Many users with ADHD
-                use a short session of N-Back as a "warm-up" to activate their
-                brain before tackling complex work.
+                For &quot;ADHD Paralysis&quot; (the inability to start tasks),
+                N-Back helps by expanding your &quot;mental workspace,&quot;
+                allowing you to hold the multiple steps of a task in your head
+                simultaneously, reducing the feeling of being overwhelmed. Many
+                users with ADHD use a short session of N-Back as a
+                &quot;warm-up&quot; to activate their brain before tackling
+                complex work.
               </p>
             </AccordionContent>
           </AccordionItem>
@@ -258,22 +261,23 @@ export default function FAQ() {
               <p>
                 Emerging research suggests a strong link between Working Memory
                 training and anxiety reduction. Anxiety often involves
-                "rumination"—the inability to disengage from a negative thought.
+                &quot;rumination&quot; - the inability to disengage from a
+                negative thought.
               </p>
               <p>
                 The Single N-Back task trains the <Strong>Disengagement</Strong>{" "}
                 mechanism. Every time the target changes, you must let go of the
-                old information. This neural pathway—the ability to "let go" and
-                "update"—transfers to emotional regulation, helping you
-                disengage from intrusive thoughts and return to the present
-                moment.
+                old information. This neural pathway - the ability to &quot;let
+                go&quot; and &quot;update&quot; - transfers to emotional
+                regulation, helping you disengage from intrusive thoughts and
+                return to the present moment.
               </p>
             </AccordionContent>
           </AccordionItem>
 
           <AccordionItem value="item-10">
             <AccordionTrigger className="text-left">
-              I'm a programmer/writer. How will this help my career?
+              I&apos;m a programmer/writer. How will this help my career?
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-base leading-relaxed">
               <p>
@@ -283,12 +287,12 @@ export default function FAQ() {
               </p>
               <p>
                 By training with Single N-Back, you are effectively upgrading
-                your mental RAM. Programmers report being able to "see" more of
-                their code logic at once without losing their place. Writers
-                report better ability to maintain the "thread" of a story while
-                editing. Additionally, the Interference Control training helps
-                you ignore open tabs and Slack notifications, fostering a state
-                of "Deep Work".
+                your mental RAM. Programmers report being able to
+                &quot;see&quot; more of their code logic at once without losing
+                their place. Writers report better ability to maintain the
+                &quot;thread&quot; of a story while editing. Additionally, the
+                Interference Control training helps you ignore open tabs and
+                Slack notifications, fostering a state of &quot;Deep Work&quot;.
               </p>
             </AccordionContent>
           </AccordionItem>
