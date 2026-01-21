@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { ImgHTMLAttributes } from "react";
 
-type ImageProps = ImgHTMLAttributes<HTMLImageElement>;
+type ImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
+  src?: string;
+};
 
 export function ImageComponent(props: ImageProps) {
   return (
