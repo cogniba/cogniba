@@ -26,29 +26,29 @@ export default function DesktopHeader() {
         <NavigationMenuList>
           {navigationItems.map((item) => (
             <NavigationMenuItem key={item.name}>
-              <Link href={item.href} legacyBehavior passHref>
-                <NavigationMenuLink asChild>
-                  <Button variant="ghost">{item.name}</Button>
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild>
+                <Button variant="ghost" asChild>
+                  <Link href={item.href}>{item.name}</Link>
+                </Button>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>
 
         <NavigationMenuList className="gap-1">
           <NavigationMenuItem>
-            <Link href="/sign-in" legacyBehavior passHref>
-              <NavigationMenuLink asChild>
-                <Button variant="secondary">Sign In</Button>
-              </NavigationMenuLink>
-            </Link>
+            <NavigationMenuLink asChild>
+              <Button variant="secondary" asChild>
+                <Link href="/sign-in">Sign In</Link>
+              </Button>
+            </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/sign-up" legacyBehavior passHref>
-              <NavigationMenuLink asChild>
-                <Button>Get Started</Button>
-              </NavigationMenuLink>
-            </Link>
+            <NavigationMenuLink asChild>
+              <Button asChild>
+                <Link href="/sign-up">Get Started</Link>
+              </Button>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
