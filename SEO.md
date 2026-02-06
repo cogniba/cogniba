@@ -9,6 +9,13 @@ This guide explains how to create and optimize blog posts for maximum search eng
     - Example: `how-to-improve-working-memory.mdx`
     - URL will be: `cogniba.com/blog/how-to-improve-working-memory`
 
+## 0. Avoid Duplicates (Required)
+
+Before writing a post, check `BLOGPOSTS.md` so we don't publish the same topic twice.
+
+- If a similar post already exists, update it or pick a different angle.
+- After publishing, add the post to `BLOGPOSTS.md` (title, slug, date, and 1-line description).
+
 ## 2. Frontmatter (The Metadata)
 
 Every post must start with "Frontmatter" block between three dashes `---`. This data controls how your post appears in Google and social media.
@@ -73,3 +80,4 @@ Use headings to structure your content. Google loves hierarchy.
 - [ ] Image exists in `public/images/blog/` and is 1200x630px.
 - [ ] Content uses H2 and H3 headings correctly.
 - [ ] You have linked to at least one other page on Cogniba.com.
+- [ ] You updated `BLOGPOSTS.md`.
