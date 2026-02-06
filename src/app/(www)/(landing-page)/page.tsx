@@ -3,6 +3,16 @@ import HeroSection from "@/components/landing-page/HeroSection";
 import HowItWorksSection from "@/components/landing-page/HowItWorksSection";
 import FancyButton from "@/components/ui/FancyButton";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "The Scientific Brain Training App",
+  description:
+    "Increase your IQ and working memory with the only scientifically validated brain training method. Join Cogniba today.",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function LandingPagePage() {
   return (

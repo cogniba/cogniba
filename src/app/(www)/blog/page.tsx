@@ -3,15 +3,33 @@ import BlogCard from "@/components/blog/BlogCard";
 import getAllPosts from "@/lib/blog/getAllPosts";
 
 export const metadata: Metadata = {
-  title: "Blog | Cogniba",
+  title: "Blog",
   description: "Latest articles about cognitive training and brain development",
+  alternates: {
+    canonical: "/blog",
+  },
   openGraph: {
-    title: "Blog | Cogniba",
+    title: "Blog",
     description:
       "Latest articles about cognitive training and brain development",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
+    url: "/blog",
     siteName: "Cogniba",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Cogniba - Scientific Brain Training",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog",
+    description:
+      "Latest articles about cognitive training and brain development",
+    images: ["/og-image.png"],
   },
 };
 

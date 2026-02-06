@@ -53,8 +53,7 @@ Definition of done: all items below are deployed and verified via page source an
 
 - Problem found: blog JSON-LD uses `${siteUrl}/logo.png` but only `public/logo.svg` exists.
 - Fix:
-  - Option A (fast): add `public/logo.png` and keep JSON-LD as-is.
-  - Option B: update `src/app/(www)/blog/[slug]/page.tsx` to point to an existing logo asset.
+  - Update `src/app/(www)/blog/[slug]/page.tsx` to point to an existing logo asset (`/apple-icon.png`).
 - Verify:
   - View source for a blog post and confirm JSON-LD `publisher.logo.url` is a real file.
 
@@ -75,10 +74,7 @@ Definition of done: all items below are deployed and verified via page source an
 
 - Problem found: auth pages are indexable (sign-in/sign-up/forgot-password).
 - Fix:
-  - Add `robots: { index: false, follow: true }` metadata to:
-    - `src/app/(www)/(auth)/sign-in/page.tsx`
-    - `src/app/(www)/(auth)/sign-up/page.tsx`
-    - `src/app/(www)/(auth)/forgot-password/page.tsx`
+  - Add `src/app/(www)/(auth)/layout.tsx` exporting `metadata.robots` with `noindex, follow` for all auth routes.
 - Verify:
   - View source and confirm `meta name="robots" content="noindex"` (or equivalent) is present.
 

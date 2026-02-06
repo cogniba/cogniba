@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ogImage = post.frontmatter.image;
 
   return {
-    title: `${post.frontmatter.title} | Cogniba Blog`,
+    title: post.frontmatter.title,
     description: post.frontmatter.description,
     authors: [{ name: post.frontmatter.author }],
     alternates: {
@@ -44,8 +44,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [
         {
           url: ogImage,
-          width: 1200,
-          height: 630,
           alt: post.frontmatter.title,
         },
       ],
@@ -89,7 +87,9 @@ export default async function PostPage({ params }: Props) {
       name: "Cogniba",
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}/logo.png`, // Assuming a logo exists, or fallback
+        url: `${siteUrl}/apple-icon.png`,
+        width: 180,
+        height: 180,
       },
     },
     url: `${siteUrl}/blog/${post.slug}`,

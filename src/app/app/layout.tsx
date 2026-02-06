@@ -2,6 +2,18 @@ import AppHeader from "@/components/app-header/AppHeader";
 import AppSidebar from "@/components/app-sidebar/AppSidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import AuthContextProvider from "@/context/AuthContext";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
+};
 
 interface AppLayoutProps {
   children: React.ReactNode;

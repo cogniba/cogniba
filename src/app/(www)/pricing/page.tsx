@@ -2,7 +2,40 @@ import { Button } from "@/components/ui/button";
 import stripeConfig from "@/config/stripeConfig";
 import { cn } from "@/lib/cn";
 import { CheckIcon } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Pricing",
+  description:
+    "Start for free or go unlimited to get the best results from Cogniba's scientifically validated brain training.",
+  alternates: {
+    canonical: "/pricing",
+  },
+  openGraph: {
+    type: "website",
+    url: "/pricing",
+    title: "Pricing",
+    description:
+      "Start for free or go unlimited to get the best results from Cogniba's scientifically validated brain training.",
+    siteName: "Cogniba",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Cogniba - Scientific Brain Training",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pricing",
+    description:
+      "Start for free or go unlimited to get the best results from Cogniba's scientifically validated brain training.",
+    images: ["/og-image.png"],
+  },
+};
 
 export default function PricingPage() {
   const pricingPlans = stripeConfig.plans;

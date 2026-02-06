@@ -11,6 +11,32 @@ export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
     "Scientific answers to your questions about Single N-Back training, IQ improvement, and Cogniba's methodology.",
+  alternates: {
+    canonical: "/faq",
+  },
+  openGraph: {
+    type: "website",
+    url: "/faq",
+    title: "Frequently Asked Questions",
+    description:
+      "Scientific answers to your questions about Single N-Back training, IQ improvement, and Cogniba's methodology.",
+    siteName: "Cogniba",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Cogniba - Scientific Brain Training",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Frequently Asked Questions",
+    description:
+      "Scientific answers to your questions about Single N-Back training, IQ improvement, and Cogniba's methodology.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function FAQ() {

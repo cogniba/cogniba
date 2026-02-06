@@ -2,15 +2,35 @@ import { Strong } from "@/components/ui/Strong";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "The Architecture of Focus: Single N-Back Research | Cogniba",
+  title: "The Architecture of Focus: Single N-Back Research",
   description:
     "An exhaustive analysis of Single N-Back training. Discover how updating and interference control unlock fluid intelligence and cognitive potential.",
+  alternates: {
+    canonical: "/research",
+  },
   openGraph: {
     title: "The Architecture of Focus: Single N-Back Research",
     description:
       "An exhaustive analysis of Single N-Back training. Discover how updating and interference control unlock fluid intelligence and cognitive potential.",
+    url: "/research",
     type: "article",
     authors: ["Cogniba Research Team"],
+    siteName: "Cogniba",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Cogniba - Scientific Brain Training",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Architecture of Focus: Single N-Back Research",
+    description:
+      "An exhaustive analysis of Single N-Back training. Discover how updating and interference control unlock fluid intelligence and cognitive potential.",
+    images: ["/og-image.png"],
   },
 };
 
