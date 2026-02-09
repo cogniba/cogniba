@@ -34,7 +34,7 @@ Every post must start with "Frontmatter" block between three dashes `---`. This 
 ---
 title: "The Ultimate Guide to N-Back Training"
 description: "Learn how the n-back task improves IQ and working memory. We explain the science and how to start training today."
-date: "2024-03-20"
+date: "2024-03-20T12:00:00Z"
 image: "/images/blog/n-back-guide.png"
 author: "Marcos Hernanz"
 role: "Founder & CEO"
@@ -46,7 +46,7 @@ tags: ["n-back", "brain-training", "science"]
 
 - **title**: The `<h1>` of the page and the blue link in Google. Keep it under 60 characters. Make it catchy but accurate.
 - **description**: The short text under the link in Google. Keep it under 160 characters. Include your main keywords (e.g., "n-back", "IQ").
-- **date**: YYYY-MM-DD format.
+- **date**: Prefer an ISO timestamp in UTC for scheduled publishing (e.g. `2026-02-10T12:00:00Z`). Date-only (`YYYY-MM-DD`) is ok if you don't care about publish hour.
 - **image**: The "social card" image shown on Twitter/LinkedIn.
   - Place images in `public/images/blog/`.
   - Recommended size: **1200x630 pixels**.

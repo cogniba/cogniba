@@ -1,4 +1,4 @@
-# TODO (Manual Steps for Monday SEO Batch)
+# TODO (Manual Steps for Blog SEO Batch)
 
 Delete this file when you're done.
 
@@ -40,11 +40,14 @@ Then spot-check pages locally:
 
 ## 3) Schedule/publish
 
-If you are scheduling 3/day Mon-Fri, pick the dates and update frontmatter `date` fields accordingly.
+We publish 5 posts/week (Mon-Fri) and pre-schedule via frontmatter `date`.
+
+- Use an ISO timestamp in UTC: `YYYY-MM-DDT12:00:00Z`
+- Production hides future-dated posts until their publish time.
 
 ## 4) Update `BLOGPOSTS.md`
 
-If you publish/schedule posts over multiple days, update the date next to each slug in `BLOGPOSTS.md` so it matches the frontmatter date.
+If you publish/schedule posts over multiple days, update the date next to each slug in `BLOGPOSTS.md` so it matches the frontmatter day (`YYYY-MM-DD`).
 
 ## 5) Search Console (15 minutes)
 
