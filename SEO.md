@@ -9,6 +9,16 @@ This guide explains how to create and optimize blog posts for maximum search eng
     - Example: `how-to-improve-working-memory.mdx`
     - URL will be: `cogniba.com/blog/how-to-improve-working-memory`
 
+### Required: Image Prompt Comment (Dark Mode)
+
+At the top of every post (immediately after frontmatter), include a JSX comment block that contains an **AI image prompt** for the OG image.
+
+- Use MDX-safe JSX comments: `{/* ... */}` (do not use `<!-- ... -->`).
+- The generator does not know our brand; **do not mention Cogniba** or "brand colors".
+- Be explicit about **dark-mode colors** using the exact hex values from `src/styles/globals/globals.css` (use the `.dark` palette).
+- State: 1200x630 PNG, no watermark, no people (unless intentionally needed), keep text within safe margins.
+- Provide the exact headline/subtitle text that should appear on the image.
+
 ## 0. Avoid Duplicates (Required)
 
 Before writing a post, check `BLOGPOSTS.md` so we don't publish the same topic twice.
