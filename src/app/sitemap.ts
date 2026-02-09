@@ -1,10 +1,14 @@
 import { MetadataRoute } from "next";
 import getAllPosts from "@/lib/blog/getAllPosts";
 
+// Allow scheduled posts to appear in the sitemap without redeploy.
+export const revalidate = 300;
+
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cogniba.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts();
+  // Only include published posts in production so scheduled posts don't get indexed early.
+  const posts = getAllPosts({ includeFuture: false });
 
   const blogUrls = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,

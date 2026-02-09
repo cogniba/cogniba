@@ -2,6 +2,9 @@ import { Metadata } from "next";
 import BlogCard from "@/components/blog/BlogCard";
 import getAllPosts from "@/lib/blog/getAllPosts";
 
+// Allow scheduled posts to go live without redeploy.
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: "Blog",
   description: "Latest articles about cognitive training and brain development",
