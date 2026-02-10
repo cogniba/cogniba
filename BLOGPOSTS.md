@@ -33,6 +33,24 @@ How to use:
 - 2026-02-26 `fluid-intelligence-explained` (`src/content/blog/fluid-intelligence-explained.mdx`): What Gf is and how it is measured.
 - 2026-02-27 `does-brain-training-work` (`src/content/blog/does-brain-training-work.mdx`): Transfer, hype, and what to expect.
 
+- 2026-03-02 `executive-function-explained` (`src/content/blog/executive-function-explained.mdx`): The 3-part model behind self-control and focus.
+- 2026-03-03 `inhibitory-control-explained` (`src/content/blog/inhibitory-control-explained.mdx`): The skill of resisting distraction and impulses.
+- 2026-03-04 `cognitive-load-theory-explained` (`src/content/blog/cognitive-load-theory-explained.mdx`): Why your brain "overheats" and how to reduce load.
+- 2026-03-05 `task-switching-explained` (`src/content/blog/task-switching-explained.mdx`): The real cost of context switching (attention residue).
+- 2026-03-06 `how-to-improve-attention-span` (`src/content/blog/how-to-improve-attention-span.mdx`): Practical levers to focus longer without gimmicks.
+
+- 2026-03-09 `attention-residue-explained` (`src/content/blog/attention-residue-explained.mdx`): Why switching tasks leaves your mind "sticky".
+- 2026-03-10 `working-memory-capacity-explained` (`src/content/blog/working-memory-capacity-explained.mdx`): What capacity means and how to work with it.
+- 2026-03-11 `how-to-set-n-back-difficulty` (`src/content/blog/how-to-set-n-back-difficulty.mdx`): Accuracy targets and small adjustments to find the sweet spot.
+- 2026-03-12 `n-back-accuracy-target` (`src/content/blog/n-back-accuracy-target.mdx`): What score range to aim for (and why not 100%).
+- 2026-03-13 `n-back-training-schedule` (`src/content/blog/n-back-training-schedule.mdx`): How often to train and how to avoid burnout.
+
+- 2026-03-16 `sustained-attention-explained` (`src/content/blog/sustained-attention-explained.mdx`): How to keep focus stable over time.
+- 2026-03-17 `mind-wandering-explained` (`src/content/blog/mind-wandering-explained.mdx`): Why attention drifts and how to return faster.
+- 2026-03-18 `metacognition-explained` (`src/content/blog/metacognition-explained.mdx`): Monitor confusion, calibrate confidence, learn faster.
+- 2026-03-19 `how-to-stay-consistent-with-brain-training` (`src/content/blog/how-to-stay-consistent-with-brain-training.mdx`): Friction reduction + minimum sessions to avoid burnout.
+- 2026-03-20 `n-back-for-burnout` (`src/content/blog/n-back-for-burnout.mdx`): When training helps vs when rest is the smarter move.
+
 ## Backlog (Ideas)
 
 Use these as "unique angles" to generate high-volume posts without repeating yourself.
